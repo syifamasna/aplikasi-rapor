@@ -29,23 +29,31 @@
                                     </div>
 
                                     <h3 class="text-center mb-4">Login E-Rapor SIT Aliya</h3>
+
                                     <form action="{{ route('login') }}" method="POST">
                                         @csrf
                                         <div class="form-group">
                                             <label><strong>Email</strong></label>
-                                            <input type="email" name="email" class="form-control"
-                                                placeholder="Masukkan email..." required>
+                                            <input type="email" name="email" class="form-control" placeholder="Masukkan email..." required>
                                         </div>
                                         <div class="form-group">
                                             <label><strong>Password</strong></label>
-                                            <input type="password" name="password" class="form-control"
-                                                placeholder="Masukkan password..." required>
+                                            <input type="password" name="password" class="form-control" placeholder="Masukkan password..." required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label><strong>Masuk sebagai</strong></label>
+                                            <select name="role" class="form-control text-dark bg-white" required>
+                                                <option value="" disabled selected>Pilih Tipe Pengguna</option>
+                                                @foreach($roles as $role)
+                                                    <option value="{{ $role->id }}">{{ $role->role }}</option>
+                                                @endforeach
+                                            </select>                                            
                                         </div>
                                         <br>
                                         <div class="text-center">
                                             <button type="submit" class="btn btn-primary btn-block">Masuk</button>
                                         </div>
-                                    </form>
+                                    </form>                                    
                                 </div>
                             </div>
                         </div>
@@ -57,9 +65,10 @@
     </div>
 
     <!-- Scripts -->
+    <script src="{{ asset('vendor/global/global.min.js') }}"></script>
+    <script src="{{ asset('vendor/sweetalert2/dist/sweetalert2.min.js') }}"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-    
             @if (session('success'))
                 Swal.fire({
                     title: "Berhasil Logout",
@@ -81,12 +90,8 @@
                     heightAuto: false
                 });
             @endif
-    
         });
     </script>
 
-    <script src="{{ asset('vendor/global/global.min.js') }}"></script>
-    <script src="{{ asset('vendor/sweetalert2/dist/sweetalert2.min.js') }}"></script>
 </body>
-
 </html>

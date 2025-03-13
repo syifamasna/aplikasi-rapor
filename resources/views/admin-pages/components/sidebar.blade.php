@@ -24,10 +24,11 @@
                         class="nav-text">Administrasi</span></a>
                 <ul aria-expanded="false">
                     <li><a href="{{ route('admin.school_profiles.index') }}">Data Sekolah</a></li>
-                    <li><a href="./app-calender.html">Data Kelas</a></li>
-                    <li><a href="./app-calender.html">Data Mapel</a></li>
+                    <li><a href="{{ route('admin.student_classes.index') }}">Data Kelas</a></li>
+                    <li><a href="{{ route('admin.students.index') }}">Data Siswa</a></li>
+                    <li><a href="{{ route('admin.subjects.index') }}">Data Mapel</a></li>
                     <li><a href="./app-calender.html">Data Pembelajaran</a></li>
-                    <li><a href="./app-calender.html">Data Tahun Ajar</a></li>
+                    <li><a href="{{ route('admin.school_years.index') }}">Data Tahun Ajar</a></li>
                     <li><a href="./app-calender.html">Data Prestasi</a></li>
                 </ul>
             </li>
@@ -41,15 +42,10 @@
             </li>
 
             <li class="nav-label">Lainnya</li>
-            <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+            <li><a href="{{ route('admin.users.index') }}">
                     <i class="fa fa-users"></i><span class="nav-text">Data Pengguna</span></a>
-                <ul aria-expanded="false">
-                    <li><a href="./ui-accordion.html">Data Admin</a></li>
-                    <li><a href="./ui-alert.html">Data Guru Mapel</a></li>
-                    <li><a href="./ui-alert.html">Data Guru Wali Kelas</a></li>
-                    <li><a href="./ui-button.html">Data Pj Prestasi</a></li>
-                </ul>
             </li>
+
             <li>
                 <a href="javascript:void(0);" id="logout-btn">
                     <i class="fa fa-sign-out"></i>
