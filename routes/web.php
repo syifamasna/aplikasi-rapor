@@ -2,11 +2,13 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
 use App\Http\Controllers\Admin\SchoolProfileController as AdminSchoolProfileController;
 use App\Http\Controllers\Admin\SchoolYearController as AdminSchoolYearController;
 use App\Http\Controllers\Admin\StudentClassController as AdminStudentClassController;
 use App\Http\Controllers\Admin\StudentController as AdminStudentController;
 use App\Http\Controllers\Admin\SubjectController as AdminSubjectController;
+use App\Http\Controllers\Admin\TeachingController as AdminTeachingController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -39,7 +41,13 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
         Route::resource('students', AdminStudentController::class)->names('admin.students');
         Route::post('students/import', [AdminStudentController::class, 'import'])->name('admin.students.import');
         Route::resource('subjects', AdminSubjectController::class)->names('admin.subjects');
+        Route::resource('teachings', AdminTeachingController::class)->names('admin.teachings');
         Route::resource('users', AdminUserController::class)->names('admin.users');
+
+        // Rute untuk update profil admin
+        Route::get('profile', [AdminProfileController::class, 'index'])->name('admin.profile.index');
+        Route::put('profile', [AdminProfileController::class, 'update'])->name('admin.profile.update');
+        Route::delete('profile/photo', [AdminProfileController::class, 'destroyImage'])->name('admin.profile.destroyImage');        
 
         // Rute untuk update data sekolah
         Route::get('school_profiles', [AdminSchoolProfileController::class, 'index'])->name('admin.school_profiles.index');

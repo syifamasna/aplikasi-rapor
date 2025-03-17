@@ -110,10 +110,11 @@
             color: #707070;
         }
 
-        .info-row strong {
-            text-align: left;
+        .info-row:last-child {
+            border-bottom: none;
         }
 
+        .info-row strong,
         .info-row span {
             text-align: left;
         }
@@ -142,8 +143,9 @@
                     </div>
                     <div class="col-md-6 p-md-0 d-flex justify-content-end">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}"></a>Dashboard</li>
-                            <li class="breadcrumb-item"><a class="text-dark" href="{{ route('admin.users.index') }}">Data Pengguna</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
+                            <li class="breadcrumb-item"><a class="text-dark"
+                                    href="{{ route('admin.users.index') }}">Data Pengguna</a></li>
                         </ol>
                     </div>
                 </div>

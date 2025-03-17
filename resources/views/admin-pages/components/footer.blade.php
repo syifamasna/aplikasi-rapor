@@ -1,6 +1,6 @@
 <div class="footer">
     <div class="copyright">
-        <p>Copyright © {{ date('Y') }} Designed & Developed by <a href="#" target="_blank">Quixkit</a></p>
+        <p>Copyright &copy; Aplikasi E-Rapor SIT Aliya {{ date('Y') }}</p>
     </div>
 </div>
 

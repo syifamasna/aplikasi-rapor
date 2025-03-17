@@ -1,11 +1,17 @@
 <div class="nav-header">
-    <a href="{{ route('admin.dashboard') }}" class="brand-logo">
+    <a href="{{ route('admin.dashboard') }}" class="brand-logo d-flex align-items-center">
         <img class="logo-abbr" src="{{ asset('images/logo-erapor.png') }}" alt="">
-        <img class="brand-title" src="{{ asset('images/logo-text.png') }}" alt="">
+
+        @php
+            $activeRole = session('active_role');
+            $roleText = $activeRole ? \App\Models\Role::find($activeRole)->role : 'Tidak ada peran aktif';
+        @endphp
+
+        <span id="role-text" class="ml-3 font-weight-bold text-uppercase">{{ $roleText }}</span>
     </a>
 
     <div class="nav-control">
-        <div class="hamburger">
+        <div class="hamburger" id="hamburger-menu">
             <span class="line"></span><span class="line"></span><span class="line"></span>
         </div>
     </div>
@@ -27,7 +33,7 @@
                     <li><a href="{{ route('admin.student_classes.index') }}">Data Kelas</a></li>
                     <li><a href="{{ route('admin.students.index') }}">Data Siswa</a></li>
                     <li><a href="{{ route('admin.subjects.index') }}">Data Mapel</a></li>
-                    <li><a href="./app-calender.html">Data Pembelajaran</a></li>
+                    <li><a href="{{ route('admin.teachings.index') }}">Data Pembelajaran</a></li>
                     <li><a href="{{ route('admin.school_years.index') }}">Data Tahun Ajar</a></li>
                     <li><a href="./app-calender.html">Data Prestasi</a></li>
                 </ul>
@@ -61,7 +67,30 @@
     </div>
 </div>
 
+<style>
+    /* Hilangkan role kalau sidebar kecil (mini-nav) */
+    .mini-nav #role-text {
+        display: none !important;
+    }
+
+    /* Hilangkan role kalau layar kecil (di bawah 768px, ukuran tablet & HP) */
+    @media (max-width: 768px) {
+        #role-text {
+            display: none !important;
+        }
+    }
+</style>
+
 <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const body = document.body;
+        const hamburger = document.getElementById("hamburger-menu");
+
+        hamburger.addEventListener("click", function() {
+            body.classList.toggle("mini-nav"); // Toggle class mini-nav
+        });
+    });
+
     document.addEventListener("DOMContentLoaded", function() {
         document.addEventListener('click', function(event) {
             if (event.target.closest('#logout-btn')) { // Menangkap event dari dropdown

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Student;
 use App\Models\StudentClass;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 
 class StudentController extends Controller
@@ -14,16 +15,23 @@ class StudentController extends Controller
     public function index(Request $request)
     {
         $classId = $request->input('class_id');
-    
-        // Jika class_id kosong, tampilkan semua siswa
+
+        // Ambil daftar kelas yang sudah diurutkan abjad
+        $classes = StudentClass::orderBy('nama', 'asc')->get();
+
+        // Ambil siswa dengan filter kelas (jika ada), dan urutkan berdasarkan nama kelas lalu nama siswa
         $students = Student::when($classId, function ($query) use ($classId) {
-            return $query->where('class_id', $classId);
-        })->get();
-    
-        $classes = StudentClass::all(); // Ambil semua kelas untuk dropdown
-    
+                return $query->where('class_id', $classId);
+            })
+            ->with('class') // Pastikan mengambil data kelas
+            ->join('student_classes', 'students.class_id', '=', 'student_classes.id') // Join untuk mengurutkan berdasarkan nama kelas
+            ->orderBy('student_classes.nama', 'asc') // Urutkan berdasarkan nama kelas (bukan ID)
+            ->orderBy('students.nama', 'asc') // Lalu urutkan berdasarkan nama siswa
+            ->select('students.*') // Pastikan hanya memilih kolom dari tabel students agar tidak bentrok
+            ->get();
+
         return view('admin-pages.students.index', compact('students', 'classes'));
-    }    
+    }
 
     public function store(Request $request)
     {
@@ -82,39 +90,78 @@ class StudentController extends Controller
 
     public function import(Request $request)
     {
-        // Validasi input file
-        $request->validate([
-            'file' => 'required|mimes:xlsx,xls',
-        ]);
+        try {
+            // Validasi input file
+            $request->validate([
+                'importFile' => 'required|mimes:xlsx,xls',
+            ]);
 
-        $file = $request->file('file')->getPathname();
-        $spreadsheet = IOFactory::load($file);
-        $sheet = $spreadsheet->getActiveSheet();
-        $rows = $sheet->toArray(null, true, true, true);
-
-        foreach ($rows as $key => $row) {
-            // Skip header row (key = 1)
-            if ($key == 1) continue;
-
-            // Proses untuk mengganti 'P' dan 'L' dengan 'Perempuan' dan 'Laki-laki'
-            $jk = $row['C'];  // Kolom C adalah jenis kelamin
-            if ($jk == 'P') {
-                $jk = 'Perempuan';
-            } elseif ($jk == 'L') {
-                $jk = 'Laki-laki';
+            // Ambil file yang diupload
+            $file = $request->file('importFile');
+            if (!$file) {
+                return back()->with('error', 'File tidak ditemukan dalam request!');
             }
 
-            // Simpan data ke tabel students
-            Student::create([
-                'nama' => $row['A'],  // Kolom A untuk nama
-                'kelas' => $row['B'], // Kolom B untuk kelas
-                'jk' => $jk,          // Simpan jenis kelamin yang sudah diproses
-                'nis' => $row['D'],   // Kolom D untuk NIS
-                'nisn' => $row['E'],  // Kolom E untuk NISN
-                'ttl' => $row['F']    // Kolom F untuk TTL
-            ]);
-        }
+            // Simpan file sementara di storage/temp (agar bisa diakses PhpSpreadsheet)
+            $path = $file->move(storage_path('app/temp'), $file->getClientOriginalName());
+            $fullPath = $path->getRealPath(); // Ambil path absolut
 
-        return redirect()->back()->with('success', 'Data siswa berhasil diimpor');
+            // Debugging Path File
+            Log::info("File Path: " . $fullPath);
+            sleep(1); // Tunggu 1 detik agar file benar-benar tersimpan
+
+            if (!file_exists($fullPath)) {
+                return back()->with('error', "File tidak ditemukan di: " . $fullPath);
+            }
+
+            // Load file dengan PhpSpreadsheet
+            $spreadsheet = IOFactory::load($fullPath);
+            $sheet = $spreadsheet->getActiveSheet();
+            $rows = $sheet->toArray(null, true, true, true);
+
+            // Debug isi Excel
+            Log::info("Isi Excel: ", $rows);
+
+            // Ubah array agar indeks mulai dari 0 tanpa loncatan
+            $rows = array_values($rows);
+
+            foreach ($rows as $key => $row) {
+                // Lewati baris pertama (judul) dan kedua (header)
+                if ($key < 2) {
+                    continue;
+                }
+            
+                // Jika baris kosong, lanjutkan loop
+                if (empty($row['B']) || empty($row['C'])) {
+                    Log::warning("Baris {$key} kosong, dilewati.");
+                    continue;
+                }
+            
+                // Ambil class_id berdasarkan nama kelas
+                $class = StudentClass::where('nama', $row['C'])->first();
+                $class_id = $class ? $class->id : null;
+            
+                // Konversi jenis kelamin
+                $jk = ($row['D'] == 'P') ? 'Perempuan' : (($row['D'] == 'L') ? 'Laki-laki' : null);
+            
+                // Simpan data ke database (NISN boleh kosong)
+                Student::create([
+                    'nama' => $row['B'],
+                    'class_id' => $class_id,
+                    'jk' => $jk,
+                    'nis' => $row['E'] ?? null,  // Boleh kosong
+                    'nisn' => $row['F'] ?? null, // Sekarang tetap disimpan walaupun kosong
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+            
+                Log::info("Siswa berhasil diimport: {$row['B']}");
+            }            
+
+            return redirect()->back()->with('success', 'Data siswa berhasil diimpor!');
+        } catch (\Exception $e) {
+            Log::error("Error saat import: " . $e->getMessage());
+            return back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+        }
     }
 }
