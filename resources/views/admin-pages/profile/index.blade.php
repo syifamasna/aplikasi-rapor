@@ -205,7 +205,7 @@
 
                                                             <div class="form-group mt-2 text-right">
                                                                 <button type="submit"
-                                                                    class="btn btn-primary btn-sm mt-3">
+                                                                    class="btn btn-success btn-sm mt-3 text-white">
                                                                     <i class="fa fa-upload"></i> Upload
                                                                 </button>
                                                             </div>

@@ -139,7 +139,7 @@
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <h5 class="m-0">Tabel Siswa</h5>
                         <div class="d-flex align-items-center gap-2">
-                            <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                            <button type="button" class="btn btn-success text-white" data-bs-toggle="modal"
                                 data-bs-target="#importStudentModal"><i class="fa fa-upload"></i> Impor Siswa
                             </button>
                             <button type="button" class="btn btn-primary ml-2" data-toggle="modal"
