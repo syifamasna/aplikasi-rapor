@@ -20,11 +20,11 @@
 
 <body>
 
-    @include('admin-pages.components.preloader')
+    @include('wali-kelas-pages.components.preloader')
 
     <div id="main-wrapper">
-        @include('admin-pages.components.sidebar')
-        @include('admin-pages.components.topbar')
+        @include('wali-kelas-pages.components.sidebar')
+        @include('wali-kelas-pages.components.topbar')
 
         <div class="content-body">
             <div class="container-fluid">
@@ -36,9 +36,9 @@
                     </div>
                     <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('wali_kelas.dashboard') }}">Dashboard</a></li>
                             <li class="breadcrumb-item active"><a class="text-dark"
-                                    href="{{ route('admin.profile.index') }}">Profil Saya</a></li>
+                                    href="{{ route('wali_kelas.profile.index') }}">Profil Saya</a></li>
                         </ol>
                     </div>
                 </div>
@@ -106,7 +106,7 @@
                                         <div id="edit-profil" class="tab-pane fade active show">
                                             <div class="pt-3">
                                                 <div class="settings-form">
-                                                    <form action="{{ route('admin.profile.update', $user->id) }}"
+                                                    <form action="{{ route('wali_kelas.profile.update', $user->id) }}"
                                                         method="POST">
                                                         @csrf
                                                         @method('PUT')
@@ -177,13 +177,14 @@
 
                                                     <!-- Preview Gambar -->
                                                     <div class="text-center">
-                                                        <img id="imagePreviewEdit" src="{{ asset('storage/' . $user->image) }}" 
+                                                        <img id="imagePreviewEdit"
+                                                            src="{{ asset('storage/' . $user->image) }}"
                                                             class="rounded-circle border d-block mx-auto"
                                                             style="width: 100px; height: 100px; object-fit: cover;">
-                                                    </div>                                                    
+                                                    </div>
 
                                                     @if ($user->image)
-                                                        <form action="{{ route('admin.profile.destroyImage') }}"
+                                                        <form action="{{ route('wali_kelas.profile.destroyImage') }}"
                                                             method="POST" class="mt-2">
                                                             @csrf
                                                             @method('DELETE')
@@ -193,8 +194,8 @@
                                                     @endif
 
                                                     <!-- Form Upload Foto -->
-                                                    <form action="{{ route('admin.profile.update') }}" method="POST"
-                                                        enctype="multipart/form-data">
+                                                    <form action="{{ route('wali_kelas.profile.update') }}"
+                                                        method="POST" enctype="multipart/form-data">
                                                         @csrf
                                                         @method('PUT')
                                                         <div class="form-group mt-3 text-left">
@@ -219,7 +220,7 @@
                                         <div id="edit-akun" class="tab-pane fade">
                                             <div class="pt-3">
                                                 <div class="settings-form">
-                                                    <form action="{{ route('admin.profile.update', $user->id) }}"
+                                                    <form action="{{ route('wali_kelas.profile.update', $user->id) }}"
                                                         method="POST">
                                                         @csrf
                                                         @method('PUT')
@@ -266,7 +267,7 @@
                     </div>
                 </div>
 
-                @include('admin-pages.components.footer')
+                @include('wali-kelas-pages.components.footer')
             </div>
         </div>
 
@@ -282,12 +283,12 @@
                 passwordInput.type = "password";
             }
         }
-        
+
         // Script Preview Gambar di Edit Foto Profil
         document.getElementById('inputImage').addEventListener('change', function(event) {
             const file = event.target.files[0];
             const previewContainer = document.getElementById(
-            'imagePreviewEdit'); // ID untuk preview dalam form Edit Foto
+                'imagePreviewEdit'); // ID untuk preview dalam form Edit Foto
             const reader = new FileReader();
 
             if (file) {
@@ -298,7 +299,7 @@
                 reader.readAsDataURL(file);
             } else {
                 previewContainer.src =
-                "{{ asset('default-profile.png') }}"; // Kembali ke default jika tidak ada gambar
+                    "{{ asset('default-profile.png') }}"; // Kembali ke default jika tidak ada gambar
             }
         });
     </script>

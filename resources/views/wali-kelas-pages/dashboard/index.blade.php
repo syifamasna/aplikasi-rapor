@@ -34,14 +34,14 @@
 
 <body>
 
-    @include('admin-pages.components.preloader')
+    @include('wali-kelas-pages.components.preloader')
 
     <!--**********************************
         Main wrapper start
     ***********************************-->
     <div id="main-wrapper">
-        @include('admin-pages.components.sidebar')
-        @include('admin-pages.components.topbar')
+        @include('wali-kelas-pages.components.sidebar')
+        @include('wali-kelas-pages.components.topbar')
 
         <!--**********************************
             Content body start
@@ -59,7 +59,7 @@
 
                 <div class="row">
                     <div class="col-lg-3 col-sm-6">
-                        <a href="{{ route('admin.students.index') }}" class="text-decoration-none">
+                        <a href="{{ route('wali_kelas.student_classes.students') }}" class="text-decoration-none">
                             <div class="card">
                                 <div class="stat-widget-one card-body text-primary">
                                     <div class="stat-icon d-inline-block">
@@ -73,56 +73,11 @@
                             </div>
                         </a>
                     </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <a href="{{ route('admin.subjects.index') }}" class="text-decoration-none">
-                            <div class="card">
-                                <div class="stat-widget-one card-body text-success">
-                                    <div class="stat-icon d-inline-block">
-                                        <i class="ti-book border-success"></i>
-                                    </div>
-                                    <div class="stat-content d-inline-block">
-                                        <div class="stat-text">Total Mapel</div>
-                                        <div class="stat-digit">{{ $totalMapel }}</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <a href="{{ route('admin.student_classes.index') }}" class="text-decoration-none">
-                            <div class="card">
-                                <div class="stat-widget-one card-body text-info">
-                                    <div class="stat-icon d-inline-block">
-                                        <i class="ti-home border-info"></i>
-                                    </div>
-                                    <div class="stat-content d-inline-block">
-                                        <div class="stat-text">Total Kelas</div>
-                                        <div class="stat-digit">{{ $totalKelas }}</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <a href="{{ route('admin.users.index') }}" class="text-decoration-none">
-                            <div class="card">
-                                <div class="stat-widget-one card-body text-danger">
-                                    <div class="stat-icon d-inline-block">
-                                        <i class="ti-id-badge border-danger"></i>
-                                    </div>
-                                    <div class="stat-content d-inline-block">
-                                        <div class="stat-text">Total Pengguna</div>
-                                        <div class="stat-digit">{{ $totalPengguna }}</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
                 </div>
 
             </div>
 
-            @include('admin-pages.components.footer')
+            @include('wali-kelas-pages.components.footer')
 
         </div>
     </div>

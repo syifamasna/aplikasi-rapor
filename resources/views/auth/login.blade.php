@@ -34,26 +34,36 @@
                                         @csrf
                                         <div class="form-group">
                                             <label><strong>Email</strong></label>
-                                            <input type="email" name="email" class="form-control" placeholder="Masukkan email..." required>
+                                            <input type="email" name="email" class="form-control"
+                                                placeholder="Masukkan email..." required>
                                         </div>
                                         <div class="form-group">
                                             <label><strong>Password</strong></label>
-                                            <input type="password" name="password" class="form-control" placeholder="Masukkan password..." required>
+                                            <div class="input-group">
+                                                <input type="password" name="password" id="password"
+                                                    class="form-control" placeholder="Masukkan password..." required>
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text" onclick="togglePassword()"
+                                                        style="cursor: pointer;">
+                                                        <i id="eyeIcon" class="fa fa-eye"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="form-group">
                                             <label><strong>Masuk sebagai</strong></label>
                                             <select name="role" class="form-control text-dark bg-white" required>
                                                 <option value="" disabled selected>Pilih Tipe Pengguna</option>
-                                                @foreach($roles as $role)
+                                                @foreach ($roles as $role)
                                                     <option value="{{ $role->id }}">{{ $role->role }}</option>
                                                 @endforeach
-                                            </select>                                            
+                                            </select>
                                         </div>
                                         <br>
                                         <div class="text-center">
                                             <button type="submit" class="btn btn-primary btn-block">Masuk</button>
                                         </div>
-                                    </form>                                    
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -63,6 +73,23 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function togglePassword() {
+            let passwordInput = document.getElementById("password");
+            let eyeIcon = document.getElementById("eyeIcon");
+
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                eyeIcon.classList.remove("fa-eye");
+                eyeIcon.classList.add("fa-eye-slash");
+            } else {
+                passwordInput.type = "password";
+                eyeIcon.classList.remove("fa-eye-slash");
+                eyeIcon.classList.add("fa-eye");
+            }
+        }
+    </script>
 
     <!-- Scripts -->
     <script src="{{ asset('vendor/global/global.min.js') }}"></script>
@@ -79,7 +106,7 @@
                     heightAuto: false
                 });
             @endif
-    
+
             @if (session('error'))
                 Swal.fire({
                     title: "Login Gagal",
@@ -94,4 +121,5 @@
     </script>
 
 </body>
+
 </html>

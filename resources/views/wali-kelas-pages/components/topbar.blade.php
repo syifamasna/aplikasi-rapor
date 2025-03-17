@@ -23,11 +23,12 @@
                                         : asset('images/avatar/male.png');
                             @endphp
 
-                            <img src="{{ auth()->user()->image ? asset('storage/' . auth()->user()->image) : asset('images/avatar/default.png') }}"
+                            <img src="{{ auth()->user()->image ? asset('storage/' . auth()->user()->image) : $defaultImage }}"
                                 class="rounded-circle border" style="width: 35px; height: 35px; object-fit: cover;">
+
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a href="{{ route('admin.profile.index') }}" class="dropdown-item">
+                            <a href="{{ route('wali_kelas.profile.index') }}" class="dropdown-item">
                                 <i class="icon-user"></i>
                                 <span class="ml-2">Profil Saya</span>
                             </a>

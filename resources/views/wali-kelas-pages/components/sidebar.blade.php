@@ -1,5 +1,5 @@
 <div class="nav-header">
-    <a href="{{ route('admin.dashboard') }}" class="brand-logo d-flex align-items-center">
+    <a href="{{ route('wali_kelas.dashboard') }}" class="brand-logo d-flex align-items-center">
         <img class="logo-abbr" src="{{ asset('images/logo-erapor.png') }}" alt="">
 
         @php
@@ -21,21 +21,17 @@
     <div class="quixnav-scroll">
         <ul class="metismenu" id="menu">
 
-            <li><a href="{{ route('admin.dashboard') }}">
-                <i class="fa fa-dashboard"></i><span class="nav-text">Dashboard</span></a>
+            <li><a href="{{ route('wali_kelas.dashboard') }}">
+                    <i class="fa fa-dashboard"></i><span class="nav-text">Dashboard</span></a>
             </li>
 
             <li class="nav-label">Data Master</li>
             <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="fa fa-folder"></i><span
                         class="nav-text">Administrasi</span></a>
                 <ul aria-expanded="false">
-                    <li><a href="{{ route('admin.school_profiles.index') }}">Data Sekolah</a></li>
-                    <li><a href="{{ route('admin.student_classes.index') }}">Data Kelas</a></li>
-                    <li><a href="{{ route('admin.students.index') }}">Data Siswa</a></li>
-                    <li><a href="{{ route('admin.subjects.index') }}">Data Mapel</a></li>
-                    <li><a href="{{ route('admin.teachings.index') }}">Data Pembelajaran</a></li>
-                    <li><a href="{{ route('admin.school_years.index') }}">Data Tahun Ajar</a></li>
-                    <li><a href="./app-calender.html">Data Prestasi</a></li>
+                    <li><a href="{{ route('wali_kelas.student_classes.index') }}">Data Kelas</a></li>
+                    <li><a href="./app-calender.html">Ketidakhadiran</a></li>
+                    <li><a href="./app-calender.html">Catatan Wali Kelas</a></li>
                 </ul>
             </li>
 
@@ -47,12 +43,8 @@
                 </ul>
             </li>
 
-            <li><a href="{{ route('admin.users.index') }}">
-                    <i class="fa fa-users"></i><span class="nav-text">Data Pengguna</span></a>
-            </li>
-
             <li class="nav-label">Lainnya</li>
-            <li><a href="{{ route('admin.profile.index') }}">
+            <li><a href="{{ route('wali_kelas.profile.index') }}">
                     <i class="fa fa-user"></i><span class="nav-text">Profil Saya</span></a>
             </li>
             <li>

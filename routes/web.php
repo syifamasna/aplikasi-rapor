@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
 use App\Http\Controllers\Admin\SchoolProfileController as AdminSchoolProfileController;
@@ -10,6 +11,12 @@ use App\Http\Controllers\Admin\StudentController as AdminStudentController;
 use App\Http\Controllers\Admin\SubjectController as AdminSubjectController;
 use App\Http\Controllers\Admin\TeachingController as AdminTeachingController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
+
+use App\Http\Controllers\WaliKelas\DashboardController as WaliKelasDashboardController;
+use App\Http\Controllers\WaliKelas\ProfileController as WaliKelasProfileController;
+use App\Http\Controllers\WaliKelas\StudentClassController as WaliKelasStudentClassController;
+use App\Http\Controllers\WaliKelas\StudentController as WaliKelasStudentController;
+
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -58,18 +65,41 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     });
 });
 
+// ===========================================
+// Rute Wali Kelas
+// ===========================================
+Route::middleware(['auth'])->prefix('wali')->group(function () {
+    Route::group(['middleware' => function ($request, $next) {
+        if (!Auth::user()->roles->contains('role', 'Wali Kelas')) {
+            abort(403, 'Unauthorized action.');
+        }
+        return $next($request);
+    }], function () {
+        Route::get('/dashboard', [WaliKelasDashboardController::class, 'index'])->name('wali_kelas.dashboard');
+
+        Route::resource('student_classes', WaliKelasStudentClassController::class)->names('wali_kelas.student_classes')->except(['show']);
+        Route::get('student_classes/students', [WaliKelasStudentClassController::class, 'studentIndex'])->name('wali_kelas.student_classes.students');
+        Route::resource('students', WaliKelasStudentController::class)->names('wali_kelas.students');
+
+        // Rute untuk update profil wali kelas
+        Route::get('profile', [WaliKelasProfileController::class, 'index'])->name('wali_kelas.profile.index');
+        Route::put('profile', [WaliKelasProfileController::class, 'update'])->name('wali_kelas.profile.update');
+        Route::delete('profile/photo', [WaliKelasProfileController::class, 'destroyImage'])->name('wali_kelas.profile.destroyImage');        
+    });
+});
+
+// Wali Kelas Dashboard
+/* Route::middleware(['auth'])->prefix('wali')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('wali_kelas.dashboard');
+    })->name('wali_kelas.dashboard');
+}); */
+
 // Guru Mapel Dashboard
 Route::middleware(['auth'])->prefix('guru')->group(function () {
     Route::get('/dashboard', function () {
         return view('guru_mapel.dashboard');
     })->name('guru_mapel.dashboard');
-});
-
-// Wali Kelas Dashboard
-Route::middleware(['auth'])->prefix('wali')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('wali_kelas.dashboard');
-    })->name('wali_kelas.dashboard');
 });
 
 // PJ Prestasi Dashboard
