@@ -56,7 +56,7 @@ class LoginController extends Controller
             'Admin' => redirect()->route('admin.dashboard')->with('success', 'Berhasil login sebagai Admin.'),
             'Guru Mapel' => redirect()->route('guru_mapel.dashboard')->with('success', 'Berhasil login sebagai Guru Mapel.'),
             'Wali Kelas' => redirect()->route('wali_kelas.dashboard')->with('success', 'Berhasil login sebagai Wali Kelas.'),
-            'PJ Prestasi' => redirect()->route('pj_prestasi.dashboard')->with('success', 'Berhasil login sebagai PJ Prestasi.'),
+            'Pj Prestasi' => redirect()->route('pj_prestasi.dashboard')->with('success', 'Berhasil login sebagai PJ Prestasi.'),
             default => redirect()->route('login')->with('error', 'Role tidak dikenali.'),
         };
     }    

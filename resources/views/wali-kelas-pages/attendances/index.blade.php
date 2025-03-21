@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Kelas - E-Rapor SIT Aliya</title>
+    <title>Data Ketidakhadiran - E-Rapor SIT Aliya</title>
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('vendor/sweetalert2/dist/sweetalert2.min.css') }}">
@@ -137,10 +137,11 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $student_classes->nama }}
                                             <td>{{ $student_classes->waliKelas->nama ?? '-' }}</td>
-                                            <td>{{ $student_classes->students->count() }}</td> <!-- Menampilkan jumlah siswa -->
+                                            <td>{{ $student_classes->students->count() }}</td>
+                                            <!-- Menampilkan jumlah siswa -->
                                             </td>
                                             <td>
-                                                <a href="{{ route('wali_kelas.student_classes.students', ['class_id' => $student_classes->id]) }}"
+                                                <a href="{{ route('wali_kelas.attendances.students', ['class_id' => $student_classes->id]) }}"
                                                     class="btn btn-info btn-sm btn-detail">
                                                     Kelola
                                                 </a>

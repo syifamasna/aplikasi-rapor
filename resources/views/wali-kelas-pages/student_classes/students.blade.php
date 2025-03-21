@@ -128,12 +128,9 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('wali_kelas.dashboard') }}">Dashboard</a></li>
                             <li class="breadcrumb-item"><a href="javascript:void(0)">Administrasi</a></li>
-                            <li class="breadcrumb-item active"><a
-                                    href="{{ route('wali_kelas.student_classes.index') }}">Data
-                                    Kelas</a></li>
-                            <li class="breadcrumb-item active"><a
-                                    href="{{ route('wali_kelas.student_classes.students') }}">Data
-                                Siswa</a></li>
+                            <li class="breadcrumb-item"><a
+                                    href="{{ route('wali_kelas.student_classes.index') }}">Kelas</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Data Siswa</li>
                         </ol>
                     </div>
                 </div>

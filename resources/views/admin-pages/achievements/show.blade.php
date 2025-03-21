@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Kelas - E-Rapor SIT Aliya</title>
+    <title>Prestasi {{ $student->nama ?? 'Siswa Tidak Ditemukan' }} - E-Rapor SIT Aliya</title>
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('vendor/sweetalert2/dist/sweetalert2.min.css') }}">
@@ -73,7 +73,7 @@
             background-color: #f0f0f0 !important;
         }
 
-        /* Membuat kolom Wali Kelas left-aligned */
+        /* Membuat kolom Keterangan left-aligned */
         table.dataTable tbody td:nth-child(3) {
             text-align: left;
         }
@@ -81,6 +81,25 @@
         table.dataTable td {
             text-align: center;
             color: #707070;
+        }
+
+        .info-row {
+            display: grid;
+            grid-template-columns: 180px 10px auto;
+            /* Kolom 1 untuk label, kolom 2 untuk ":", kolom 3 untuk nilai */
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #ddd;
+            color: #707070;
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .info-row strong,
+        .info-row span {
+            text-align: left;
         }
 
         /* Styling untuk tabel responsif hanya pada layar kecil */
@@ -103,23 +122,30 @@
             <div class="container-fluid">
                 <div class="row page-titles mx-0">
                     <div class="col-md-6 p-md-0">
-                        <h4 class="mb-0">Daftar Kelas SIT Aliya</h4>
+                        <h4 class="mb-0">Daftar Prestasi {{ $student->nama ?? 'Siswa Tidak Ditemukan' }}</h4>
                     </div>
                     <div class="col-md-6 p-md-0 d-flex justify-content-end">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
                             <li class="breadcrumb-item"><a href="javascript:void(0)">Administrasi</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Data Kelas</li>
+                            <li class="breadcrumb-item"><a
+                                    href="{{ route('admin.achievements.index') }}">Kelas</a></li>
+                            <li class="breadcrumb-item">
+                                <a
+                                    href="{{ route('admin.achievements.students', ['class_id' => $class->id ?? '']) }}">Siswa</a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">Prestasi Siswa</li>
+
                         </ol>
                     </div>
                 </div>
 
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
-                        <h5 class="m-0">Tabel Kelas</h5>
+                        <h5 class="m-0">Tabel Prestasi</h5>
                         <button type="button" class="btn btn-primary" data-toggle="modal"
-                            data-target="#addStudentClassModal">
-                            Tambah Kelas
+                            data-target="#addAchievementModal">
+                            Tambah Prestasi
                         </button>
                     </div>
                     <div class="card-body">
@@ -129,27 +155,26 @@
                                 <thead>
                                     <tr>
                                         <th>No.</th>
-                                        <th>Kelas</th>
-                                        <th>Wali Kelas</th>
+                                        <th>Jenis Prestasi</th>
+                                        <th>Keterangan</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($student_classes as $student_classes)
+                                    @foreach ($achievements as $achievement)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $student_classes->nama }}
-                                            <td>{{ $student_classes->waliKelas->nama ?? '-' }}</td>
-                                            </td>
+                                            <td>{{ $achievement->jenis_prestasi }}</td>
+                                            <td>{{ $achievement->keterangan }}</td>
                                             <td>
                                                 <button type="button" class="btn btn-warning btn-sm btn-edit"
-                                                    data-id="{{ $student_classes->id }}"
-                                                    data-nama="{{ $student_classes->nama }}"
-                                                    data-wali-kelas="{{ $student_classes->wali_kelas }}">
+                                                    data-id="{{ $achievement->id }}"
+                                                    data-jenis_prestasi="{{ $achievement->jenis_prestasi }}"
+                                                    data-keterangan="{{ $achievement->keterangan }}">
                                                     Edit
                                                 </button>
                                                 <form
-                                                    action="{{ route('admin.student_classes.destroy', $student_classes->id) }}"
+                                                    action="{{ route('admin.achievements.destroy', $achievement->id) }}"
                                                     method="POST" class="d-inline form-hapus">
                                                     @csrf
                                                     @method('DELETE')
@@ -171,34 +196,34 @@
         </div>
     </div>
 
-
     <!-- Modal Tambah -->
-    <div class="modal fade" id="addStudentClassModal" tabindex="-1" role="dialog"
-        aria-labelledby="addStudentClassModalLabel" aria-hidden="true">
+    <div class="modal fade" id="addAchievementModal" tabindex="-1" role="dialog"
+        aria-labelledby="addAchievementModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <form id="addStudentClassForm" action="{{ route('admin.student_classes.store') }}" method="POST">
+                <form id="addAchievementForm" action="{{ route('admin.achievements.store') }}" method="POST">
                     @csrf
+                    <input type="hidden" name="student_id" value="{{ $student->id }}">
+
                     <div class="modal-header">
-                        <h5 class="modal-title" id="addStudentClassModalLabel">Tambah Kelas</h5>
+                        <h5 class="modal-title" id="addAchievementModalLabel">Tambah Prestasi</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="nama">Nama Kelas <span class="text-danger">*</span></label>
-                            <input type="text" name="nama" class="form-control" placeholder="Contoh : 1A"
-                                required>
+                            <label>Jenis Prestasi <span class="text-danger">*</span></label>
+                            <select name="jenis_prestasi" class="form-control" required>
+                                <option value="" selected disabled>Pilih Jenis Prestasi</option>
+                                <option value="Akademik">Akademik</option>
+                                <option value="Non-Akademik">Non-Akademik</option>
+                            </select>
                         </div>
                         <div class="form-group">
-                            <label for="wali_kelas">Wali Kelas <span class="text-danger">*</span></label>
-                            <select name="wali_kelas" class="form-control" required>
-                                <option value="" selected disabled>Pilih Wali Kelas</option>
-                                @foreach ($waliKelas as $wali)
-                                    <option value="{{ $wali->id }}">{{ $wali->nama }}</option>
-                                @endforeach
-                            </select>
+                            <label for="keterangan">Keterangan <span class="text-danger">*</span></label>
+                            <input type="text" name="keterangan" class="form-control"
+                                placeholder="Contoh : Juara 1 Kompetisi Karate Tingkat Provinsi" required>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -211,38 +236,37 @@
     </div>
 
     <!-- Modal Edit -->
-    <div class="modal fade" id="editStudentClassModal" tabindex="-1" role="dialog"
-        aria-labelledby="editStudentClassModalLabel" aria-hidden="true">
+    <div class="modal fade" id="editAchievementModal" tabindex="-1" role="dialog"
+        aria-labelledby="editAchievementModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <form id="editStudentClassForm" method="POST">
+                <form id="editAchievementForm" method="POST">
                     @csrf
                     @method('PUT')
                     <div class="modal-header">
-                        <h5 class="modal-title" id="editStudentClassModalLabel">Edit Kelas</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <h5 class="modal-title" id="editAchievementModalLabel">Edit Prestasi</h5>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
                         <input type="hidden" name="id" id="edit_id">
                         <div class="form-group">
-                            <label for="edit_nama">Nama Kelas <span class="text-danger">*</span></label>
-                            <input type="text" name="nama" id="edit_nama" class="form-control"
-                                placeholder="Contoh : 1A" required>
+                            <label for="edit_jenis_prestasi">Jenis Prestasi <span class="text-danger">*</span></label>
+                            <select class="form-control" name="jenis_prestasi" id="edit_jenis_prestasi" required>
+                                <option value="" selected disabled>Pilih Jenis Prestasi</option>
+                                <option value="Akademik">Akademik</option>
+                                <option value="Non-Akademik">Non-Akademik</option>
+                            </select>
                         </div>
                         <div class="form-group">
-                            <label for="edit_wali_kelas">Wali Kelas <span class="text-danger">*</span></label>
-                            <select class="form-control" name="wali_kelas" id="edit_wali_kelas" required>
-                                <option value="" selected disabled>Pilih Wali Kelas</option>
-                                @foreach ($waliKelas as $wali)
-                                    <option value="{{ $wali->id }}">{{ $wali->nama }}</option>
-                                @endforeach
-                            </select>
+                            <label for="edit_keterangan">keterangan <span class="text-danger">*</span></label>
+                            <input type="text" name="keterangan" id="edit_keterangan" class="form-control"
+                                placeholder="Contoh : Juara 1 Kompetisi Karate Tingkat Provinsi" required>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                         <button type="submit" class="btn btn-success">Simpan Perubahan</button>
                     </div>
                 </form>
@@ -257,17 +281,17 @@
                 if (event.target.classList.contains("btn-edit")) {
                     let button = event.target;
                     let id = button.getAttribute("data-id");
-                    let nama = button.getAttribute("data-nama");
-                    let wali_kelas = button.getAttribute("data-wali-kelas");
+                    let jenis_prestasi = button.getAttribute("data-jenis_prestasi");
+                    let keterangan = button.getAttribute("data-keterangan");
 
                     document.getElementById("edit_id").value = id;
-                    document.getElementById("edit_nama").value = nama;
-                    document.getElementById("edit_wali_kelas").value = wali_kelas;
+                    document.getElementById("edit_jenis_prestasi").value = jenis_prestasi;
+                    document.getElementById("edit_keterangan").value = keterangan;
 
-                    let form = document.getElementById("editStudentClassForm");
-                    form.setAttribute("action", `/admin/student_classes/${id}`);
+                    let form = document.getElementById("editAchievementForm");
+                    form.setAttribute("action", `/admin/achievements/${id}`);
 
-                    $('#editStudentClassModal').modal('show');
+                    $('#editAchievementModal').modal('show');
                 }
 
                 //script konfirmasi hapus
@@ -298,6 +322,7 @@
     <script src="{{ asset('js/quixnav-init.js') }}"></script>
     <script src="{{ asset('js/custom.min.js') }}"></script>
     <script src="{{ asset('vendor/sweetalert2/dist/sweetalert2.min.js') }}"></script>
+    <script src="{{ asset('vendor/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
 
     <!-- Datatable -->
     <script src="{{ asset('vendor/datatables/js/jquery.dataTables.min.js') }}"></script>

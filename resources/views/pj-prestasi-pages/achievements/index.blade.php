@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Kelas - E-Rapor SIT Aliya</title>
+    <title>Prestasi Siswa - E-Rapor SIT Aliya</title>
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('vendor/sweetalert2/dist/sweetalert2.min.css') }}">
@@ -93,11 +93,11 @@
 </head>
 
 <body>
-    @include('wali-kelas-pages.components.preloader')
+    @include('pj-prestasi-pages.components.preloader')
 
     <div id="main-wrapper" class="main-container">
-        @include('wali-kelas-pages.components.sidebar')
-        @include('wali-kelas-pages.components.topbar')
+        @include('pj-prestasi-pages.components.sidebar')
+        @include('pj-prestasi-pages.components.topbar')
 
         <div class="content-body">
             <div class="container-fluid">
@@ -107,7 +107,7 @@
                     </div>
                     <div class="col-md-6 p-md-0 d-flex justify-content-end">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('wali_kelas.dashboard') }}">Dashboard</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('pj_prestasi.dashboard') }}">Dashboard</a></li>
                             <li class="breadcrumb-item"><a href="javascript:void(0)">Administrasi</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Kelas</li>
                         </ol>
@@ -127,20 +127,17 @@
                                         <th>No.</th>
                                         <th>Kelas</th>
                                         <th>Wali Kelas</th>
-                                        <th>Jumlah Siswa</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($student_classes as $student_classes)
+                                    @foreach ($student_classes as $class)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $student_classes->nama }}
-                                            <td>{{ $student_classes->waliKelas->nama ?? '-' }}</td>
-                                            <td>{{ $student_classes->students->count() }}</td> <!-- Menampilkan jumlah siswa -->
-                                            </td>
+                                            <td>{{ $class->nama }}</td>
+                                            <td>{{ $class->waliKelas->nama ?? '-' }}</td>
                                             <td>
-                                                <a href="{{ route('wali_kelas.student_classes.students', ['class_id' => $student_classes->id]) }}"
+                                                <a href="{{ route('pj_prestasi.achievements.students', ['class_id' => $class->id]) }}"
                                                     class="btn btn-info btn-sm btn-detail">
                                                     Kelola
                                                 </a>
@@ -154,7 +151,7 @@
                 </div>
             </div>
 
-            @include('wali-kelas-pages.components.footer')
+            @include('pj-prestasi-pages.components.footer')
 
         </div>
     </div>
@@ -184,29 +181,6 @@
             });
         });
     </script>
-
-    <!-- sweetalert2 success dan error -->
-    @if (session('success'))
-        <script>
-            Swal.fire({
-                icon: 'success',
-                title: 'Sukses!',
-                text: "{{ session('success') }}",
-                timer: 3000,
-                showConfirmButton: false
-            });
-        </script>
-    @endif
-
-    @if (session('error'))
-        <script>
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: "{{ session('error') }}",
-            });
-        </script>
-    @endif
 
 </body>
 

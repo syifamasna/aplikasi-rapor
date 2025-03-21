@@ -35,7 +35,7 @@
                     <li><a href="{{ route('admin.subjects.index') }}">Data Mapel</a></li>
                     <li><a href="{{ route('admin.teachings.index') }}">Data Pembelajaran</a></li>
                     <li><a href="{{ route('admin.school_years.index') }}">Data Tahun Ajar</a></li>
-                    <li><a href="./app-calender.html">Data Prestasi</a></li>
+                    <li><a href="{{ route('admin.achievements.index') }}">Data Prestasi</a></li>
                 </ul>
             </li>
 

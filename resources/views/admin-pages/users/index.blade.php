@@ -144,8 +144,7 @@
                     <div class="col-md-6 p-md-0 d-flex justify-content-end">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                            <li class="breadcrumb-item"><a class="text-dark"
-                                    href="{{ route('admin.users.index') }}">Data Pengguna</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Data Pengguna</li>
                         </ol>
                     </div>
                 </div>

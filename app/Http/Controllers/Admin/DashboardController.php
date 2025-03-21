@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Achievement;
 use App\Models\User;
 use App\Models\Student;
 use App\Models\Subject;
@@ -17,7 +18,8 @@ class DashboardController extends Controller
         $totalMapel = Subject::count();
         $totalKelas = StudentClass::count();
         $totalPengguna = User::count();
+        $totalPrestasi = Achievement::count();
 
-        return view('admin-pages.dashboard.index', compact('totalSiswa', 'totalMapel', 'totalKelas', 'totalPengguna'));
+        return view('admin-pages.dashboard.index', compact('totalSiswa', 'totalMapel', 'totalKelas', 'totalPengguna', 'totalPrestasi'));
     }
 }

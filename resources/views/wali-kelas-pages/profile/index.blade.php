@@ -37,21 +37,10 @@
                     <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('wali_kelas.dashboard') }}">Dashboard</a></li>
-                            <li class="breadcrumb-item active"><a class="text-dark"
-                                    href="{{ route('wali_kelas.profile.index') }}">Profil Saya</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Profil Saya</li>
                         </ol>
                     </div>
                 </div>
-
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
 
                 <div class="row">
                     <div class="col-md-12">

@@ -28,7 +28,7 @@
                                 class="rounded-circle border" style="width: 35px; height: 35px; object-fit: cover;">
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a href="{{ route('wali_kelas.profile.index') }}" class="dropdown-item">
+                            <a href="{{ route('pj_prestasi.profile.index') }}" class="dropdown-item">
                                 <i class="icon-user"></i>
                                 <span class="ml-2">Profil Saya</span>
                             </a>

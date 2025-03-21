@@ -66,7 +66,7 @@
                                         <i class="ti-user border-primary"></i>
                                     </div>
                                     <div class="stat-content d-inline-block">
-                                        <div class="stat-text">Total Siswa</div>
+                                        <div class="stat-text">Data Siswa</div>
                                         <div class="stat-digit">{{ $totalSiswa }}</div>
                                     </div>
                                 </div>
@@ -81,7 +81,7 @@
                                         <i class="ti-book border-success"></i>
                                     </div>
                                     <div class="stat-content d-inline-block">
-                                        <div class="stat-text">Total Mapel</div>
+                                        <div class="stat-text">Data Mapel</div>
                                         <div class="stat-digit">{{ $totalMapel }}</div>
                                     </div>
                                 </div>
@@ -96,7 +96,7 @@
                                         <i class="ti-home border-info"></i>
                                     </div>
                                     <div class="stat-content d-inline-block">
-                                        <div class="stat-text">Total Kelas</div>
+                                        <div class="stat-text">Data Kelas</div>
                                         <div class="stat-digit">{{ $totalKelas }}</div>
                                     </div>
                                 </div>
@@ -111,13 +111,29 @@
                                         <i class="ti-id-badge border-danger"></i>
                                     </div>
                                     <div class="stat-content d-inline-block">
-                                        <div class="stat-text">Total Pengguna</div>
+                                        <div class="stat-text">Data Pengguna</div>
                                         <div class="stat-digit">{{ $totalPengguna }}</div>
                                     </div>
                                 </div>
                             </div>
                         </a>
                     </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <a href="{{ route('admin.achievements.index') }}" class="text-decoration-none">
+                            <div class="card">
+                                <div class="stat-widget-one card-body text-warning">
+                                    <div class="stat-icon d-inline-block">
+                                        <i class="ti-medall border-warning"></i>
+                                    </div>
+                                    <div class="stat-content d-inline-block">
+                                        <div class="stat-text">Data Prestasi</div>
+                                        <div class="stat-digit">{{ $totalPrestasi }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
                 </div>
 
             </div>

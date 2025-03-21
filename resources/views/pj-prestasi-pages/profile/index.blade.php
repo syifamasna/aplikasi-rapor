@@ -20,11 +20,11 @@
 
 <body>
 
-    @include('admin-pages.components.preloader')
+    @include('pj-prestasi-pages.components.preloader')
 
     <div id="main-wrapper">
-        @include('admin-pages.components.sidebar')
-        @include('admin-pages.components.topbar')
+        @include('pj-prestasi-pages.components.sidebar')
+        @include('pj-prestasi-pages.components.topbar')
 
         <div class="content-body">
             <div class="container-fluid">
@@ -36,21 +36,11 @@
                     </div>
                     <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('pj_prestasi.dashboard') }}">Dashboard</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Profil Saya</li>
                         </ol>
                     </div>
                 </div>
-
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
 
                 <div class="row">
                     <div class="col-md-12">
@@ -105,7 +95,7 @@
                                         <div id="edit-profil" class="tab-pane fade active show">
                                             <div class="pt-3">
                                                 <div class="settings-form">
-                                                    <form action="{{ route('admin.profile.update', $user->id) }}"
+                                                    <form action="{{ route('pj_prestasi.profile.update', $user->id) }}"
                                                         method="POST">
                                                         @csrf
                                                         @method('PUT')
@@ -176,13 +166,14 @@
 
                                                     <!-- Preview Gambar -->
                                                     <div class="text-center">
-                                                        <img id="imagePreviewEdit" src="{{ asset('storage/' . $user->image) }}" 
+                                                        <img id="imagePreviewEdit"
+                                                            src="{{ asset('storage/' . $user->image) }}"
                                                             class="rounded-circle border d-block mx-auto"
                                                             style="width: 100px; height: 100px; object-fit: cover;">
-                                                    </div>                                                    
+                                                    </div>
 
                                                     @if ($user->image)
-                                                        <form action="{{ route('admin.profile.destroyImage') }}"
+                                                        <form action="{{ route('pj_prestasi.profile.destroyImage') }}"
                                                             method="POST" class="mt-2">
                                                             @csrf
                                                             @method('DELETE')
@@ -192,8 +183,8 @@
                                                     @endif
 
                                                     <!-- Form Upload Foto -->
-                                                    <form action="{{ route('admin.profile.update') }}" method="POST"
-                                                        enctype="multipart/form-data">
+                                                    <form action="{{ route('pj_prestasi.profile.update') }}"
+                                                        method="POST" enctype="multipart/form-data">
                                                         @csrf
                                                         @method('PUT')
                                                         <div class="form-group mt-3 text-left">
@@ -218,7 +209,7 @@
                                         <div id="edit-akun" class="tab-pane fade">
                                             <div class="pt-3">
                                                 <div class="settings-form">
-                                                    <form action="{{ route('admin.profile.update', $user->id) }}"
+                                                    <form action="{{ route('pj_prestasi.profile.update', $user->id) }}"
                                                         method="POST">
                                                         @csrf
                                                         @method('PUT')
@@ -265,7 +256,7 @@
                     </div>
                 </div>
 
-                @include('admin-pages.components.footer')
+                @include('pj-prestasi-pages.components.footer')
             </div>
         </div>
 
@@ -281,12 +272,12 @@
                 passwordInput.type = "password";
             }
         }
-        
+
         // Script Preview Gambar di Edit Foto Profil
         document.getElementById('inputImage').addEventListener('change', function(event) {
             const file = event.target.files[0];
             const previewContainer = document.getElementById(
-            'imagePreviewEdit'); // ID untuk preview dalam form Edit Foto
+                'imagePreviewEdit'); // ID untuk preview dalam form Edit Foto
             const reader = new FileReader();
 
             if (file) {
@@ -297,7 +288,7 @@
                 reader.readAsDataURL(file);
             } else {
                 previewContainer.src =
-                "{{ asset('default-profile.png') }}"; // Kembali ke default jika tidak ada gambar
+                    "{{ asset('default-profile.png') }}"; // Kembali ke default jika tidak ada gambar
             }
         });
     </script>

@@ -1,5 +1,5 @@
 <div class="nav-header">
-    <a href="{{ route('wali_kelas.dashboard') }}" class="brand-logo d-flex align-items-center">
+    <a href="{{ route('pj_prestasi.dashboard') }}" class="brand-logo d-flex align-items-center">
         <img class="logo-abbr" src="{{ asset('images/logo-erapor.png') }}" alt="">
 
         @php
@@ -21,30 +21,17 @@
     <div class="quixnav-scroll">
         <ul class="metismenu" id="menu">
 
-            <li><a href="{{ route('wali_kelas.dashboard') }}">
+            <li><a href="{{ route('pj_prestasi.dashboard') }}">
                     <i class="fa fa-dashboard"></i><span class="nav-text">Dashboard</span></a>
             </li>
 
-            <li class="nav-label">Data Master</li>
-            <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="fa fa-folder"></i><span
-                        class="nav-text">Administrasi</span></a>
-                <ul aria-expanded="false">
-                    <li><a href="{{ route('wali_kelas.student_classes.index') }}">Data Kelas</a></li>
-                    <li><a href="{{ route('wali_kelas.attendances.index') }}">Ketidakhadiran</a></li>
-                    <li><a href="./app-calender.html">Catatan Wali Kelas</a></li>
-                </ul>
-            </li>
-
-            <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="fa fa-book"></i><span
-                        class="nav-text">Data Rapor</span></a>
-                <ul aria-expanded="false">
-                    <li><a href="./chart-flot.html">Leger Nilai</a></li>
-                    <li><a href="./chart-morris.html">Cetak Rapor</a></li>
-                </ul>
+            <li class="nav-label">Pj Prestasi</li>
+            <li><a href="{{ route('pj_prestasi.achievements.index') }}">
+                    <i class="fa fa-trophy"></i><span class="nav-text">Prestasi Siswa</span></a>
             </li>
 
             <li class="nav-label">Lainnya</li>
-            <li><a href="{{ route('wali_kelas.profile.index') }}">
+            <li><a href="{{ route('pj_prestasi.profile.index') }}">
                     <i class="fa fa-user"></i><span class="nav-text">Profil Saya</span></a>
             </li>
             <li>

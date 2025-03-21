@@ -128,9 +128,7 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
                             <li class="breadcrumb-item"><a href="javascript:void(0)">Administrasi</a></li>
-                            <li class="breadcrumb-item active"><a class="text-dark"
-                                    href="{{ route('admin.teachings.index') }}">Data
-                                    Pembelajaran</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Data Pembelajaran</li>
                         </ol>
                     </div>
                 </div>

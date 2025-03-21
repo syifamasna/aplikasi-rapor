@@ -17,13 +17,14 @@
 
                             <!-- Foto Profil -->
                             @php
-                                $defaultImage =
-                                    auth()->user()->jk == 'Perempuan'
-                                        ? asset('images/avatar/female.png')
-                                        : asset('images/avatar/male.png');
+                                $defaultImage = asset('images/avatar/male.png'); // Default ke laki-laki
+                                if (auth()->user()->jk == 'Perempuan') {
+                                    $defaultImage = asset('images/avatar/female.png');
+                                }
                             @endphp
 
-                            <img src="{{ auth()->user()->image ? asset('storage/' . auth()->user()->image) : asset('images/avatar/default.png') }}"
+                            <img src="{{ auth()->user()->image ? asset('storage/' . auth()->user()->image) : $defaultImage }}"
+                                onerror="this.onerror=null; this.src='{{ $defaultImage }}';"
                                 class="rounded-circle border" style="width: 35px; height: 35px; object-fit: cover;">
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">

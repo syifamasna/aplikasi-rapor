@@ -38,8 +38,9 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
                             <li class="breadcrumb-item"><a href="javascript:void(0)">Administrasi</a></li>
-                            <li class="breadcrumb-item active"><a href="{{ route('admin.school_profiles.index') }}">Data Sekolah</a></li>
-                            <li class="breadcrumb-item"><a class="text-dark" href="{{ route('admin.school_profiles.edit', $school_profiles->id) }}">Edit Data Sekolah</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('admin.school_profiles.index') }}">Data
+                                    Sekolah</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Edit Data Sekolah</li>
                         </ol>
                     </div>
                 </div>
@@ -59,12 +60,14 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="nama">Nama Sekolah <span class="text-danger">*</span></label>
+                                                <label for="nama">Nama Sekolah <span
+                                                        class="text-danger">*</span></label>
                                                 <input type="text" name="nama" class="form-control"
                                                     value="{{ old('nama', $school_profiles->nama) }}" required>
                                             </div>
                                             <div class="form-group">
-                                                <label for="kepsek">Kepala Sekolah <span class="text-danger">*</span></label>
+                                                <label for="kepsek">Kepala Sekolah <span
+                                                        class="text-danger">*</span></label>
                                                 <input type="text" name="kepsek" class="form-control"
                                                     value="{{ old('kepsek', $school_profiles->kepsek) }}" required>
                                             </div>

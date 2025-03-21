@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Kelas - E-Rapor SIT Aliya</title>
+    <title>Prestasi Kelas {{ $class->nama ?? 'Tidak Ada Kelas' }} - E-Rapor SIT Aliya</title>
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('vendor/sweetalert2/dist/sweetalert2.min.css') }}">
@@ -74,13 +74,32 @@
         }
 
         /* Membuat kolom Wali Kelas left-aligned */
-        table.dataTable tbody td:nth-child(3) {
+        table.dataTable tbody td:nth-child(2) {
             text-align: left;
         }
 
         table.dataTable td {
             text-align: center;
             color: #707070;
+        }
+
+        .info-row {
+            display: grid;
+            grid-template-columns: 180px 10px auto;
+            /* Kolom 1 untuk label, kolom 2 untuk ":", kolom 3 untuk nilai */
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #ddd;
+            color: #707070;
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .info-row strong,
+        .info-row span {
+            text-align: left;
         }
 
         /* Styling untuk tabel responsif hanya pada layar kecil */
@@ -93,30 +112,33 @@
 </head>
 
 <body>
-    @include('wali-kelas-pages.components.preloader')
+    @include('pj-prestasi-pages.components.preloader')
 
     <div id="main-wrapper" class="main-container">
-        @include('wali-kelas-pages.components.sidebar')
-        @include('wali-kelas-pages.components.topbar')
+        @include('pj-prestasi-pages.components.sidebar')
+        @include('pj-prestasi-pages.components.topbar')
 
         <div class="content-body">
             <div class="container-fluid">
                 <div class="row page-titles mx-0">
                     <div class="col-md-6 p-md-0">
-                        <h4 class="mb-0">Daftar Kelas SIT Aliya</h4>
+                        <h4 class="mb-0">Daftar Prestasi Kelas {{ $class->nama ?? 'Tidak Ada Kelas' }}</h4>
                     </div>
                     <div class="col-md-6 p-md-0 d-flex justify-content-end">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('wali_kelas.dashboard') }}">Dashboard</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('pj_prestasi.dashboard') }}">Dashboard</a>
+                            </li>
                             <li class="breadcrumb-item"><a href="javascript:void(0)">Administrasi</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Kelas</li>
+                            <li class="breadcrumb-item"><a
+                                    href="{{ route('pj_prestasi.achievements.index') }}">Kelas</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Siswa</li>
                         </ol>
                     </div>
                 </div>
 
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
-                        <h5 class="m-0">Tabel Kelas</h5>
+                        <h5 class="m-0">Tabel Siswa</h5>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -125,23 +147,20 @@
                                 <thead>
                                     <tr>
                                         <th>No.</th>
+                                        <th>Nama</th>
                                         <th>Kelas</th>
-                                        <th>Wali Kelas</th>
-                                        <th>Jumlah Siswa</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($student_classes as $student_classes)
+                                    @foreach ($students as $student)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $student_classes->nama }}
-                                            <td>{{ $student_classes->waliKelas->nama ?? '-' }}</td>
-                                            <td>{{ $student_classes->students->count() }}</td> <!-- Menampilkan jumlah siswa -->
-                                            </td>
+                                            <td>{{ $student->nama }}</td>
+                                            <td>{{ $student->class ? $student->class->nama : '-' }}</td>
                                             <td>
-                                                <a href="{{ route('wali_kelas.student_classes.students', ['class_id' => $student_classes->id]) }}"
-                                                    class="btn btn-info btn-sm btn-detail">
+                                                <a href="{{ route('pj_prestasi.achievements.show', ['class_id' => $class->id, 'student_id' => $student->id]) }}"
+                                                    class="btn btn-info btn-sm">
                                                     Kelola
                                                 </a>
                                             </td>
@@ -154,7 +173,7 @@
                 </div>
             </div>
 
-            @include('wali-kelas-pages.components.footer')
+            @include('pj-prestasi-pages.components.footer')
 
         </div>
     </div>
@@ -164,6 +183,7 @@
     <script src="{{ asset('js/quixnav-init.js') }}"></script>
     <script src="{{ asset('js/custom.min.js') }}"></script>
     <script src="{{ asset('vendor/sweetalert2/dist/sweetalert2.min.js') }}"></script>
+    <script src="{{ asset('vendor/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
 
     <!-- Datatable -->
     <script src="{{ asset('vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
