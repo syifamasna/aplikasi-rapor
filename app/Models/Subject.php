@@ -20,4 +20,8 @@ class Subject extends Model
        'aplikasi'
     ];
 
+    public function teachings()
+    {
+        return $this->belongsToMany(StudentClass::class, 'teachings', 'subject_id', 'class_id');
+    }
 }

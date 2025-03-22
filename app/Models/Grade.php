@@ -5,29 +5,40 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Attendance extends Model
+class Grade extends Model
 {
     use HasFactory;
 
-    protected $table = 'attendances';
+    protected $table = 'grades';
 
     protected $fillable = [
         'student_id',
         'school_year_id',
-        'sakit',
-        'izin',
-        'alfa',
+        'subject_id',
+        'nilai',
+        'capaian',
+        'target',
+        'aplikasi_program',
     ];
 
-    // Relasi ke Siswa
+    protected $casts = [
+        'capaian' => 'array',
+        'target' => 'array',
+        'aplikasi_program' => 'array',
+    ];
+
     public function student()
     {
         return $this->belongsTo(Student::class);
     }
 
-    // Relasi ke Tahun Ajaran
     public function schoolYear()
     {
         return $this->belongsTo(SchoolYear::class);
+    }
+
+    public function subject()
+    {
+        return $this->belongsTo(Subject::class);
     }
 }

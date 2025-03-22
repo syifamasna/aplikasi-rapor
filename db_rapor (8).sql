@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 21, 2025 at 03:50 AM
+-- Generation Time: Mar 22, 2025 at 05:53 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -36,6 +36,14 @@ CREATE TABLE `achievements` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `achievements`
+--
+
+INSERT INTO `achievements` (`id`, `student_id`, `jenis_prestasi`, `keterangan`, `created_at`, `updated_at`) VALUES
+(2, 256, 'Non-Akademik', 'Juara 2 Lomba Story Telling', '2025-03-20 20:11:45', '2025-03-20 20:11:45'),
+(3, 285, 'Akademik', 'Juara 1 Cerdas Cermat Matematika', '2025-03-20 21:51:54', '2025-03-20 21:51:54');
+
 -- --------------------------------------------------------
 
 --
@@ -52,6 +60,66 @@ CREATE TABLE `attendances` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `attendances`
+--
+
+INSERT INTO `attendances` (`id`, `student_id`, `school_year_id`, `sakit`, `izin`, `alfa`, `created_at`, `updated_at`) VALUES
+(1, 840, 3, 0, 0, 0, '2025-03-21 00:41:08', '2025-03-21 03:15:39'),
+(2, 841, 3, 0, 0, 0, '2025-03-21 00:41:08', '2025-03-21 00:41:08'),
+(3, 842, 3, 0, 0, 0, '2025-03-21 00:41:09', '2025-03-21 00:41:09'),
+(4, 843, 3, 0, 0, 0, '2025-03-21 00:41:09', '2025-03-21 01:09:18'),
+(5, 844, 3, 0, 0, 0, '2025-03-21 00:41:09', '2025-03-21 00:41:09'),
+(6, 845, 3, 0, 0, 0, '2025-03-21 00:41:09', '2025-03-21 01:09:00'),
+(7, 846, 3, 0, 0, 0, '2025-03-21 00:41:09', '2025-03-21 00:41:09'),
+(8, 847, 3, 0, 0, 0, '2025-03-21 00:41:09', '2025-03-21 00:41:09'),
+(9, 848, 3, 0, 0, 0, '2025-03-21 00:41:09', '2025-03-21 00:41:09'),
+(10, 849, 3, 0, 0, 0, '2025-03-21 00:41:09', '2025-03-21 00:41:09'),
+(11, 850, 3, 0, 0, 0, '2025-03-21 00:41:09', '2025-03-21 00:41:09'),
+(12, 851, 3, 0, 0, 0, '2025-03-21 00:41:09', '2025-03-21 00:41:09'),
+(13, 852, 3, 0, 0, 0, '2025-03-21 00:41:09', '2025-03-21 01:09:49'),
+(14, 853, 3, 0, 0, 0, '2025-03-21 00:41:09', '2025-03-21 00:41:09'),
+(15, 854, 3, 0, 0, 0, '2025-03-21 00:41:10', '2025-03-21 00:41:10'),
+(16, 855, 3, 0, 0, 0, '2025-03-21 00:41:10', '2025-03-21 00:41:10'),
+(17, 856, 3, 0, 0, 0, '2025-03-21 00:41:10', '2025-03-21 00:41:10'),
+(18, 857, 3, 0, 0, 0, '2025-03-21 00:41:10', '2025-03-21 00:51:02'),
+(19, 858, 3, 0, 0, 0, '2025-03-21 00:41:10', '2025-03-21 00:41:10'),
+(20, 859, 3, 0, 0, 0, '2025-03-21 00:41:10', '2025-03-21 00:41:10'),
+(21, 860, 3, 0, 0, 0, '2025-03-21 00:41:10', '2025-03-21 00:41:10'),
+(22, 861, 3, 0, 0, 0, '2025-03-21 00:41:10', '2025-03-21 00:41:10'),
+(23, 862, 3, 0, 0, 0, '2025-03-21 00:41:10', '2025-03-21 00:41:10'),
+(24, 863, 3, 0, 0, 0, '2025-03-21 00:41:10', '2025-03-21 00:41:10'),
+(25, 864, 3, 0, 0, 0, '2025-03-21 00:41:10', '2025-03-21 00:41:10'),
+(26, 865, 3, 0, 0, 0, '2025-03-21 00:41:10', '2025-03-21 00:51:02'),
+(27, 866, 3, 0, 0, 0, '2025-03-21 00:41:10', '2025-03-21 00:41:10'),
+(28, 840, 7, 0, 0, 0, '2025-03-21 03:14:39', '2025-03-21 03:15:47'),
+(29, 841, 7, 0, 0, 0, '2025-03-21 03:14:39', '2025-03-21 03:14:39'),
+(30, 842, 7, 0, 0, 0, '2025-03-21 03:14:39', '2025-03-21 03:14:39'),
+(31, 843, 7, 0, 0, 0, '2025-03-21 03:14:39', '2025-03-21 03:14:39'),
+(32, 844, 7, 0, 0, 0, '2025-03-21 03:14:39', '2025-03-21 03:14:39'),
+(33, 845, 7, 0, 0, 0, '2025-03-21 03:14:39', '2025-03-21 03:14:39'),
+(34, 846, 7, 0, 0, 0, '2025-03-21 03:14:39', '2025-03-21 03:14:39'),
+(35, 847, 7, 0, 0, 0, '2025-03-21 03:14:39', '2025-03-21 03:14:39'),
+(36, 848, 7, 0, 0, 0, '2025-03-21 03:14:39', '2025-03-21 03:14:39'),
+(37, 849, 7, 0, 0, 0, '2025-03-21 03:14:39', '2025-03-21 03:14:39'),
+(38, 850, 7, 0, 0, 0, '2025-03-21 03:14:39', '2025-03-21 03:14:39'),
+(39, 851, 7, 0, 0, 0, '2025-03-21 03:14:39', '2025-03-21 03:14:39'),
+(40, 852, 7, 0, 0, 0, '2025-03-21 03:14:39', '2025-03-21 03:14:39'),
+(41, 853, 7, 0, 0, 0, '2025-03-21 03:14:40', '2025-03-21 03:14:40'),
+(42, 854, 7, 0, 0, 0, '2025-03-21 03:14:40', '2025-03-21 03:14:40'),
+(43, 855, 7, 0, 0, 0, '2025-03-21 03:14:40', '2025-03-21 03:14:40'),
+(44, 856, 7, 0, 0, 0, '2025-03-21 03:14:40', '2025-03-21 03:14:40'),
+(45, 857, 7, 0, 0, 0, '2025-03-21 03:14:40', '2025-03-21 03:14:40'),
+(46, 858, 7, 0, 0, 0, '2025-03-21 03:14:40', '2025-03-21 03:14:40'),
+(47, 859, 7, 0, 0, 0, '2025-03-21 03:14:40', '2025-03-21 03:14:40'),
+(48, 860, 7, 0, 0, 0, '2025-03-21 03:14:40', '2025-03-21 03:14:40'),
+(49, 861, 7, 0, 0, 0, '2025-03-21 03:14:40', '2025-03-21 03:14:40'),
+(50, 862, 7, 0, 0, 0, '2025-03-21 03:14:40', '2025-03-21 03:14:40'),
+(51, 863, 7, 0, 0, 0, '2025-03-21 03:14:40', '2025-03-21 03:14:40'),
+(52, 864, 7, 0, 0, 0, '2025-03-21 03:14:40', '2025-03-21 03:14:40'),
+(53, 865, 7, 0, 0, 0, '2025-03-21 03:14:40', '2025-03-21 03:14:40'),
+(54, 866, 7, 0, 0, 0, '2025-03-21 03:14:40', '2025-03-21 03:14:40');
 
 -- --------------------------------------------------------
 
@@ -91,6 +159,25 @@ CREATE TABLE `failed_jobs` (
   `payload` longtext NOT NULL,
   `exception` longtext NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `grades`
+--
+
+CREATE TABLE `grades` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `student_id` bigint(20) UNSIGNED NOT NULL,
+  `school_year_id` bigint(20) UNSIGNED NOT NULL,
+  `subject_id` bigint(20) UNSIGNED NOT NULL,
+  `nilai` decimal(5,2) DEFAULT NULL,
+  `capaian` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`capaian`)),
+  `target` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`target`)),
+  `aplikasi_program` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`aplikasi_program`)),
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -151,7 +238,84 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (4, '2025_03_12_000000_create_student_classes_table', 2),
 (5, '2025_03_17_051603_create_teachings_table', 3),
 (6, '2025_03_17_173754_create_attendances_table', 4),
-(7, '2025_03_18_020745_create_achievements_table', 4);
+(7, '2025_03_18_020745_create_achievements_table', 4),
+(8, '2025_03_21_080229_create_notes_table', 5),
+(9, '2025_03_22_015959_create_grades_table', 6);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `notes`
+--
+
+CREATE TABLE `notes` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `student_id` bigint(20) UNSIGNED NOT NULL,
+  `school_year_id` bigint(20) UNSIGNED NOT NULL,
+  `catatan` text NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `notes`
+--
+
+INSERT INTO `notes` (`id`, `student_id`, `school_year_id`, `catatan`, `created_at`, `updated_at`) VALUES
+(1, 840, 3, 'lanjutkan!!', '2025-03-21 01:29:16', '2025-03-21 02:26:31'),
+(2, 841, 3, '', '2025-03-21 01:29:16', '2025-03-21 01:29:16'),
+(3, 842, 3, '', '2025-03-21 01:29:16', '2025-03-21 01:29:16'),
+(4, 843, 3, '', '2025-03-21 01:29:16', '2025-03-21 01:29:16'),
+(5, 844, 3, '', '2025-03-21 01:29:16', '2025-03-21 01:29:16'),
+(6, 845, 3, '', '2025-03-21 01:29:16', '2025-03-21 01:29:16'),
+(7, 846, 3, '', '2025-03-21 01:29:16', '2025-03-21 01:29:16'),
+(8, 847, 3, '', '2025-03-21 01:29:16', '2025-03-21 01:29:16'),
+(9, 848, 3, '', '2025-03-21 01:29:16', '2025-03-21 01:29:16'),
+(10, 849, 3, '', '2025-03-21 01:29:16', '2025-03-21 01:29:16'),
+(11, 850, 3, '', '2025-03-21 01:29:16', '2025-03-21 01:29:16'),
+(12, 851, 3, '', '2025-03-21 01:29:16', '2025-03-21 01:29:16'),
+(13, 852, 3, '', '2025-03-21 01:29:17', '2025-03-21 01:29:17'),
+(14, 853, 3, '', '2025-03-21 01:29:17', '2025-03-21 01:29:17'),
+(15, 854, 3, '', '2025-03-21 01:29:17', '2025-03-21 01:29:17'),
+(16, 855, 3, '', '2025-03-21 01:29:17', '2025-03-21 01:29:17'),
+(17, 856, 3, '', '2025-03-21 01:29:17', '2025-03-21 01:29:17'),
+(18, 857, 3, '', '2025-03-21 01:29:17', '2025-03-21 01:29:17'),
+(19, 858, 3, '', '2025-03-21 01:29:17', '2025-03-21 01:29:17'),
+(20, 859, 3, '', '2025-03-21 01:29:17', '2025-03-21 01:29:17'),
+(21, 860, 3, '', '2025-03-21 01:29:17', '2025-03-21 01:29:17'),
+(22, 861, 3, '', '2025-03-21 01:29:17', '2025-03-21 01:29:17'),
+(23, 862, 3, '', '2025-03-21 01:29:17', '2025-03-21 01:29:17'),
+(24, 863, 3, '', '2025-03-21 01:29:17', '2025-03-21 01:29:17'),
+(25, 864, 3, '', '2025-03-21 01:29:17', '2025-03-21 01:29:17'),
+(26, 865, 3, '', '2025-03-21 01:29:17', '2025-03-21 01:29:17'),
+(27, 866, 3, '', '2025-03-21 01:29:17', '2025-03-21 01:29:17'),
+(28, 840, 5, '', '2025-03-21 02:26:55', '2025-03-21 02:26:55'),
+(29, 841, 5, '', '2025-03-21 02:26:55', '2025-03-21 02:26:55'),
+(30, 842, 5, '', '2025-03-21 02:26:55', '2025-03-21 02:26:55'),
+(31, 843, 5, '', '2025-03-21 02:26:55', '2025-03-21 02:26:55'),
+(32, 844, 5, '', '2025-03-21 02:26:56', '2025-03-21 02:26:56'),
+(33, 845, 5, '', '2025-03-21 02:26:56', '2025-03-21 02:26:56'),
+(34, 846, 5, '', '2025-03-21 02:26:56', '2025-03-21 02:26:56'),
+(35, 847, 5, '', '2025-03-21 02:26:56', '2025-03-21 02:26:56'),
+(36, 848, 5, '', '2025-03-21 02:26:56', '2025-03-21 02:26:56'),
+(37, 849, 5, '', '2025-03-21 02:26:56', '2025-03-21 02:26:56'),
+(38, 850, 5, '', '2025-03-21 02:26:56', '2025-03-21 02:26:56'),
+(39, 851, 5, '', '2025-03-21 02:26:56', '2025-03-21 02:26:56'),
+(40, 852, 5, '', '2025-03-21 02:26:56', '2025-03-21 02:26:56'),
+(41, 853, 5, '', '2025-03-21 02:26:56', '2025-03-21 02:26:56'),
+(42, 854, 5, '', '2025-03-21 02:26:56', '2025-03-21 02:26:56'),
+(43, 855, 5, '', '2025-03-21 02:26:56', '2025-03-21 02:26:56'),
+(44, 856, 5, '', '2025-03-21 02:26:56', '2025-03-21 02:26:56'),
+(45, 857, 5, '', '2025-03-21 02:26:56', '2025-03-21 02:26:56'),
+(46, 858, 5, '', '2025-03-21 02:26:56', '2025-03-21 02:26:56'),
+(47, 859, 5, '', '2025-03-21 02:26:57', '2025-03-21 02:26:57'),
+(48, 860, 5, '', '2025-03-21 02:26:57', '2025-03-21 02:26:57'),
+(49, 861, 5, '', '2025-03-21 02:26:57', '2025-03-21 02:26:57'),
+(50, 862, 5, '', '2025-03-21 02:26:57', '2025-03-21 02:26:57'),
+(51, 863, 5, '', '2025-03-21 02:26:57', '2025-03-21 02:26:57'),
+(52, 864, 5, '', '2025-03-21 02:26:57', '2025-03-21 02:26:57'),
+(53, 865, 5, '', '2025-03-21 02:26:57', '2025-03-21 02:26:57'),
+(54, 866, 5, 'semangat terus yaa', '2025-03-21 02:26:57', '2025-03-21 02:27:37');
 
 -- --------------------------------------------------------
 
@@ -300,7 +464,10 @@ INSERT INTO `role_user` (`id`, `user_id`, `role_id`, `created_at`, `updated_at`)
 (103, 81, 3, '2025-03-14 21:59:02', '2025-03-14 21:59:02'),
 (104, 82, 3, '2025-03-14 21:59:35', '2025-03-14 21:59:35'),
 (105, 83, 3, '2025-03-14 22:00:09', '2025-03-14 22:00:09'),
-(106, 84, 3, '2025-03-14 22:01:17', '2025-03-14 22:01:17');
+(106, 84, 3, '2025-03-14 22:01:17', '2025-03-14 22:01:17'),
+(107, 20, 4, '2025-03-20 20:26:05', '2025-03-20 20:26:05'),
+(108, 20, 2, '2025-03-20 21:54:16', '2025-03-20 21:54:16'),
+(109, 20, 3, '2025-03-20 21:54:16', '2025-03-20 21:54:16');
 
 -- --------------------------------------------------------
 
@@ -328,7 +495,7 @@ CREATE TABLE `school_profiles` (
 --
 
 INSERT INTO `school_profiles` (`id`, `nama`, `npsn`, `kode_pos`, `telepon`, `alamat`, `email`, `website`, `kepsek`, `logo`, `created_at`, `updated_at`) VALUES
-(1, 'SIT Aliya', 20219975, 16117, '02518422129', 'Jl. Gardu Raya, RT.03/RW.11, Bubulak, Kec. Bogor Bar., Kota Bogor, Jawa Barat', 'sitaliya01@gmail.com', 'https://sitaliya.sch.id/', 'Luluk Dianarini, S.TP, M.Pd.', NULL, NULL, '2025-03-05 11:37:13');
+(1, 'SIT Aliya', 20219975, 16117, '02518422129', 'Jl. Gardu Raya, RT.03/RW.11, Bubulak, Bogor Barat, Kota Bogor', 'sitaliya01@gmail.com', 'https://sitaliya.sch.id/', 'Luluk Dianarini, S.TP, M.Pd.', 'school_logos/ClhgsLAFUO1y9fnMWvvepINFU9ORk4J88TPQRO0Y.png', NULL, '2025-03-21 17:35:47');
 
 -- --------------------------------------------------------
 
@@ -376,8 +543,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('2QBzNdlSL1u4GXvPAeO1Ab9TQeH6iWpmkTgXuacW', 20, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiMFZPTmw1N0dsQ29XNllxOFhZbTVyakRudGs2M3ZGY0prYU1mQzNLVSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MjA7czoxMToiYWN0aXZlX3JvbGUiO3M6MToiMSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZG1pbi90ZWFjaGluZ3MiO319', 1742359717),
-('iWjRvZ7GWcTAkUmo5GN7QRGvKEYv8IBsQN1dLwTN', 20, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiVkU4ampPSjZFOXpGWjI3bmRrWjFLTU5JWjMzeFM5c0tIV3VaS1hsOCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzU6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZG1pbi9wcm9maWxlIjt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MjA7czoxMToiYWN0aXZlX3JvbGUiO3M6MToiMSI7fQ==', 1742525387);
+('WTluD7w9DuyisfnQ419nWcsqdpzPNllS6TNwk3Yr', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiNlNPTVRsTWhWRHpSTzN2cGJwZXVnYjhmM0xuWWM0NktCNWY5SVVxayI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9sb2dpbiI7fX0=', 1742619166);
 
 -- --------------------------------------------------------
 
@@ -1746,7 +1912,7 @@ INSERT INTO `users` (`id`, `nama`, `email`, `password`, `nip`, `nuptk`, `jk`, `t
 (17, 'Gunawan, S.Kom', 'gunawan@aliya.com', '$2y$12$yvDTwEA3HuyEuJ58vYTiie3gHMg3IchYHWhaL/5pciYGx3tC8og9u', NULL, NULL, 'Laki-Laki', NULL, NULL, NULL, '2025-03-10 22:10:43', '2025-03-10 22:10:43'),
 (18, 'Irma Oktaviana Majid, S.Pt', 'irmaoktavianamajid@aliya.com', '$2y$12$ssTP0epA.inLWERBOlkIDer6R2XU.1ZK9iBiHzE3DRnaepcUayd86', NULL, NULL, 'Perempuan', NULL, NULL, NULL, '2025-03-10 23:13:20', '2025-03-12 20:21:18'),
 (19, 'Asep Rudini Setiawan, S.Pi.,M.Pd', 'aseprudinisetiawan@aliya.com', '$2y$12$KcY.9wwD1HMDj5Sn5Sf8Deym/kwhsjvj/1giHsEhF6vxhhpTXLi4W', NULL, NULL, 'Laki-Laki', NULL, NULL, NULL, '2025-03-10 23:14:05', '2025-03-10 23:14:05'),
-(20, 'Syifa Khairunisa Masna', 'admin@aliya.com', '$2y$12$f7nC.SMPy1dONw0zMw5R..SlKS2PC5pA4bWfjhorpkIdaf/7Gwvl.', NULL, NULL, 'Perempuan', NULL, NULL, 'images/MEELhDg0Bk0zQVjnKX74kT5HfRMFNdEFpzK63CQw.jpg', '2025-03-10 23:35:30', '2025-03-16 21:04:28'),
+(20, 'Admin', 'admin@aliya.com', '$2y$12$f7nC.SMPy1dONw0zMw5R..SlKS2PC5pA4bWfjhorpkIdaf/7Gwvl.', NULL, NULL, 'Perempuan', NULL, NULL, NULL, '2025-03-10 23:35:30', '2025-03-20 21:56:47'),
 (21, 'Ahmad Suhaedi, S.Pd.I, M.Pd', 'ahmadsuhaedi@aliya.com', '$2y$12$4yUjpsPlNp24C48NE6juqObAkWts7yJVDa9ajfXtmQj//ikDRC85S', NULL, NULL, 'Laki-Laki', NULL, NULL, NULL, '2025-03-12 20:20:41', '2025-03-12 20:20:41'),
 (22, 'Baban Sobana, S.Ag', 'babansobana@aliya.com', '$2y$12$q1pyWOdvbes.AS4z9Mib1.BzAcUOEzGP6.c6/Qi26oDdYVi.S.JqO', NULL, NULL, 'Laki-Laki', NULL, NULL, NULL, '2025-03-12 20:22:06', '2025-03-12 20:22:06'),
 (23, 'Saiful Rahman, S.Pd.I', 'saifulrahman@aliya.com', '$2y$12$9HADbY9WLyZg8r0RTwg93uoOQTXACPC/HFcXzsfnrFnOgbvADMdAO', NULL, NULL, 'Laki-Laki', NULL, NULL, NULL, '2025-03-12 20:22:43', '2025-03-12 20:22:43'),
@@ -1851,6 +2017,15 @@ ALTER TABLE `failed_jobs`
   ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
 
 --
+-- Indexes for table `grades`
+--
+ALTER TABLE `grades`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `grades_student_id_foreign` (`student_id`),
+  ADD KEY `grades_school_year_id_foreign` (`school_year_id`),
+  ADD KEY `grades_subject_id_foreign` (`subject_id`);
+
+--
 -- Indexes for table `jobs`
 --
 ALTER TABLE `jobs`
@@ -1868,6 +2043,14 @@ ALTER TABLE `job_batches`
 --
 ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `notes`
+--
+ALTER TABLE `notes`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `notes_student_id_school_year_id_unique` (`student_id`,`school_year_id`),
+  ADD KEY `notes_school_year_id_foreign` (`school_year_id`);
 
 --
 -- Indexes for table `password_reset_tokens`
@@ -1957,18 +2140,24 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `achievements`
 --
 ALTER TABLE `achievements`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `attendances`
 --
 ALTER TABLE `attendances`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `grades`
+--
+ALTER TABLE `grades`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
@@ -1981,7 +2170,13 @@ ALTER TABLE `jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `notes`
+--
+ALTER TABLE `notes`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -1993,7 +2188,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `role_user`
 --
 ALTER TABLE `role_user`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=107;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
 
 --
 -- AUTO_INCREMENT for table `school_profiles`
@@ -2053,6 +2248,21 @@ ALTER TABLE `achievements`
 ALTER TABLE `attendances`
   ADD CONSTRAINT `attendances_school_year_id_foreign` FOREIGN KEY (`school_year_id`) REFERENCES `school_years` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `attendances_student_id_foreign` FOREIGN KEY (`student_id`) REFERENCES `students` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `grades`
+--
+ALTER TABLE `grades`
+  ADD CONSTRAINT `grades_school_year_id_foreign` FOREIGN KEY (`school_year_id`) REFERENCES `school_years` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `grades_student_id_foreign` FOREIGN KEY (`student_id`) REFERENCES `students` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `grades_subject_id_foreign` FOREIGN KEY (`subject_id`) REFERENCES `subjects` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `notes`
+--
+ALTER TABLE `notes`
+  ADD CONSTRAINT `notes_school_year_id_foreign` FOREIGN KEY (`school_year_id`) REFERENCES `school_years` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `notes_student_id_foreign` FOREIGN KEY (`student_id`) REFERENCES `students` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `role_user`

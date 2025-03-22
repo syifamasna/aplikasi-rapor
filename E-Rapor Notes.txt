@@ -1,0 +1,9 @@
+REVISI APLIKASI E-RAPOR SIT ALIYA
+
+-  Tambah * di setiap form untuk menunjukkan form yang wajib diisi
+- Impor siswa kasih format excelnya
+-  Scroll di sidebar ketika collapse
+- Grafik diambil berdasarkan data kelas yang terbanyak prestasi nya
+- Data NULL yang sudah diisi di profil bisa dihapus/dikosongkan lagi
+- Bedakan isi kalimat card welcome di tiap-tiap halaman user
+- Form input nilai mata pelajaran

@@ -71,11 +71,11 @@
 </head>
 
 <body>
-    @include('wali-kelas-pages.components.preloader')
+    @include('guru-mapel-pages.components.preloader')
 
     <div id="main-wrapper" class="main-container">
-        @include('wali-kelas-pages.components.sidebar')
-        @include('wali-kelas-pages.components.topbar')
+        @include('guru-mapel-pages.components.sidebar')
+        @include('guru-mapel-pages.components.topbar')
 
         <div class="content-body">
             <div class="container-fluid">
@@ -85,9 +85,9 @@
                     </div>
                     <div class="col-md-6 p-md-0 d-flex justify-content-end">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('wali_kelas.dashboard') }}">Dashboard</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('guru_mapel.dashboard') }}">Dashboard</a></li>
                             <li class="breadcrumb-item"><a href="javascript:void(0)">Administrasi</a></li>
-                            <li class="breadcrumb-item"><a href="{{ route('wali_kelas.attendances.index') }}">Kelas</a>
+                            <li class="breadcrumb-item"><a href="{{ route('guru_mapel.grades.index') }}">Kelas</a>
                             </li>
                             <li class="breadcrumb-item active" aria-current="page">Ketidakhadiran</li>
                         </ol>
@@ -99,23 +99,40 @@
                 <div class="card">
                     <div class="card-body">
                         <!-- FORM FILTER -->
-                        <form action="{{ route('wali_kelas.attendances.students') }}" method="GET">
+                        <form action="{{ route('guru_mapel.grades.students') }}" method="GET">
                             <input type="hidden" name="class_id" value="{{ $class->id }}">
 
                             <div class="mb-4 border-bottom pb-3">
                                 <div class="row">
+                                    <!-- Mata Pelajaran -->
                                     <div class="col-md-12 mb-2 d-flex align-items-center">
-                                        <strong class="info-row h5 font-weight-bold me-3 w-25 text-nowrap">Kelas <span>:</span></strong>
+                                        <strong class="info-row h5 font-weight-bold me-3 w-25 text-nowrap">Mata
+                                            Pelajaran <span>:</span></strong>
+                                        <input type="text" class="form-control flex-grow-1"
+                                            value="{{ $subjects->where('id', request('subject_id'))->first()->nama ?? '-' }}"
+                                            disabled>
+                                    </div>
+
+                                    <!-- Kelas -->
+                                    <div class="col-md-12 mb-2 d-flex align-items-center">
+                                        <strong class="info-row h5 font-weight-bold me-3 w-25 text-nowrap">Kelas
+                                            <span>:</span></strong>
                                         <input type="text" class="form-control flex-grow-1"
                                             value="{{ $class->nama ?? '-' }}" disabled>
                                     </div>
+
+                                    <!-- Guru Pengampu -->
                                     <div class="col-md-12 mb-2 d-flex align-items-center">
-                                        <strong class="info-row h5 font-weight-bold me-3 w-25 text-nowrap">Wali Kelas <span>:</span></strong>
+                                        <strong class="info-row h5 font-weight-bold me-3 w-25 text-nowrap">Guru
+                                            Pengampu <span>:</span></strong>
                                         <input type="text" class="form-control flex-grow-1"
-                                            value="{{ $class->waliKelas->nama ?? '-' }}" disabled>
+                                            value="{{ $teacher->nama ?? '-' }}" disabled>
                                     </div>
+
+                                    <!-- Tahun Ajar -->
                                     <div class="col-md-12 mb-2 d-flex align-items-center">
-                                        <strong class="info-row h5 font-weight-bold me-3 w-25 text-nowrap">Tahun Ajar <span>:</span></strong>
+                                        <strong class="info-row h5 font-weight-bold me-3 w-25 text-nowrap">Tahun
+                                            Ajar <span>:</span></strong>
                                         <select name="school_year_id" class="form-control flex-grow-1"
                                             onchange="this.form.submit()">
                                             @foreach ($schoolYears as $year)
@@ -131,8 +148,8 @@
                             </div>
                         </form>
 
-                        <!-- TABEL KETIDAKHADIRAN -->
-                        <form action="{{ route('wali_kelas.attendances.update', $class->id) }}" method="POST">
+                        <!-- TABEL NILAI -->
+                        <form action="{{ route('guru_mapel.grades.update', $class->id) }}" method="POST">
                             @csrf
                             @method('PUT')
                             <input type="hidden" name="class_id" value="{{ $class->id }}">
@@ -147,9 +164,13 @@
                                             <th>Nama</th>
                                             <th>NIS</th>
                                             <th>Jenis Kelamin</th>
-                                            <th>Sakit</th>
-                                            <th>Izin</th>
-                                            <th>Tanpa Keterangan</th>
+                                            <th>Nilai</th>
+                                            <th>
+                                                <button type="button" class="btn btn-sm btn-primary"
+                                                    id="addCapaianBtn">
+                                                    <i class="fa fa-plus"></i> Tambah Capaian
+                                                </button>
+                                            </th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -160,32 +181,41 @@
                                                 <td>{{ $student->nis }}</td>
                                                 <td>{{ $student->jk }}</td>
 
-                                                <!-- Tambahkan input hidden untuk student_id -->
-                                                <input type="hidden"
-                                                    name="attendances[{{ $student->id }}][student_id]"
-                                                    value="{{ $student->id }}">
+                                                <!-- Input Nilai -->
+                                                <td>
+                                                    <input type="number" name="grades[{{ $student->id }}][nilai]"
+                                                        class="form-control" step="0.01" min="0"
+                                                        max="100"
+                                                        value="{{ old('grades.' . $student->id . '.nilai', $grades[$student->id]->nilai ?? '') }}">
+                                                </td>
 
-                                                <td><input type="number"
-                                                        name="attendances[{{ $student->id }}][sakit]"
-                                                        class="form-control" min="0"
-                                                        value="{{ old('attendances.' . $student->id . '.sakit', $attendances[$student->id]->sakit ?? 0) }}">
-                                                </td>
-                                                <td><input type="number" name="attendances[{{ $student->id }}][izin]"
-                                                        class="form-control" min="0"
-                                                        value="{{ old('attendances.' . $student->id . '.izin', $attendances[$student->id]->izin ?? 0) }}">
-                                                </td>
-                                                <td><input type="number" name="attendances[{{ $student->id }}][alfa]"
-                                                        class="form-control" min="0"
-                                                        value="{{ old('attendances.' . $student->id . '.alfa', $attendances[$student->id]->alfa ?? 0) }}">
+                                                <!-- Tempat untuk capaian tambahan -->
+                                                <td>
+                                                    <div class="capaian-container"
+                                                        data-student-id="{{ $student->id }}">
+                                                        @if (!empty($grades[$student->id]->capaian))
+                                                            <textarea name="grades[{{ $student->id }}][capaian]" class="form-control mt-2">{{ old('grades.' . $student->id . '.capaian', $grades[$student->id]->capaian ?? '') }}</textarea>
+                                                        @endif
+
+                                                        @if (!empty($grades[$student->id]->target))
+                                                            <textarea name="grades[{{ $student->id }}][target]" class="form-control mt-2">{{ old('grades.' . $student->id . '.target', $grades[$student->id]->target ?? '') }}</textarea>
+                                                        @endif
+
+                                                        @if (!empty($grades[$student->id]->aplikasi_program))
+                                                            <textarea name="grades[{{ $student->id }}][aplikasi_program]" class="form-control mt-2">{{ old('grades.' . $student->id . '.aplikasi_program', $grades[$student->id]->aplikasi_program ?? '') }}</textarea>
+                                                        @endif
+                                                    </div>
                                                 </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
                             </div>
+
                             <div class="form-group mt-4 text-right">
-                                <button type="submit" class="btn btn-success text-white"><i class="fa fa-save"></i>
-                                    Simpan Perubahan</button>
+                                <button type="submit" class="btn btn-success text-white">
+                                    <i class="fa fa-save"></i> Simpan Perubahan
+                                </button>
                             </div>
                         </form>
                     </div>
@@ -193,10 +223,42 @@
 
             </div>
 
-            @include('wali-kelas-pages.components.footer')
+            @include('guru-mapel-pages.components.footer')
 
         </div>
     </div>
+
+    <script>
+        document.getElementById('addCapaianBtn').addEventListener('click', function() {
+            document.querySelectorAll('.capaian-container').forEach(container => {
+                const studentId = container.getAttribute('data-student-id');
+
+                // Buat pilihan input yang bisa ditambahkan
+                let capaianHtml = `
+                            <select class="form-control mt-2 add-option">
+                                <option value="">Pilih Data Tambahan</option>
+                                <option value="capaian">Capaian</option>
+                                <option value="target">Target</option>
+                                <option value="aplikasi_program">Aplikasi Program</option>
+                            </select>
+                        `;
+
+                container.insertAdjacentHTML('beforeend', capaianHtml);
+
+                container.addEventListener('change', function(event) {
+                    if (event.target.classList.contains('add-option')) {
+                        let selected = event.target.value;
+                        if (selected) {
+                            let inputHtml =
+                                `<textarea name="grades[${studentId}][${selected}]" class="form-control mt-2"></textarea>`;
+                            event.target.insertAdjacentHTML('afterend', inputHtml);
+                            event.target.remove();
+                        }
+                    }
+                });
+            });
+        });
+    </script>
 
     <!-- Scripts -->
     <script src="{{ asset('vendor/global/global.min.js') }}"></script>

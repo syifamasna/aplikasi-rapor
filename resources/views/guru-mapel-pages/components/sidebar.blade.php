@@ -1,5 +1,5 @@
 <div class="nav-header">
-    <a href="{{ route('wali_kelas.dashboard') }}" class="brand-logo d-flex align-items-center">
+    <a href="{{ route('guru_mapel.dashboard') }}" class="brand-logo d-flex align-items-center">
         <img class="logo-abbr" src="{{ asset('images/logo-erapor.png') }}" alt="">
 
         @php
@@ -21,30 +21,17 @@
     <div class="quixnav-scroll">
         <ul class="metismenu" id="menu">
 
-            <li><a href="{{ route('wali_kelas.dashboard') }}">
+            <li><a href="{{ route('guru_mapel.dashboard') }}">
                     <i class="fa fa-dashboard"></i><span class="nav-text">Dashboard</span></a>
             </li>
 
-            <li class="nav-label">Wali Kelas</li>
-            <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="fa fa-folder"></i><span
-                        class="nav-text">Administrasi</span></a>
-                <ul aria-expanded="false">
-                    <li><a href="{{ route('wali_kelas.student_classes.index') }}">Data Kelas</a></li>
-                    <li><a href="{{ route('wali_kelas.attendances.index') }}">Ketidakhadiran</a></li>
-                    <li><a href="{{ route('wali_kelas.notes.index') }}">Catatan Wali Kelas</a></li>
-                </ul>
-            </li>
-
-            <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="fa fa-book"></i><span
-                        class="nav-text">Data Rapor</span></a>
-                <ul aria-expanded="false">
-                    <li><a href="./chart-flot.html">Leger Nilai</a></li>
-                    <li><a href="./chart-morris.html">Cetak Rapor</a></li>
-                </ul>
+            <li class="nav-label">Guru Mapel</li>
+            <li><a href="{{ route('guru_mapel.grades.index') }}">
+                    <i class="fa fa-book"></i><span class="nav-text">Data Pembelajaran</span></a>
             </li>
 
             <li class="nav-label">Lainnya</li>
-            <li><a href="{{ route('wali_kelas.profile.index') }}">
+            <li><a href="{{ route('guru_mapel.profile.index') }}">
                     <i class="fa fa-user"></i><span class="nav-text">Profil Saya</span></a>
             </li>
             <li>

@@ -15,9 +15,14 @@ use App\Http\Controllers\Admin\UserController as AdminUserController;
 
 use App\Http\Controllers\WaliKelas\AttendanceController as WaliKelasAttendanceController;
 use App\Http\Controllers\WaliKelas\DashboardController as WaliKelasDashboardController;
+use App\Http\Controllers\WaliKelas\NoteController as WaliKelasNoteController;
 use App\Http\Controllers\WaliKelas\ProfileController as WaliKelasProfileController;
 use App\Http\Controllers\WaliKelas\StudentClassController as WaliKelasStudentClassController;
 use App\Http\Controllers\WaliKelas\StudentController as WaliKelasStudentController;
+
+use App\Http\Controllers\GuruMapel\DashboardController as GuruMapelDashboardController;
+use App\Http\Controllers\GuruMapel\ProfileController as GuruMapelProfileController;
+use App\Http\Controllers\GuruMapel\GradeController as GuruMapelGradeController;
 
 use App\Http\Controllers\PjPrestasi\AchievementController as PjPrestasiAchievementController;
 use App\Http\Controllers\PjPrestasi\DashboardController as PjPrestasiDashboardController;
@@ -47,11 +52,14 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
         }
         return $next($request);
     }], function () {
+        // Rute untuk dashboard admin
         Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
 
+        // Rute untuk prestasi siswa
         Route::resource('achievements', AdminAchievementController::class)->names('admin.achievements');
         Route::get('achievements/class/{class_id}/student/{student_id}', [AdminAchievementController::class, 'show'])->name('admin.achievements.show');
         Route::get('achievements/students/{class_id}', [AdminAchievementController::class, 'studentIndex'])->name('admin.achievements.students');
+        
         Route::resource('school_years', AdminSchoolYearController::class)->names('admin.school_years');
         Route::resource('student_classes', AdminStudentClassController::class)->names('admin.student_classes');
         Route::resource('students', AdminStudentController::class)->names('admin.students');
@@ -86,10 +94,18 @@ Route::middleware(['auth'])->prefix('wali')->group(function () {
         }
         return $next($request);
     }], function () {
+        // Rute untuk dashboard wali kelas
         Route::get('/dashboard', [WaliKelasDashboardController::class, 'index'])->name('wali_kelas.dashboard');
 
+        // Rute untuk update ketidakhadiran
         Route::resource('attendances', WaliKelasAttendanceController::class)->names('wali_kelas.attendances')->except(['show']);
         Route::get('attendances/students', [WaliKelasAttendanceController::class, 'studentIndex'])->name('wali_kelas.attendances.students');
+
+        // Rute untuk catatan wali kelas
+        Route::resource('notes', WaliKelasNoteController::class)->names('wali_kelas.notes')->except(['show']);
+        Route::get('notes/students', [WaliKelasNoteController::class, 'studentIndex'])->name('wali_kelas.notes.students');
+
+        // Rute untuk data kelas & siswa
         Route::resource('student_classes', WaliKelasStudentClassController::class)->names('wali_kelas.student_classes')->except(['show']);
         Route::get('student_classes/students', [WaliKelasStudentClassController::class, 'studentIndex'])->name('wali_kelas.student_classes.students');
         Route::resource('students', WaliKelasStudentController::class)->names('wali_kelas.students');
@@ -98,6 +114,32 @@ Route::middleware(['auth'])->prefix('wali')->group(function () {
         Route::get('profile', [WaliKelasProfileController::class, 'index'])->name('wali_kelas.profile.index');
         Route::put('profile', [WaliKelasProfileController::class, 'update'])->name('wali_kelas.profile.update');
         Route::delete('profile/photo', [WaliKelasProfileController::class, 'destroyImage'])->name('wali_kelas.profile.destroyImage');        
+    });
+});
+
+
+
+// ===========================================
+// Rute Guru Mapel
+// ===========================================
+Route::middleware(['auth'])->prefix('guru')->group(function () {
+    Route::group(['middleware' => function ($request, $next) {
+        if (!Auth::user()->roles->contains('role', 'Guru Mapel')) {
+            abort(403, 'Unauthorized action.');
+        }
+        return $next($request);
+    }], function () {
+        // Rute untuk dashboard guru mapel
+        Route::get('/dashboard', [GuruMapelDashboardController::class, 'index'])->name('guru_mapel.dashboard');
+
+        // Rute untuk input nilai siswa
+        Route::resource('grades', GuruMapelGradeController::class)->names('guru_mapel.grades')->except(['show']);
+        Route::get('grades/students', [GuruMapelGradeController::class, 'studentIndex'])->name('guru_mapel.grades.students');
+        
+        // Rute untuk update profil guru mapel
+        Route::get('profile', [GuruMapelProfileController::class, 'index'])->name('guru_mapel.profile.index');
+        Route::put('profile', [GuruMapelProfileController::class, 'update'])->name('guru_mapel.profile.update');
+        Route::delete('profile/photo', [GuruMapelProfileController::class, 'destroyImage'])->name('guru_mapel.profile.destroyImage');        
     });
 });
 
@@ -116,6 +158,7 @@ Route::middleware(['auth'])->prefix('pj')->group(function () {
     }], function () {
         Route::get('/dashboard', [PjPrestasiDashboardController::class, 'index'])->name('pj_prestasi.dashboard');
 
+        // Rute untuk prestasi siswa
         Route::resource('achievements', PjPrestasiAchievementController::class)->names('pj_prestasi.achievements');
         Route::get('achievements/class/{class_id}/student/{student_id}', [PjPrestasiAchievementController::class, 'show'])->name('pj_prestasi.achievements.show');
         Route::get('achievements/students/{class_id}', [PjPrestasiAchievementController::class, 'studentIndex'])->name('pj_prestasi.achievements.students');
@@ -125,11 +168,4 @@ Route::middleware(['auth'])->prefix('pj')->group(function () {
         Route::put('profile', [PjPrestasiProfileController::class, 'update'])->name('pj_prestasi.profile.update');
         Route::delete('profile/photo', [PjPrestasiProfileController::class, 'destroyImage'])->name('pj_prestasi.profile.destroyImage');        
     });
-});
-
-// Guru Mapel Dashboard
-Route::middleware(['auth'])->prefix('guru')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('guru_mapel.dashboard');
-    })->name('guru_mapel.dashboard');
 });

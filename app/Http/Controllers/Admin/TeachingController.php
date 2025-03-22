@@ -16,26 +16,29 @@ class TeachingController extends Controller
      */
     public function index(Request $request)
     {
-        // Query dengan eager loading
-        $query = Teaching::with(['subject', 'class', 'teacher'])->orderBy('subject_id');
+        // Query dengan eager loading, diurutkan berdasarkan ID mata pelajaran dan nama kelas
+        $query = Teaching::with(['subject', 'class', 'teacher'])
+            ->join('student_classes', 'teachings.class_id', '=', 'student_classes.id')
+            ->orderBy('teachings.subject_id')
+            ->orderBy('student_classes.nama');
 
         // Filter berdasarkan kelas
         if ($request->has('class_id') && $request->class_id != '') {
-            $query->where('class_id', $request->class_id);
+            $query->where('teachings.class_id', $request->class_id);
         }
 
         // Filter berdasarkan mata pelajaran
         if ($request->has('subject_id') && $request->subject_id != '') {
-            $query->where('subject_id', $request->subject_id);
+            $query->where('teachings.subject_id', $request->subject_id);
         }
 
         // Filter berdasarkan guru
         if ($request->has('user_id') && $request->user_id != '') {
-            $query->where('user_id', $request->user_id);
+            $query->where('teachings.user_id', $request->user_id);
         }
 
         // Ambil data yang sudah difilter
-        $teachings = $query->get();
+        $teachings = $query->select('teachings.*')->get();
 
         // Ambil semua mata pelajaran (diurutkan berdasarkan ID)
         $subjects = Subject::orderBy('id')->get();

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Ketidakhadiran Kelas {{ $class->nama ?? 'Tidak Ada Kelas' }} - E-Rapor SIT Aliya</title>
+    <title>Catatan Wali Kelas {{ $class->nama ?? 'Tidak Ada Kelas' }} - E-Rapor SIT Aliya</title>
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('vendor/sweetalert2/dist/sweetalert2.min.css') }}">
@@ -81,27 +81,25 @@
             <div class="container-fluid">
                 <div class="row page-titles mx-0">
                     <div class="col-md-6 p-md-0">
-                        <h4 class="mb-0">Data Ketidakhadiran Kelas {{ $class->nama ?? 'Tidak Ada Kelas' }}</h4>
+                        <h4 class="mb-0">Catatan Wali Kelas {{ $class->nama ?? 'Tidak Ada Kelas' }}</h4>
                     </div>
                     <div class="col-md-6 p-md-0 d-flex justify-content-end">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('wali_kelas.dashboard') }}">Dashboard</a></li>
                             <li class="breadcrumb-item"><a href="javascript:void(0)">Administrasi</a></li>
-                            <li class="breadcrumb-item"><a href="{{ route('wali_kelas.attendances.index') }}">Kelas</a>
+                            <li class="breadcrumb-item"><a href="{{ route('wali_kelas.notes.index') }}">Kelas</a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">Ketidakhadiran</li>
+                            <li class="breadcrumb-item active" aria-current="page">Catatan Wali Kelas</li>
                         </ol>
                     </div>
                 </div>
 
-
-
                 <div class="card">
                     <div class="card-body">
                         <!-- FORM FILTER -->
-                        <form action="{{ route('wali_kelas.attendances.students') }}" method="GET">
+                        <form action="{{ route('wali_kelas.notes.students') }}" method="GET">
                             <input type="hidden" name="class_id" value="{{ $class->id }}">
-
+                
                             <div class="mb-4 border-bottom pb-3">
                                 <div class="row">
                                     <div class="col-md-12 mb-2 d-flex align-items-center">
@@ -116,13 +114,11 @@
                                     </div>
                                     <div class="col-md-12 mb-2 d-flex align-items-center">
                                         <strong class="info-row h5 font-weight-bold me-3 w-25 text-nowrap">Tahun Ajar <span>:</span></strong>
-                                        <select name="school_year_id" class="form-control flex-grow-1"
-                                            onchange="this.form.submit()">
+                                        <select name="school_year_id" class="form-control flex-grow-1" onchange="this.form.submit()">
                                             @foreach ($schoolYears as $year)
                                                 <option value="{{ $year->id }}"
                                                     {{ request('school_year_id', $schoolYear->id ?? '') == $year->id ? 'selected' : '' }}>
-                                                    {{ $year->tahun_awal }} / {{ $year->tahun_akhir }} -
-                                                    {{ $year->semester }}
+                                                    {{ $year->tahun_awal }} / {{ $year->tahun_akhir }} - {{ $year->semester }}
                                                 </option>
                                             @endforeach
                                         </select>
@@ -130,26 +126,23 @@
                                 </div>
                             </div>
                         </form>
-
-                        <!-- TABEL KETIDAKHADIRAN -->
-                        <form action="{{ route('wali_kelas.attendances.update', $class->id) }}" method="POST">
+                
+                        <!-- TABEL CATATAN -->
+                        <form action="{{ route('wali_kelas.notes.update', $class->id) }}" method="POST">
                             @csrf
                             @method('PUT')
                             <input type="hidden" name="class_id" value="{{ $class->id }}">
                             <input type="hidden" name="school_year_id" value="{{ $schoolYear->id ?? '' }}">
-
+                
                             <div class="table-responsive">
-                                <table class="table table-bordered table-striped" id="dataTable" width="100%"
-                                    cellspacing="0">
+                                <table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
                                             <th>No.</th>
                                             <th>Nama</th>
                                             <th>NIS</th>
                                             <th>Jenis Kelamin</th>
-                                            <th>Sakit</th>
-                                            <th>Izin</th>
-                                            <th>Tanpa Keterangan</th>
+                                            <th>Catatan</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -159,37 +152,24 @@
                                                 <td>{{ $student->nama }}</td>
                                                 <td>{{ $student->nis }}</td>
                                                 <td>{{ $student->jk }}</td>
-
-                                                <!-- Tambahkan input hidden untuk student_id -->
-                                                <input type="hidden"
-                                                    name="attendances[{{ $student->id }}][student_id]"
-                                                    value="{{ $student->id }}">
-
-                                                <td><input type="number"
-                                                        name="attendances[{{ $student->id }}][sakit]"
-                                                        class="form-control" min="0"
-                                                        value="{{ old('attendances.' . $student->id . '.sakit', $attendances[$student->id]->sakit ?? 0) }}">
-                                                </td>
-                                                <td><input type="number" name="attendances[{{ $student->id }}][izin]"
-                                                        class="form-control" min="0"
-                                                        value="{{ old('attendances.' . $student->id . '.izin', $attendances[$student->id]->izin ?? 0) }}">
-                                                </td>
-                                                <td><input type="number" name="attendances[{{ $student->id }}][alfa]"
-                                                        class="form-control" min="0"
-                                                        value="{{ old('attendances.' . $student->id . '.alfa', $attendances[$student->id]->alfa ?? 0) }}">
+                
+                                                <input type="hidden" name="notes[{{ $student->id }}][student_id]" value="{{ $student->id }}">
+                                                <td>
+                                                    <textarea name="notes[{{ $student->id }}][catatan]" class="form-control" rows="2">{{ old("notes.{$student->id}.catatan", $notes[$student->id]->catatan ?? '') }}</textarea>
                                                 </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
                             </div>
+                
                             <div class="form-group mt-4 text-right">
                                 <button type="submit" class="btn btn-success text-white"><i class="fa fa-save"></i>
                                     Simpan Perubahan</button>
                             </div>
                         </form>
                     </div>
-                </div>
+                </div>                
 
             </div>
 
