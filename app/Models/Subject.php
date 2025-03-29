@@ -14,10 +14,7 @@ class Subject extends Model
     protected $fillable = [
        'nama',
        'singkatan',
-       'kelompok_mapel',
-       'capaian',
-       'tujuan',
-       'aplikasi'
+       'kelompok_mapel'
     ];
 
     public function teachings()

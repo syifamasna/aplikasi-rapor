@@ -70,8 +70,8 @@ class GradeController extends Controller
         // Ambil Guru Pengampu berdasarkan kelas & mata pelajaran
         $teacher = Teaching::where('class_id', $classId)
         ->where('subject_id', $subjectId)
-        ->where('user_id', auth()->id()) // Hanya ambil data guru yang sedang login
-        ->first()?->teacher;    
+        ->where('user_id', auth()->id())
+        ->first()?->teacher ?? auth()->user(); 
     
         // Ambil daftar tahun ajar
         $schoolYears = SchoolYear::orderBy('tahun_awal', 'desc')
@@ -89,39 +89,34 @@ class GradeController extends Controller
             ->keyBy('student_id');
     
         return view('guru-mapel-pages.grades.students', compact(
-            'students', 'class', 'subjects', 'schoolYears', 'schoolYear', 'grades', 'teacher'
+            'students', 'class', 'subjects', 'schoolYears', 'schoolYear', 'grades', 'teacher', 'subjectId'
         ));
     }    
 
     public function update(Request $request)
     {
+
         $validated = $request->validate([
             'class_id' => 'required|exists:student_classes,id',
             'school_year_id' => 'required|exists:school_years,id',
             'subject_id' => 'required|exists:subjects,id',
-            'grades.*.student_id' => 'required|exists:students,id',
-            'grades.*.nilai' => 'nullable|numeric|min:0|max:100',
-            'grades.*.capaian' => 'nullable|string',
-            'grades.*.target' => 'nullable|string',
-            'grades.*.aplikasi_program' => 'nullable|string',
+            'grades' => 'required|array',
+            'grades.*.nilai' => 'nullable|numeric|min:75|max:100',
         ]);
 
-        foreach ($validated['grades'] as $data) {
+        foreach ($validated['grades'] as $student_id => $data) {
             Grade::updateOrCreate(
                 [
-                    'student_id' => $data['student_id'],
+                    'student_id' => $student_id, // Ambil dari key array
                     'school_year_id' => $validated['school_year_id'],
                     'subject_id' => $validated['subject_id'],
                 ],
                 [
                     'nilai' => $data['nilai'] ?? null,
-                    'capaian' => $data['capaian'] ?? null,
-                    'target' => $data['target'] ?? null,
-                    'aplikasi_program' => $data['aplikasi_program'] ?? null,
                 ]
             );
         }
 
-        return redirect()->back()->with('success', 'Data nilai berhasil diperbarui!');
+        return redirect()->back()->with('success', 'Nilai berhasil diperbarui!');
     }
 }

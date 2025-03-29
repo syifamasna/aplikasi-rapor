@@ -167,6 +167,10 @@
                                                     class="btn btn-info btn-sm btn-detail">
                                                     <i class="fa fa-pencil"></i> Input Nilai
                                                 </a>
+                                                <a href="{{ route('guru_mapel.grade_details.index', ['class_id' => $teaching->class_id, 'subject_id' => $teaching->subject_id]) }}"
+                                                    class="btn btn-warning btn-sm">
+                                                    <i class="fa fa-bar-chart"></i> Input Capaian
+                                                </a>
                                             </td>
                                         </tr>
                                     @empty

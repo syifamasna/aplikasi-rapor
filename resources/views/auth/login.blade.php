@@ -12,6 +12,8 @@
 </head>
 
 <body class="h-100">
+    @include('admin-pages.components.preloader')
+
     <div class="authincation h-100">
         <div class="container-fluid h-100">
             <div class="row justify-content-center h-100 align-items-center">
@@ -93,7 +95,9 @@
 
     <!-- Scripts -->
     <script src="{{ asset('vendor/global/global.min.js') }}"></script>
+    <script src="{{ asset('js/custom.min.js') }}"></script>
     <script src="{{ asset('vendor/sweetalert2/dist/sweetalert2.min.js') }}"></script>
+    
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             @if (session('success'))

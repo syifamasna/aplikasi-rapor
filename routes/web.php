@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\LandingPageController;
+use App\Http\Controllers\ContactController;
 
 use App\Http\Controllers\Admin\AchievementController as AdminAchievementController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
@@ -23,6 +25,7 @@ use App\Http\Controllers\WaliKelas\StudentController as WaliKelasStudentControll
 use App\Http\Controllers\GuruMapel\DashboardController as GuruMapelDashboardController;
 use App\Http\Controllers\GuruMapel\ProfileController as GuruMapelProfileController;
 use App\Http\Controllers\GuruMapel\GradeController as GuruMapelGradeController;
+use App\Http\Controllers\GuruMapel\GradeDetailController as GuruMapelGradeDetailController;
 
 use App\Http\Controllers\PjPrestasi\AchievementController as PjPrestasiAchievementController;
 use App\Http\Controllers\PjPrestasi\DashboardController as PjPrestasiDashboardController;
@@ -32,6 +35,13 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+
+//rute landing page
+Route::get('/', [LandingPageController::class, 'index']);
+
+//rute kontak landing page
+Route::post('/contact', [ContactController::class, 'sendContact'])->name('contact.send');
+
 
 // ===========================================
 // Rute Login (umum untuk semua pengguna)
@@ -135,6 +145,7 @@ Route::middleware(['auth'])->prefix('guru')->group(function () {
         // Rute untuk input nilai siswa
         Route::resource('grades', GuruMapelGradeController::class)->names('guru_mapel.grades')->except(['show']);
         Route::get('grades/students', [GuruMapelGradeController::class, 'studentIndex'])->name('guru_mapel.grades.students');
+        Route::resource('grade_details', GuruMapelGradeDetailController::class)->names('guru_mapel.grade_details')->except(['show']);
         
         // Rute untuk update profil guru mapel
         Route::get('profile', [GuruMapelProfileController::class, 'index'])->name('guru_mapel.profile.index');
@@ -169,3 +180,4 @@ Route::middleware(['auth'])->prefix('pj')->group(function () {
         Route::delete('profile/photo', [PjPrestasiProfileController::class, 'destroyImage'])->name('pj_prestasi.profile.destroyImage');        
     });
 });
+

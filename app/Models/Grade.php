@@ -16,15 +16,6 @@ class Grade extends Model
         'school_year_id',
         'subject_id',
         'nilai',
-        'capaian',
-        'target',
-        'aplikasi_program',
-    ];
-
-    protected $casts = [
-        'capaian' => 'array',
-        'target' => 'array',
-        'aplikasi_program' => 'array',
     ];
 
     public function student()
@@ -40,5 +31,10 @@ class Grade extends Model
     public function subject()
     {
         return $this->belongsTo(Subject::class);
+    }
+
+    public function details()
+    {
+        return $this->hasMany(GradeDetail::class, 'grade_id');
     }
 }

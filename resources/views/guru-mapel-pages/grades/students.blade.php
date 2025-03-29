@@ -4,7 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Ketidakhadiran Kelas {{ $class->nama ?? 'Tidak Ada Kelas' }} - E-Rapor SIT Aliya</title>
+    <title>Input Nilai
+        {{ $subjects->where('id', request('subject_id'))->first()?->singkatan ?: $subjects->where('id', request('subject_id'))->first()?->nama ?? '-' }}
+        Kelas {{ $class->nama ?? '-' }} - E-Rapor SIT Aliya
+    </title>
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('vendor/sweetalert2/dist/sweetalert2.min.css') }}">
@@ -81,7 +84,7 @@
             <div class="container-fluid">
                 <div class="row page-titles mx-0">
                     <div class="col-md-6 p-md-0">
-                        <h4 class="mb-0">Data Ketidakhadiran Kelas {{ $class->nama ?? 'Tidak Ada Kelas' }}</h4>
+                        <h4 class="mb-0">Input Nilai Kelas {{ $class->nama ?? 'Tidak Ada Kelas' }}</h4>
                     </div>
                     <div class="col-md-6 p-md-0 d-flex justify-content-end">
                         <ol class="breadcrumb">
@@ -89,17 +92,25 @@
                             <li class="breadcrumb-item"><a href="javascript:void(0)">Administrasi</a></li>
                             <li class="breadcrumb-item"><a href="{{ route('guru_mapel.grades.index') }}">Kelas</a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">Ketidakhadiran</li>
+                            <li class="breadcrumb-item active" aria-current="page">Input Nilai Siswa</li>
                         </ol>
                     </div>
                 </div>
 
-
+                @if (session('error'))
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        {!! session('error') !!}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                @endif
 
                 <div class="card">
                     <div class="card-body">
                         <!-- FORM FILTER -->
                         <form action="{{ route('guru_mapel.grades.students') }}" method="GET">
+                            <input type="hidden" name="subject_id" value="{{ request('subject_id') }}">
                             <input type="hidden" name="class_id" value="{{ $class->id }}">
 
                             <div class="mb-4 border-bottom pb-3">
@@ -108,9 +119,13 @@
                                     <div class="col-md-12 mb-2 d-flex align-items-center">
                                         <strong class="info-row h5 font-weight-bold me-3 w-25 text-nowrap">Mata
                                             Pelajaran <span>:</span></strong>
+                                        @php
+                                            $selectedSubject = $subjects
+                                                ->where('id', request('subject_id', $subjectId))
+                                                ->first();
+                                        @endphp
                                         <input type="text" class="form-control flex-grow-1"
-                                            value="{{ $subjects->where('id', request('subject_id'))->first()->nama ?? '-' }}"
-                                            disabled>
+                                            value="{{ $selectedSubject->nama ?? '-' }}" disabled>
                                     </div>
 
                                     <!-- Kelas -->
@@ -149,9 +164,21 @@
                         </form>
 
                         <!-- TABEL NILAI -->
+
+                        <!-- Tombol Terapkan Nilai Rata -->
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                                data-target="#applyAverageModal">
+                                <i class="fa fa-clipboard"></i> Terapkan Nilai Rata
+                            </button>
+                            <div id="customDataTableFilter"></div>
+                            <!-- Search bar DataTables akan dipindahkan ke sini -->
+                        </div>
+
                         <form action="{{ route('guru_mapel.grades.update', $class->id) }}" method="POST">
                             @csrf
                             @method('PUT')
+                            <input type="hidden" name="subject_id" value="{{ request('subject_id') }}">
                             <input type="hidden" name="class_id" value="{{ $class->id }}">
                             <input type="hidden" name="school_year_id" value="{{ $schoolYear->id ?? '' }}">
 
@@ -165,12 +192,6 @@
                                             <th>NIS</th>
                                             <th>Jenis Kelamin</th>
                                             <th>Nilai</th>
-                                            <th>
-                                                <button type="button" class="btn btn-sm btn-primary"
-                                                    id="addCapaianBtn">
-                                                    <i class="fa fa-plus"></i> Tambah Capaian
-                                                </button>
-                                            </th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -184,27 +205,9 @@
                                                 <!-- Input Nilai -->
                                                 <td>
                                                     <input type="number" name="grades[{{ $student->id }}][nilai]"
-                                                        class="form-control" step="0.01" min="0"
-                                                        max="100"
+                                                        class="form-control" min="75" max="100"
+                                                        step="1"
                                                         value="{{ old('grades.' . $student->id . '.nilai', $grades[$student->id]->nilai ?? '') }}">
-                                                </td>
-
-                                                <!-- Tempat untuk capaian tambahan -->
-                                                <td>
-                                                    <div class="capaian-container"
-                                                        data-student-id="{{ $student->id }}">
-                                                        @if (!empty($grades[$student->id]->capaian))
-                                                            <textarea name="grades[{{ $student->id }}][capaian]" class="form-control mt-2">{{ old('grades.' . $student->id . '.capaian', $grades[$student->id]->capaian ?? '') }}</textarea>
-                                                        @endif
-
-                                                        @if (!empty($grades[$student->id]->target))
-                                                            <textarea name="grades[{{ $student->id }}][target]" class="form-control mt-2">{{ old('grades.' . $student->id . '.target', $grades[$student->id]->target ?? '') }}</textarea>
-                                                        @endif
-
-                                                        @if (!empty($grades[$student->id]->aplikasi_program))
-                                                            <textarea name="grades[{{ $student->id }}][aplikasi_program]" class="form-control mt-2">{{ old('grades.' . $student->id . '.aplikasi_program', $grades[$student->id]->aplikasi_program ?? '') }}</textarea>
-                                                        @endif
-                                                    </div>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -228,36 +231,47 @@
         </div>
     </div>
 
+    <!-- Modal Input Nilai Rata -->
+    <div class="modal fade" id="applyAverageModal" tabindex="-1" aria-labelledby="applyAverageModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="applyAverageModalLabel">Terapkan Nilai Rata</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <label for="averageScore">Nilai</label>
+                    <input type="number" id="averageScore" class="form-control" min="75" max="100"
+                        placeholder="Masukkan nilai...">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    <button type="button" class="btn btn-success" onclick="applyAverage()">Terapkan</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
-        document.getElementById('addCapaianBtn').addEventListener('click', function() {
-            document.querySelectorAll('.capaian-container').forEach(container => {
-                const studentId = container.getAttribute('data-student-id');
+        // script Modal Input Nilai Rata
+        function applyAverage() {
+            var nilai = document.getElementById("averageScore").value;
+            if (nilai < 75 || nilai > 100) {
+                alert("Nilai harus antara 75 dan 100!");
+                return;
+            }
 
-                // Buat pilihan input yang bisa ditambahkan
-                let capaianHtml = `
-                            <select class="form-control mt-2 add-option">
-                                <option value="">Pilih Data Tambahan</option>
-                                <option value="capaian">Capaian</option>
-                                <option value="target">Target</option>
-                                <option value="aplikasi_program">Aplikasi Program</option>
-                            </select>
-                        `;
-
-                container.insertAdjacentHTML('beforeend', capaianHtml);
-
-                container.addEventListener('change', function(event) {
-                    if (event.target.classList.contains('add-option')) {
-                        let selected = event.target.value;
-                        if (selected) {
-                            let inputHtml =
-                                `<textarea name="grades[${studentId}][${selected}]" class="form-control mt-2"></textarea>`;
-                            event.target.insertAdjacentHTML('afterend', inputHtml);
-                            event.target.remove();
-                        }
-                    }
-                });
+            // Isi semua input nilai dengan nilai yang diinputkan
+            document.querySelectorAll("input[name^='grades'][name$='[nilai]']").forEach(input => {
+                input.value = nilai;
             });
-        });
+
+            // Tutup modal setelah menerapkan nilai
+            $('#applyAverageModal').modal('hide');
+        }
     </script>
 
     <!-- Scripts -->
@@ -265,6 +279,7 @@
     <script src="{{ asset('js/quixnav-init.js') }}"></script>
     <script src="{{ asset('js/custom.min.js') }}"></script>
     <script src="{{ asset('vendor/sweetalert2/dist/sweetalert2.min.js') }}"></script>
+    <script src="{{ asset('vendor/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
 
     <!-- Datatable -->
     <script src="{{ asset('vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
@@ -281,6 +296,29 @@
                 "autoWidth": false,
                 "responsive": true,
             });
+        });
+
+        $(document).ready(function() {
+            var dataTable = $("#dataTable").DataTable();
+
+            // Pindahkan search bar DataTables ke dalam div yang kita buat
+            $("#customDataTableFilter").append($("#dataTable_filter"));
+
+            // Hilangkan teks "Search:" sebelum input
+            $("#customDataTableFilter label").contents().filter(function() {
+                return this.nodeType === 3; // NodeType 3 adalah teks
+            }).remove();
+
+            // Tambahkan kembali class dan styling yang mungkin hilang
+            $("#customDataTableFilter .dataTables_filter").addClass("d-flex align-items-center");
+            $("#customDataTableFilter label").addClass("mb-0");
+            $("#customDataTableFilter input")
+                .addClass("form-control")
+                .css({
+                    "width": "200px",
+                    "margin-left": "10px"
+                })
+                .attr("placeholder", "Cari...");
         });
     </script>
 
