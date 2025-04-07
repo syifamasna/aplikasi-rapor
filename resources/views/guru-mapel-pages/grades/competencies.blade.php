@@ -64,6 +64,20 @@
             padding: 8px 0;
         }
 
+        .btn-back {
+            background-color: #6c757d !important;
+            color: white !important;
+            transition: background-color 0.2s ease-in-out;
+        }
+
+        .btn-back:hover {
+            background-color: #5a6268 !important;
+        }
+
+        .btn-back:active {
+            background-color: #495057 !important;
+        }
+
         /* Styling untuk tabel responsif hanya pada layar kecil */
         @media (max-width: 991px) {
             .table-responsive {
@@ -174,6 +188,7 @@
                             $isInformatika =
                                 isset($selectedSubject->nama) &&
                                 Str::contains(Str::lower($selectedSubject->nama), ['informatika', 'komputer', 'tik']);
+                            $isDisabled = $grades->where('nilai', '-')->count() > 0; // Form disabled jika ada nilai kosong
                         @endphp
 
                         <!-- FORM UNTUK TARGET & CAPAIAN ATAU APLIKASI/PROGRAM -->
@@ -185,8 +200,10 @@
                             <input type="hidden" name="school_year_id" value="{{ $schoolYear->id ?? '' }}">
 
                             <div class="table-responsive">
-                                <table class="table table-bordered table-striped" id="dataTable" width="100%"
-                                    cellspacing="0">
+                                <table
+                                    class="table table-bordered table-striped {{ $isDisabled ? 'table-secondary' : '' }}"
+                                    id="dataTable" width="100%" cellspacing="0"
+                                    style="{{ $isDisabled ? 'opacity: 0.6; pointer-events: none;' : '' }}">
                                     <thead>
                                         <tr>
                                             <th>No.</th>
@@ -217,7 +234,8 @@
                                                         <input type="text"
                                                             name="grade_details[{{ $student->id }}][aplikasi_program]"
                                                             class="form-control"
-                                                            value="{{ old('grade_details.' . $student->id . '.aplikasi_program', $gradeDetails[$grades[$student->id]->id]->aplikasi_program ?? '-') }}">
+                                                            value="{{ old('grade_details.' . $student->id . '.aplikasi_program', $gradeDetails[$grades[$student->id]->id]->aplikasi_program ?? '-') }}"
+                                                            {{ $isDisabled ? 'disabled' : '' }}>
                                                     </td>
                                                 @else
                                                     <!-- FORM TARGET & CAPAIAN UNTUK MATA PELAJARAN LAINNYA -->
@@ -225,13 +243,15 @@
                                                         <input type="text"
                                                             name="grade_details[{{ $student->id }}][target]"
                                                             class="form-control"
-                                                            value="{{ old('grade_details.' . $student->id . '.target', $gradeDetails[$grades[$student->id]->id]->target ?? '-') }}">
+                                                            value="{{ old('grade_details.' . $student->id . '.target', $gradeDetails[$grades[$student->id]->id]->target ?? '-') }}"
+                                                            {{ $isDisabled ? 'disabled' : '' }}>
                                                     </td>
                                                     <td>
                                                         <input type="text"
                                                             name="grade_details[{{ $student->id }}][capaian]"
                                                             class="form-control"
-                                                            value="{{ old('grade_details.' . $student->id . '.capaian', $gradeDetails[$grades[$student->id]->id]->capaian ?? '-') }}">
+                                                            value="{{ old('grade_details.' . $student->id . '.capaian', $gradeDetails[$grades[$student->id]->id]->capaian ?? '-') }}"
+                                                            {{ $isDisabled ? 'disabled' : '' }}>
                                                     </td>
                                                 @endif
                                             </tr>
@@ -241,7 +261,11 @@
                             </div>
 
                             <div class="form-group mt-4 text-right">
-                                <button type="submit" class="btn btn-success text-white">
+                                <a href="{{ url()->previous() }}" class="btn btn-back">
+                                    <i class="fa fa-arrow-left"></i> Kembali
+                                </a>
+                                <button type="submit" class="btn btn-success text-white"
+                                    {{ $isDisabled ? 'disabled' : '' }}>
                                     <i class="fa fa-save"></i> Simpan Perubahan
                                 </button>
                             </div>

@@ -36,9 +36,10 @@
             </li>
 
             <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="fa fa-book"></i><span
-                        class="nav-text">Data Rapor</span></a>
+                        class="nav-text">Leger Nilai</span></a>
                 <ul aria-expanded="false">
-                    <li><a href="./chart-flot.html">Leger Nilai</a></li>
+                    <li><a href="{{ route('wali_kelas.student_progress_reports.index') }}">Laporan Perkembangan Peserta Didik (LPPD)</a></li>
+                    <li><a href="{{ route('wali_kelas.student_reports.index') }}">Laporan Hasil Belajar (Rapor) Peserta Didik</a></li>
                     <li><a href="./chart-morris.html">Cetak Rapor</a></li>
                 </ul>
             </li>

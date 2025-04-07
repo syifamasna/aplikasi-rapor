@@ -64,6 +64,20 @@
             padding: 8px 0;
         }
 
+        .btn-back {
+            background-color: #6c757d !important;
+            color: white !important;
+            transition: background-color 0.2s ease-in-out;
+        }
+
+        .btn-back:hover {
+            background-color: #5a6268 !important;
+        }
+
+        .btn-back:active {
+            background-color: #495057 !important;
+        }
+
         /* Styling untuk tabel responsif hanya pada layar kecil */
         @media (max-width: 991px) {
             .table-responsive {
@@ -216,6 +230,9 @@
                             </div>
 
                             <div class="form-group mt-4 text-right">
+                                <a href="{{ url()->previous() }}" class="btn btn-back">
+                                    <i class="fa fa-arrow-left"></i> Kembali
+                                </a>
                                 <button type="submit" class="btn btn-success text-white">
                                     <i class="fa fa-save"></i> Simpan Perubahan
                                 </button>

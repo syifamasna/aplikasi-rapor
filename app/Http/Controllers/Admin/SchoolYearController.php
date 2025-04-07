@@ -33,7 +33,7 @@ class SchoolYearController extends Controller
         $request->validate([
             'tahun_awal' => 'required|integer|min:2000|max:2100',
             'tahun_akhir' => 'required|integer|gt:tahun_awal',
-            'semester' => 'required|in:Ganjil,Genap',
+            'semester' => 'required|in:Ganjil,Genap,"Tengah Semester Ganjil","Tengah Semester Genap"',
             'tempat_rapor' => 'nullable|string|max:255',
             'tanggal_rapor' => 'nullable|date',
         ]);
@@ -59,7 +59,7 @@ class SchoolYearController extends Controller
         $request->validate([
             'tahun_awal' => 'required|integer|min:2000|max:2100',
             'tahun_akhir' => 'required|integer|gt:tahun_awal',
-            'semester' => 'required|in:Ganjil,Genap',
+            'semester' => 'required|in:Ganjil,Genap,"Tengah Semester Ganjil","Tengah Semester Genap"',
             'tempat_rapor' => 'nullable|string|max:255',
             'tanggal_rapor' => 'nullable|date',
         ]);

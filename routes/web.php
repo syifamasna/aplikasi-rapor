@@ -19,8 +19,10 @@ use App\Http\Controllers\WaliKelas\AttendanceController as WaliKelasAttendanceCo
 use App\Http\Controllers\WaliKelas\DashboardController as WaliKelasDashboardController;
 use App\Http\Controllers\WaliKelas\NoteController as WaliKelasNoteController;
 use App\Http\Controllers\WaliKelas\ProfileController as WaliKelasProfileController;
-use App\Http\Controllers\WaliKelas\StudentClassController as WaliKelasStudentClassController;
 use App\Http\Controllers\WaliKelas\StudentController as WaliKelasStudentController;
+use App\Http\Controllers\WaliKelas\StudentClassController as WaliKelasStudentClassController;
+use App\Http\Controllers\WaliKelas\StudentProgressReportController as WaliKelasStudentProgressReportController;
+use App\Http\Controllers\WaliKelas\StudentReportController as WaliKelasStudentReportController;
 
 use App\Http\Controllers\GuruMapel\DashboardController as GuruMapelDashboardController;
 use App\Http\Controllers\GuruMapel\ProfileController as GuruMapelProfileController;
@@ -119,6 +121,18 @@ Route::middleware(['auth'])->prefix('wali')->group(function () {
         Route::resource('student_classes', WaliKelasStudentClassController::class)->names('wali_kelas.student_classes')->except(['show']);
         Route::get('student_classes/students', [WaliKelasStudentClassController::class, 'studentIndex'])->name('wali_kelas.student_classes.students');
         Route::resource('students', WaliKelasStudentController::class)->names('wali_kelas.students');
+
+        // Rute untuk Laporan Perkembangan Peserta Didik
+        Route::get('student_progress_reports', [WaliKelasStudentProgressReportController::class, 'index'])->name('wali_kelas.student_progress_reports.index');
+        Route::get('student_progress_reports/{class_id}/students', [WaliKelasStudentProgressReportController::class, 'students'])->name('wali_kelas.student_progress_reports.students');
+        Route::get('student_progress_reports/{class_id}/students/{student_id}', [WaliKelasStudentProgressReportController::class, 'show'])->name('wali_kelas.student_progress_reports.show');       
+        Route::get('student_progress_reports/{class_id}/students/{student_id}/export-pdf', [WaliKelasStudentProgressReportController::class, 'exportPdf'])->name('wali_kelas.student_progress_reports.export-pdf'); 
+
+        // Rute untuk Laporan Hasil Belajar (Rapor) Peserta Didik
+        Route::get('student_reports', [WaliKelasStudentReportController::class, 'index'])->name('wali_kelas.student_reports.index');
+        Route::get('student_reports/{class_id}/students', [WaliKelasStudentReportController::class, 'students'])->name('wali_kelas.student_reports.students');
+        Route::get('student_reports/{class_id}/students/{student_id}', [WaliKelasStudentReportController::class, 'show'])->name('wali_kelas.student_reports.show');       
+        Route::get('student_reports/{class_id}/students/{student_id}/export-pdf', [WaliKelasStudentReportController::class, 'exportPdf'])->name('wali_kelas.student_reports.export-pdf'); 
 
         // Rute untuk update profil wali kelas
         Route::get('profile', [WaliKelasProfileController::class, 'index'])->name('wali_kelas.profile.index');

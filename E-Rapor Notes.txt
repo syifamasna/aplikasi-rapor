@@ -6,3 +6,7 @@ REVISI APLIKASI E-RAPOR SIT ALIYA
 - Grafik diambil berdasarkan data kelas yang terbanyak prestasi nya
 - Data NULL yang sudah diisi di profil bisa dihapus/dikosongkan lagi
 - Bedakan isi kalimat card welcome di tiap-tiap halaman user
+- Tahun ajar di input prestasi halaman Pj Prestasi
+- Keputusan di Rapor Siswa Semester Genap
+
+

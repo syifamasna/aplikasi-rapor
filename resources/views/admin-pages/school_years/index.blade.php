@@ -205,13 +205,15 @@
                             <label for="semester">Semester <span class="text-danger">*</span></label>
                             <select name="semester" class="form-control" required>
                                 <option value="" selected disabled>Pilih Semester</option>
+                                <option value="Tengah Semester Ganjil">Tengah Semester Ganjil</option>
                                 <option value="Ganjil">Ganjil</option>
+                                <option value="Tengah Semester Genap">Tengah Semester Genap</option>
                                 <option value="Genap">Genap</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="tempat_rapor">Tempat Pembagian Rapor</label>
-                            <input type="text" name="tempat_rapor" class="form-control" placeholder="Bogor">
+                            <input type="text" name="tempat_rapor" class="form-control" placeholder="Contoh : Bogor">
                         </div>
                         <div class="form-group">
                             <label for="tanggal_rapor">Tanggal Pembagian Rapor</label>
@@ -256,13 +258,15 @@
                         <div class="form-group">
                             <label for="edit_semester">Semester <span class="text-danger">*</span></label>
                             <select name="semester" id="edit_semester" class="form-control" required>
+                                <option value="Tengah Semester Ganjil">Tengah Semester Ganjil</option>
                                 <option value="Ganjil">Ganjil</option>
+                                <option value="Tengah Semester Genap">Tengah Semester Genap</option>
                                 <option value="Genap">Genap</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="edit_tempat_rapor">Tempat Pembagian Rapor</label>
-                            <input type="text" name="tempat_rapor" id="edit_tempat_rapor" class="form-control">
+                            <input type="text" name="tempat_rapor" id="edit_tempat_rapor" class="form-control" placeholder="Contoh : Bogor">
                         </div>
                         <div class="form-group">
                             <label for="edit_tanggal_rapor">Tanggal Pembagian Rapor</label>

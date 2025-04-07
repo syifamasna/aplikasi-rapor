@@ -13,6 +13,7 @@ class Achievement extends Model
 
     protected $fillable = [
         'student_id',
+        'school_year_id',
         'jenis_prestasi',
         'keterangan',
     ];
@@ -20,6 +21,11 @@ class Achievement extends Model
     public function student()
     {
         return $this->belongsTo(Student::class, 'student_id');
+    }
+
+    public function schoolYear()
+    {
+        return $this->belongsTo(SchoolYear::class, 'school_year_id');
     }
 
     public function scopeAkademik($query)
