@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 07, 2025 at 12:48 PM
+-- Generation Time: Apr 08, 2025 at 03:59 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -44,7 +44,8 @@ CREATE TABLE `achievements` (
 INSERT INTO `achievements` (`id`, `student_id`, `school_year_id`, `jenis_prestasi`, `keterangan`, `created_at`, `updated_at`) VALUES
 (4, 759, 3, 'Non-Akademik', 'Juara 2 Lomba Story Telling', '2025-04-04 11:02:00', '2025-04-04 11:03:46'),
 (5, 759, 3, 'Akademik', 'Juara Lomba Cerdas Cermat Sains', '2025-04-04 11:04:59', '2025-04-04 11:05:45'),
-(6, 759, 3, 'Akademik', 'Juara 1 Cerdas Cermat Matematika', '2025-04-04 11:05:35', '2025-04-04 11:05:35');
+(6, 759, 3, 'Akademik', 'Juara 1 Cerdas Cermat Matematika', '2025-04-04 11:05:35', '2025-04-04 11:05:35'),
+(7, 257, 3, 'Akademik', 'Juara 2 Lomba Cerdas Cermat PAI', '2025-04-08 06:38:49', '2025-04-08 06:46:13');
 
 -- --------------------------------------------------------
 
@@ -901,9 +902,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('czk2QzdEQ4bvPUrNc3kx9SZ82srjeGxHgokJq3Of', 40, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiM1RwMDZRR1RNWFFMaldhTzlIdlJ3TTNJSVZZRHdQVGV6RXpEZ0Y0VSI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czo2NjoiaHR0cDovLzEyNy4wLjAuMTo4MDAwL3dhbGkvc3R1ZGVudF9wcm9ncmVzc19yZXBvcnRzLzIvc3R1ZGVudHMvODQwIjt9czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NjM6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC93YWxpL3N0dWRlbnRfcHJvZ3Jlc3NfcmVwb3J0cy8yNC9zdHVkZW50cyI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjQwO3M6MTE6ImFjdGl2ZV9yb2xlIjtzOjE6IjIiO30=', 1744014776),
-('H65mICzcKQ4T4AXCGCOVULCLmUqZR0GoJ9jnkiAN', 40, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36', 'YTo3OntzOjY6Il90b2tlbiI7czo0MDoiVEpHbkEzaEhnSHpBNmZkTk4xcndRdW5veld3SnRzd3JjcVNsVVBJMSI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czo2NzoiaHR0cDovLzEyNy4wLjAuMTo4MDAwL3dhbGkvc3R1ZGVudF9wcm9ncmVzc19yZXBvcnRzLzI0L3N0dWRlbnRzLzc2MCI7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjI3OiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvbG9naW4iO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YToxOntpOjA7czo3OiJzdWNjZXNzIjt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aTo0MDtzOjExOiJhY3RpdmVfcm9sZSI7czoxOiIyIjtzOjc6InN1Y2Nlc3MiO3M6MzQ6IkJlcmhhc2lsIGxvZ2luIHNlYmFnYWkgV2FsaSBLZWxhcy4iO30=', 1743930956),
-('IsVjFHRhSN62moFjEY75sPf8RNZ0421aUTQYqJKc', 17, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiRDJpbnBHd1o0TE1wa0RkTWRhU2VJQTBJMWhublVGejdZd1dWclpKRCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Nzc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC93YWxpL3N0dWRlbnRfcHJvZ3Jlc3NfcmVwb3J0cy8yL3N0dWRlbnRzLzg0MC9leHBvcnQtcGRmIjt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTc7czoxMToiYWN0aXZlX3JvbGUiO3M6MToiMiI7fQ==', 1743931835);
+('qw65yQbgRhHbOzDJiMMV5xQBRW92RZSOAS59JrDQ', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiWHZqcXB1M1d0Y2x1dkN4YzJ0eW1ramwyWWFuUmtKWlNlOUh0RzVhNyI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9sb2dpbiI7fX0=', 1744120033);
 
 -- --------------------------------------------------------
 
@@ -2505,7 +2504,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `achievements`
 --
 ALTER TABLE `achievements`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `attendances`

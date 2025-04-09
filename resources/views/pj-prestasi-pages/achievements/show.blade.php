@@ -73,8 +73,8 @@
             background-color: #f0f0f0 !important;
         }
 
-        /* Membuat kolom Wali Kelas left-aligned */
-        table.dataTable tbody td:nth-child(3) {
+        /* Membuat kolom Keterangan left-aligned */
+        table.dataTable tbody td:nth-child(4) {
             text-align: left;
         }
 
@@ -156,6 +156,7 @@
                                 <thead>
                                     <tr>
                                         <th>No.</th>
+                                        <th>Tahun Ajar</th>
                                         <th>Jenis Prestasi</th>
                                         <th>Keterangan</th>
                                         <th>Aksi</th>
@@ -165,11 +166,14 @@
                                     @foreach ($achievements as $achievement)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $achievement->schoolYear->tahun_awal }}/{{ $achievement->schoolYear->tahun_akhir }}
+                                                - {{ $achievement->schoolYear->semester }}</td>
                                             <td>{{ $achievement->jenis_prestasi }}</td>
                                             <td>{{ $achievement->keterangan }}</td>
                                             <td>
                                                 <button type="button" class="btn btn-warning btn-sm btn-edit"
                                                     data-id="{{ $achievement->id }}"
+                                                    data-school_year_id="{{ $achievement->school_year_id }}"
                                                     data-jenis_prestasi="{{ $achievement->jenis_prestasi }}"
                                                     data-keterangan="{{ $achievement->keterangan }}">
                                                     Edit
@@ -214,6 +218,17 @@
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
+                            <label>Tahun Ajar <span class="text-danger">*</span></label>
+                            <select name="school_year_id" class="form-control" required>
+                                <option value="" selected disabled>Pilih Tahun Ajar</option>
+                                @foreach ($schoolYears as $year)
+                                    <option value="{{ $year->id }}">
+                                        {{ $year->tahun_awal }}/{{ $year->tahun_akhir }} - {{ $year->semester }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <label>Jenis Prestasi <span class="text-danger">*</span></label>
                             <select name="jenis_prestasi" class="form-control" required>
                                 <option value="" selected disabled>Pilih Jenis Prestasi</option>
@@ -253,6 +268,17 @@
                     <div class="modal-body">
                         <input type="hidden" name="id" id="edit_id">
                         <div class="form-group">
+                            <label for="edit_school_year_id">Tahun Ajar <span class="text-danger">*</span></label>
+                            <select class="form-control" name="school_year_id" id="edit_school_year_id" required>
+                                <option value="" selected disabled>Pilih Tahun Ajar</option>
+                                @foreach ($schoolYears as $year)
+                                    <option value="{{ $year->id }}">
+                                        {{ $year->tahun_awal }}/{{ $year->tahun_akhir }} - {{ $year->semester }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <label for="edit_jenis_prestasi">Jenis Prestasi <span class="text-danger">*</span></label>
                             <select class="form-control" name="jenis_prestasi" id="edit_jenis_prestasi" required>
                                 <option value="" selected disabled>Pilih Jenis Prestasi</option>
@@ -282,15 +308,17 @@
                 if (event.target.classList.contains("btn-edit")) {
                     let button = event.target;
                     let id = button.getAttribute("data-id");
+                    let school_year_id = button.getAttribute("data-school_year_id");
                     let jenis_prestasi = button.getAttribute("data-jenis_prestasi");
                     let keterangan = button.getAttribute("data-keterangan");
 
                     document.getElementById("edit_id").value = id;
+                    document.getElementById("edit_school_year_id").value = school_year_id;
                     document.getElementById("edit_jenis_prestasi").value = jenis_prestasi;
                     document.getElementById("edit_keterangan").value = keterangan;
 
                     let form = document.getElementById("editAchievementForm");
-                    form.setAttribute("action", `/pj_prestasi/achievements/${id}`);
+                    form.setAttribute("action", `/pj/achievements/${id}`);
 
                     $('#editAchievementModal').modal('show');
                 }

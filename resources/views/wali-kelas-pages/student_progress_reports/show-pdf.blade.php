@@ -80,9 +80,9 @@
     <div class="container">
         <div style="position: relative; text-align: center;">
             <!-- Gambar di belakang -->
-            <img src="{{ public_path('images/logo.png') }}" alt="Logo Sekolah"
-                style="position: absolute; left: 30; top: 10; transform: translateY(-50%);
-                        width: 80px; z-index: 1;">
+            <img src="{{ public_path('images/document-logo.png') }}" alt="Logo Sekolah"
+            style="position: absolute; left: 50; top: 7; transform: translateY(-50%);
+                    width: 72px; z-index: 1;">
 
             <!-- Teks header -->
             <div style="z-index: -1; position: relative;">

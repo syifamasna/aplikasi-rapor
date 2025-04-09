@@ -109,7 +109,7 @@
                                 <a href="{{ route('wali_kelas.student_progress_reports.show', ['class_id' => $class->id, 'student_id' => $student->id]) }}"
                                     title="LPPD {{ $student->nama ?? '-' }}"
                                     class="{{ request()->is('wali/student_progress_reports/*') ? 'text-dark' : '' }}">
-                                    LPPD Siswa
+                                    Laporan Siswa
                                 </a>
                             </li>
 
