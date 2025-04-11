@@ -7,8 +7,9 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            font-size: 10px;
+            font-size: 11px;
             margin: 0;
+            padding: 0;
         }
 
         .container {
@@ -28,7 +29,7 @@
         .table {
             width: 100%;
             border-collapse: collapse;
-            margin: 10px 0;
+            margin: 7px 0;
         }
 
         .table th,
@@ -40,32 +41,7 @@
 
         .table th {
             background-color: #e7e7e7;
-        }
-
-        .details p {
-            margin: 1px 0;
-        }
-
-        .signature {
-            display: flex;
-            width: 100%;
-            margin-top: 40px;
-            text-align: center;
-            justify-content: space-between;
-        }
-
-        .signature-content {
-            display: inline-block;
-            width: 30%;
-            text-align: center;
-        }
-
-        .signature-content p {
-            margin: 1px 0;
-        }
-
-        .signature-space {
-            min-height: 40px;
+            text-align: left;
         }
 
         .subheading {
@@ -78,38 +54,33 @@
 
 <body>
     <div class="container">
-        <div style="position: relative; text-align: center;">
-            <!-- Gambar di belakang -->
-            <img src="{{ public_path('images/document-logo.png') }}" alt="Logo Sekolah"
-            style="position: absolute; left: 50; top: 7; transform: translateY(-50%);
-                    width: 72px; z-index: 1;">
-
-            <!-- Teks header -->
-            <div style="z-index: -1; position: relative;">
-                <h3 style="margin: 2px 0;">LAPORAN PERKEMBANGAN PESERTA DIDIK</h3>
-                <h3 style="margin: 2px 0;">
-                    @if ($schoolYear && $schoolYear->semester === 'Tengah Semester Ganjil')
-                        SEMESTER I (SATU)
-                    @elseif ($schoolYear && $schoolYear->semester === 'Tengah Semester Genap')
-                        SEMESTER II (DUA)
-                    @else
-                        SEMESTER TIDAK DIKETAHUI
-                    @endif
-                    TAHUN PELAJARAN {{ $schoolYear->tahun_awal ?? '-' }}/{{ $schoolYear->tahun_akhir ?? '-' }}
-                </h3>
-                <h3 style="margin: 2px 0;">SEKOLAH DASAR ISLAM TERPADU ALIYA KOTA BOGOR</h3>
-            </div>
+        <div class="header">
+            <h3 style="margin: 2px 0;">LAPORAN PERKEMBANGAN PESERTA DIDIK</h3>
+            <h3 style="margin: 2px 0;">
+                @if ($schoolYear && $schoolYear->semester === 'Tengah Semester I (Satu)')
+                    SEMESTER I (SATU)
+                @elseif ($schoolYear && $schoolYear->semester === 'Tengah Semester II (Dua)')
+                    SEMESTER II (DUA)
+                @else
+                    SEMESTER TIDAK DIKETAHUI
+                @endif
+                TAHUN PELAJARAN {{ $schoolYear->tahun_awal ?? '-' }}/{{ $schoolYear->tahun_akhir ?? '-' }}
+            </h3>
+            <h3 style="margin: 2px 0;">SEKOLAH DASAR ISLAM TERPADU ALIYA KOTA BOGOR</h3>
         </div>
 
         <!-- Identitas -->
         <table style="width: 100%; border-spacing: 5px;">
             <tr>
                 <td style="width: 33%; vertical-align: top;">
-                    <p style="margin: 5px 0;"><strong>Nama Peserta Didik<span style="display: inline-block; width: 20px;"></span>:
+                    <p style="margin: 5px 0;"><strong>Nama Peserta Didik<span
+                                style="display: inline-block; width: 20px;"></span>:
                             {{ $student->nama }}</strong></p>
-                    <p style="margin: 5px 0;"><strong>NIS / NISN<span style="display: inline-block; width: 64px;"></span>:
+                    <p style="margin: 5px 0;"><strong>NIS / NISN<span
+                                style="display: inline-block; width: 69px;"></span>:
                             {{ $student->nis }} / {{ $student->nisn }}</strong></p>
-                    <p style="margin: 5px 0;"><strong>Alamat Sekolah<span style="display: inline-block; width: 39px;"></span>:
+                    <p style="margin: 5px 0;"><strong>Alamat Sekolah<span
+                                style="display: inline-block; width: 40px;"></span>:
                             {{ $schoolProfile->alamat }}</strong></p>
                 </td>
                 <td style="width: 10%; vertical-align: top;">
@@ -218,45 +189,50 @@
         </table>
 
         <!-- Absensi -->
-        <table class="table">
-            <thead>
-                <tr>
-                    <th colspan="2" class="text-center">KETIDAKHADIRAN</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Sakit</td>
-                    <td>{{ $attendances->sakit ?? '0' }} Hari</td>
-                </tr>
-                <tr>
-                    <td>Izin</td>
-                    <td>{{ $attendances->izin ?? '0' }} Hari</td>
-                </tr>
-                <tr>
-                    <td>Tanpa Keterangan</td>
-                    <td>{{ $attendances->alfa ?? '0' }} Hari</td>
-                </tr>
-            </tbody>
-        </table>
+        <div style="width: 40%; float: right;">
+            <table class="table table-sm table-bordered" style="margin-top: 2px;">
+                <thead>
+                    <tr>
+                        <th colspan="2">KETIDAKHADIRAN</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Sakit</td>
+                        <td>{{ $attendances->sakit ?? '0' }} Hari</td>
+                    </tr>
+                    <tr>
+                        <td>Izin</td>
+                        <td>{{ $attendances->izin ?? '0' }} Hari</td>
+                    </tr>
+                    <tr>
+                        <td>Tanpa Keterangan</td>
+                        <td>{{ $attendances->alfa ?? '0' }} Hari</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
         <!-- Signature -->
-        <div class="signature">
-            <div class="signature-content">
-                <p>Orangtua / Wali</p>
-                <div style="height: 60px;"></div> <!-- Ruang tanda tangan -->
-                <p><strong>(...............................................)</strong></p>
-            </div>
-
-            <div class="signature-content">
-                <p>{{ $schoolYear->tempat_rapor ?? 'Bogor' }},
-                    {{ \Carbon\Carbon::parse($schoolYear->tanggal_rapor)->locale('id')->translatedFormat('d F Y') ?? '-' }}
-                </p>
-                <p>Wali Kelas</p>
-                <div style="height: 50px;"></div> <!-- Ruang tanda tangan -->
-                <p><strong>{{ $class->waliKelas->nama ?? '...............................................' }}</strong>
-                </p>
-            </div>
+        <div style="clear: both; margin-top: 20px; width: 100%;">
+            <table style="width: 100%;">
+                <tr>
+                    <td style="width: 40%; text-align: center;">
+                        Orangtua / Wali
+                        <div style="height: 50px;"></div>
+                        <strong>(...............................................)</strong>
+                    </td>
+                    <td style="width: 60%;"></td> <!-- spacer -->
+                    <td style="width: 40%; text-align: center;">
+                        {{ $schoolYear->tempat_rapor ?? 'Bogor' }},
+                        {{ \Carbon\Carbon::parse($schoolYear->tanggal_rapor)->locale('id')->translatedFormat('d F Y') ?? '-' }}
+                        <br>
+                        Wali Kelas
+                        <div style="height: 40px;"></div>
+                        <strong>{{ $class->waliKelas->nama ?? '...............................................' }}</strong>
+                    </td>
+                </tr>
+            </table>
         </div>
 
     </div>

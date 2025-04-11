@@ -9,6 +9,40 @@
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/logo-erapor.png') }}">
     <link rel="stylesheet" href="{{ asset('vendor/sweetalert2/dist/sweetalert2.min.css') }}">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+
+    <style>
+        .authincation {
+            background: url('{{ asset('images/bg.png') }}') no-repeat center center;
+            background-size: cover;
+            background-attachment: fixed;
+            position: relative;
+        }
+    
+        .authincation::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+    
+        .authincation-content {
+            position: relative;
+            z-index: 2;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(4px);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.3);
+            max-width: 450px;
+            margin: 0 auto;
+        }
+    
+        /* Buat form lebih rapih */
+        .auth-form {
+            padding: 10px;
+        }
+    </style>
 </head>
 
 <body class="h-100">
@@ -97,7 +131,7 @@
     <script src="{{ asset('vendor/global/global.min.js') }}"></script>
     <script src="{{ asset('js/custom.min.js') }}"></script>
     <script src="{{ asset('vendor/sweetalert2/dist/sweetalert2.min.js') }}"></script>
-    
+
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             @if (session('success'))

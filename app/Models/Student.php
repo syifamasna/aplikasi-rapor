@@ -29,4 +29,8 @@ class Student extends Model
         return $this->hasMany(Grade::class);
     }
 
+    public function graduationDecisions()
+    {
+        return $this->hasMany(\App\Models\GraduationDecision::class);
+    }
 }

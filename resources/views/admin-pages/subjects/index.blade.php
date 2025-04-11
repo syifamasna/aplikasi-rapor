@@ -205,9 +205,6 @@
                                 <option value="Muatan Lokal"
                                     {{ request('kelompok_mapel') == 'Muatan Lokal' ? 'selected' : '' }}>Muatan Lokal
                                 </option>
-                                <option value="Seni dan Budaya"
-                                    {{ request('kelompok_mapel') == 'Seni dan Budaya' ? 'selected' : '' }}>Seni dan
-                                    Budaya</option>
                             </select>
                         </div>
                         <div class="text-right">
@@ -249,7 +246,6 @@
                                 <option value="" selected disabled>Pilih Kelompok Mapel</option>
                                 <option value="Mata Pelajaran Wajib">Mata Pelajaran Wajib</option>
                                 <option value="Muatan Lokal">Muatan Lokal</option>
-                                <option value="Seni dan Budaya">Seni dan Budaya</option>
                             </select>
                         </div>
                     </div>
@@ -293,7 +289,6 @@
                             <select name="kelompok_mapel" id="edit_kelompok_mapel" class="form-control" required>
                                 <option value="Mata Pelajaran Wajib">Mata Pelajaran Wajib</option>
                                 <option value="Muatan Lokal">Muatan Lokal</option>
-                                <option value="Seni dan Budaya">Seni dan Budaya</option>
                             </select>
                         </div>
                     </div>

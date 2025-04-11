@@ -16,11 +16,13 @@ class TeachingController extends Controller
      */
     public function index(Request $request)
     {
-        // Query dengan eager loading, diurutkan berdasarkan ID mata pelajaran dan nama kelas
+        // Query dengan eager loading dan join ke student_classes dan users
         $query = Teaching::with(['subject', 'class', 'teacher'])
             ->join('student_classes', 'teachings.class_id', '=', 'student_classes.id')
-            ->orderBy('teachings.subject_id')
-            ->orderBy('student_classes.nama');
+            ->join('users', 'teachings.user_id', '=', 'users.id')
+            ->orderBy('student_classes.nama')       // Urut berdasarkan nama kelas
+            ->orderBy('teachings.subject_id')       // Lalu berdasarkan ID mapel
+            ->orderBy('users.nama');                // Terakhir berdasarkan nama guru
 
         // Filter berdasarkan kelas
         if ($request->has('class_id') && $request->class_id != '') {

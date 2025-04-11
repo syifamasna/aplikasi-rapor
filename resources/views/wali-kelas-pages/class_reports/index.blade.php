@@ -108,8 +108,8 @@
                     <div class="col-md-6 p-md-0 d-flex justify-content-end">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('wali_kelas.dashboard') }}">Dashboard</a></li>
-                            <li class="breadcrumb-item"><a href="javascript:void(0)">Leger Nilai</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Laporan Hasil Belajar</a></li>
+                            <li class="breadcrumb-item"><a href="javascript:void(0)">Cetak Rapor & Legger</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Rapor</a></li>
                         </ol>
                     </div>
                 </div>
@@ -145,7 +145,7 @@
                                                     class="btn btn-info btn-sm btn-detail">
                                                     Detail
                                                 </a>
-                                            </td>                                            
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>

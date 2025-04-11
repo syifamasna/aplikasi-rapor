@@ -14,6 +14,8 @@ use App\Models\Student;
 use App\Models\StudentClass;
 use App\Models\Subject;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class ClassReportController extends Controller
 {
@@ -35,7 +37,7 @@ class ClassReportController extends Controller
             ->firstOrFail();
 
         // Ambil daftar tahun ajaran yang tersedia
-        $schoolYears = SchoolYear::whereIn('semester', ['Ganjil', 'Genap'])
+        $schoolYears = SchoolYear::whereIn('semester', ['I (Satu)', 'II (Dua)'])
             ->orderBy('tahun_awal', 'desc')
             ->get();
 
@@ -115,7 +117,7 @@ class ClassReportController extends Controller
             });
 
         $filename = 'Rapor ' . $class->nama . ' Semester ' 
-            . ($schoolYear->semester === 'Ganjil' ? 'I (Satu)' : 'II (Dua)') 
+            . ($schoolYear->semester === 'I (Satu)' ? 'I (Satu)' : 'II (Dua)') 
             . ' Tahun Ajar ' . $schoolYear->tahun_awal . '-' . $schoolYear->tahun_akhir . '.csv';
 
         $headers = [
@@ -128,7 +130,7 @@ class ClassReportController extends Controller
         
             // Header Judul
             fputcsv($handle, ['LEGGER NILAI RAPOR KELAS ' . strtoupper($class->nama)]);
-            $semesterRomawi = $schoolYear->semester === 'Ganjil' ? 'I (Satu)' : 'II (Dua)';
+            $semesterRomawi = $schoolYear->semester === 'I (Satu)' ? 'I (Satu)' : 'II (Dua)';
             $tahunPelajaran = $schoolYear->tahun_awal . ' / ' . $schoolYear->tahun_akhir;
             fputcsv($handle, ["Semester $semesterRomawi Tahun Pelajaran $tahunPelajaran"]);
             fputcsv($handle, []);
@@ -212,5 +214,83 @@ class ClassReportController extends Controller
         };        
 
         return response()->stream($callback, 200, $headers);
+    }
+
+    public function exportPdf($class_id)
+    {
+        // Ambil kelas berdasarkan ID dan wali kelas yang sedang login
+        $class = StudentClass::where('id', $class_id)
+            ->where('wali_kelas_id', auth()->id())
+            ->firstOrFail();
+
+        // Ambil daftar tahun ajaran yang tersedia
+        $schoolYears = SchoolYear::whereIn('semester', ['I (Satu)', 'II (Dua)'])
+            ->orderBy('tahun_awal', 'desc')
+            ->get();
+
+        // Ambil tahun ajaran yang dipilih (atau default ke yang pertama)
+        $schoolYear = SchoolYear::where('id', request('school_year_id', optional($schoolYears->first())->id))
+            ->first();
+
+        // Ambil semua mata pelajaran
+        $subjects = Subject::whereIn('kelompok_mapel', ['Mata Pelajaran Wajib', 'Muatan Lokal'])->get();
+
+        // Ambil ID siswa dalam kelas
+        $studentIds = Student::where('class_id', $class_id)->pluck('id');
+
+        // Ambil semua nilai siswa dan kelompokkan per siswa
+        $grades = Grade::whereIn('student_id', $studentIds)
+            ->where('school_year_id', $schoolYear->id ?? null)
+            ->with('subject')
+            ->get()
+            ->groupBy('student_id');
+
+        // Ambil data absensi dan kelompokkan per siswa
+        $attendances = Attendance::whereIn('student_id', $studentIds)
+            ->where('school_year_id', $schoolYear->id ?? null)
+            ->get()
+            ->keyBy('student_id');
+
+        // Ambil semua siswa lalu tambahkan grades dan absensi ke masing-masing siswa
+        $students = Student::where('class_id', $class_id)
+            ->orderBy('nama')
+            ->get()
+            ->map(function ($student) use ($grades, $attendances) {
+                $student->grades = $grades[$student->id] ?? collect();
+                $student->absensi = $attendances[$student->id] ?? ['sakit' => 0, 'izin' => 0, 'alfa' => 0];
+                return $student;
+            });
+
+        $schoolProfile = SchoolProfile::first();
+
+        // 🔍 Cek apakah ini mode cetak (print)
+        if (request('mode') === 'print') {
+            return view('wali-kelas-pages.class_reports.show-pdf', compact(
+                'class',
+                'students',
+                'grades',
+                'subjects',
+                'schoolYears',
+                'schoolYear',
+                'attendances',
+                'schoolProfile'
+            ));
+        }
+
+        // Default: generate PDF
+        $pdf = Pdf::loadView('wali-kelas-pages.class_reports.show-pdf', compact(
+            'class',
+            'students',
+            'grades',
+            'subjects',
+            'schoolYears',
+            'schoolYear',
+            'attendances',
+            'schoolProfile'
+        ))->setPaper('A4', 'landscape');
+
+        $filename = Str::slug('Rekap Nilai' . '_' . $class->nama . '_' . $schoolYear->label) . '.pdf';
+
+        return $pdf->stream($filename);
     }
 }

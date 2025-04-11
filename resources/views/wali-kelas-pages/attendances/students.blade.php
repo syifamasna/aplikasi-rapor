@@ -115,7 +115,7 @@
                                             value="{{ $class->waliKelas->nama ?? '-' }}" disabled>
                                     </div>
                                     <div class="col-md-12 mb-2 d-flex align-items-center">
-                                        <strong class="info-row h5 font-weight-bold me-3 w-25 text-nowrap">Tahun Ajar <span>:</span></strong>
+                                        <strong class="info-row h5 font-weight-bold me-3 w-25 text-nowrap">Tahun Pelajaran <span>:</span></strong>
                                         <select name="school_year_id" class="form-control flex-grow-1"
                                             onchange="this.form.submit()">
                                             @foreach ($schoolYears as $year)

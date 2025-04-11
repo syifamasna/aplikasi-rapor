@@ -14,7 +14,7 @@ use App\Models\Student;
 
 class GradeController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request) 
     {
         $user = auth()->user();
 
@@ -24,16 +24,16 @@ class GradeController extends Controller
 
         // Ambil semua pengajaran yang diampu oleh guru yang sedang login
         $teachings = Teaching::with(['subject', 'class', 'teacher'])
-            ->where('user_id', $user->id)
+            ->join('student_classes', 'student_classes.id', '=', 'teachings.class_id')
+            ->where('teachings.user_id', $user->id)
             ->when($classId, function ($query) use ($classId) {
-                return $query->where('class_id', $classId);
+                return $query->where('teachings.class_id', $classId);
             })
             ->when($subjectId, function ($query) use ($subjectId) {
-                return $query->where('subject_id', $subjectId);
+                return $query->where('teachings.subject_id', $subjectId);
             })
-            ->orderBy('subject_id')
-            ->join('student_classes', 'student_classes.id', '=', 'teachings.class_id')
-            ->orderBy('student_classes.nama')
+            ->orderBy('student_classes.nama')     // 1. Kelas
+            ->orderBy('teachings.subject_id')     // 2. Mapel
             ->select('teachings.*')
             ->get();
 
@@ -101,7 +101,7 @@ class GradeController extends Controller
             'school_year_id' => 'required|exists:school_years,id',
             'subject_id' => 'required|exists:subjects,id',
             'grades' => 'required|array',
-            'grades.*.nilai' => 'nullable|numeric|min:75|max:100',
+            'grades.*.nilai' => 'nullable|numeric|min:0|max:100',
         ]);
 
         foreach ($validated['grades'] as $student_id => $data) {

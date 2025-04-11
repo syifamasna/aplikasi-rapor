@@ -54,7 +54,7 @@ class StudentProgressReportController extends Controller
             ->firstOrFail();
 
         // Ambil daftar tahun ajaran yang tersedia
-        $schoolYears = SchoolYear::whereIn('semester', ['Tengah Semester Ganjil', 'Tengah Semester Genap'])
+        $schoolYears = SchoolYear::whereIn('semester', ['Tengah Semester I (Satu)', 'Tengah Semester II (Dua)'])
             ->orderBy('tahun_awal', 'desc')
             ->get();
 
@@ -91,7 +91,7 @@ class StudentProgressReportController extends Controller
         $student = Student::findOrFail($student_id);
         $schoolProfile = SchoolProfile::first();
 
-        $schoolYear = SchoolYear::whereIn('semester', ['Tengah Semester Ganjil', 'Tengah Semester Genap'])
+        $schoolYear = SchoolYear::whereIn('semester', ['Tengah Semester I (Satu)', 'Tengah Semester II (Dua)'])
             ->orderBy('tahun_awal', 'desc')
             ->first();
 
@@ -113,7 +113,7 @@ class StudentProgressReportController extends Controller
             'schoolYear', 'schoolProfile', 'attendances'
         ));
 
-        $filename = 'Rapor_' . Str::slug($student->nama) . '_' . $schoolYear->tahun_awal . '_' . $schoolYear->tahun_akhir . '_' . $schoolYear->semester . '.pdf';
+        $filename = 'LPPD_' . Str::slug($student->nama) . '_' . $schoolYear->tahun_awal . '_' . $schoolYear->tahun_akhir . '_' . $schoolYear->semester . '.pdf';
 
         return $pdf->stream($filename);
     }

@@ -22,7 +22,7 @@
         <ul class="metismenu" id="menu">
 
             <li><a href="{{ route('admin.dashboard') }}">
-                <i class="fa fa-dashboard"></i><span class="nav-text">Dashboard</span></a>
+                    <i class="fa fa-dashboard"></i><span class="nav-text">Dashboard</span></a>
             </li>
 
             <li class="nav-label">Data Master</li>
@@ -39,11 +39,29 @@
                 </ul>
             </li>
 
-            <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="fa fa-book"></i><span
-                        class="nav-text">Data Rapor</span></a>
+            <li>
+                <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                    <i class="fa fa-book"></i>
+                    <span class="nav-text">Legger Nilai</span>
+                </a>
                 <ul aria-expanded="false">
-                    <li><a href="./chart-flot.html">Leger Nilai</a></li>
-                    <li><a href="./chart-morris.html">Cetak Rapor</a></li>
+                    <li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">Laporan Perkembangan <br>
+                            Peserta
+                            Didik (LPPD)</a>
+                        <ul aria-expanded="false">
+                            <li><a href="{{ route('admin.student_progress_reports.index') }}">Rapor Siswa</a></li>
+                            <li><a href="{{ route('admin.class_progress_reports.index') }}">Rapor Kelas</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">Laporan Hasil Belajar <br>
+                            (Rapor) Peserta Didik</a>
+                        <ul aria-expanded="false">
+                            <li><a href="{{ route('admin.student_reports.index') }}">Rapor Siswa</a></li>
+                            <li><a href="{{ route('admin.class_reports.index') }}">Rapor Kelas</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </li>
 

@@ -101,7 +101,7 @@
                     <div class="col-md-6 p-md-0 d-flex justify-content-end">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('wali_kelas.dashboard') }}">Dashboard</a></li>
-                            <li class="breadcrumb-item"><a href="javascript:void(0)">Leger Nilai</a></li>
+                            <li class="breadcrumb-item"><a href="javascript:void(0)">Cetak Rapor & Legger</a></li>
                             <li class="breadcrumb-item"><a
                                     href="{{ route('wali_kelas.student_progress_reports.index') }}"
                                     title="Laporan Perkembangan Peserta Didik (LPPD)">LPPD</a></li>
@@ -109,7 +109,7 @@
                                 <a href="{{ route('wali_kelas.student_progress_reports.show', ['class_id' => $class->id, 'student_id' => $student->id]) }}"
                                     title="LPPD {{ $student->nama ?? '-' }}"
                                     class="{{ request()->is('wali/student_progress_reports/*') ? 'text-dark' : '' }}">
-                                    Laporan Siswa
+                                    Rapor Siswa
                                 </a>
                             </li>
 
@@ -166,7 +166,7 @@
                                     <!-- Tahun Ajar -->
                                     <div class="col-md-12 mb-2 d-flex align-items-center">
                                         <strong class="info-row h5 font-weight-bold me-3 w-25 text-nowrap">Tahun
-                                            Ajar <span>:</span></strong>
+                                            Pelajaran <span>:</span></strong>
                                         <select name="school_year_id" class="form-control flex-grow-1"
                                             onchange="this.form.submit()">
                                             @foreach ($schoolYears as $year)

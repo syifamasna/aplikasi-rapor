@@ -161,7 +161,7 @@
                                     <!-- Tahun Ajar -->
                                     <div class="col-md-12 mb-2 d-flex align-items-center">
                                         <strong class="info-row h5 font-weight-bold me-3 w-25 text-nowrap">Tahun
-                                            Ajar <span>:</span></strong>
+                                            Pelajaran <span>:</span></strong>
                                         <select name="school_year_id" class="form-control flex-grow-1"
                                             onchange="this.form.submit()">
                                             @foreach ($schoolYears as $year)
@@ -219,7 +219,7 @@
                                                 <!-- Input Nilai -->
                                                 <td>
                                                     <input type="number" name="grades[{{ $student->id }}][nilai]"
-                                                        class="form-control" min="75" max="100"
+                                                        class="form-control" min="0" max="100"
                                                         step="1"
                                                         value="{{ old('grades.' . $student->id . '.nilai', $grades[$student->id]->nilai ?? '') }}">
                                                 </td>
@@ -261,7 +261,7 @@
                 </div>
                 <div class="modal-body">
                     <label for="averageScore">Nilai</label>
-                    <input type="number" id="averageScore" class="form-control" min="75" max="100"
+                    <input type="number" id="averageScore" class="form-control" min="0" max="100"
                         placeholder="Masukkan nilai...">
                 </div>
                 <div class="modal-footer">
@@ -276,8 +276,8 @@
         // script Modal Input Nilai Rata
         function applyAverage() {
             var nilai = document.getElementById("averageScore").value;
-            if (nilai < 75 || nilai > 100) {
-                alert("Nilai harus antara 75 dan 100!");
+            if (nilai < 0 || nilai > 100) {
+                alert("Nilai harus antara 0 dan 100!");
                 return;
             }
 

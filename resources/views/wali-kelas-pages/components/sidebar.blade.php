@@ -32,29 +32,32 @@
                     <li><a href="{{ route('wali_kelas.student_classes.index') }}">Data Kelas</a></li>
                     <li><a href="{{ route('wali_kelas.attendances.index') }}">Ketidakhadiran</a></li>
                     <li><a href="{{ route('wali_kelas.notes.index') }}">Catatan Wali Kelas</a></li>
+                    <li><a href="{{ route('wali_kelas.graduation_decisions.index') }}">Keputusan Kelulusan</a></li>
                 </ul>
             </li>
 
             <li>
                 <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                     <i class="fa fa-book"></i>
-                    <span class="nav-text">Leger Nilai</span>
+                    <span class="nav-text">Cetak Rapor & Legger</span>
                 </a>
                 <ul aria-expanded="false">
                     <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">Laporan Perkembangan <br> Peserta
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">Laporan Perkembangan <br>
+                            Peserta
                             Didik (LPPD)</a>
                         <ul aria-expanded="false">
-                            <li><a href="{{ route('wali_kelas.student_progress_reports.index') }}">Laporan Individu</a></li>
-                            <li><a href="#">Laporan Kelas</a></li>
+                            <li><a href="{{ route('wali_kelas.student_progress_reports.index') }}">Rapor Siswa</a>
+                            </li>
+                            <li><a href="{{ route('wali_kelas.class_progress_reports.index') }}">Rapor Kelas</a></li>
                         </ul>
                     </li>
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">Laporan Hasil Belajar <br>
                             (Rapor) Peserta Didik</a>
                         <ul aria-expanded="false">
-                            <li><a href="{{ route('wali_kelas.student_reports.index') }}">Laporan Individu</a></li>
-                            <li><a href="{{ route('wali_kelas.class_reports.index') }}">Laporan Kelas</a></li>
+                            <li><a href="{{ route('wali_kelas.student_reports.index') }}">Rapor Siswa</a></li>
+                            <li><a href="{{ route('wali_kelas.class_reports.index') }}">Rapor Kelas</a></li>
                         </ul>
                     </li>
                 </ul>

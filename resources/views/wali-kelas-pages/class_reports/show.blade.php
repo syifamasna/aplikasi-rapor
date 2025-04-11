@@ -8,9 +8,11 @@
     </title>
 
     <!-- Styles -->
+    <link rel="stylesheet" href="{{ asset('assets/css/lib/font-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/sweetalert2/dist/sweetalert2.min.css') }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/logo-erapor.png') }}">
     <link rel="stylesheet" href="{{ asset('vendor/datatables/css/jquery.dataTables.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/lib/data-table/buttons.bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
     <style>
@@ -119,14 +121,14 @@
                     <div class="col-md-6 p-md-0 d-flex justify-content-end">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('wali_kelas.dashboard') }}">Dashboard</a></li>
-                            <li class="breadcrumb-item"><a href="javascript:void(0)">Leger Nilai</a></li>
+                            <li class="breadcrumb-item"><a href="javascript:void(0)">Cetak Rapor & Legger</a></li>
                             <li class="breadcrumb-item"><a href="{{ route('wali_kelas.class_reports.index') }}"
-                                    title="Laporan Hasil Belajar (Rapor) Peserta Didik">Laporan Hasil Belajar</a></li>
+                                    title="Laporan Hasil Belajar (Rapor) Peserta Didik">Rapor</a></li>
                             <li class="breadcrumb-item">
                                 <a href="{{ route('wali_kelas.class_reports.show', ['class_id' => $class->id]) }}"
-                                    title="Laporan Kelas {{ $class->nama ?? '-' }}"
+                                    title="Rapor Kelas {{ $class->nama ?? '-' }}"
                                     class="{{ request()->is('wali/class_reports/*') ? 'text-dark' : '' }}">
-                                    Laporan Kelas
+                                    Rapor Kelas
                                 </a>
                             </li>
                         </ol>
@@ -172,7 +174,7 @@
                                     <!-- Tahun Ajar -->
                                     <div class="col-md-12 mb-2 d-flex align-items-center">
                                         <strong class="info-row h5 font-weight-bold me-3 w-25 text-nowrap">Tahun
-                                            Ajar <span>:</span></strong>
+                                            Pelajaran <span>:</span></strong>
                                         <select name="school_year_id" class="form-control flex-grow-1"
                                             onchange="this.form.submit()">
                                             @foreach ($schoolYears as $year)
@@ -266,12 +268,29 @@
                             <a href="{{ url()->previous() }}" class="btn btn-back">
                                 <i class="fa fa-arrow-left"></i> Kembali
                             </a>
-                            <a href="{{ route('wali_kelas.class_reports.export-csv', ['class_id' => $class->id, 'school_year_id' => request('school_year_id')]) }}"
-                                class="btn btn-success text-white">
-                                <i class="fa fa-file-excel-o"></i> Export ke Excel
-                            </a>
-                        </div>
 
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-success text-white dropdown-toggle"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fa fa-download"></i> Export
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item"
+                                        href="{{ route('wali_kelas.class_reports.export-csv', ['class_id' => $class->id]) }}?school_year_id={{ request('school_year_id', $schoolYear->id) }}">
+                                        <i class="fa fa-file-excel-o"></i> CSV
+                                    </a>
+                                    <a class="dropdown-item"
+                                        href="{{ route('wali_kelas.class_reports.export-pdf', ['class_id' => $class->id]) }}?school_year_id={{ request('school_year_id', $schoolYear->id) }}">
+                                        <i class="fa fa-file-pdf-o"></i> PDF
+                                    </a>
+                                    <a class="dropdown-item"
+                                        href="{{ route('wali_kelas.class_reports.export-pdf', ['class_id' => $class->id]) }}?school_year_id={{ request('school_year_id', $schoolYear->id) }}&mode=print"
+                                        target="_blank">
+                                        <i class="fa fa-print"></i> Print
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
