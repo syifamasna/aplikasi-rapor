@@ -260,7 +260,14 @@
                                 </table>
                             </div>
 
-                            <div class="form-group mt-4 text-right">
+                            <div class="form-check text-left mt-3">
+                                <input class="form-check-input" type="checkbox" id="confirmCheckbox">
+                                <label class="form-check-label" for="confirmCheckbox">
+                                    Saya yakin sudah mengisi dengan benar
+                                </label>
+                            </div>
+
+                            <div class="form-group text-right">
                                 <a href="{{ url()->previous() }}" class="btn btn-back">
                                     <i class="fa fa-arrow-left"></i> Kembali
                                 </a>
@@ -281,6 +288,27 @@
         </div>
     </div>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const checkbox = document.getElementById('confirmCheckbox');
+            const submitButton = document.querySelector('button[type="submit"]');
+    
+            const isDisabledFromServer = {{ $isDisabled ? 'true' : 'false' }};
+    
+            // ⏱ Set kondisi awal saat halaman dimuat
+            if (!isDisabledFromServer) {
+                submitButton.disabled = true; // awalnya disable
+            }
+    
+            // 🟢 Update tombol saat checkbox dicentang/diubah
+            checkbox.addEventListener('change', function () {
+                if (!isDisabledFromServer) {
+                    submitButton.disabled = !checkbox.checked;
+                }
+            });
+        });
+    </script>
+    
     <!-- Scripts -->
     <script src="{{ asset('vendor/global/global.min.js') }}"></script>
     <script src="{{ asset('js/quixnav-init.js') }}"></script>

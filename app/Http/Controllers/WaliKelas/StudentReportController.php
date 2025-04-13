@@ -95,15 +95,23 @@ class StudentReportController extends Controller
         ));        
     }
     
-    public function exportPdf($class_id, $student_id)
+    public function exportPdf($class_id, $student_id, Request $request)
     {
         $class = StudentClass::findOrFail($class_id);
         $student = Student::findOrFail($student_id);
         $schoolProfile = SchoolProfile::first();
 
-        $schoolYear = SchoolYear::whereIn('semester', ['I (Satu)', 'II (Dua)'])
-            ->orderBy('tahun_awal', 'desc')
-            ->first();
+        // Ambil school_year_id dari request, atau fallback ke yang terbaru jika tidak ada
+        $schoolYearId = $request->school_year_id;
+
+        if ($schoolYearId) {
+            $schoolYear = SchoolYear::findOrFail($schoolYearId);
+        } else {
+            // fallback: ambil yang semester I atau II terbaru
+            $schoolYear = SchoolYear::whereIn('semester', ['I (Satu)', 'II (Dua)'])
+                ->orderBy('tahun_awal', 'desc')
+                ->first();
+        }
 
         $subjects = Subject::whereIn('kelompok_mapel', ['Mata Pelajaran Wajib', 'Muatan Lokal'])->get();
 
@@ -126,7 +134,6 @@ class StudentReportController extends Controller
             ->where('school_year_id', $schoolYear->id)
             ->first();
 
-        // Ambil data graduation decision
         $graduationDecision = \App\Models\GraduationDecision::where('student_id', $student->id)
             ->where('school_year_id', $schoolYear->id)
             ->first();
@@ -142,7 +149,7 @@ class StudentReportController extends Controller
             'attendances',
             'achievements',
             'notes',
-            'graduationDecision' // <-- ditambahkan ke compact
+            'graduationDecision'
         ));
 
         $filename = 'Rapor_' . Str::slug($student->nama) . '_' . $schoolYear->tahun_awal . '_' . $schoolYear->tahun_akhir . '_' . $schoolYear->semester . '.pdf';
@@ -150,3 +157,4 @@ class StudentReportController extends Controller
         return $pdf->stream($filename);
     }
 }
+

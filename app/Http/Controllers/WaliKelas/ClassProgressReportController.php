@@ -289,7 +289,7 @@ class ClassProgressReportController extends Controller
             'schoolProfile'
         ))->setPaper('A4', 'landscape');
 
-        $filename = Str::slug('LPPD' . '_' . $class->nama . '_' . $schoolYear->label) . '.pdf';
+        $filename = Str::slug('LPS' . '_' . $class->nama . '_' . $schoolYear->label) . '.pdf';
 
         return $pdf->stream($filename);
     }

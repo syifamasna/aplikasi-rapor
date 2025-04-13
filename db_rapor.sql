@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 11, 2025 at 09:41 PM
+-- Generation Time: Apr 13, 2025 at 01:01 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -45,7 +45,9 @@ INSERT INTO `achievements` (`id`, `student_id`, `school_year_id`, `jenis_prestas
 (4, 759, 3, 'Non-Akademik', 'Juara 2 Lomba Story Telling', '2025-04-04 11:02:00', '2025-04-04 11:03:46'),
 (5, 759, 3, 'Akademik', 'Juara Lomba Cerdas Cermat Sains', '2025-04-04 11:04:59', '2025-04-04 11:05:45'),
 (6, 759, 3, 'Akademik', 'Juara 1 Cerdas Cermat Matematika', '2025-04-04 11:05:35', '2025-04-04 11:05:35'),
-(7, 257, 3, 'Akademik', 'Juara 2 Lomba Cerdas Cermat PAI', '2025-04-08 06:38:49', '2025-04-08 06:46:13');
+(7, 257, 3, 'Akademik', 'Juara 2 Lomba Cerdas Cermat PAI', '2025-04-08 06:38:49', '2025-04-08 06:46:13'),
+(8, 256, 9, 'Akademik', 'Juara Lomba Cerdas Cermat Bahasa Indonesia', '2025-04-13 01:31:00', '2025-04-13 01:31:00'),
+(10, 256, 3, 'Non-Akademik', 'Juara 3 Tari Kreasi', '2025-04-13 02:01:16', '2025-04-13 02:35:15');
 
 -- --------------------------------------------------------
 
@@ -482,7 +484,34 @@ INSERT INTO `grades` (`id`, `student_id`, `school_year_id`, `subject_id`, `nilai
 (268, 917, 3, 3, 69, '2025-04-11 12:31:29', '2025-04-11 12:31:29'),
 (269, 918, 3, 3, 69, '2025-04-11 12:31:29', '2025-04-11 12:31:29'),
 (270, 919, 3, 3, 69, '2025-04-11 12:31:29', '2025-04-11 12:31:29'),
-(271, 920, 3, 3, 69, '2025-04-11 12:31:29', '2025-04-11 12:31:29');
+(271, 920, 3, 3, 69, '2025-04-11 12:31:29', '2025-04-11 12:31:29'),
+(272, 759, 3, 2, 94, '2025-04-12 03:55:41', '2025-04-12 03:55:41'),
+(273, 760, 3, 2, 94, '2025-04-12 03:55:41', '2025-04-12 03:55:41'),
+(274, 761, 3, 2, 94, '2025-04-12 03:55:41', '2025-04-12 03:55:41'),
+(275, 762, 3, 2, 94, '2025-04-12 03:55:41', '2025-04-12 03:55:41'),
+(276, 763, 3, 2, 94, '2025-04-12 03:55:41', '2025-04-12 03:55:41'),
+(277, 764, 3, 2, 94, '2025-04-12 03:55:41', '2025-04-12 03:55:41'),
+(278, 765, 3, 2, 94, '2025-04-12 03:55:41', '2025-04-12 03:55:41'),
+(279, 766, 3, 2, 94, '2025-04-12 03:55:41', '2025-04-12 03:55:41'),
+(280, 767, 3, 2, 94, '2025-04-12 03:55:41', '2025-04-12 03:55:41'),
+(281, 768, 3, 2, 94, '2025-04-12 03:55:41', '2025-04-12 03:55:41'),
+(282, 769, 3, 2, 94, '2025-04-12 03:55:41', '2025-04-12 03:55:41'),
+(283, 770, 3, 2, 94, '2025-04-12 03:55:41', '2025-04-12 03:55:41'),
+(284, 771, 3, 2, 94, '2025-04-12 03:55:41', '2025-04-12 03:55:41'),
+(285, 772, 3, 2, 94, '2025-04-12 03:55:41', '2025-04-12 03:55:41'),
+(286, 773, 3, 2, 94, '2025-04-12 03:55:41', '2025-04-12 03:55:41'),
+(287, 774, 3, 2, 94, '2025-04-12 03:55:41', '2025-04-12 03:55:41'),
+(288, 775, 3, 2, 94, '2025-04-12 03:55:41', '2025-04-12 03:55:41'),
+(289, 776, 3, 2, 94, '2025-04-12 03:55:41', '2025-04-12 03:55:41'),
+(290, 777, 3, 2, 94, '2025-04-12 03:55:41', '2025-04-12 03:55:41'),
+(291, 778, 3, 2, 94, '2025-04-12 03:55:42', '2025-04-12 03:55:42'),
+(292, 779, 3, 2, 94, '2025-04-12 03:55:42', '2025-04-12 03:55:42'),
+(293, 780, 3, 2, 94, '2025-04-12 03:55:42', '2025-04-12 03:55:42'),
+(294, 781, 3, 2, 94, '2025-04-12 03:55:42', '2025-04-12 03:55:42'),
+(295, 782, 3, 2, 94, '2025-04-12 03:55:42', '2025-04-12 03:55:42'),
+(296, 783, 3, 2, 94, '2025-04-12 03:55:42', '2025-04-12 03:55:42'),
+(297, 784, 3, 2, 94, '2025-04-12 03:55:42', '2025-04-12 03:55:42'),
+(298, 785, 3, 2, 94, '2025-04-12 03:55:42', '2025-04-12 03:55:42');
 
 -- --------------------------------------------------------
 
@@ -640,7 +669,34 @@ INSERT INTO `grade_details` (`id`, `grade_id`, `target`, `capaian`, `aplikasi_pr
 (133, 214, NULL, NULL, '-', '2025-04-11 11:23:14', '2025-04-11 11:23:14'),
 (134, 215, NULL, NULL, '-', '2025-04-11 11:23:14', '2025-04-11 11:23:14'),
 (135, 216, NULL, NULL, '-', '2025-04-11 11:23:14', '2025-04-11 11:23:14'),
-(136, 217, NULL, NULL, '-', '2025-04-11 11:23:14', '2025-04-11 11:23:14');
+(136, 217, NULL, NULL, '-', '2025-04-11 11:23:14', '2025-04-11 11:23:14'),
+(137, 272, '-', '-', NULL, '2025-04-12 06:45:30', '2025-04-12 06:45:30'),
+(138, 273, '-', '-', NULL, '2025-04-12 06:45:30', '2025-04-12 06:45:30'),
+(139, 274, '-', '-', NULL, '2025-04-12 06:45:30', '2025-04-12 06:45:30'),
+(140, 275, '-', '-', NULL, '2025-04-12 06:45:30', '2025-04-12 06:45:30'),
+(141, 276, '-', '-', NULL, '2025-04-12 06:45:30', '2025-04-12 06:45:30'),
+(142, 277, '-', '-', NULL, '2025-04-12 06:45:31', '2025-04-12 06:45:31'),
+(143, 278, '-', '-', NULL, '2025-04-12 06:45:31', '2025-04-12 06:45:31'),
+(144, 279, '-', '-', NULL, '2025-04-12 06:45:31', '2025-04-12 06:45:31'),
+(145, 280, '-', '-', NULL, '2025-04-12 06:45:31', '2025-04-12 06:45:31'),
+(146, 281, '-', '-', NULL, '2025-04-12 06:45:31', '2025-04-12 06:45:31'),
+(147, 282, '-', '-', NULL, '2025-04-12 06:45:31', '2025-04-12 06:45:31'),
+(148, 283, '-', '-', NULL, '2025-04-12 06:45:31', '2025-04-12 06:45:31'),
+(149, 284, '-', '-', NULL, '2025-04-12 06:45:31', '2025-04-12 06:45:31'),
+(150, 285, '-', '-', NULL, '2025-04-12 06:45:31', '2025-04-12 06:45:31'),
+(151, 286, '-', '-', NULL, '2025-04-12 06:45:31', '2025-04-12 06:45:31'),
+(152, 287, '-', '-', NULL, '2025-04-12 06:45:31', '2025-04-12 06:45:31'),
+(153, 288, '-', '-', NULL, '2025-04-12 06:45:31', '2025-04-12 06:45:31'),
+(154, 289, '-', '-', NULL, '2025-04-12 06:45:31', '2025-04-12 06:45:31'),
+(155, 290, '-', '-', NULL, '2025-04-12 06:45:31', '2025-04-12 06:45:31'),
+(156, 291, '-', '-', NULL, '2025-04-12 06:45:31', '2025-04-12 06:45:31'),
+(157, 292, '-', '-', NULL, '2025-04-12 06:45:31', '2025-04-12 06:45:31'),
+(158, 293, '-', '-', NULL, '2025-04-12 06:45:31', '2025-04-12 06:45:31'),
+(159, 294, '-', '-', NULL, '2025-04-12 06:45:31', '2025-04-12 06:45:31'),
+(160, 295, '-', '-', NULL, '2025-04-12 06:45:31', '2025-04-12 06:45:31'),
+(161, 296, '-', '-', NULL, '2025-04-12 06:45:31', '2025-04-12 06:45:31'),
+(162, 297, '-', '-', NULL, '2025-04-12 06:45:31', '2025-04-12 06:45:31'),
+(163, 298, '-', '-', NULL, '2025-04-12 06:45:31', '2025-04-12 06:45:31');
 
 -- --------------------------------------------------------
 
@@ -1088,9 +1144,6 @@ INSERT INTO `role_user` (`id`, `user_id`, `role_id`, `created_at`, `updated_at`)
 (104, 82, 3, '2025-03-14 21:59:35', '2025-03-14 21:59:35'),
 (105, 83, 3, '2025-03-14 22:00:09', '2025-03-14 22:00:09'),
 (106, 84, 3, '2025-03-14 22:01:17', '2025-03-14 22:01:17'),
-(107, 20, 4, '2025-03-20 20:26:05', '2025-03-20 20:26:05'),
-(108, 20, 2, '2025-03-20 21:54:16', '2025-03-20 21:54:16'),
-(109, 20, 3, '2025-03-20 21:54:16', '2025-03-20 21:54:16'),
 (110, 53, 4, '2025-04-09 20:23:42', '2025-04-09 20:23:42');
 
 -- --------------------------------------------------------
@@ -1119,7 +1172,7 @@ CREATE TABLE `school_profiles` (
 --
 
 INSERT INTO `school_profiles` (`id`, `nama`, `npsn`, `kode_pos`, `telepon`, `alamat`, `email`, `website`, `kepsek`, `logo`, `created_at`, `updated_at`) VALUES
-(1, 'SIT Aliya', 20219975, 16117, '02518422129', 'Jl. Gardu Raya, RT.03/RW.11, Bubulak, Bogor Barat, Kota Bogor', 'sitaliya01@gmail.com', 'https://sitaliya.sch.id/', 'Luluk Dianarini, S.TP, M.Pd.', 'school_logos/ClhgsLAFUO1y9fnMWvvepINFU9ORk4J88TPQRO0Y.png', NULL, '2025-03-21 17:35:47');
+(1, 'SIT Aliya', 20219975, 16115, '02518422129', 'Jl. Gardu Raya, RT.03/RW.11, Bubulak, Bogor Barat, Kota Bogor', 'sitaliya01@gmail.com', 'https://sitaliya.sch.id/', 'Luluk Dianarini, S.TP, M.Pd.', 'school_logos/ClhgsLAFUO1y9fnMWvvepINFU9ORk4J88TPQRO0Y.png', NULL, '2025-04-13 02:48:08');
 
 -- --------------------------------------------------------
 
@@ -1146,7 +1199,8 @@ INSERT INTO `school_years` (`id`, `tahun_awal`, `tahun_akhir`, `semester`, `temp
 (3, 2024, 2025, 'II (Dua)', 'Bogor', '2025-06-20', '2025-03-06 00:21:23', '2025-04-10 20:07:17'),
 (5, 2024, 2025, 'I (Satu)', 'Bogor', '2024-12-26', '2025-03-06 20:04:02', '2025-04-10 20:07:37'),
 (7, 2023, 2024, 'II (Dua)', 'Bogor', '2024-06-21', '2025-03-06 20:31:49', '2025-04-10 20:06:39'),
-(9, 2024, 2025, 'Tengah Semester II (Dua)', 'Bogor', NULL, '2025-04-02 23:50:16', '2025-04-10 20:07:24');
+(9, 2024, 2025, 'Tengah Semester II (Dua)', 'Bogor', '2025-04-12', '2025-04-02 23:50:16', '2025-04-12 02:55:12'),
+(10, 2024, 2025, 'Tengah Semester I (Satu)', 'Bogor', '2024-03-22', '2025-04-12 02:54:06', '2025-04-12 02:54:06');
 
 -- --------------------------------------------------------
 
@@ -1168,7 +1222,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('vkLPU1OF4oySQ5u899a6DYZrzHlDJcCC7ndK8YL9', 19, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiZkpwa2dyZU5URWhUMmlZVTE3SU5DT3UyRDkwWVFxQ1JCTFBrRUp3TyI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Nzk6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC93YWxpL2NsYXNzX3Byb2dyZXNzX3JlcG9ydHMvNC9leHBvcnQtcGRmP3NjaG9vbF95ZWFyX2lkPTkiO31zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxOTtzOjExOiJhY3RpdmVfcm9sZSI7czoxOiIyIjt9', 1744400184);
+('a2nPDC6Ovi3regeUyTg4ZTRqwCDKoychQ0Di9gYz', 40, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiWDR0ZGJNZklCc0Vtc3czNWxuQ0ZZdzVLbFlQMVBnbXZZZzBwTVJ2YSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzQ6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC93YWxpL3Byb2ZpbGUiO31zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aTo0MDtzOjExOiJhY3RpdmVfcm9sZSI7czoxOiIyIjt9', 1744541659);
 
 -- --------------------------------------------------------
 
@@ -1695,7 +1749,7 @@ INSERT INTO `students` (`id`, `nis`, `nisn`, `nama`, `class_id`, `jk`, `created_
 (756, '202101103', '0146088164', 'Syahira Khanza Rania Putri', 23, 'Perempuan', '2025-03-17 00:18:27', '2025-03-17 00:18:27'),
 (757, '202101105', '3138383812', 'Syamil Shifan Hamid', 23, 'Laki-laki', '2025-03-17 00:18:27', '2025-03-17 00:18:27'),
 (758, '202101107', '0139832202', 'Syifa Namira Alfariza', 23, 'Perempuan', '2025-03-17 00:18:28', '2025-03-17 00:18:28'),
-(759, '202101004', '3142388936', 'Afdhal Lathief Aziizan', 24, 'Laki-laki', '2025-03-17 00:18:28', '2025-03-17 00:18:28'),
+(759, '202101004', '3142388936', 'Afdhal Lathief Aziizan', 24, 'Laki-laki', '2025-03-17 00:18:28', '2025-04-13 03:45:42'),
 (760, '202101006', '0137584248', 'Afia Ahza Pramesti', 24, 'Perempuan', '2025-03-17 00:18:28', '2025-03-17 00:18:28'),
 (761, '202101011', '0132887378', 'Amira Markaziya Fauzan', 24, 'Perempuan', '2025-03-17 00:18:28', '2025-03-17 00:18:28'),
 (762, '202101016', '0146884261', 'Apriellya Mutiara Jasmine', 24, 'Perempuan', '2025-03-17 00:18:28', '2025-03-17 00:18:28'),
@@ -2777,7 +2831,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `achievements`
 --
 ALTER TABLE `achievements`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `attendances`
@@ -2795,13 +2849,13 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `grades`
 --
 ALTER TABLE `grades`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=272;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=326;
 
 --
 -- AUTO_INCREMENT for table `grade_details`
 --
 ALTER TABLE `grade_details`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=137;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=164;
 
 --
 -- AUTO_INCREMENT for table `graduation_decisions`
@@ -2837,7 +2891,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `role_user`
 --
 ALTER TABLE `role_user`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=111;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=112;
 
 --
 -- AUTO_INCREMENT for table `school_profiles`
@@ -2849,37 +2903,37 @@ ALTER TABLE `school_profiles`
 -- AUTO_INCREMENT for table `school_years`
 --
 ALTER TABLE `school_years`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1029;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1030;
 
 --
 -- AUTO_INCREMENT for table `student_classes`
 --
 ALTER TABLE `student_classes`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `subjects`
 --
 ALTER TABLE `subjects`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `teachings`
 --
 ALTER TABLE `teachings`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=555;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=557;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
 
 --
 -- Constraints for dumped tables

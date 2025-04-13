@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laporan Perkembangan Peserta Didik - E-Rapor SIT Aliya</title>
+    <title>Laporan Perkembangan Siswa - E-Rapor SIT Aliya</title>
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('vendor/sweetalert2/dist/sweetalert2.min.css') }}">
@@ -109,7 +109,7 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('wali_kelas.dashboard') }}">Dashboard</a></li>
                             <li class="breadcrumb-item"><a href="javascript:void(0)">Cetak Rapor & Legger</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">LPPD</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">LPS</a></li>
                         </ol>
                     </div>
                 </div>

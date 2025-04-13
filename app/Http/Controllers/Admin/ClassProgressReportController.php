@@ -110,7 +110,7 @@ class ClassProgressReportController extends Controller
                 return $student;
             });
 
-        $filename = 'LPPD ' . $class->nama . ' Semester ' 
+        $filename = 'LPS ' . $class->nama . ' Semester ' 
             . ($schoolYear->semester === 'Tengah Semester I (Satu)' ? 'I (Satu)' : 'II (Dua)') 
             . ' Tahun Ajar ' . $schoolYear->tahun_awal . '-' . $schoolYear->tahun_akhir . '.csv';
 
@@ -280,7 +280,7 @@ class ClassProgressReportController extends Controller
             'schoolProfile'
         ))->setPaper('A4', 'landscape');
 
-        $filename = Str::slug('LPPD' . '_' . $class->nama . '_' . $schoolYear->label) . '.pdf';
+        $filename = Str::slug('LPS' . '_' . $class->nama . '_' . $schoolYear->label) . '.pdf';
 
         return $pdf->stream($filename);
     }

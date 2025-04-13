@@ -106,8 +106,15 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-group text-right mt-2">
-                                        <button type="submit" class="btn btn-success text-white"><i
+                                    <div class="form-check text-left">
+                                        <input class="form-check-input" type="checkbox" id="editConfirmCheckbox">
+                                        <label class="form-check-label" for="editConfirmCheckbox">
+                                            Saya yakin ingin menyimpan perubahan
+                                        </label>
+                                    </div>
+
+                                    <div class="form-group text-right">
+                                        <button type="submit" class="btn btn-success text-white" id="editSubmitButton" disabled><i
                                                 class="fa fa-save"></i> Simpan</button>
                                         <a href="{{ route('admin.school_profiles.index') }}"
                                             class="btn btn-secondary">Batal</a>
@@ -122,6 +129,13 @@
             </div>
         </div>
     </div>
+
+    <script>
+        // script untuk mengaktifkan tombol simpan jika checkbox dicentang
+        document.getElementById('editConfirmCheckbox').addEventListener('change', function() {
+            document.getElementById('editSubmitButton').disabled = !this.checked;
+        });
+    </script>
 
     <script src="{{ asset('vendor/global/global.min.js') }}"></script>
     <script src="{{ asset('js/quixnav-init.js') }}"></script>

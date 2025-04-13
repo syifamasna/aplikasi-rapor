@@ -5,15 +5,13 @@ REVISI APLIKASI E-RAPOR SIT ALIYA
 - Scroll di sidebar ketika collapse
 - Grafik diambil berdasarkan data kelas yang terbanyak prestasi nya
 - Data NULL yang sudah diisi di profil bisa dihapus/dikosongkan lagi
-- Bedakan isi kalimat card welcome di tiap-tiap halaman user
 - Function/Element DataTable di Laporan Kelas dibikin stay dan tidak ikut bergeser ketika table di scroll
 - Nama kelas diubah jadi angka romawi (I (Satu))
-- jquery validate(?)
 
 PERTANYAAN 
 
 - Export PDF semua siswa di halaman Individu atau Kelas
-- max karakter untuk catatan wali kelas
+- max karakter untuk catatan wali kelas = 255
 
 tambahan (revisi) 10 April 2025: 
 1. bisa disort berdasarkan nama ✅

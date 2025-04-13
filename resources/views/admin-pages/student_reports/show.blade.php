@@ -107,7 +107,7 @@
                             <li class="breadcrumb-item">
                                 <a href="{{ route('admin.student_reports.show', ['class_id' => $class->id, 'student_id' => $student->id]) }}"
                                     title="Rapor {{ $student->nama ?? '-' }}"
-                                    class="{{ request()->is('wali/student_reports/*') ? 'text-dark' : '' }}">
+                                    class="{{ request()->is('admin/student_reports/*') ? 'text-dark' : '' }}">
                                     Rapor Siswa
                                 </a>
                             </li>
@@ -363,9 +363,10 @@
                             <a href="{{ url()->previous() }}" class="btn btn-back">
                                 <i class="fa fa-arrow-left"></i> Kembali
                             </a>
-                            <a href="{{ route('admin.student_reports.export-pdf', ['class_id' => $class->id, 'student_id' => $student->id]) }}"
+                            <a href="{{ route('admin.student_reports.export-pdf', ['class_id' => $class->id, 'student_id' => $student->id, 'school_year_id' => request('school_year_id', $schoolYear->id ?? '')]) }}"
                                 class="btn btn-success text-white">
-                                <i class="fa fa-print"></i> Cetak Rapor</a>
+                                <i class="fa fa-print"></i> Cetak Rapor
+                            </a>
                         </div>
 
                     </div>

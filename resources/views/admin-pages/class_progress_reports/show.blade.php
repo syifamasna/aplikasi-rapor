@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laporan Perkembangan Peserta Didik Kelas {{ $class->nama ?? '-' }} - E-Rapor SIT Aliya
+    <title>Laporan Perkembangan Siswa Kelas {{ $class->nama ?? '-' }} - E-Rapor SIT Aliya
     </title>
 
     <!-- Styles -->
@@ -114,18 +114,18 @@
             <div class="container-fluid">
                 <div class="row page-titles mx-0">
                     <div class="col-md-6 p-md-0">
-                        <h4 class="mb-0">LPPD Kelas {{ $class->nama ?? '-' }}</h4>
+                        <h4 class="mb-0">LPS Kelas {{ $class->nama ?? '-' }}</h4>
                     </div>
                     <div class="col-md-6 p-md-0 d-flex justify-content-end">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
                             <li class="breadcrumb-item"><a href="javascript:void(0)">Cetak Rapor & Legger</a></li>
                             <li class="breadcrumb-item"><a href="{{ route('admin.class_progress_reports.index') }}"
-                                    title="Laporan Perkembangan Peserta Didik">LPPD</a></li>
+                                    title="Laporan Perkembangan Siswa">LPS</a></li>
                             <li class="breadcrumb-item">
                                 <a href="{{ route('admin.class_progress_reports.show', ['class_id' => $class->id]) }}"
                                     title="Rapor Kelas {{ $class->nama ?? '-' }}"
-                                    class="{{ request()->is('wali/class_progress_reports/*') ? 'text-dark' : '' }}">
+                                    class="{{ request()->is('admin/class_progress_reports/*') ? 'text-dark' : '' }}">
                                     Rapor Kelas
                                 </a>
                             </li>

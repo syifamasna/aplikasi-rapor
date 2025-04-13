@@ -39,9 +39,8 @@ class AttendanceController extends Controller
             ->orderBy('nama')
             ->get();
 
-        // Ambil semua tahun ajaran yang tersedia, urut berdasarkan tahun_awal dan semester
         $schoolYears = SchoolYear::orderBy('tahun_awal', 'desc')
-            ->orderBy('semester', 'desc')
+            ->orderByRaw("FIELD(semester, 'II (Dua)', 'Tengah Semester II (Dua)', 'I (Satu)', 'Tengah Semester I (Satu)')")
             ->get();
 
         // Ambil tahun ajaran yang sedang dipilih (jika ada)

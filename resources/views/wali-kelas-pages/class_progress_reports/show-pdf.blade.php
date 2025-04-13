@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Cetak LPPD Kelas {{ $class->nama ?? '-' }} - PDF</title>
+    <title>Cetak LPS Kelas {{ $class->nama ?? '-' }} - PDF</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;

@@ -185,8 +185,16 @@
                                 </table>
                             </div>
 
-                            <div class="form-group mt-4 text-right">
-                                <button type="submit" class="btn btn-success text-white"><i class="fa fa-save"></i>
+                            <div class="form-check text-left mt-3">
+                                <input class="form-check-input" type="checkbox" id="confirmCheckbox">
+                                <label class="form-check-label" for="confirmCheckbox">
+                                    Saya yakin sudah mengisi data dengan benar
+                                </label>
+                            </div>
+
+                            <div class="form-group text-right">
+                                <button type="submit" class="btn btn-success text-white" id="submitButton" disabled><i
+                                        class="fa fa-save"></i>
                                     Simpan Perubahan</button>
                             </div>
                         </form>
@@ -199,6 +207,13 @@
 
         </div>
     </div>
+    
+    <script>
+        // script untuk mengaktifkan tombol simpan jika checkbox dicentang
+        document.getElementById('confirmCheckbox').addEventListener('change', function() {
+            document.getElementById('submitButton').disabled = !this.checked;
+        });
+    </script>
 
     <!-- Scripts -->
     <script src="{{ asset('vendor/global/global.min.js') }}"></script>

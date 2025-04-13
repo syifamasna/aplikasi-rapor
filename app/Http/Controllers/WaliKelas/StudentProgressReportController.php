@@ -85,15 +85,23 @@ class StudentProgressReportController extends Controller
         ));        
     }
     
-    public function exportPdf($class_id, $student_id)
+    public function exportPdf($class_id, $student_id, Request $request)
     {
         $class = StudentClass::findOrFail($class_id);
         $student = Student::findOrFail($student_id);
         $schoolProfile = SchoolProfile::first();
 
-        $schoolYear = SchoolYear::whereIn('semester', ['Tengah Semester I (Satu)', 'Tengah Semester II (Dua)'])
-            ->orderBy('tahun_awal', 'desc')
-            ->first();
+        // Ambil school_year_id dari request, atau fallback ke yang terbaru jika tidak ada
+        $schoolYearId = $request->school_year_id;
+
+        if ($schoolYearId) {
+            $schoolYear = SchoolYear::findOrFail($schoolYearId);
+        } else {
+            // fallback: ambil yang tengah semester I atau II terbaru
+            $schoolYear = SchoolYear::whereIn('semester', ['Tengah Semester I (Satu)', 'Tengah Semester II (Dua)'])
+                ->orderBy('tahun_awal', 'desc')
+                ->first();
+        }
 
         $subjects = Subject::whereIn('kelompok_mapel', ['Mata Pelajaran Wajib', 'Muatan Lokal'])->get();
 
@@ -113,7 +121,7 @@ class StudentProgressReportController extends Controller
             'schoolYear', 'schoolProfile', 'attendances'
         ));
 
-        $filename = 'LPPD_' . Str::slug($student->nama) . '_' . $schoolYear->tahun_awal . '_' . $schoolYear->tahun_akhir . '_' . $schoolYear->semester . '.pdf';
+        $filename = 'LPS_' . Str::slug($student->nama) . '_' . $schoolYear->tahun_awal . '_' . $schoolYear->tahun_akhir . '_' . $schoolYear->semester . '.pdf';
 
         return $pdf->stream($filename);
     }

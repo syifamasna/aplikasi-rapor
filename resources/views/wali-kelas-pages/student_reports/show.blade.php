@@ -363,9 +363,10 @@
                             <a href="{{ url()->previous() }}" class="btn btn-back">
                                 <i class="fa fa-arrow-left"></i> Kembali
                             </a>
-                            <a href="{{ route('wali_kelas.student_reports.export-pdf', ['class_id' => $class->id, 'student_id' => $student->id]) }}"
+                            <a href="{{ route('wali_kelas.student_reports.export-pdf', ['class_id' => $class->id, 'student_id' => $student->id, 'school_year_id' => request('school_year_id', $schoolYear->id ?? '')]) }}"
                                 class="btn btn-success text-white">
-                                <i class="fa fa-print"></i> Cetak Rapor</a>
+                                <i class="fa fa-print"></i> Cetak Rapor
+                            </a>
                         </div>
 
                     </div>

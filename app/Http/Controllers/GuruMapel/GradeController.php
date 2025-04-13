@@ -75,9 +75,9 @@ class GradeController extends Controller
     
         // Ambil daftar tahun ajar
         $schoolYears = SchoolYear::orderBy('tahun_awal', 'desc')
-            ->orderBy('semester', 'desc')
+            ->orderByRaw("FIELD(semester, 'II (Dua)', 'Tengah Semester II (Dua)', 'I (Satu)', 'Tengah Semester I (Satu)')")
             ->get();
-        
+
         $schoolYearId = $request->input('school_year_id', $schoolYears->first()->id ?? null);
         $schoolYear = $schoolYears->where('id', $schoolYearId)->first();
     

@@ -229,11 +229,18 @@
                                 </table>
                             </div>
 
-                            <div class="form-group mt-4 text-right">
+                            <div class="form-check text-left mt-3">
+                                <input class="form-check-input" type="checkbox" id="confirmCheckbox">
+                                <label class="form-check-label" for="confirmCheckbox">
+                                    Saya yakin sudah mengisi nilai dengan benar
+                                </label>
+                            </div>
+
+                            <div class="form-group text-right">
                                 <a href="{{ url()->previous() }}" class="btn btn-back">
                                     <i class="fa fa-arrow-left"></i> Kembali
                                 </a>
-                                <button type="submit" class="btn btn-success text-white">
+                                <button type="submit" class="btn btn-success text-white" id="submitButton" disabled>
                                     <i class="fa fa-save"></i> Simpan Perubahan
                                 </button>
                             </div>
@@ -289,6 +296,11 @@
             // Tutup modal setelah menerapkan nilai
             $('#applyAverageModal').modal('hide');
         }
+
+        // script untuk mengaktifkan tombol simpan jika checkbox dicentang
+        document.getElementById('confirmCheckbox').addEventListener('change', function() {
+            document.getElementById('submitButton').disabled = !this.checked;
+        });
     </script>
 
     <!-- Scripts -->

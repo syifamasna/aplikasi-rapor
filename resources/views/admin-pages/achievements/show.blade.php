@@ -73,7 +73,8 @@
             background-color: #f0f0f0 !important;
         }
 
-        /* Membuat kolom Keterangan left-aligned */
+        /* Membuat kolom Tahun Ajar dan Keterangan left-aligned */
+        table.dataTable tbody td:nth-child(2),
         table.dataTable tbody td:nth-child(4) {
             text-align: left;
         }
@@ -239,6 +240,12 @@
                             <input type="text" name="keterangan" class="form-control"
                                 placeholder="Contoh : Juara 1 Kompetisi Karate Tingkat Provinsi" required>
                         </div>
+                        <div class="form-group form-check">
+                            <input class="form-check-input" type="checkbox" id="confirmCheckbox" required>
+                            <label class="form-check-label" for="confirmCheckbox">
+                                Saya yakin sudah mengisi data dengan benar
+                            </label>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
@@ -289,10 +296,17 @@
                             <input type="text" name="keterangan" id="edit_keterangan" class="form-control"
                                 placeholder="Contoh : Juara 1 Kompetisi Karate Tingkat Provinsi" required>
                         </div>
+                        <div class="form-group form-check">
+                            <input class="form-check-input" type="checkbox" id="editConfirmCheckbox" required>
+                            <label class="form-check-label" for="editConfirmCheckbox">
+                                Saya yakin ingin menyimpan perubahan
+                            </label>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-success">Simpan Perubahan</button>
+                        <button type="submit" class="btn btn-success" id="editSubmitButton" disabled>Simpan
+                            Perubahan</button>
                     </div>
                 </form>
             </div>
@@ -300,8 +314,47 @@
     </div>
 
     <script>
+        // script modal tambah
+        document.addEventListener('DOMContentLoaded', function() {
+            const confirmCheckbox = document.getElementById('confirmCheckbox');
+            const submitButton = document.querySelector('#addAchievementForm button[type="submit"]');
+            const formInputs = document.querySelectorAll('#addAchievementForm input, #addAchievementForm select');
+
+            // Awalnya tombol disable sampai checkbox dicentang
+            submitButton.disabled = true;
+
+            // Event listener untuk mengubah status tombol submit berdasarkan checkbox
+            confirmCheckbox.addEventListener('change', function() {
+                submitButton.disabled = !confirmCheckbox.checked;
+            });
+
+            // Mencegah checkbox dicentang saat menekan Enter
+            formInputs.forEach(input => {
+                input.addEventListener('keydown', function(event) {
+                    if (event.key === 'Enter' && document.activeElement === confirmCheckbox) {
+                        event.preventDefault(); // Mencegah aksi default Enter pada checkbox
+                    }
+                });
+            });
+        });
+
         // script modal edit
         document.addEventListener("DOMContentLoaded", function() {
+            const editCheckbox = document.getElementById("editConfirmCheckbox");
+            const editSubmitButton = document.getElementById("editSubmitButton");
+
+            // Saat modal edit dibuka, reset checkbox dan disable tombol
+            $('#editAchievementModal').on('show.bs.modal', function() {
+                editCheckbox.checked = false;
+                editSubmitButton.disabled = true;
+            });
+
+            // Aktifkan tombol ketika checkbox dicentang
+            editCheckbox.addEventListener("change", function() {
+                editSubmitButton.disabled = !this.checked;
+            });
+
+            // Script untuk isi data ke modal edit
             document.body.addEventListener("click", function(event) {
                 if (event.target.classList.contains("btn-edit")) {
                     let button = event.target;
@@ -316,7 +369,7 @@
                     document.getElementById("edit_keterangan").value = keterangan;
 
                     let form = document.getElementById("editAchievementForm");
-                    form.setAttribute("action", `/admin/achievements/${id}`);
+                    form.setAttribute("action", `/pj/achievements/${id}`);
 
                     $('#editAchievementModal').modal('show');
                 }

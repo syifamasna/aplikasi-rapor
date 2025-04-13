@@ -52,7 +52,7 @@
                     <div class="col-sm-6 p-md-0">
                         <div class="welcome-text">
                             <h4>Selamat Datang, {{ Auth::user()->nama }}!</h4>
-                            <p class="mb-0">Kelola nilai, absensi, dan prestasi siswa dengan mudah</p>
+                            <p class="mb-0">Pantau dan kelola seluruh data sekolah dengan efisien</p>
                         </div>
                     </div>
                 </div>

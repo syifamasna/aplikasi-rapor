@@ -28,8 +28,28 @@ class AchievementController extends Controller
     {
         $class = StudentClass::findOrFail($class_id);
         $student = Student::findOrFail($student_id);
-        $achievements = Achievement::where('student_id', $student_id)->get();
-        $schoolYears = SchoolYear::orderBy('tahun_awal', 'desc')->get();
+
+        // Untuk tabel prestasi: urutan tahun lama ke baru
+        $achievements = Achievement::where('student_id', $student_id)
+            ->with('schoolYear')
+            ->join('school_years', 'achievements.school_year_id', '=', 'school_years.id')
+            ->orderBy('school_years.tahun_awal', 'asc')
+            ->orderByRaw("FIELD(school_years.semester, 
+                'Tengah Semester I (Satu)', 
+                'I (Satu)', 
+                'Tengah Semester II (Dua)', 
+                'II (Dua)')")
+            ->select('achievements.*') // pastikan ambil kolom dari table asli
+            ->get();
+
+        // Untuk dropdown modal: urutan tahun terbaru dulu
+        $schoolYears = SchoolYear::orderBy('tahun_awal', 'desc')
+            ->orderByRaw("FIELD(semester, 
+                'II (Dua)', 
+                'Tengah Semester II (Dua)', 
+                'I (Satu)', 
+                'Tengah Semester I (Satu)')")
+            ->get();
 
         return view('pj-prestasi-pages.achievements.show', compact('class', 'student', 'achievements', 'schoolYears'));
     }

@@ -104,10 +104,10 @@
                             <li class="breadcrumb-item"><a href="javascript:void(0)">Cetak Rapor & Legger</a></li>
                             <li class="breadcrumb-item"><a
                                     href="{{ route('wali_kelas.student_progress_reports.index') }}"
-                                    title="Laporan Perkembangan Peserta Didik (LPPD)">LPPD</a></li>
+                                    title="Laporan Perkembangan Siswa (LPS)">LPS</a></li>
                             <li class="breadcrumb-item">
                                 <a href="{{ route('wali_kelas.student_progress_reports.show', ['class_id' => $class->id, 'student_id' => $student->id]) }}"
-                                    title="LPPD {{ $student->nama ?? '-' }}"
+                                    title="LPS {{ $student->nama ?? '-' }}"
                                     class="{{ request()->is('wali/student_progress_reports/*') ? 'text-dark' : '' }}">
                                     Rapor Siswa
                                 </a>
@@ -304,7 +304,7 @@
                             <a href="{{ url()->previous() }}" class="btn btn-back">
                                 <i class="fa fa-arrow-left"></i> Kembali
                             </a>
-                            <a href="{{ route('wali_kelas.student_progress_reports.export-pdf', ['class_id' => $class->id, 'student_id' => $student->id]) }}"
+                            <a href="{{ route('wali_kelas.student_progress_reports.export-pdf', ['class_id' => $class->id, 'student_id' => $student->id, 'school_year_id' => request('school_year_id', $schoolYear->id ?? '')]) }}"
                                 class="btn btn-success text-white">
                                 <i class="fa fa-print"></i> Cetak Rapor</a>
                         </div>

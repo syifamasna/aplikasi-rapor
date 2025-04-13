@@ -110,9 +110,9 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th style="width: 5%;">NO</th>
+                    <th style="width: 5%; text-align: center;">NO</th>
                     <th style="text-align: left;">MATA PELAJARAN</th>
-                    <th style="width: 15%;">NILAI AKHIR</th>
+                    <th style="width: 15%; text-align: center;">NILAI AKHIR</th>
                 </tr>
             </thead>
             <tbody>

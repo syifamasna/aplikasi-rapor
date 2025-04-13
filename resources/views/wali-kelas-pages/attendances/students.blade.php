@@ -105,17 +105,20 @@
                             <div class="mb-4 border-bottom pb-3">
                                 <div class="row">
                                     <div class="col-md-12 mb-2 d-flex align-items-center">
-                                        <strong class="info-row h5 font-weight-bold me-3 w-25 text-nowrap">Kelas <span>:</span></strong>
+                                        <strong class="info-row h5 font-weight-bold me-3 w-25 text-nowrap">Kelas
+                                            <span>:</span></strong>
                                         <input type="text" class="form-control flex-grow-1"
                                             value="{{ $class->nama ?? '-' }}" disabled>
                                     </div>
                                     <div class="col-md-12 mb-2 d-flex align-items-center">
-                                        <strong class="info-row h5 font-weight-bold me-3 w-25 text-nowrap">Wali Kelas <span>:</span></strong>
+                                        <strong class="info-row h5 font-weight-bold me-3 w-25 text-nowrap">Wali Kelas
+                                            <span>:</span></strong>
                                         <input type="text" class="form-control flex-grow-1"
                                             value="{{ $class->waliKelas->nama ?? '-' }}" disabled>
                                     </div>
                                     <div class="col-md-12 mb-2 d-flex align-items-center">
-                                        <strong class="info-row h5 font-weight-bold me-3 w-25 text-nowrap">Tahun Pelajaran <span>:</span></strong>
+                                        <strong class="info-row h5 font-weight-bold me-3 w-25 text-nowrap">Tahun
+                                            Pelajaran <span>:</span></strong>
                                         <select name="school_year_id" class="form-control flex-grow-1"
                                             onchange="this.form.submit()">
                                             @foreach ($schoolYears as $year)
@@ -183,8 +186,17 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="form-group mt-4 text-right">
-                                <button type="submit" class="btn btn-success text-white"><i class="fa fa-save"></i>
+
+                            <div class="form-check text-left mt-3">
+                                <input class="form-check-input" type="checkbox" id="confirmCheckbox">
+                                <label class="form-check-label" for="confirmCheckbox">
+                                    Saya yakin sudah mengisi data dengan benar
+                                </label>
+                            </div>
+
+                            <div class="form-group text-right">
+                                <button type="submit" class="btn btn-success text-white" id="submitButton" disabled><i
+                                        class="fa fa-save"></i>
                                     Simpan Perubahan</button>
                             </div>
                         </form>
@@ -197,6 +209,13 @@
 
         </div>
     </div>
+
+    <script>
+        // script untuk mengaktifkan tombol simpan jika checkbox dicentang
+        document.getElementById('confirmCheckbox').addEventListener('change', function() {
+            document.getElementById('submitButton').disabled = !this.checked;
+        });
+    </script>
 
     <!-- Scripts -->
     <script src="{{ asset('vendor/global/global.min.js') }}"></script>

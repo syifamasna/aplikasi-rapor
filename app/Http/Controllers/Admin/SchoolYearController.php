@@ -15,7 +15,7 @@ class SchoolYearController extends Controller
 
         $schoolYears = SchoolYear::whereRaw("CONCAT(tahun_awal, '/', tahun_akhir) LIKE ?", ["%$keyword%"])
             ->orderBy('tahun_awal', 'asc')
-            ->orderBy('semester', 'asc')
+            ->orderByRaw("FIELD(semester, 'Tengah Semester I (Satu)', 'I (Satu)', 'Tengah Semester II (Dua)', 'II (Dua)')")
             ->get();
 
         return view('admin-pages.school_years.index', compact('schoolYears', 'keyword'));

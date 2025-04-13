@@ -38,9 +38,8 @@ class NoteController extends Controller
             ->orderBy('nama')
             ->get();
 
-        // Ambil semua tahun ajaran yang tersedia
         $schoolYears = SchoolYear::orderBy('tahun_awal', 'desc')
-            ->orderBy('semester', 'desc')
+            ->orderByRaw("FIELD(semester, 'II (Dua)', 'Tengah Semester II (Dua)', 'I (Satu)', 'Tengah Semester I (Satu)')")
             ->get();
 
         // Ambil tahun ajaran yang dipilih, default ke tahun terbaru jika tidak ada

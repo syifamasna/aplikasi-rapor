@@ -127,7 +127,7 @@
                             <li class="breadcrumb-item">
                                 <a href="{{ route('admin.class_reports.show', ['class_id' => $class->id]) }}"
                                     title="Rapor Kelas {{ $class->nama ?? '-' }}"
-                                    class="{{ request()->is('wali/class_reports/*') ? 'text-dark' : '' }}">
+                                    class="{{ request()->is('admin/class_reports/*') ? 'text-dark' : '' }}">
                                     Rapor Kelas
                                 </a>
                             </li>
