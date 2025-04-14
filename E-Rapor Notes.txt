@@ -1,8 +1,6 @@
 REVISI APLIKASI E-RAPOR SIT ALIYA
 
 - Download format XSLX (Excel)
-- Scroll di sidebar ketika collapse
-- Grafik diambil berdasarkan data kelas yang terbanyak prestasi nya
 - Data NULL yang sudah diisi di profil bisa dihapus/dikosongkan lagi
 - Function/Element DataTable di Laporan Kelas dibikin stay dan tidak ikut bergeser ketika table di scroll
 

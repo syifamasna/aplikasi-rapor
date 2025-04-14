@@ -17,16 +17,17 @@
             transition: transform 0.3s ease, color 0.3s ease;
         }
 
-        .card:hover {
+        .card-widget {
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .card-widget:hover {
             transform: scale(1.05);
         }
 
-        .card:hover .stat-text,
-        .card:hover .stat-digit {
-            color: inherit;
-        }
-
-        .card:hover .stat-icon i {
+        .card-widget:hover .stat-text,
+        .card-widget:hover .stat-digit,
+        .card-widget:hover .stat-icon i {
             color: inherit !important;
         }
     </style>
@@ -57,10 +58,10 @@
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col-lg-3 col-sm-6">
+                <div class="row mt-4">
+                    <div class="col-lg-4 col-sm-12">
                         <a href="{{ route('pj_prestasi.achievements.index') }}" class="text-decoration-none">
-                            <div class="card">
+                            <div class="card card-widget">
                                 <div class="stat-widget-one card-body text-warning">
                                     <div class="stat-icon d-inline-block">
                                         <i class="ti-medall border-warning"></i>
@@ -73,7 +74,16 @@
                             </div>
                         </a>
                     </div>
-                    
+                    <div class="col-lg-8 col-sm-12">
+                        <div class="card">
+                            <div class="card-header bg-gradient-primary text-white">
+                                <h5 class="mb-0">Grafik Prestasi per Kelas</h5>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="prestasiChart" height="100"></canvas>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
             </div>
@@ -103,8 +113,67 @@
     <script src="{{ asset('vendor/global/global.min.js') }}"></script>
     <script src="{{ asset('js/quixnav-init.js') }}"></script>
     <script src="{{ asset('js/custom.min.js') }}"></script>
+    <script src="{{ asset('assets/js/lib/chart-js/Chart.bundle.js') }}"></script>
     <script src="{{ asset('vendor/sweetalert2/dist/sweetalert2.min.js') }}"></script>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const ctx = document.getElementById('prestasiChart').getContext('2d');
+
+            const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+            gradient.addColorStop(0, '#f1c40f');
+            gradient.addColorStop(1, '#f39c12'); // lebih gelap untuk gradasi
+
+            const data = {
+                labels: {!! json_encode($prestasiPerKelas->pluck('kelas')) !!},
+                datasets: [{
+                    label: 'Jumlah Prestasi',
+                    data: {!! json_encode($prestasiPerKelas->pluck('total')) !!},
+                    backgroundColor: gradient,
+                    borderColor: '#f1c40f',
+                    borderWidth: 1,
+                    hoverBackgroundColor: '#f39c12'
+                }]
+            };
+
+            const config = {
+                type: 'bar',
+                data: data,
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return ` ${context.parsed.y} prestasi`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Jumlah Prestasi'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Kelas'
+                            }
+                        }
+                    }
+                }
+            };
+
+            new Chart(ctx, config);
+        });
+    </script>
 </body>
 
 </html>
