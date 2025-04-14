@@ -89,16 +89,15 @@
                     <p style="margin: 5px 0;"><strong>Fase<span style="display: inline-block; width: 35px;"></span>:
                             @php
                                 $className = $class->nama ?? '';
-                                if (preg_match('/[1-2]/', $className)) {
-                                    $fase = 'A';
-                                } elseif (preg_match('/[3-4]/', $className)) {
-                                    $fase = 'B';
-                                } elseif (preg_match('/[5-6]/', $className)) {
-                                    $fase = 'C';
-                                } else {
-                                    $fase = 'Tidak Diketahui';
-                                }
+                                $fase = 'Tidak Diketahui';
 
+                                if (preg_match('/^I\b|^II\b/', $className)) {
+                                    $fase = 'A';
+                                } elseif (preg_match('/^III\b|^IV\b/', $className)) {
+                                    $fase = 'B';
+                                } elseif (preg_match('/^V\b|^VI\b/', $className)) {
+                                    $fase = 'C';
+                                }
                             @endphp
                             {{ $fase }}
                         </strong></p>
@@ -232,7 +231,7 @@
                         <strong>{{ $class->waliKelas->nama ?? '...............................................' }}</strong>
                     </td>
                 </tr>
-            </table>            
+            </table>
         </div>
 
     </div>

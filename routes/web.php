@@ -83,6 +83,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
         Route::resource('student_classes', AdminStudentClassController::class)->names('admin.student_classes');
         Route::resource('students', AdminStudentController::class)->names('admin.students');
         Route::post('students/import', [AdminStudentController::class, 'import'])->name('admin.students.import');
+        Route::get('admin/students/template', [AdminStudentController::class, 'downloadTemplate'])->name('admin.students.template');
         Route::resource('subjects', AdminSubjectController::class)->names('admin.subjects');
         Route::resource('teachings', AdminTeachingController::class)->names('admin.teachings');
         Route::resource('users', AdminUserController::class)->names('admin.users');
@@ -99,13 +100,13 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
         Route::post('school_profiles/{id}/upload-logo', [AdminSchoolProfileController::class, 'uploadLogo'])->name('admin.school_profiles.uploadLogo');
         Route::delete('school_profiles/{id}/delete-logo', [AdminSchoolProfileController::class, 'deleteLogo'])->name('admin.school_profiles.deleteLogo');
 
-        // Rute untuk Laporan Perkembangan Siswa (tampilan per siswa)
+        // Rute untuk Laporan Perkembangan Peserta Didik (tampilan per siswa)
         Route::get('student_progress_reports', [AdminStudentProgressReportController::class, 'index'])->name('admin.student_progress_reports.index');
         Route::get('student_progress_reports/{class_id}/students', [AdminStudentProgressReportController::class, 'students'])->name('admin.student_progress_reports.students');
         Route::get('student_progress_reports/{class_id}/students/{student_id}', [AdminStudentProgressReportController::class, 'show'])->name('admin.student_progress_reports.show');       
         Route::get('student_progress_reports/{class_id}/students/{student_id}/export-pdf', [AdminStudentProgressReportController::class, 'exportPdf'])->name('admin.student_progress_reports.export-pdf');
         
-        // Rute untuk Laporan Perkembangan Siswa (tampilan per kelas)
+        // Rute untuk Laporan Perkembangan Peserta Didik (tampilan per kelas)
         Route::get('class_progress_reports', [AdminClassProgressReportController::class, 'index'])->name('admin.class_progress_reports.index');
         Route::get('class_progress_reports/{class_id}', [AdminClassProgressReportController::class, 'show'])->name('admin.class_progress_reports.show');       
         Route::get('class_progress_reports/{class_id}/export-csv', [AdminClassProgressReportController::class, 'exportCsv'])->name('admin.class_progress_reports.export-csv');
@@ -157,13 +158,13 @@ Route::middleware(['auth'])->prefix('wali')->group(function () {
         Route::get('student_classes/students', [WaliKelasStudentClassController::class, 'studentIndex'])->name('wali_kelas.student_classes.students');
         Route::resource('students', WaliKelasStudentController::class)->names('wali_kelas.students');
 
-        // Rute untuk Laporan Perkembangan Siswa (tampilan per siswa)
+        // Rute untuk Laporan Perkembangan Peserta Didik (tampilan per siswa)
         Route::get('student_progress_reports', [WaliKelasStudentProgressReportController::class, 'index'])->name('wali_kelas.student_progress_reports.index');
         Route::get('student_progress_reports/{class_id}/students', [WaliKelasStudentProgressReportController::class, 'students'])->name('wali_kelas.student_progress_reports.students');
         Route::get('student_progress_reports/{class_id}/students/{student_id}', [WaliKelasStudentProgressReportController::class, 'show'])->name('wali_kelas.student_progress_reports.show');       
         Route::get('student_progress_reports/{class_id}/students/{student_id}/export-pdf', [WaliKelasStudentProgressReportController::class, 'exportPdf'])->name('wali_kelas.student_progress_reports.export-pdf');
         
-        // Rute untuk Laporan Perkembangan Siswa (tampilan per kelas)
+        // Rute untuk Laporan Perkembangan Peserta Didik (tampilan per kelas)
         Route::get('class_progress_reports', [WaliKelasClassProgressReportController::class, 'index'])->name('wali_kelas.class_progress_reports.index');
         Route::get('class_progress_reports/{class_id}', [WaliKelasClassProgressReportController::class, 'show'])->name('wali_kelas.class_progress_reports.show');       
         Route::get('class_progress_reports/{class_id}/export-csv', [WaliKelasClassProgressReportController::class, 'exportCsv'])->name('wali_kelas.class_progress_reports.export-csv');
@@ -207,6 +208,8 @@ Route::middleware(['auth'])->prefix('guru')->group(function () {
         Route::resource('grades', GuruMapelGradeController::class)->names('guru_mapel.grades')->except(['show']);
         Route::get('grades/students', [GuruMapelGradeController::class, 'studentIndex'])->name('guru_mapel.grades.students');
         Route::resource('grade_details', GuruMapelGradeDetailController::class)->names('guru_mapel.grade_details')->except(['show']);
+        Route::post('/grades/import', [GuruMapelGradeController::class, 'import'])->name('guru_mapel.grades.import');
+        Route::get('/grades/template', [GuruMapelGradeController::class, 'downloadTemplate'])->name('guru_mapel.grades.template');
         
         // Rute untuk update profil guru mapel
         Route::get('profile', [GuruMapelProfileController::class, 'index'])->name('guru_mapel.profile.index');

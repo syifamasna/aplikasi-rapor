@@ -102,6 +102,17 @@
             text-align: left;
         }
 
+        .custom-download-link {
+            color: #FFAA16;
+            font-weight: bold;
+            text-decoration: underline;
+            transition: color 0.3s ease;
+        }
+
+        .custom-download-link:hover {
+            color: #e0a800;
+        }
+
         /* Styling untuk tabel responsif hanya pada layar kecil */
         @media (max-width: 991px) {
             .table-responsive {
@@ -213,14 +224,32 @@
                 <form action="{{ route('admin.students.import') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
+                        <div class="alert alert-warning alert-dismissible fade show">
+                            <button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <i class="fa fa-exclamation-circle mr-2"></i>
+                            <b>Penting!</b> File yang diunggah harus berupa dokumen Microsoft Excel dengan ekstensi
+                            .xlsx
+                            <br><a href="{{ route('admin.students.template') }}" class="custom-download-link">
+                                Download Format Impor
+                            </a>
+                        </div>
                         <div class="form-group">
                             <label for="importFile">Pilih File (CSV/Excel)</label>
                             <input type="file" class="form-control" id="importFile" name="importFile" required>
                         </div>
+                        <div class="form-group form-check">
+                            <input class="form-check-input" type="checkbox" id="importConfirmCheckbox" required>
+                            <label class="form-check-label" for="importConfirmCheckbox">
+                                Saya yakin sudah mengisi data dengan benar
+                            </label>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                        <button type="submit" class="btn btn-success">Impor</button>
+                        <button type="submit" class="btn btn-success" id="importSubmitButton"
+                            disabled>Impor</button>
                     </div>
                 </form>
             </div>
@@ -425,6 +454,11 @@
     </div>
 
     <script>
+        // script modal import
+        document.getElementById('importConfirmCheckbox').addEventListener('change', function() {
+            document.getElementById('importSubmitButton').disabled = !this.checked;
+        });
+
         // script modal filter
         document.addEventListener("DOMContentLoaded", function() {
             // Pastikan tombol close bisa berfungsi

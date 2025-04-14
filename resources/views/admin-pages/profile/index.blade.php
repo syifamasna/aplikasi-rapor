@@ -42,16 +42,6 @@
                     </div>
                 </div>
 
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
-
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card">
@@ -159,9 +149,19 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="form-group mt-2 text-right">
-                                                            <button type="submit"
-                                                                class="btn btn-success text-white"><i
+
+                                                        <div class="form-check text-left">
+                                                            <input class="form-check-input" type="checkbox"
+                                                                id="profilConfirmCheckbox">
+                                                            <label class="form-check-label"
+                                                                for="profilConfirmCheckbox">
+                                                                Saya yakin ingin menyimpan perubahan
+                                                            </label>
+                                                        </div>
+
+                                                        <div class="form-group text-right">
+                                                            <button type="submit" class="btn btn-success text-white"
+                                                                id="profilSubmitButton" disabled><i
                                                                     class="fa fa-save"></i> Simpan Perubahan</button>
                                                         </div>
                                                     </form>
@@ -176,10 +176,11 @@
 
                                                     <!-- Preview Gambar -->
                                                     <div class="text-center">
-                                                        <img id="imagePreviewEdit" src="{{ asset('storage/' . $user->image) }}" 
+                                                        <img id="imagePreviewEdit"
+                                                            src="{{ asset('storage/' . $user->image) }}"
                                                             class="rounded-circle border d-block mx-auto"
                                                             style="width: 100px; height: 100px; object-fit: cover;">
-                                                    </div>                                                    
+                                                    </div>
 
                                                     @if ($user->image)
                                                         <form action="{{ route('admin.profile.destroyImage') }}"
@@ -192,8 +193,8 @@
                                                     @endif
 
                                                     <!-- Form Upload Foto -->
-                                                    <form action="{{ route('admin.profile.update') }}" method="POST"
-                                                        enctype="multipart/form-data">
+                                                    <form action="{{ route('admin.profile.update') }}"
+                                                        method="POST" enctype="multipart/form-data">
                                                         @csrf
                                                         @method('PUT')
                                                         <div class="form-group mt-3 text-left">
@@ -248,9 +249,18 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="form-group mt-2 text-right">
-                                                            <button type="submit"
-                                                                class="btn btn-success text-white"><i
+
+                                                        <div class="form-check text-left">
+                                                            <input class="form-check-input" type="checkbox"
+                                                                id="akunConfirmCheckbox">
+                                                            <label class="form-check-label" for="akunConfirmCheckbox">
+                                                                Saya yakin ingin menyimpan perubahan
+                                                            </label>
+                                                        </div>
+
+                                                        <div class="form-group text-right">
+                                                            <button type="submit" class="btn btn-success text-white"
+                                                                id="akunSubmitButton" disabled><i
                                                                     class="fa fa-save"></i> Perbarui Akun</button>
                                                         </div>
                                                     </form>
@@ -272,6 +282,15 @@
     </div>
 
     <script>
+        // script untuk mengaktifkan tombol simpan jika checkbox dicentang
+        document.getElementById('profilConfirmCheckbox').addEventListener('change', function() {
+            document.getElementById('profilSubmitButton').disabled = !this.checked;
+        });
+
+        document.getElementById('akunConfirmCheckbox').addEventListener('change', function() {
+            document.getElementById('akunSubmitButton').disabled = !this.checked;
+        });
+
         // Script Toggle Password di Edit Akun
         function togglePassword() {
             var passwordInput = document.getElementById("password");
@@ -281,12 +300,12 @@
                 passwordInput.type = "password";
             }
         }
-        
+
         // Script Preview Gambar di Edit Foto Profil
         document.getElementById('inputImage').addEventListener('change', function(event) {
             const file = event.target.files[0];
             const previewContainer = document.getElementById(
-            'imagePreviewEdit'); // ID untuk preview dalam form Edit Foto
+                'imagePreviewEdit'); // ID untuk preview dalam form Edit Foto
             const reader = new FileReader();
 
             if (file) {
@@ -297,7 +316,7 @@
                 reader.readAsDataURL(file);
             } else {
                 previewContainer.src =
-                "{{ asset('default-profile.png') }}"; // Kembali ke default jika tidak ada gambar
+                    "{{ asset('default-profile.png') }}"; // Kembali ke default jika tidak ada gambar
             }
         });
     </script>

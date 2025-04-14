@@ -78,6 +78,17 @@
             background-color: #495057 !important;
         }
 
+        .custom-download-link {
+            color: #FFAA16;
+            font-weight: bold;
+            text-decoration: underline;
+            transition: color 0.3s ease;
+        }
+
+        .custom-download-link:hover {
+            color: #e0a800;
+        }
+
         /* Styling untuk tabel responsif hanya pada layar kecil */
         @media (max-width: 991px) {
             .table-responsive {
@@ -181,12 +192,18 @@
 
                         <!-- Tombol Terapkan Nilai Rata -->
                         <div class="d-flex justify-content-between align-items-center mb-3">
-                            <button type="button" class="btn btn-primary" data-toggle="modal"
-                                data-target="#applyAverageModal">
-                                <i class="fa fa-clipboard"></i> Terapkan Nilai Rata
-                            </button>
+                            <div>
+                                <button type="button" class="btn btn-primary" data-toggle="modal"
+                                    data-target="#applyAverageModal">
+                                    <i class="fa fa-clipboard"></i> Terapkan Nilai Rata
+                                </button>
+                                <button type="button" class="btn btn-success text-white" data-bs-toggle="modal"
+                                    data-bs-target="#importGradeModal">
+                                    <i class="fa fa-upload"></i> Impor Nilai
+                                </button>
+                            </div>
                             <div id="customDataTableFilter"></div>
-                            <!-- Search bar DataTables akan dipindahkan ke sini -->
+                            <!-- Search bar DataTables will be placed here -->
                         </div>
 
                         <form action="{{ route('guru_mapel.grades.update', $class->id) }}" method="POST">
@@ -279,6 +296,61 @@
         </div>
     </div>
 
+    <!-- Modal Impor Nilai -->
+    <div class="modal fade" id="importGradeModal" tabindex="-1" role="dialog"
+        aria-labelledby="importGradeModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="importGradeModalLabel">Impor Nilai</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="importForm" action="{{ route('guru_mapel.grades.import') }}" method="POST"
+                    enctype="multipart/form-data">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="alert alert-warning alert-dismissible fade show">
+                            <button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <i class="fa fa-exclamation-circle mr-2"></i>
+                            <b>Penting!</b> File yang diunggah harus berupa dokumen Microsoft Excel dengan ekstensi
+                            .xlsx
+                            <br><a href="{{ route('guru_mapel.grades.template') }}" class="custom-download-link">
+                                Download Format Impor
+                            </a>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="importFile">Pilih File (Excel)</label>
+                            <input type="file" class="form-control" id="importFile" name="import_file" required
+                                accept=".xlsx,.xls">
+                        </div>
+
+                        <input type="hidden" name="subject_id" value="{{ request('subject_id') }}">
+                        <input type="hidden" name="class_id" value="{{ $class->id }}">
+                        <input type="hidden" name="school_year_id" value="{{ $schoolYear->id ?? '' }}">
+
+                        <div class="form-group form-check">
+                            <input class="form-check-input" type="checkbox" id="importConfirmCheckbox" required>
+                            <label class="form-check-label" for="importConfirmCheckbox">
+                                Saya yakin sudah mengisi nilai dengan benar
+                            </label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                        <button type="submit" class="btn btn-success" id="importSubmitButton" disabled>
+                            Impor
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <script>
         // script Modal Input Nilai Rata
         function applyAverage() {
@@ -296,6 +368,28 @@
             // Tutup modal setelah menerapkan nilai
             $('#applyAverageModal').modal('hide');
         }
+
+        // script modal import
+        document.getElementById('importForm').addEventListener('submit', function(e) {
+            const fileInput = document.getElementById('importFile');
+            const submitBtn = document.getElementById('importSubmitButton');
+
+            // Validasi file
+            if (!fileInput.files.length) {
+                e.preventDefault();
+                alert('Silakan pilih file terlebih dahulu!');
+                return;
+            }
+
+            // Tampilkan loading
+            submitBtn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Memproses...';
+            submitBtn.disabled = true;
+        });
+
+        // script modal import untuk mengaktifkan tombol simpan jika checkbox dicentang
+        document.getElementById('importConfirmCheckbox').addEventListener('change', function() {
+            document.getElementById('importSubmitButton').disabled = !this.checked;
+        });
 
         // script untuk mengaktifkan tombol simpan jika checkbox dicentang
         document.getElementById('confirmCheckbox').addEventListener('change', function() {

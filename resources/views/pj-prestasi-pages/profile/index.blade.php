@@ -149,9 +149,19 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="form-group mt-2 text-right">
-                                                            <button type="submit"
-                                                                class="btn btn-success text-white"><i
+
+                                                        <div class="form-check text-left">
+                                                            <input class="form-check-input" type="checkbox"
+                                                                id="profilConfirmCheckbox">
+                                                            <label class="form-check-label"
+                                                                for="profilConfirmCheckbox">
+                                                                Saya yakin ingin menyimpan perubahan
+                                                            </label>
+                                                        </div>
+
+                                                        <div class="form-group text-right">
+                                                            <button type="submit" class="btn btn-success text-white"
+                                                                id="profilSubmitButton" disabled><i
                                                                     class="fa fa-save"></i> Simpan Perubahan</button>
                                                         </div>
                                                     </form>
@@ -239,9 +249,18 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="form-group mt-2 text-right">
-                                                            <button type="submit"
-                                                                class="btn btn-success text-white"><i
+
+                                                        <div class="form-check text-left">
+                                                            <input class="form-check-input" type="checkbox"
+                                                                id="akunConfirmCheckbox">
+                                                            <label class="form-check-label" for="akunConfirmCheckbox">
+                                                                Saya yakin ingin menyimpan perubahan
+                                                            </label>
+                                                        </div>
+
+                                                        <div class="form-group text-right">
+                                                            <button type="submit" class="btn btn-success text-white"
+                                                                id="akunSubmitButton" disabled><i
                                                                     class="fa fa-save"></i> Perbarui Akun</button>
                                                         </div>
                                                     </form>
@@ -263,6 +282,15 @@
     </div>
 
     <script>
+        // script untuk mengaktifkan tombol simpan jika checkbox dicentang
+        document.getElementById('profilConfirmCheckbox').addEventListener('change', function() {
+            document.getElementById('profilSubmitButton').disabled = !this.checked;
+        });
+
+        document.getElementById('akunConfirmCheckbox').addEventListener('change', function() {
+            document.getElementById('akunSubmitButton').disabled = !this.checked;
+        });
+
         // Script Toggle Password di Edit Akun
         function togglePassword() {
             var passwordInput = document.getElementById("password");

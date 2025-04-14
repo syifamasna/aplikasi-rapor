@@ -8,6 +8,11 @@ use App\Models\StudentClass;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use PhpOffice\PhpSpreadsheet\Style\Fill;
+use PhpOffice\PhpSpreadsheet\Style\Border;
 
 class StudentController extends Controller
 {
@@ -163,5 +168,86 @@ class StudentController extends Controller
             Log::error("Error saat import: " . $e->getMessage());
             return back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
+    }
+
+    public function downloadTemplate()
+    {
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+        
+        // Tambahkan judul utama
+        $sheet->mergeCells('A1:F1');
+        $sheet->setCellValue('A1', 'TEMPLATE IMPOR DATA SISWA');
+        $sheet->getStyle('A1')->applyFromArray([
+            'font' => [
+                'bold' => true,
+                'size' => 14,
+                'color' => ['rgb' => 'FFFFFF']
+            ],
+            'fill' => [
+                'fillType' => 'solid',
+                'startColor' => ['rgb' => '4472C4']
+            ],
+            'alignment' => [
+                'horizontal' => 'center'
+            ]
+        ]);
+    
+        // Header tabel
+        $sheet->fromArray(
+            ['No', 'Nama Siswa', 'Kelas', 'Jenis Kelamin', 'NIS', 'NISN'],
+            null,
+            'A2' // Mulai dari baris 2
+        );
+    
+        // Styling header tabel
+        $sheet->getStyle('A2:F2')->applyFromArray([
+            'font' => ['bold' => true],
+            'fill' => [
+                'fillType' => 'solid',
+                'startColor' => ['rgb' => 'D9E1F2']
+            ],
+            'borders' => [
+                'allBorders' => [
+                    'borderStyle' => 'thin'
+                ]
+            ]
+        ]);
+    
+        // Contoh data
+        $sheet->fromArray(
+            [
+                [1, 'Contoh Siswa 1', 'I (Satu) A', 'L', '123456', '7236930']
+        
+            ],
+            null,
+            'A3' // Mulai dari baris 3
+        );
+
+        $sheet->getStyle('A3:F3')->applyFromArray([
+
+            'borders' => [
+                'allBorders' => [
+                    'borderStyle' => 'thin'
+                ]
+            ]
+        ]);
+    
+        // Auto size column
+        foreach(range('A','F') as $column) {
+            $sheet->getColumnDimension($column)->setAutoSize(true);
+        }
+    
+        // Tinggi baris judul
+        $sheet->getRowDimension(1)->setRowHeight(25);
+    
+        $writer = new Xlsx($spreadsheet);
+        $fileName = 'template_impor_siswa.xlsx';
+        $tempFile = tempnam(sys_get_temp_dir(), $fileName);
+        $writer->save($tempFile);
+    
+        return response()->download($tempFile, $fileName, [
+            'Content-Type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        ])->deleteFileAfterSend(true);
     }
 }

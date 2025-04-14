@@ -89,16 +89,15 @@
                     <p style="margin: 5px 0;"><strong>Fase<span style="display: inline-block; width: 35px;"></span>:
                             @php
                                 $className = $class->nama ?? '';
-                                if (preg_match('/[1-2]/', $className)) {
-                                    $fase = 'A';
-                                } elseif (preg_match('/[3-4]/', $className)) {
-                                    $fase = 'B';
-                                } elseif (preg_match('/[5-6]/', $className)) {
-                                    $fase = 'C';
-                                } else {
-                                    $fase = 'Tidak Diketahui';
-                                }
+                                $fase = 'Tidak Diketahui';
 
+                                if (preg_match('/^I\b|^II\b/', $className)) {
+                                    $fase = 'A';
+                                } elseif (preg_match('/^III\b|^IV\b/', $className)) {
+                                    $fase = 'B';
+                                } elseif (preg_match('/^V\b|^VI\b/', $className)) {
+                                    $fase = 'C';
+                                }
                             @endphp
                             {{ $fase }}
                         </strong></p>
@@ -263,20 +262,20 @@
 
         <!-- Keputusan -->
         @php
-            $className = $class->nama;
+            $className = $class->nama ?? '';
             $naikKelas = '-';
 
-            if (Str::contains($className, '1')) {
+            if (Str::startsWith($className, 'I')) {
                 $naikKelas = 'II (Dua)';
-            } elseif (Str::contains($className, '2')) {
+            } elseif (Str::startsWith($className, 'II')) {
                 $naikKelas = 'III (Tiga)';
-            } elseif (Str::contains($className, '3')) {
+            } elseif (Str::startsWith($className, 'III')) {
                 $naikKelas = 'IV (Empat)';
-            } elseif (Str::contains($className, '4')) {
+            } elseif (Str::startsWith($className, 'IV')) {
                 $naikKelas = 'V (Lima)';
-            } elseif (Str::contains($className, '5')) {
+            } elseif (Str::startsWith($className, 'V')) {
                 $naikKelas = 'VI (Enam)';
-            } elseif (Str::contains($className, '6')) {
+            } elseif (Str::startsWith($className, 'VI')) {
                 $naikKelas = 'LULUS';
             }
         @endphp

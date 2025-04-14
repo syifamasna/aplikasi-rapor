@@ -1,12 +1,10 @@
 REVISI APLIKASI E-RAPOR SIT ALIYA
 
-- Tambah * di setiap form untuk menunjukkan form yang wajib diisi
-- Impor siswa kasih format excelnya
+- Download format XSLX (Excel)
 - Scroll di sidebar ketika collapse
 - Grafik diambil berdasarkan data kelas yang terbanyak prestasi nya
 - Data NULL yang sudah diisi di profil bisa dihapus/dikosongkan lagi
 - Function/Element DataTable di Laporan Kelas dibikin stay dan tidak ikut bergeser ketika table di scroll
-- Nama kelas diubah jadi angka romawi (I (Satu))
 
 PERTANYAAN 
 
@@ -18,14 +16,14 @@ tambahan (revisi) 10 April 2025:
 2. semester diubah jadi angka romawi (I (Satu)) ✅
 3. seni musik dihilangkan ✅
 4. layout ttd dan catatan kehadiran ✅
-5. tombol export adanya di data perkelas bukan individu
-6. logo aliya dihilangkan ✅
-7. tambahkan keputusan wali kelas (hanya Iikbisa diambil di semester 2) naik dan tidak naik ✅
-8. Rapor Siswa, Rapor Kelas, Legger 
-9. Menu Legger nilai diubah menjadi Cetak Rapor dan Legger
-10. Tahun Ajar diganti jadi Tahun Pelajaran ✅
-11. Download template di halaman guru mapel (impor nilai) kolomnya disesuaikan dengan input nilai siswa (perkelas)
-12. kalau nilai =<70 akan ada warning (di legger) ✅
+5. logo aliya dihilangkan ✅
+6. tambahkan keputusan wali kelas (hanya Iikbisa diambil di semester 2) naik dan tidak naik ✅
+7. Tahun Ajar diganti jadi Tahun Pelajaran ✅
+8. Download template di halaman guru mapel (impor nilai) kolomnya disesuaikan dengan input nilai siswa (perkelas) ✅
+9. kalau nilai =<70 akan ada warning (di legger) ✅
+10. Rapor Siswa, Rapor Kelas, Legger 
+11. Menu Legger nilai diubah menjadi Cetak Rapor dan Legger
+12. tombol export adanya di data perkelas bukan individu
 13. rekap nilai perkelas (Legger Sekolah (gabungan dari legger kelas-kelas))
 14. grafik di dashboard =rata² nilai, gender(doughnut chart)
 15. terapkan nilai dihilangkan
