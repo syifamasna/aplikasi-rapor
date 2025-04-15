@@ -130,19 +130,19 @@ class StudentReportController extends Controller
             ->where('school_year_id', $schoolYear->id)
             ->first();
 
-        $pdf = Pdf::loadView('wali-kelas-pages.student_reports.show-pdf', compact(
-            'class',
-            'student',
-            'grades',
-            'subjects',
-            'gradeDetails',
-            'schoolYear',
-            'schoolProfile',
-            'attendances',
-            'achievements',
-            'notes',
-            'graduationDecision'
-        ));
+            $pdf = Pdf::loadView('admin-pages.student_reports.show-pdf', compact(
+                'class',
+                'student',
+                'grades',
+                'subjects',
+                'gradeDetails',
+                'schoolYear',
+                'schoolProfile',
+                'attendances',
+                'achievements',
+                'notes',
+                'graduationDecision'
+            ) + ['isAll' => false]);            
 
         $filename = 'Rapor_' . Str::slug($student->nama) . '_' . $schoolYear->tahun_awal . '_' . $schoolYear->tahun_akhir . '_' . $schoolYear->semester . '.pdf';
 

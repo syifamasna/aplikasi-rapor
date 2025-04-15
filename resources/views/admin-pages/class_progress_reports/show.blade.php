@@ -275,16 +275,20 @@
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <a class="dropdown-item"
                                         href="{{ route('admin.class_progress_reports.export-csv', ['class_id' => $class->id]) }}?school_year_id={{ request('school_year_id', $schoolYear->id) }}">
-                                        <i class="fa fa-file-excel-o"></i> CSV
+                                        <i class="fa fa-file-excel-o"></i> CSV (Legger)
                                     </a>
                                     <a class="dropdown-item"
                                         href="{{ route('admin.class_progress_reports.export-pdf', ['class_id' => $class->id]) }}?school_year_id={{ request('school_year_id', $schoolYear->id) }}">
-                                        <i class="fa fa-file-pdf-o"></i> PDF
+                                        <i class="fa fa-file-pdf-o"></i> PDF (Legger)
+                                    </a>
+                                    <a class="dropdown-item"
+                                        href="{{ route('admin.class_progress_reports.export-all-pdf', ['class_id' => $class->id, 'school_year_id' => request('school_year_id', $schoolYear->id ?? '')]) }}">
+                                        <i class="fa fa-file-pdf-o"></i> PDF (Semua Rapor)
                                     </a>
                                     <a class="dropdown-item"
                                         href="{{ route('admin.class_progress_reports.export-pdf', ['class_id' => $class->id]) }}?school_year_id={{ request('school_year_id', $schoolYear->id) }}&mode=print"
                                         target="_blank">
-                                        <i class="fa fa-print"></i> Print
+                                        <i class="fa fa-print"></i> Print Legger
                                     </a>
                                 </div>
                             </div>

@@ -47,7 +47,7 @@
                         <ul aria-expanded="false">
                             <li><a href="{{ route('wali_kelas.student_progress_reports.index') }}">Rapor Siswa</a>
                             </li>
-                            <li><a href="{{ route('wali_kelas.class_progress_reports.index') }}">Rapor Kelas</a></li>
+                            <li><a href="{{ route('wali_kelas.class_progress_reports.index') }}">Legger Kelas</a></li>
                         </ul>
                     </li>
                     <li>
@@ -55,7 +55,7 @@
                             (Rapor) Peserta Didik</a>
                         <ul aria-expanded="false">
                             <li><a href="{{ route('wali_kelas.student_reports.index') }}">Rapor Siswa</a></li>
-                            <li><a href="{{ route('wali_kelas.class_reports.index') }}">Rapor Kelas</a></li>
+                            <li><a href="{{ route('wali_kelas.class_reports.index') }}">Legger Kelas</a></li>
                         </ul>
                     </li>
                 </ul>

@@ -105,12 +105,13 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
         Route::get('student_progress_reports/{class_id}/students', [AdminStudentProgressReportController::class, 'students'])->name('admin.student_progress_reports.students');
         Route::get('student_progress_reports/{class_id}/students/{student_id}', [AdminStudentProgressReportController::class, 'show'])->name('admin.student_progress_reports.show');       
         Route::get('student_progress_reports/{class_id}/students/{student_id}/export-pdf', [AdminStudentProgressReportController::class, 'exportPdf'])->name('admin.student_progress_reports.export-pdf');
-        
+
         // Rute untuk Laporan Perkembangan Peserta Didik (tampilan per kelas)
         Route::get('class_progress_reports', [AdminClassProgressReportController::class, 'index'])->name('admin.class_progress_reports.index');
         Route::get('class_progress_reports/{class_id}', [AdminClassProgressReportController::class, 'show'])->name('admin.class_progress_reports.show');       
         Route::get('class_progress_reports/{class_id}/export-csv', [AdminClassProgressReportController::class, 'exportCsv'])->name('admin.class_progress_reports.export-csv');
         Route::get('class_progress_reports/{class_id}/export-pdf', [AdminClassProgressReportController::class, 'exportPdf'])->name('admin.class_progress_reports.export-pdf'); 
+        Route::get('class_progress_reports/{class_id}/export-all-pdf', [AdminClassProgressReportController::class, 'exportAllPdf'])->name('admin.class_progress_reports.export-all-pdf');
 
         // Rute untuk Laporan Hasil Belajar (Rapor) Peserta Didik (tampilan per siswa)
         Route::get('student_reports', [AdminStudentReportController::class, 'index'])->name('admin.student_reports.index');
@@ -123,6 +124,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
         Route::get('class_reports/{class_id}', [AdminClassReportController::class, 'show'])->name('admin.class_reports.show');       
         Route::get('class_reports/{class_id}/export-csv', [AdminClassReportController::class, 'exportCsv'])->name('admin.class_reports.export-csv');
         Route::get('class_reports/{class_id}/export-pdf', [AdminClassReportController::class, 'exportPdf'])->name('admin.class_reports.export-pdf'); 
+        Route::get('class_reports/{class_id}/export-all-pdf', [AdminClassReportController::class, 'exportAllPdf'])->name('admin.class_reports.export-all-pdf');
     });
 });
 
@@ -169,6 +171,7 @@ Route::middleware(['auth'])->prefix('wali')->group(function () {
         Route::get('class_progress_reports/{class_id}', [WaliKelasClassProgressReportController::class, 'show'])->name('wali_kelas.class_progress_reports.show');       
         Route::get('class_progress_reports/{class_id}/export-csv', [WaliKelasClassProgressReportController::class, 'exportCsv'])->name('wali_kelas.class_progress_reports.export-csv');
         Route::get('class_progress_reports/{class_id}/export-pdf', [WaliKelasClassProgressReportController::class, 'exportPdf'])->name('wali_kelas.class_progress_reports.export-pdf'); 
+        Route::get('class_progress_reports/{class_id}/export-all-pdf', [WaliKelasClassProgressReportController::class, 'exportAllPdf'])->name('wali_kelas.class_progress_reports.export-all-pdf');
 
         // Rute untuk Laporan Hasil Belajar (Rapor) Peserta Didik (tampilan per siswa)
         Route::get('student_reports', [WaliKelasStudentReportController::class, 'index'])->name('wali_kelas.student_reports.index');
@@ -181,6 +184,7 @@ Route::middleware(['auth'])->prefix('wali')->group(function () {
         Route::get('class_reports/{class_id}', [WaliKelasClassReportController::class, 'show'])->name('wali_kelas.class_reports.show');       
         Route::get('class_reports/{class_id}/export-csv', [WaliKelasClassReportController::class, 'exportCsv'])->name('wali_kelas.class_reports.export-csv');
         Route::get('class_reports/{class_id}/export-pdf', [WaliKelasClassReportController::class, 'exportPdf'])->name('wali_kelas.class_reports.export-pdf'); 
+        Route::get('class_reports/{class_id}/export-all-pdf', [WaliKelasClassReportController::class, 'exportAllPdf'])->name('wali_kelas.class_reports.export-all-pdf');
 
         // Rute untuk update profil wali kelas
         Route::get('profile', [WaliKelasProfileController::class, 'index'])->name('wali_kelas.profile.index');

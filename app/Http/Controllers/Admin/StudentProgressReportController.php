@@ -110,7 +110,7 @@ class StudentProgressReportController extends Controller
         $pdf = Pdf::loadView('admin-pages.student_progress_reports.show-pdf', compact(
             'class', 'student', 'grades', 'subjects', 'gradeDetails',
             'schoolYear', 'schoolProfile', 'attendances'
-        ));
+        ) + ['isAll' => false]);
 
         $filename = 'LPS_' . Str::slug($student->nama) . '_' . $schoolYear->tahun_awal . '_' . $schoolYear->tahun_akhir . '_' . $schoolYear->semester . '.pdf';
 

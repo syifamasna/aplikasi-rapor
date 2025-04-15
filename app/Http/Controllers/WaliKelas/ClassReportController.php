@@ -14,6 +14,7 @@ use App\Models\Student;
 use App\Models\StudentClass;
 use App\Models\Subject;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;
 use Barryvdh\DomPDF\Facade\Pdf;
 
@@ -292,5 +293,75 @@ class ClassReportController extends Controller
         $filename = Str::slug('Rekap Nilai' . '_' . $class->nama . '_' . $schoolYear->label) . '.pdf';
 
         return $pdf->stream($filename);
+    }
+
+    public function exportAllPdf($class_id, Request $request)
+    {
+        $class = StudentClass::findOrFail($class_id);
+        $schoolProfile = SchoolProfile::first();
+
+        // Ambil school_year_id dari request atau gunakan yang terbaru
+        $schoolYearId = $request->school_year_id;
+
+        if ($schoolYearId) {
+            $schoolYear = SchoolYear::findOrFail($schoolYearId);
+        } else {
+            $schoolYear = SchoolYear::whereIn('semester', ['I (Satu)', 'II (Dua)'])
+                ->orderBy('tahun_awal', 'desc')
+                ->first();
+        }
+
+        $subjects = Subject::whereIn('kelompok_mapel', ['Mata Pelajaran Wajib', 'Muatan Lokal'])->get();
+
+        $students = Student::where('class_id', $class_id)->orderBy('nama')->get();
+
+        $mergedHtml = '';
+
+        foreach ($students as $index => $student) {
+            $grades = Grade::where('student_id', $student->id)
+                ->where('school_year_id', $schoolYear->id)
+                ->with('subject')
+                ->get();
+
+            $gradeDetails = GradeDetail::whereIn('grade_id', $grades->pluck('id'))->get();
+
+            $achievements = Achievement::where('student_id', $student->id)
+                ->where('school_year_id', $schoolYear->id)
+                ->get();
+
+            $attendances = Attendance::where('student_id', $student->id)
+                ->where('school_year_id', $schoolYear->id)
+                ->first();
+
+            $notes = Note::where('student_id', $student->id)
+                ->where('school_year_id', $schoolYear->id)
+                ->first();
+
+            $graduationDecision = \App\Models\GraduationDecision::where('student_id', $student->id)
+                ->where('school_year_id', $schoolYear->id)
+                ->first();
+
+            // Render tampilan untuk setiap siswa
+            $html = View::make('wali-kelas-pages.student_reports.show-pdf', compact(
+                'class',
+                'student',
+                'grades',
+                'subjects',
+                'gradeDetails',
+                'schoolYear',
+                'schoolProfile',
+                'attendances',
+                'achievements',
+                'notes',
+                'graduationDecision'
+            ) + ['isAll' => true])->render();            
+
+            $mergedHtml .= $html;
+        }
+
+        $finalPdf = Pdf::loadHTML($mergedHtml);
+        $filename = 'Rapor_Kelas_' . Str::slug($class->nama) . '_' . $schoolYear->tahun_awal . '_' . $schoolYear->tahun_akhir . '_' . $schoolYear->semester . '.pdf';
+
+        return $finalPdf->stream($filename);
     }
 }

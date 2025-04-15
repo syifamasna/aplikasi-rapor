@@ -49,7 +49,7 @@
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">Laporan Perkembangan <br> Siswa (LPS)</a>
                         <ul aria-expanded="false">
                             <li><a href="{{ route('admin.student_progress_reports.index') }}">Rapor Siswa</a></li>
-                            <li><a href="{{ route('admin.class_progress_reports.index') }}">Rapor Kelas</a></li>
+                            <li><a href="{{ route('admin.class_progress_reports.index') }}">Legger Kelas</a></li>
                         </ul>
                     </li>
                     <li>
@@ -57,7 +57,7 @@
                             (Rapor) Peserta Didik</a>
                         <ul aria-expanded="false">
                             <li><a href="{{ route('admin.student_reports.index') }}">Rapor Siswa</a></li>
-                            <li><a href="{{ route('admin.class_reports.index') }}">Rapor Kelas</a></li>
+                            <li><a href="{{ route('admin.class_reports.index') }}">Legger Kelas</a></li>
                         </ul>
                     </li>
                 </ul>

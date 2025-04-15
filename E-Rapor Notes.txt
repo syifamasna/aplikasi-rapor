@@ -19,9 +19,9 @@ tambahan (revisi) 10 April 2025:
 7. Tahun Ajar diganti jadi Tahun Pelajaran ✅
 8. Download template di halaman guru mapel (impor nilai) kolomnya disesuaikan dengan input nilai siswa (perkelas) ✅
 9. kalau nilai =<70 akan ada warning (di legger) ✅
-10. Rapor Siswa, Rapor Kelas, Legger 
-11. Menu Legger nilai diubah menjadi Cetak Rapor dan Legger
-12. tombol export adanya di data perkelas bukan individu
+10. Rapor Siswa, Rapor Kelas, Legger ✅
+11. Menu Legger nilai diubah menjadi Cetak Rapor dan Legger ✅
+12. tombol export adanya di data perkelas bukan individu ✅
 13. rekap nilai perkelas (Legger Sekolah (gabungan dari legger kelas-kelas))
 14. grafik di dashboard =rata² nilai, gender(doughnut chart)
 15. terapkan nilai dihilangkan

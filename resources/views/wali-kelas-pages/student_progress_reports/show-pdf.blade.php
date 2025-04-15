@@ -3,7 +3,15 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Cetak LPS {{ $student->nama }} - PDF</title>
+    <title>
+        @if (!empty($isAll))
+            Cetak LPS {{ $class->nama ?? '-' }}
+        @elseif(isset($student))
+            Cetak LPS {{ $student->nama }}
+        @else
+            Cetak LPS
+        @endif
+    </title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
