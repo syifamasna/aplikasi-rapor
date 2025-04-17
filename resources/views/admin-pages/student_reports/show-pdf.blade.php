@@ -11,7 +11,7 @@
         @else
             Cetak Rapor
         @endif
-    </title>  
+    </title> 
     <style>
         body {
             font-family: 'Arial', sans-serif;

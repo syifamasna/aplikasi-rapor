@@ -25,3 +25,4 @@ tambahan (revisi) 10 April 2025:
 13. rekap nilai perkelas (Legger Sekolah (gabungan dari legger kelas-kelas))
 14. grafik di dashboard =rata² nilai, gender(doughnut chart)
 15. terapkan nilai dihilangkan
+16. Logo Sekolah dihilangkan

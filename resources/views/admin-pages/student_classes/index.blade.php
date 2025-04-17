@@ -188,7 +188,7 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="nama">Nama Kelas <span class="text-danger">*</span></label>
-                            <input type="text" name="nama" class="form-control" placeholder="Contoh : 1A"
+                            <input type="text" name="nama" class="form-control" placeholder="Contoh : I (Satu) A"
                                 required>
                         </div>
                         <div class="form-group">
@@ -235,7 +235,7 @@
                         <div class="form-group">
                             <label for="edit_nama">Nama Kelas <span class="text-danger">*</span></label>
                             <input type="text" name="nama" id="edit_nama" class="form-control"
-                                placeholder="Contoh : 1A" required>
+                                placeholder="Contoh : I (Satu) A" required>
                         </div>
                         <div class="form-group">
                             <label for="edit_wali_kelas">Wali Kelas <span class="text-danger">*</span></label>
