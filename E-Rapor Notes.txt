@@ -1,13 +1,15 @@
 REVISI APLIKASI E-RAPOR SIT ALIYA
 
 - Download format XSLX (Excel)
-- Data NULL yang sudah diisi di profil bisa dihapus/dikosongkan lagi
-- Function/Element DataTable di Laporan Kelas dibikin stay dan tidak ikut bergeser ketika table di scroll
+- Data NULL yang sudah diisi di profil bisa dihapus/dikosongkan lagi 
+- Input nilai mapel kelas VI (Enam) D Semester I (Satu) Tahun Pelajaran 2024/2025
+- Grafik Prestasi bisa di filter sesuai tahun ajar
+- Buat responsive table untuk mobile
 
 PERTANYAAN 
 
-- Export PDF semua siswa di halaman Individu atau Kelas
-- max karakter untuk catatan wali kelas = 255
+- Mengapa absensi bukan diinput oleh guru jam mata pelajaran tersebut melainkan wali kelas?
+- Kenapa penulisan kelas bukan pakai angka digital (1, 2, 3) dan malah pakai romawi?
 
 tambahan (revisi) 10 April 2025: 
 1. bisa disort berdasarkan nama ✅

@@ -68,7 +68,7 @@
       <a href="{{ url('/') }}" class="logo d-flex align-items-center me-auto">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <img src="{{ asset('landing/assets/img/logorapor.png') }}" alt="Logo E-Rapor" class="logo-img">
-        <h1 class="sitename">E-Rapor Aliya</h1>
+        <h1 class="sitename">E-Rapor SIT Aliya</h1>
       </a>
 
       <nav id="navmenu" class="navmenu">
@@ -260,7 +260,7 @@
 
           <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
             <div class="member">
-              <div class="pic"><img src="{{ asset('landing/assets/img/team/team-1.jpg')}}" class="img-fluid" alt="">
+              <div class="pic"><img src="{{ asset('landing/assets/img/team/team-1.jpeg')}}" class="img-fluid" alt="">
               </div>
               <div class="member-info">
                 <h4>Siti Nur Aisah</h4>
@@ -292,7 +292,7 @@
 
           <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
             <div class="member">
-              <div class="pic"><img src="{{ asset('landing/assets/img/team/team-3.jpg')}}" class="img-fluid" alt="">
+              <div class="pic"><img src="{{ asset('landing/assets/img/team/team-3.jpeg')}}" class="img-fluid" alt="">
               </div>
               <div class="member-info">
                 <h4>Aulia Putri</h4>
@@ -390,7 +390,7 @@
 
                 <div class="col-md-12">
                   <label for="message-field" class="pb-2">Pesan</label>
-                  <textarea class="form-control" name="message" rows="10" id="message-field" placeholder="Masukkan pesan anda..." required></textarea>
+                  <textarea class="form-control" name="message" rows="10" id="message-field" placeholder="Sampaikan pesan anda..." required></textarea>
                 </div>
 
                 <div class="col-md-12 text-center">
@@ -434,7 +434,7 @@
           <div class="footer-contact pt-3">
             <p>Jalan Gardu Raya</p>
             <p>Kota Bogor, 16115</p>
-            <p class="mt-3"><strong>Phone:</strong> <span>+62 857 1344 0089</span></p>
+            <p class="mt-3"><strong>Telepon:</strong> <span>+62 857 1344 0089</span></p>
             <p><strong>Email:</strong> <span>eraporsitaliyadev@gmail.com</span></p>
           </div>
         </div>

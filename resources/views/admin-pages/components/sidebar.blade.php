@@ -42,7 +42,7 @@
             <li>
                 <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                     <i class="fa fa-book"></i>
-                    <span class="nav-text">Legger Nilai</span>
+                    <span class="nav-text">Cetak Rapor & Legger</span>
                 </a>
                 <ul aria-expanded="false">
                     <li>

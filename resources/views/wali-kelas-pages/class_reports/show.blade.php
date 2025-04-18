@@ -17,42 +17,6 @@
 
     <style>
         /* Styling tambahan untuk DataTable */
-        .dataTables_wrapper .dataTables_filter {
-            display: flex;
-            justify-content: flex-end;
-            margin-top: auto;
-            margin-bottom: 10px;
-        }
-
-        .dataTables_wrapper .dataTables_paginate {
-            display: flex;
-            justify-content: flex-end;
-            margin-top: 15px;
-            margin-bottom: 10px;
-        }
-
-        .dataTables_wrapper .dataTables_length {
-            display: flex;
-            justify-content: flex-start;
-            margin-bottom: 10px;
-        }
-
-        .dataTables_wrapper .dataTables_filter input {
-            width: 250px;
-            display: inline-block;
-            margin-left: 10px;
-        }
-
-        .dataTables_wrapper .dataTables_length select {
-            width: 100px;
-            display: inline-block;
-            margin-right: 10px;
-        }
-
-        .dataTables_wrapper .dataTables_info {
-            margin-top: 10px;
-        }
-
         table.dataTable {
             border-collapse: collapse !important;
         }
@@ -61,6 +25,12 @@
             background-color: #593bdb;
             color: white;
             text-align: center;
+        }
+
+        /* Border bawah hanya untuk th "Nilai" dan "Absensi" */
+        table.dataTable thead tr:first-child th:nth-child(3),
+        table.dataTable thead tr:first-child th:nth-child(4) {
+            border-bottom: 1px solid white;
         }
 
         /* Warna latar belang-belang */
@@ -101,6 +71,53 @@
 
         .btn-back:active {
             background-color: #495057 !important;
+        }
+
+        .dataTables_scroll {
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+
+        .dataTables_wrapper .dataTables_scrollBody {
+            overflow-x: auto;
+            border-bottom: none !important;
+            box-shadow: none !important;
+        }
+
+        .dataTables_wrapper .dataTables_filter {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: auto;
+            margin-bottom: 10px;
+        }
+
+        .dataTables_wrapper .dataTables_paginate {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 15px;
+            margin-bottom: 10px;
+        }
+
+        .dataTables_wrapper .dataTables_length {
+            display: flex;
+            justify-content: flex-start;
+            margin-bottom: 10px;
+        }
+
+        .dataTables_wrapper .dataTables_filter input {
+            width: 250px;
+            display: inline-block;
+            margin-left: 10px;
+        }
+
+        .dataTables_wrapper .dataTables_length select {
+            width: 100px;
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        .dataTables_wrapper .dataTables_info {
+            margin-top: 10px;
         }
     </style>
 </head>
@@ -191,78 +208,74 @@
                         </form>
 
                         <!-- TABEL NILAI MATA PELAJARAN -->
-                        <div class="table-wrapper" style="overflow-x: auto; width: 100%;">
-                            <table class="table table-bordered table-striped table-sm" id="dataTable" cellspacing="0"
-                                style="font-size: 0.85rem; min-width: max-content;">
-                                <thead>
-                                    <tr>
-                                        <th rowspan="2" style="vertical-align: middle">No</th>
-                                        <th rowspan="2" style="vertical-align: middle">Nama Lengkap</th>
+                        <table class="table table-bordered table-striped table-sm" id="dataTable" cellspacing="0"
+                            style="font-size: 0.85rem; min-width: max-content;">
+                            <thead>
+                                <tr>
+                                    <th rowspan="2" style="vertical-align: middle">No</th>
+                                    <th rowspan="2" style="vertical-align: middle">Nama Lengkap</th>
 
-                                        {{-- Kolom Nilai --}}
-                                        <th colspan="{{ count($subjects) }}" class="border-bottom">Nilai</th>
+                                    {{-- Kolom Nilai --}}
+                                    <th colspan="{{ count($subjects) }}">Nilai</th>
 
-                                        {{-- Kolom Absensi --}}
-                                        <th colspan="3" class="border-bottom">Absensi</th>
+                                    {{-- Kolom Absensi --}}
+                                    <th colspan="3">Absensi</th>
 
-                                        <th rowspan="2" style="vertical-align: middle">Jumlah</th>
-                                        <th rowspan="2" style="vertical-align: middle">Rata-Rata</th>
-                                    </tr>
-                                    <tr>
-                                        @foreach ($subjects as $subject)
-                                            <th>{{ $subject->singkatan ?? $subject->nama }}</th>
-                                        @endforeach
-                                        <th>S</th>
-                                        <th>I</th>
-                                        <th>A</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($students as $student)
-                                        <tr>
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $student->nama }}</td>
-
-                                            {{-- Nilai per mapel --}}
-                                            @foreach ($subjects as $subject)
-                                                @php
-                                                    $grade = $student->grades->firstWhere('subject_id', $subject->id);
-                                                @endphp
-                                                <td>{{ $grade->nilai ?? '-' }}</td>
-                                            @endforeach
-
-                                            {{-- Absensi --}}
-                                            <td>{{ $student->absensi['sakit'] ?? 0 }}</td>
-                                            <td>{{ $student->absensi['izin'] ?? 0 }}</td>
-                                            <td>{{ $student->absensi['alfa'] ?? 0 }}</td>
-
-                                            {{-- Jumlah dan Rata-Rata --}}
-                                            @php
-                                                $nilaiArray = $subjects
-                                                    ->map(function ($subject) use ($student) {
-                                                        $nilai = optional(
-                                                            $student->grades
-                                                                ->where('subject_id', $subject->id)
-                                                                ->first(),
-                                                        )->nilai;
-
-                                                        return is_numeric($nilai) ? floatval($nilai) : null;
-                                                    })
-                                                    ->filter();
-
-                                                $jumlah = $nilaiArray->sum();
-                                                $rataRata =
-                                                    $nilaiArray->count() > 0
-                                                        ? number_format($jumlah / $nilaiArray->count(), 2)
-                                                        : '-';
-                                            @endphp
-                                            <td>{{ $jumlah }}</td>
-                                            <td>{{ $rataRata }}</td>
-                                        </tr>
+                                    <th rowspan="2" style="vertical-align: middle">Jumlah</th>
+                                    <th rowspan="2" style="vertical-align: middle">Rata-Rata</th>
+                                </tr>
+                                <tr>
+                                    @foreach ($subjects as $subject)
+                                        <th>{{ $subject->singkatan ?? $subject->nama }}</th>
                                     @endforeach
-                                </tbody>
-                            </table>
-                        </div>
+                                    <th>S</th>
+                                    <th>I</th>
+                                    <th>A</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($students as $student)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $student->nama }}</td>
+
+                                        {{-- Nilai per mapel --}}
+                                        @foreach ($subjects as $subject)
+                                            @php
+                                                $grade = $student->grades->firstWhere('subject_id', $subject->id);
+                                            @endphp
+                                            <td>{{ $grade->nilai ?? '-' }}</td>
+                                        @endforeach
+
+                                        {{-- Absensi --}}
+                                        <td>{{ $student->absensi['sakit'] ?? 0 }}</td>
+                                        <td>{{ $student->absensi['izin'] ?? 0 }}</td>
+                                        <td>{{ $student->absensi['alfa'] ?? 0 }}</td>
+
+                                        {{-- Jumlah dan Rata-Rata --}}
+                                        @php
+                                            $nilaiArray = $subjects
+                                                ->map(function ($subject) use ($student) {
+                                                    $nilai = optional(
+                                                        $student->grades->where('subject_id', $subject->id)->first(),
+                                                    )->nilai;
+
+                                                    return is_numeric($nilai) ? floatval($nilai) : null;
+                                                })
+                                                ->filter();
+
+                                            $jumlah = $nilaiArray->sum();
+                                            $rataRata =
+                                                $nilaiArray->count() > 0
+                                                    ? number_format($jumlah / $nilaiArray->count(), 2)
+                                                    : '-';
+                                        @endphp
+                                        <td>{{ $jumlah }}</td>
+                                        <td>{{ $rataRata }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
 
                         <div class="form-group mt-4 text-right">
                             <a href="{{ url()->previous() }}" class="btn btn-back">
@@ -318,15 +331,19 @@
 
     <script>
         $(document).ready(function() {
-            $('#dataTable').DataTable({
-                "paging": true,
-                "lengthChange": true,
-                "searching": true,
-                "ordering": false,
-                "info": true,
-                "autoWidth": false,
-                "responsive": true,
-                "lengthMenu": [5, 10, 25, 50, 100],
+            var table = $('#dataTable').DataTable({
+                paging: true,
+                lengthChange: true,
+                searching: true,
+                ordering: false,
+                info: true,
+                autoWidth: false,
+                responsive: true,
+                scrollX: true,
+                lengthMenu: [5, 10, 25, 50, 100],
+                drawCallback: function() {
+                    this.api().columns.adjust();
+                }
             });
         });
     </script>
