@@ -100,7 +100,7 @@
                     <div class="col-md-6 p-md-0">
                         <h4 class="mb-0">Input Capaian Kompetensi {{ $class->nama ?? 'Tidak Ada Kelas' }}</h4>
                     </div>
-                    <div class="col-md-6 p-md-0 d-flex justify-content-end">
+                    <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('guru_mapel.dashboard') }}">Dashboard</a></li>
                             <li class="breadcrumb-item"><a href="javascript:void(0)">Administrasi</a></li>
@@ -260,7 +260,7 @@
                                 </table>
                             </div>
 
-                            <div class="form-check text-left mt-3">
+                            <div class="form-check text-left mt-3 mb-3">
                                 <input class="form-check-input" type="checkbox" id="confirmCheckbox">
                                 <label class="form-check-label" for="confirmCheckbox">
                                     Saya yakin sudah mengisi dengan benar
@@ -289,26 +289,26 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             const checkbox = document.getElementById('confirmCheckbox');
             const submitButton = document.querySelector('button[type="submit"]');
-    
+
             const isDisabledFromServer = {{ $isDisabled ? 'true' : 'false' }};
-    
+
             // ⏱ Set kondisi awal saat halaman dimuat
             if (!isDisabledFromServer) {
                 submitButton.disabled = true; // awalnya disable
             }
-    
+
             // 🟢 Update tombol saat checkbox dicentang/diubah
-            checkbox.addEventListener('change', function () {
+            checkbox.addEventListener('change', function() {
                 if (!isDisabledFromServer) {
                     submitButton.disabled = !checkbox.checked;
                 }
             });
         });
     </script>
-    
+
     <!-- Scripts -->
     <script src="{{ asset('vendor/global/global.min.js') }}"></script>
     <script src="{{ asset('js/quixnav-init.js') }}"></script>

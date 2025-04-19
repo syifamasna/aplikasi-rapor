@@ -118,21 +118,6 @@
                             </div>
                         </a>
                     </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <a href="{{ route('admin.achievements.index') }}" class="text-decoration-none">
-                            <div class="card">
-                                <div class="stat-widget-one card-body text-warning">
-                                    <div class="stat-icon d-inline-block">
-                                        <i class="ti-medall border-warning"></i>
-                                    </div>
-                                    <div class="stat-content d-inline-block">
-                                        <div class="stat-text">Data Prestasi</div>
-                                        <div class="stat-digit">{{ $totalPrestasi }}</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
                     
                 </div>
 

@@ -18,8 +18,7 @@ class DashboardController extends Controller
         $totalMapel = Subject::count();
         $totalKelas = StudentClass::count();
         $totalPengguna = User::count();
-        $totalPrestasi = Achievement::count();
 
-        return view('admin-pages.dashboard.index', compact('totalSiswa', 'totalMapel', 'totalKelas', 'totalPengguna', 'totalPrestasi'));
+        return view('admin-pages.dashboard.index', compact('totalSiswa', 'totalMapel', 'totalKelas', 'totalPengguna'));
     }
 }

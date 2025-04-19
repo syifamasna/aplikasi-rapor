@@ -105,7 +105,7 @@
                     <div class="col-md-6 p-md-0">
                         <h4 class="mb-0">Daftar Kelas SIT Aliya</h4>
                     </div>
-                    <div class="col-md-6 p-md-0 d-flex justify-content-end">
+                    <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('wali_kelas.dashboard') }}">Dashboard</a></li>
                             <li class="breadcrumb-item"><a href="javascript:void(0)">Administrasi</a></li>
@@ -137,7 +137,8 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $student_classes->nama }}
                                             <td>{{ $student_classes->waliKelas->nama ?? '-' }}</td>
-                                            <td>{{ $student_classes->students->count() }}</td> <!-- Menampilkan jumlah siswa -->
+                                            <td>{{ $student_classes->students->count() }}</td>
+                                            <!-- Menampilkan jumlah siswa -->
                                             </td>
                                             <td>
                                                 <a href="{{ route('wali_kelas.student_classes.students', ['class_id' => $student_classes->id]) }}"

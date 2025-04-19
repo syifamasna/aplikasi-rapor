@@ -30,9 +30,7 @@
             <div class="container-fluid">
                 <div class="row page-titles mx-0">
                     <div class="col-sm-6 p-md-0">
-                        <div class="welcome-text">
-                            <h4>Edit Data Sekolah</h4>
-                        </div>
+                        <h4 class="mb-0">Edit Data Sekolah</h4>
                     </div>
                     <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                         <ol class="breadcrumb">
@@ -106,7 +104,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-check text-left">
+                                    <div class="form-check text-left mb-3">
                                         <input class="form-check-input" type="checkbox" id="editConfirmCheckbox">
                                         <label class="form-check-label" for="editConfirmCheckbox">
                                             Saya yakin ingin menyimpan perubahan
@@ -114,8 +112,8 @@
                                     </div>
 
                                     <div class="form-group text-right">
-                                        <button type="submit" class="btn btn-success text-white" id="editSubmitButton" disabled><i
-                                                class="fa fa-save"></i> Simpan</button>
+                                        <button type="submit" class="btn btn-success text-white" id="editSubmitButton"
+                                            disabled><i class="fa fa-save"></i> Simpan</button>
                                         <a href="{{ route('admin.school_profiles.index') }}"
                                             class="btn btn-secondary">Batal</a>
                                     </div>

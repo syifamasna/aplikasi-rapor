@@ -10,6 +10,9 @@ PERTANYAAN
 
 - Mengapa absensi bukan diinput oleh guru jam mata pelajaran tersebut melainkan wali kelas?
 - Kenapa penulisan kelas bukan pakai angka digital (1, 2, 3) dan malah pakai romawi?
+- Kenapa pakai Laravel 11?
+- Kenapa pakai XAMPP versi 8?
+- Kenapa pakai Bootstrap 3?
 
 tambahan (revisi) 10 April 2025: 
 1. bisa disort berdasarkan nama ✅
