@@ -74,7 +74,9 @@
                             </div>
                         </a>
                     </div>
-                    <div class="col-lg-8 col-sm-12">
+                </div>
+                <div class="row mt-2">
+                    <div class="col-sm-12">
                         <div class="card">
                             <div class="card-header bg-gradient-primary text-white">
                                 <h5 class="mb-0">Grafik Prestasi per Kelas</h5>

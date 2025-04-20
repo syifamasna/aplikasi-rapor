@@ -2,9 +2,8 @@ REVISI APLIKASI E-RAPOR SIT ALIYA
 
 - Download format XSLX (Excel)
 - Data NULL yang sudah diisi di profil bisa dihapus/dikosongkan lagi 
-- Input nilai mapel kelas VI (Enam) D Semester I (Satu) Tahun Pelajaran 2024/2025
 - Grafik Prestasi bisa di filter sesuai tahun ajar
-- Buat responsive table untuk mobile
+- Info dan paginate di buat ke center dalam mode responsive
 
 PERTANYAAN 
 

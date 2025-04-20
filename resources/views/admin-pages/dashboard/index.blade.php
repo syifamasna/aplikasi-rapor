@@ -17,16 +17,17 @@
             transition: transform 0.3s ease, color 0.3s ease;
         }
 
-        .card:hover {
+        .card-widget {
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .card-widget:hover {
             transform: scale(1.05);
         }
 
-        .card:hover .stat-text,
-        .card:hover .stat-digit {
-            color: inherit;
-        }
-
-        .card:hover .stat-icon i {
+        .card-widget:hover .stat-text,
+        .card-widget:hover .stat-digit,
+        .card-widget:hover .stat-icon i {
             color: inherit !important;
         }
     </style>
@@ -60,7 +61,7 @@
                 <div class="row">
                     <div class="col-lg-3 col-sm-6">
                         <a href="{{ route('admin.students.index') }}" class="text-decoration-none">
-                            <div class="card">
+                            <div class="card card-widget">
                                 <div class="stat-widget-one card-body text-primary">
                                     <div class="stat-icon d-inline-block">
                                         <i class="ti-user border-primary"></i>
@@ -75,7 +76,7 @@
                     </div>
                     <div class="col-lg-3 col-sm-6">
                         <a href="{{ route('admin.subjects.index') }}" class="text-decoration-none">
-                            <div class="card">
+                            <div class="card card-widget">
                                 <div class="stat-widget-one card-body text-success">
                                     <div class="stat-icon d-inline-block">
                                         <i class="ti-book border-success"></i>
@@ -90,7 +91,7 @@
                     </div>
                     <div class="col-lg-3 col-sm-6">
                         <a href="{{ route('admin.student_classes.index') }}" class="text-decoration-none">
-                            <div class="card">
+                            <div class="card card-widget">
                                 <div class="stat-widget-one card-body text-info">
                                     <div class="stat-icon d-inline-block">
                                         <i class="ti-home border-info"></i>
@@ -105,7 +106,7 @@
                     </div>
                     <div class="col-lg-3 col-sm-6">
                         <a href="{{ route('admin.users.index') }}" class="text-decoration-none">
-                            <div class="card">
+                            <div class="card card-widget">
                                 <div class="stat-widget-one card-body text-danger">
                                     <div class="stat-icon d-inline-block">
                                         <i class="ti-id-badge border-danger"></i>
@@ -118,7 +119,19 @@
                             </div>
                         </a>
                     </div>
-                    
+
+                </div>
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title">Jumlah Siswa per Kelas</h5>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="siswaPerKelasChart" height="120"></canvas>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
             </div>
@@ -148,7 +161,41 @@
     <script src="{{ asset('vendor/global/global.min.js') }}"></script>
     <script src="{{ asset('js/quixnav-init.js') }}"></script>
     <script src="{{ asset('js/custom.min.js') }}"></script>
+    <script src="{{ asset('assets/js/lib/chart-js/Chart.bundle.js') }}"></script>
     <script src="{{ asset('vendor/sweetalert2/dist/sweetalert2.min.js') }}"></script>
+
+    <script>
+        const siswaPerKelasData = @json($siswaPerKelas);
+        const ctx = document.getElementById('siswaPerKelasChart').getContext('2d');
+        const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+        gradient.addColorStop(0, 'rgba(89, 59, 219, 0.8)'); // #593bdb solid-ish
+        gradient.addColorStop(1, 'rgba(89, 59, 219, 0.1)'); // faded
+
+        const chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: siswaPerKelasData.map(item => item.kelas),
+                datasets: [{
+                    label: 'Jumlah Siswa',
+                    data: siswaPerKelasData.map(item => item.total),
+                    backgroundColor: gradient,
+                    borderColor: '#593bdb',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            precision: 0
+                        }
+                    }
+                }
+            }
+        });
+    </script>
 
 </body>
 
