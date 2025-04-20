@@ -72,7 +72,7 @@ class GraduationDecisionController extends Controller
             'class_id' => 'required|exists:student_classes,id',
             'school_year_id' => 'required|exists:school_years,id',
             'graduation_decisions.*.student_id' => 'required|exists:students,id',
-            'graduation_decisions.*.status' => 'required|in:lulus,tidak lulus',
+            'graduation_decisions.*.status' => 'required|in:"naik/lulus","tidak naik/lulus"',
         ]);
 
         foreach ($validated['graduation_decisions'] as $data) {

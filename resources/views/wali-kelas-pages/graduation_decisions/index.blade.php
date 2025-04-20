@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Keputusan Kelulusan - E-Rapor SIT Aliya</title>
+    <title>Keputusan Naik/Lulus - E-Rapor SIT Aliya</title>
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('vendor/sweetalert2/dist/sweetalert2.min.css') }}">

@@ -96,7 +96,7 @@
             <div class="container-fluid">
                 <div class="row page-titles mx-0">
                     <div class="col-md-6 p-md-0">
-                        <h4 class="mb-0">Laporan Perkembangan {{ $student->nama ?? '-' }}</h4>
+                        <h4 class="mb-0">Cetak LPS {{ $student->nama ?? '-' }}</h4>
                     </div>
                     <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                         <ol class="breadcrumb">
@@ -104,12 +104,12 @@
                             <li class="breadcrumb-item"><a href="javascript:void(0)">Cetak Rapor & Legger</a></li>
                             <li class="breadcrumb-item"><a
                                     href="{{ route('wali_kelas.student_progress_reports.index') }}"
-                                    title="Laporan Perkembangan Siswa (LPS)">LPS</a></li>
+                                    title="Cetak Laporan Perkembangan Siswa (LPS)">Cetak LPS</a></li>
                             <li class="breadcrumb-item">
                                 <a href="{{ route('wali_kelas.student_progress_reports.show', ['class_id' => $class->id, 'student_id' => $student->id]) }}"
-                                    title="LPS {{ $student->nama ?? '-' }}"
+                                    title="Cetak LPS {{ $student->nama ?? '-' }}"
                                     class="{{ request()->is('wali/student_progress_reports/*') ? 'text-dark' : '' }}">
-                                    Rapor Siswa
+                                    Cetak LPS Siswa
                                 </a>
                             </li>
 
@@ -306,7 +306,7 @@
                             </a>
                             <a href="{{ route('wali_kelas.student_progress_reports.export-pdf', ['class_id' => $class->id, 'student_id' => $student->id, 'school_year_id' => request('school_year_id', $schoolYear->id ?? '')]) }}"
                                 class="btn btn-success text-white">
-                                <i class="fa fa-print"></i> Cetak Rapor</a>
+                                <i class="fa fa-print"></i> Cetak LPS</a>
                         </div>
 
                     </div>

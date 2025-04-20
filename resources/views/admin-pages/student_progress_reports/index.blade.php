@@ -109,7 +109,7 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
                             <li class="breadcrumb-item"><a href="javascript:void(0)">Cetak Rapor & Legger</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">LPS</li>
+                            <li class="breadcrumb-item active" aria-current="page">Cetak LPS</li>
                         </ol>
                     </div>
                 </div>

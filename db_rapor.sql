@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 20 Apr 2025 pada 13.40
--- Versi server: 11.3.0-MariaDB
--- Versi PHP: 8.2.12
+-- Generation Time: Apr 20, 2025 at 07:44 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `achievements`
+-- Table structure for table `achievements`
 --
 
 CREATE TABLE `achievements` (
@@ -38,7 +38,7 @@ CREATE TABLE `achievements` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data untuk tabel `achievements`
+-- Dumping data for table `achievements`
 --
 
 INSERT INTO `achievements` (`id`, `student_id`, `school_year_id`, `jenis_prestasi`, `keterangan`, `created_at`, `updated_at`) VALUES
@@ -114,7 +114,7 @@ INSERT INTO `achievements` (`id`, `student_id`, `school_year_id`, `jenis_prestas
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `attendances`
+-- Table structure for table `attendances`
 --
 
 CREATE TABLE `attendances` (
@@ -129,7 +129,7 @@ CREATE TABLE `attendances` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data untuk tabel `attendances`
+-- Dumping data for table `attendances`
 --
 
 INSERT INTO `attendances` (`id`, `student_id`, `school_year_id`, `sakit`, `izin`, `alfa`, `created_at`, `updated_at`) VALUES
@@ -218,7 +218,7 @@ INSERT INTO `attendances` (`id`, `student_id`, `school_year_id`, `sakit`, `izin`
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `cache`
+-- Table structure for table `cache`
 --
 
 CREATE TABLE `cache` (
@@ -230,7 +230,7 @@ CREATE TABLE `cache` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `cache_locks`
+-- Table structure for table `cache_locks`
 --
 
 CREATE TABLE `cache_locks` (
@@ -242,7 +242,7 @@ CREATE TABLE `cache_locks` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `failed_jobs`
+-- Table structure for table `failed_jobs`
 --
 
 CREATE TABLE `failed_jobs` (
@@ -258,7 +258,7 @@ CREATE TABLE `failed_jobs` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `grades`
+-- Table structure for table `grades`
 --
 
 CREATE TABLE `grades` (
@@ -272,7 +272,7 @@ CREATE TABLE `grades` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data untuk tabel `grades`
+-- Dumping data for table `grades`
 --
 
 INSERT INTO `grades` (`id`, `student_id`, `school_year_id`, `subject_id`, `nilai`, `created_at`, `updated_at`) VALUES
@@ -769,7 +769,7 @@ INSERT INTO `grades` (`id`, `student_id`, `school_year_id`, `subject_id`, `nilai
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `grade_details`
+-- Table structure for table `grade_details`
 --
 
 CREATE TABLE `grade_details` (
@@ -783,7 +783,7 @@ CREATE TABLE `grade_details` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data untuk tabel `grade_details`
+-- Dumping data for table `grade_details`
 --
 
 INSERT INTO `grade_details` (`id`, `grade_id`, `target`, `capaian`, `aplikasi_program`, `created_at`, `updated_at`) VALUES
@@ -899,82 +899,82 @@ INSERT INTO `grade_details` (`id`, `grade_id`, `target`, `capaian`, `aplikasi_pr
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `graduation_decisions`
+-- Table structure for table `graduation_decisions`
 --
 
 CREATE TABLE `graduation_decisions` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `student_id` bigint(20) UNSIGNED NOT NULL,
   `school_year_id` bigint(20) UNSIGNED NOT NULL,
-  `status` enum('lulus','tidak lulus') NOT NULL,
+  `status` enum('naik/lulus','tidak naik/lulus') NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data untuk tabel `graduation_decisions`
+-- Dumping data for table `graduation_decisions`
 --
 
 INSERT INTO `graduation_decisions` (`id`, `student_id`, `school_year_id`, `status`, `created_at`, `updated_at`) VALUES
-(1, 759, 3, 'lulus', '2025-04-11 08:57:20', '2025-04-11 08:58:49'),
-(2, 760, 3, 'lulus', '2025-04-11 08:57:20', '2025-04-11 08:57:20'),
-(3, 761, 3, 'lulus', '2025-04-11 08:57:20', '2025-04-11 08:57:20'),
-(4, 762, 3, 'lulus', '2025-04-11 08:57:21', '2025-04-11 08:57:21'),
-(5, 763, 3, 'lulus', '2025-04-11 08:57:21', '2025-04-11 08:57:21'),
-(6, 764, 3, 'lulus', '2025-04-11 08:57:21', '2025-04-11 08:57:21'),
-(7, 765, 3, 'lulus', '2025-04-11 08:57:21', '2025-04-11 08:57:21'),
-(8, 766, 3, 'lulus', '2025-04-11 08:57:21', '2025-04-11 08:57:21'),
-(9, 767, 3, 'lulus', '2025-04-11 08:57:21', '2025-04-11 08:57:21'),
-(10, 768, 3, 'lulus', '2025-04-11 08:57:21', '2025-04-11 08:57:21'),
-(11, 769, 3, 'lulus', '2025-04-11 08:57:21', '2025-04-11 08:57:21'),
-(12, 770, 3, 'lulus', '2025-04-11 08:57:21', '2025-04-11 08:57:21'),
-(13, 771, 3, 'lulus', '2025-04-11 08:57:21', '2025-04-11 08:57:21'),
-(14, 772, 3, 'lulus', '2025-04-11 08:57:21', '2025-04-11 08:57:21'),
-(15, 773, 3, 'lulus', '2025-04-11 08:57:21', '2025-04-11 08:57:21'),
-(16, 774, 3, 'lulus', '2025-04-11 08:57:21', '2025-04-11 08:57:21'),
-(17, 775, 3, 'lulus', '2025-04-11 08:57:21', '2025-04-11 08:57:21'),
-(18, 776, 3, 'lulus', '2025-04-11 08:57:21', '2025-04-11 08:57:21'),
-(19, 777, 3, 'lulus', '2025-04-11 08:57:21', '2025-04-11 08:57:21'),
-(20, 778, 3, 'lulus', '2025-04-11 08:57:22', '2025-04-11 08:57:22'),
-(21, 779, 3, 'lulus', '2025-04-11 08:57:22', '2025-04-11 08:57:22'),
-(22, 780, 3, 'lulus', '2025-04-11 08:57:22', '2025-04-11 08:57:22'),
-(23, 781, 3, 'lulus', '2025-04-11 08:57:22', '2025-04-11 08:57:22'),
-(24, 782, 3, 'lulus', '2025-04-11 08:57:22', '2025-04-11 08:57:22'),
-(25, 783, 3, 'lulus', '2025-04-11 08:57:22', '2025-04-11 08:57:22'),
-(26, 784, 3, 'lulus', '2025-04-11 08:57:22', '2025-04-11 08:57:22'),
-(27, 785, 3, 'lulus', '2025-04-11 08:57:22', '2025-04-11 08:57:22'),
-(28, 894, 3, 'lulus', '2025-04-11 11:26:39', '2025-04-11 11:41:37'),
-(29, 895, 3, 'lulus', '2025-04-11 11:26:39', '2025-04-11 11:26:39'),
-(30, 896, 3, 'lulus', '2025-04-11 11:26:39', '2025-04-11 11:26:39'),
-(31, 897, 3, 'lulus', '2025-04-11 11:26:39', '2025-04-11 11:26:39'),
-(32, 898, 3, 'lulus', '2025-04-11 11:26:39', '2025-04-11 11:26:39'),
-(33, 899, 3, 'lulus', '2025-04-11 11:26:39', '2025-04-11 11:26:39'),
-(34, 900, 3, 'lulus', '2025-04-11 11:26:39', '2025-04-11 11:26:39'),
-(35, 901, 3, 'lulus', '2025-04-11 11:26:39', '2025-04-11 11:26:39'),
-(36, 902, 3, 'lulus', '2025-04-11 11:26:39', '2025-04-11 11:26:39'),
-(37, 903, 3, 'lulus', '2025-04-11 11:26:39', '2025-04-11 11:26:39'),
-(38, 904, 3, 'lulus', '2025-04-11 11:26:39', '2025-04-11 11:26:39'),
-(39, 905, 3, 'lulus', '2025-04-11 11:26:39', '2025-04-11 11:26:39'),
-(40, 906, 3, 'lulus', '2025-04-11 11:26:39', '2025-04-11 11:26:39'),
-(41, 907, 3, 'lulus', '2025-04-11 11:26:39', '2025-04-11 11:26:39'),
-(42, 908, 3, 'lulus', '2025-04-11 11:26:40', '2025-04-11 11:26:40'),
-(43, 909, 3, 'lulus', '2025-04-11 11:26:40', '2025-04-11 11:26:40'),
-(44, 910, 3, 'lulus', '2025-04-11 11:26:40', '2025-04-11 11:26:40'),
-(45, 911, 3, 'lulus', '2025-04-11 11:26:40', '2025-04-11 11:26:40'),
-(46, 912, 3, 'lulus', '2025-04-11 11:26:40', '2025-04-11 11:26:40'),
-(47, 913, 3, 'lulus', '2025-04-11 11:26:40', '2025-04-11 11:26:40'),
-(48, 914, 3, 'lulus', '2025-04-11 11:26:40', '2025-04-11 11:26:40'),
-(49, 915, 3, 'lulus', '2025-04-11 11:26:40', '2025-04-11 11:26:40'),
-(50, 916, 3, 'lulus', '2025-04-11 11:26:40', '2025-04-11 11:26:40'),
-(51, 917, 3, 'lulus', '2025-04-11 11:26:40', '2025-04-11 11:26:40'),
-(52, 918, 3, 'lulus', '2025-04-11 11:26:40', '2025-04-11 11:26:40'),
-(53, 919, 3, 'lulus', '2025-04-11 11:26:40', '2025-04-11 11:26:40'),
-(54, 920, 3, 'lulus', '2025-04-11 11:26:40', '2025-04-11 11:26:40');
+(1, 759, 3, '', '2025-04-11 08:57:20', '2025-04-11 08:58:49'),
+(2, 760, 3, '', '2025-04-11 08:57:20', '2025-04-11 08:57:20'),
+(3, 761, 3, '', '2025-04-11 08:57:20', '2025-04-11 08:57:20'),
+(4, 762, 3, '', '2025-04-11 08:57:21', '2025-04-11 08:57:21'),
+(5, 763, 3, '', '2025-04-11 08:57:21', '2025-04-11 08:57:21'),
+(6, 764, 3, '', '2025-04-11 08:57:21', '2025-04-11 08:57:21'),
+(7, 765, 3, '', '2025-04-11 08:57:21', '2025-04-11 08:57:21'),
+(8, 766, 3, '', '2025-04-11 08:57:21', '2025-04-11 08:57:21'),
+(9, 767, 3, '', '2025-04-11 08:57:21', '2025-04-11 08:57:21'),
+(10, 768, 3, '', '2025-04-11 08:57:21', '2025-04-11 08:57:21'),
+(11, 769, 3, '', '2025-04-11 08:57:21', '2025-04-11 08:57:21'),
+(12, 770, 3, '', '2025-04-11 08:57:21', '2025-04-11 08:57:21'),
+(13, 771, 3, '', '2025-04-11 08:57:21', '2025-04-11 08:57:21'),
+(14, 772, 3, '', '2025-04-11 08:57:21', '2025-04-11 08:57:21'),
+(15, 773, 3, '', '2025-04-11 08:57:21', '2025-04-11 08:57:21'),
+(16, 774, 3, '', '2025-04-11 08:57:21', '2025-04-11 08:57:21'),
+(17, 775, 3, '', '2025-04-11 08:57:21', '2025-04-11 08:57:21'),
+(18, 776, 3, '', '2025-04-11 08:57:21', '2025-04-11 08:57:21'),
+(19, 777, 3, '', '2025-04-11 08:57:21', '2025-04-11 08:57:21'),
+(20, 778, 3, '', '2025-04-11 08:57:22', '2025-04-11 08:57:22'),
+(21, 779, 3, '', '2025-04-11 08:57:22', '2025-04-11 08:57:22'),
+(22, 780, 3, '', '2025-04-11 08:57:22', '2025-04-11 08:57:22'),
+(23, 781, 3, '', '2025-04-11 08:57:22', '2025-04-11 08:57:22'),
+(24, 782, 3, '', '2025-04-11 08:57:22', '2025-04-11 08:57:22'),
+(25, 783, 3, '', '2025-04-11 08:57:22', '2025-04-11 08:57:22'),
+(26, 784, 3, '', '2025-04-11 08:57:22', '2025-04-11 08:57:22'),
+(27, 785, 3, '', '2025-04-11 08:57:22', '2025-04-11 08:57:22'),
+(28, 894, 3, 'naik/lulus', '2025-04-11 11:26:39', '2025-04-20 10:30:42'),
+(29, 895, 3, 'naik/lulus', '2025-04-11 11:26:39', '2025-04-20 10:30:42'),
+(30, 896, 3, 'naik/lulus', '2025-04-11 11:26:39', '2025-04-20 10:30:42'),
+(31, 897, 3, 'naik/lulus', '2025-04-11 11:26:39', '2025-04-20 10:30:42'),
+(32, 898, 3, 'naik/lulus', '2025-04-11 11:26:39', '2025-04-20 10:30:42'),
+(33, 899, 3, 'naik/lulus', '2025-04-11 11:26:39', '2025-04-20 10:30:42'),
+(34, 900, 3, 'naik/lulus', '2025-04-11 11:26:39', '2025-04-20 10:30:42'),
+(35, 901, 3, 'naik/lulus', '2025-04-11 11:26:39', '2025-04-20 10:30:42'),
+(36, 902, 3, 'naik/lulus', '2025-04-11 11:26:39', '2025-04-20 10:30:42'),
+(37, 903, 3, 'naik/lulus', '2025-04-11 11:26:39', '2025-04-20 10:30:42'),
+(38, 904, 3, 'naik/lulus', '2025-04-11 11:26:39', '2025-04-20 10:30:42'),
+(39, 905, 3, 'naik/lulus', '2025-04-11 11:26:39', '2025-04-20 10:30:42'),
+(40, 906, 3, 'naik/lulus', '2025-04-11 11:26:39', '2025-04-20 10:30:42'),
+(41, 907, 3, 'naik/lulus', '2025-04-11 11:26:39', '2025-04-20 10:30:43'),
+(42, 908, 3, 'naik/lulus', '2025-04-11 11:26:40', '2025-04-20 10:30:43'),
+(43, 909, 3, 'naik/lulus', '2025-04-11 11:26:40', '2025-04-20 10:30:43'),
+(44, 910, 3, 'naik/lulus', '2025-04-11 11:26:40', '2025-04-20 10:30:43'),
+(45, 911, 3, 'naik/lulus', '2025-04-11 11:26:40', '2025-04-20 10:30:43'),
+(46, 912, 3, 'naik/lulus', '2025-04-11 11:26:40', '2025-04-20 10:30:43'),
+(47, 913, 3, 'naik/lulus', '2025-04-11 11:26:40', '2025-04-20 10:30:43'),
+(48, 914, 3, 'naik/lulus', '2025-04-11 11:26:40', '2025-04-20 10:30:43'),
+(49, 915, 3, 'naik/lulus', '2025-04-11 11:26:40', '2025-04-20 10:30:43'),
+(50, 916, 3, 'naik/lulus', '2025-04-11 11:26:40', '2025-04-20 10:30:43'),
+(51, 917, 3, 'naik/lulus', '2025-04-11 11:26:40', '2025-04-20 10:30:43'),
+(52, 918, 3, 'naik/lulus', '2025-04-11 11:26:40', '2025-04-20 10:30:43'),
+(53, 919, 3, 'naik/lulus', '2025-04-11 11:26:40', '2025-04-20 10:30:43'),
+(54, 920, 3, 'naik/lulus', '2025-04-11 11:26:40', '2025-04-20 10:30:43');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `jobs`
+-- Table structure for table `jobs`
 --
 
 CREATE TABLE `jobs` (
@@ -990,7 +990,7 @@ CREATE TABLE `jobs` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `job_batches`
+-- Table structure for table `job_batches`
 --
 
 CREATE TABLE `job_batches` (
@@ -1009,7 +1009,7 @@ CREATE TABLE `job_batches` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `migrations`
+-- Table structure for table `migrations`
 --
 
 CREATE TABLE `migrations` (
@@ -1019,7 +1019,7 @@ CREATE TABLE `migrations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data untuk tabel `migrations`
+-- Dumping data for table `migrations`
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
@@ -1041,7 +1041,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `notes`
+-- Table structure for table `notes`
 --
 
 CREATE TABLE `notes` (
@@ -1054,7 +1054,7 @@ CREATE TABLE `notes` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data untuk tabel `notes`
+-- Dumping data for table `notes`
 --
 
 INSERT INTO `notes` (`id`, `student_id`, `school_year_id`, `catatan`, `created_at`, `updated_at`) VALUES
@@ -1197,7 +1197,7 @@ INSERT INTO `notes` (`id`, `student_id`, `school_year_id`, `catatan`, `created_a
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `password_reset_tokens`
+-- Table structure for table `password_reset_tokens`
 --
 
 CREATE TABLE `password_reset_tokens` (
@@ -1209,7 +1209,7 @@ CREATE TABLE `password_reset_tokens` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `roles`
+-- Table structure for table `roles`
 --
 
 CREATE TABLE `roles` (
@@ -1220,7 +1220,7 @@ CREATE TABLE `roles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `roles`
+-- Dumping data for table `roles`
 --
 
 INSERT INTO `roles` (`id`, `role`, `created_at`, `updated_at`) VALUES
@@ -1232,7 +1232,7 @@ INSERT INTO `roles` (`id`, `role`, `created_at`, `updated_at`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `role_user`
+-- Table structure for table `role_user`
 --
 
 CREATE TABLE `role_user` (
@@ -1244,7 +1244,7 @@ CREATE TABLE `role_user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `role_user`
+-- Dumping data for table `role_user`
 --
 
 INSERT INTO `role_user` (`id`, `user_id`, `role_id`, `created_at`, `updated_at`) VALUES
@@ -1350,7 +1350,7 @@ INSERT INTO `role_user` (`id`, `user_id`, `role_id`, `created_at`, `updated_at`)
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `school_profiles`
+-- Table structure for table `school_profiles`
 --
 
 CREATE TABLE `school_profiles` (
@@ -1369,16 +1369,16 @@ CREATE TABLE `school_profiles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `school_profiles`
+-- Dumping data for table `school_profiles`
 --
 
 INSERT INTO `school_profiles` (`id`, `nama`, `npsn`, `kode_pos`, `telepon`, `alamat`, `email`, `website`, `kepsek`, `logo`, `created_at`, `updated_at`) VALUES
-(1, 'SIT Aliya', 20219975, 16117, '02518422129', 'Jl. Gardu Raya, RT.03/RW.11, Bubulak, Bogor Barat, Kota Bogor', 'sitaliya01@gmail.com', 'https://sitaliya.sch.id/', 'Luluk Dianarini, S.TP, M.Pd.', 'school_logos/ClhgsLAFUO1y9fnMWvvepINFU9ORk4J88TPQRO0Y.png', NULL, '2025-03-21 17:35:47');
+(1, 'SIT Aliya', 20219975, 16115, '02518422129', 'Jl. Gardu Raya, RT.03/RW.11, Bubulak, Bogor Barat, Kota Bogor', 'sitaliya01@gmail.com', 'https://sitaliya.sch.id/', 'Luluk Dianarini, S.TP, M.Pd.', 'school_logos/ClhgsLAFUO1y9fnMWvvepINFU9ORk4J88TPQRO0Y.png', NULL, '2025-04-20 07:03:58');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `school_years`
+-- Table structure for table `school_years`
 --
 
 CREATE TABLE `school_years` (
@@ -1393,7 +1393,7 @@ CREATE TABLE `school_years` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `school_years`
+-- Dumping data for table `school_years`
 --
 
 INSERT INTO `school_years` (`id`, `tahun_awal`, `tahun_akhir`, `semester`, `tempat_rapor`, `tanggal_rapor`, `created_at`, `updated_at`) VALUES
@@ -1405,7 +1405,7 @@ INSERT INTO `school_years` (`id`, `tahun_awal`, `tahun_akhir`, `semester`, `temp
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `sessions`
+-- Table structure for table `sessions`
 --
 
 CREATE TABLE `sessions` (
@@ -1418,16 +1418,16 @@ CREATE TABLE `sessions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data untuk tabel `sessions`
+-- Dumping data for table `sessions`
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('gLF4zt8ovXjb7zKwIv2FL4ummJdsqlPMRp9H4Nts', 20, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiZW9oMUpYZTRaakNPbUZ0SlNRWWtFTnJNaWVMMmZ6eDVqT0t0VmpTMyI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NjA6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZG1pbi9hY2hpZXZlbWVudHMvY2xhc3MvNC9zdHVkZW50LzkxMCI7fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjIwO3M6MTE6ImFjdGl2ZV9yb2xlIjtzOjE6IjEiO30=', 1745148944);
+('FkHAepxYeziVSz9oiVpJxZ2TV6beiB5SIXIXkiD0', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoibTk3UGRIWG4xVGJaYmo1YlE4MThGcFZNeUVvUWVXalhaZUlFeFhWbSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9sb2dpbiI7fX0=', 1745170769);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `students`
+-- Table structure for table `students`
 --
 
 CREATE TABLE `students` (
@@ -1442,7 +1442,7 @@ CREATE TABLE `students` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data untuk tabel `students`
+-- Dumping data for table `students`
 --
 
 INSERT INTO `students` (`id`, `nis`, `nisn`, `nama`, `class_id`, `jk`, `created_at`, `updated_at`) VALUES
@@ -2143,7 +2143,7 @@ INSERT INTO `students` (`id`, `nis`, `nisn`, `nama`, `class_id`, `jk`, `created_
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `student_classes`
+-- Table structure for table `student_classes`
 --
 
 CREATE TABLE `student_classes` (
@@ -2155,7 +2155,7 @@ CREATE TABLE `student_classes` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data untuk tabel `student_classes`
+-- Dumping data for table `student_classes`
 --
 
 INSERT INTO `student_classes` (`id`, `nama`, `wali_kelas_id`, `created_at`, `updated_at`) VALUES
@@ -2187,7 +2187,7 @@ INSERT INTO `student_classes` (`id`, `nama`, `wali_kelas_id`, `created_at`, `upd
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `subjects`
+-- Table structure for table `subjects`
 --
 
 CREATE TABLE `subjects` (
@@ -2200,7 +2200,7 @@ CREATE TABLE `subjects` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data untuk tabel `subjects`
+-- Dumping data for table `subjects`
 --
 
 INSERT INTO `subjects` (`id`, `nama`, `singkatan`, `kelompok_mapel`, `created_at`, `updated_at`) VALUES
@@ -2222,7 +2222,7 @@ INSERT INTO `subjects` (`id`, `nama`, `singkatan`, `kelompok_mapel`, `created_at
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `teachings`
+-- Table structure for table `teachings`
 --
 
 CREATE TABLE `teachings` (
@@ -2235,7 +2235,7 @@ CREATE TABLE `teachings` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data untuk tabel `teachings`
+-- Dumping data for table `teachings`
 --
 
 INSERT INTO `teachings` (`id`, `class_id`, `subject_id`, `user_id`, `created_at`, `updated_at`) VALUES
@@ -2766,7 +2766,7 @@ INSERT INTO `teachings` (`id`, `class_id`, `subject_id`, `user_id`, `created_at`
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
@@ -2785,7 +2785,7 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data untuk tabel `users`
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `nama`, `email`, `password`, `nip`, `nuptk`, `jk`, `telepon`, `alamat`, `image`, `created_at`, `updated_at`) VALUES
@@ -2864,7 +2864,7 @@ INSERT INTO `users` (`id`, `nama`, `email`, `password`, `nip`, `nuptk`, `jk`, `t
 --
 
 --
--- Indeks untuk tabel `achievements`
+-- Indexes for table `achievements`
 --
 ALTER TABLE `achievements`
   ADD PRIMARY KEY (`id`),
@@ -2872,7 +2872,7 @@ ALTER TABLE `achievements`
   ADD KEY `achievements_school_year_id_foreign` (`school_year_id`);
 
 --
--- Indeks untuk tabel `attendances`
+-- Indexes for table `attendances`
 --
 ALTER TABLE `attendances`
   ADD PRIMARY KEY (`id`),
@@ -2880,26 +2880,26 @@ ALTER TABLE `attendances`
   ADD KEY `attendances_school_year_id_foreign` (`school_year_id`);
 
 --
--- Indeks untuk tabel `cache`
+-- Indexes for table `cache`
 --
 ALTER TABLE `cache`
   ADD PRIMARY KEY (`key`);
 
 --
--- Indeks untuk tabel `cache_locks`
+-- Indexes for table `cache_locks`
 --
 ALTER TABLE `cache_locks`
   ADD PRIMARY KEY (`key`);
 
 --
--- Indeks untuk tabel `failed_jobs`
+-- Indexes for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
 
 --
--- Indeks untuk tabel `grades`
+-- Indexes for table `grades`
 --
 ALTER TABLE `grades`
   ADD PRIMARY KEY (`id`),
@@ -2908,14 +2908,14 @@ ALTER TABLE `grades`
   ADD KEY `grades_subject_id_foreign` (`subject_id`);
 
 --
--- Indeks untuk tabel `grade_details`
+-- Indexes for table `grade_details`
 --
 ALTER TABLE `grade_details`
   ADD PRIMARY KEY (`id`),
   ADD KEY `grade_details_grade_id_foreign` (`grade_id`);
 
 --
--- Indeks untuk tabel `graduation_decisions`
+-- Indexes for table `graduation_decisions`
 --
 ALTER TABLE `graduation_decisions`
   ADD PRIMARY KEY (`id`),
@@ -2923,26 +2923,26 @@ ALTER TABLE `graduation_decisions`
   ADD KEY `graduation_decisions_school_year_id_foreign` (`school_year_id`);
 
 --
--- Indeks untuk tabel `jobs`
+-- Indexes for table `jobs`
 --
 ALTER TABLE `jobs`
   ADD PRIMARY KEY (`id`),
   ADD KEY `jobs_queue_index` (`queue`);
 
 --
--- Indeks untuk tabel `job_batches`
+-- Indexes for table `job_batches`
 --
 ALTER TABLE `job_batches`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `migrations`
+-- Indexes for table `migrations`
 --
 ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `notes`
+-- Indexes for table `notes`
 --
 ALTER TABLE `notes`
   ADD PRIMARY KEY (`id`),
@@ -2950,19 +2950,19 @@ ALTER TABLE `notes`
   ADD KEY `notes_school_year_id_foreign` (`school_year_id`);
 
 --
--- Indeks untuk tabel `password_reset_tokens`
+-- Indexes for table `password_reset_tokens`
 --
 ALTER TABLE `password_reset_tokens`
   ADD PRIMARY KEY (`email`);
 
 --
--- Indeks untuk tabel `roles`
+-- Indexes for table `roles`
 --
 ALTER TABLE `roles`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `role_user`
+-- Indexes for table `role_user`
 --
 ALTER TABLE `role_user`
   ADD PRIMARY KEY (`id`),
@@ -2970,19 +2970,19 @@ ALTER TABLE `role_user`
   ADD KEY `role_id` (`role_id`);
 
 --
--- Indeks untuk tabel `school_profiles`
+-- Indexes for table `school_profiles`
 --
 ALTER TABLE `school_profiles`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `school_years`
+-- Indexes for table `school_years`
 --
 ALTER TABLE `school_years`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `sessions`
+-- Indexes for table `sessions`
 --
 ALTER TABLE `sessions`
   ADD PRIMARY KEY (`id`),
@@ -2990,7 +2990,7 @@ ALTER TABLE `sessions`
   ADD KEY `sessions_last_activity_index` (`last_activity`);
 
 --
--- Indeks untuk tabel `students`
+-- Indexes for table `students`
 --
 ALTER TABLE `students`
   ADD PRIMARY KEY (`id`),
@@ -2998,7 +2998,7 @@ ALTER TABLE `students`
   ADD KEY `class_id` (`class_id`);
 
 --
--- Indeks untuk tabel `student_classes`
+-- Indexes for table `student_classes`
 --
 ALTER TABLE `student_classes`
   ADD PRIMARY KEY (`id`),
@@ -3006,7 +3006,7 @@ ALTER TABLE `student_classes`
   ADD KEY `nama` (`nama`);
 
 --
--- Indeks untuk tabel `subjects`
+-- Indexes for table `subjects`
 --
 ALTER TABLE `subjects`
   ADD PRIMARY KEY (`id`),
@@ -3014,7 +3014,7 @@ ALTER TABLE `subjects`
   ADD KEY `id_2` (`id`);
 
 --
--- Indeks untuk tabel `teachings`
+-- Indexes for table `teachings`
 --
 ALTER TABLE `teachings`
   ADD PRIMARY KEY (`id`),
@@ -3023,144 +3023,144 @@ ALTER TABLE `teachings`
   ADD KEY `teachings_user_id_foreign` (`user_id`);
 
 --
--- Indeks untuk tabel `users`
+-- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `users_email_unique` (`email`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `achievements`
+-- AUTO_INCREMENT for table `achievements`
 --
 ALTER TABLE `achievements`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
 
 --
--- AUTO_INCREMENT untuk tabel `attendances`
+-- AUTO_INCREMENT for table `attendances`
 --
 ALTER TABLE `attendances`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
 
 --
--- AUTO_INCREMENT untuk tabel `failed_jobs`
+-- AUTO_INCREMENT for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `grades`
+-- AUTO_INCREMENT for table `grades`
 --
 ALTER TABLE `grades`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=518;
 
 --
--- AUTO_INCREMENT untuk tabel `grade_details`
+-- AUTO_INCREMENT for table `grade_details`
 --
 ALTER TABLE `grade_details`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=137;
 
 --
--- AUTO_INCREMENT untuk tabel `graduation_decisions`
+-- AUTO_INCREMENT for table `graduation_decisions`
 --
 ALTER TABLE `graduation_decisions`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
--- AUTO_INCREMENT untuk tabel `jobs`
+-- AUTO_INCREMENT for table `jobs`
 --
 ALTER TABLE `jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `migrations`
+-- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
--- AUTO_INCREMENT untuk tabel `notes`
+-- AUTO_INCREMENT for table `notes`
 --
 ALTER TABLE `notes`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=136;
 
 --
--- AUTO_INCREMENT untuk tabel `roles`
+-- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT untuk tabel `role_user`
+-- AUTO_INCREMENT for table `role_user`
 --
 ALTER TABLE `role_user`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=111;
 
 --
--- AUTO_INCREMENT untuk tabel `school_profiles`
+-- AUTO_INCREMENT for table `school_profiles`
 --
 ALTER TABLE `school_profiles`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT untuk tabel `school_years`
+-- AUTO_INCREMENT for table `school_years`
 --
 ALTER TABLE `school_years`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT untuk tabel `students`
+-- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1085;
 
 --
--- AUTO_INCREMENT untuk tabel `student_classes`
+-- AUTO_INCREMENT for table `student_classes`
 --
 ALTER TABLE `student_classes`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
--- AUTO_INCREMENT untuk tabel `subjects`
+-- AUTO_INCREMENT for table `subjects`
 --
 ALTER TABLE `subjects`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
--- AUTO_INCREMENT untuk tabel `teachings`
+-- AUTO_INCREMENT for table `teachings`
 --
 ALTER TABLE `teachings`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=555;
 
 --
--- AUTO_INCREMENT untuk tabel `users`
+-- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
 
 --
--- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+-- Constraints for dumped tables
 --
 
 --
--- Ketidakleluasaan untuk tabel `achievements`
+-- Constraints for table `achievements`
 --
 ALTER TABLE `achievements`
   ADD CONSTRAINT `achievements_school_year_id_foreign` FOREIGN KEY (`school_year_id`) REFERENCES `school_years` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `achievements_student_id_foreign` FOREIGN KEY (`student_id`) REFERENCES `students` (`id`) ON DELETE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `attendances`
+-- Constraints for table `attendances`
 --
 ALTER TABLE `attendances`
   ADD CONSTRAINT `attendances_school_year_id_foreign` FOREIGN KEY (`school_year_id`) REFERENCES `school_years` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `attendances_student_id_foreign` FOREIGN KEY (`student_id`) REFERENCES `students` (`id`) ON DELETE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `grades`
+-- Constraints for table `grades`
 --
 ALTER TABLE `grades`
   ADD CONSTRAINT `grades_school_year_id_foreign` FOREIGN KEY (`school_year_id`) REFERENCES `school_years` (`id`) ON DELETE CASCADE,
@@ -3168,46 +3168,46 @@ ALTER TABLE `grades`
   ADD CONSTRAINT `grades_subject_id_foreign` FOREIGN KEY (`subject_id`) REFERENCES `subjects` (`id`) ON DELETE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `grade_details`
+-- Constraints for table `grade_details`
 --
 ALTER TABLE `grade_details`
   ADD CONSTRAINT `grade_details_grade_id_foreign` FOREIGN KEY (`grade_id`) REFERENCES `grades` (`id`) ON DELETE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `graduation_decisions`
+-- Constraints for table `graduation_decisions`
 --
 ALTER TABLE `graduation_decisions`
   ADD CONSTRAINT `graduation_decisions_school_year_id_foreign` FOREIGN KEY (`school_year_id`) REFERENCES `school_years` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `graduation_decisions_student_id_foreign` FOREIGN KEY (`student_id`) REFERENCES `students` (`id`) ON DELETE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `notes`
+-- Constraints for table `notes`
 --
 ALTER TABLE `notes`
   ADD CONSTRAINT `notes_school_year_id_foreign` FOREIGN KEY (`school_year_id`) REFERENCES `school_years` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `notes_student_id_foreign` FOREIGN KEY (`student_id`) REFERENCES `students` (`id`) ON DELETE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `role_user`
+-- Constraints for table `role_user`
 --
 ALTER TABLE `role_user`
   ADD CONSTRAINT `role_user_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `role_user_ibfk_2` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `students`
+-- Constraints for table `students`
 --
 ALTER TABLE `students`
   ADD CONSTRAINT `students_ibfk_1` FOREIGN KEY (`class_id`) REFERENCES `student_classes` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `student_classes`
+-- Constraints for table `student_classes`
 --
 ALTER TABLE `student_classes`
   ADD CONSTRAINT `student_classes_wali_kelas_id_foreign` FOREIGN KEY (`wali_kelas_id`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `teachings`
+-- Constraints for table `teachings`
 --
 ALTER TABLE `teachings`
   ADD CONSTRAINT `teachings_class_id_foreign` FOREIGN KEY (`class_id`) REFERENCES `student_classes` (`id`) ON DELETE CASCADE,

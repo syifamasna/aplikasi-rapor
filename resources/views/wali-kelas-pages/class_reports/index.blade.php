@@ -109,7 +109,7 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('wali_kelas.dashboard') }}">Dashboard</a></li>
                             <li class="breadcrumb-item"><a href="javascript:void(0)">Cetak Rapor & Legger</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Rapor</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Legger Rapor</a></li>
                         </ol>
                     </div>
                 </div>

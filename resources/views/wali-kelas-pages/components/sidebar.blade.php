@@ -32,7 +32,7 @@
                     <li><a href="{{ route('wali_kelas.student_classes.index') }}">Data Kelas</a></li>
                     <li><a href="{{ route('wali_kelas.attendances.index') }}">Ketidakhadiran</a></li>
                     <li><a href="{{ route('wali_kelas.notes.index') }}">Catatan Wali Kelas</a></li>
-                    <li><a href="{{ route('wali_kelas.graduation_decisions.index') }}">Keputusan Kelulusan</a></li>
+                    <li><a href="{{ route('wali_kelas.graduation_decisions.index') }}">Keputusan Naik/Lulus</a></li>
                 </ul>
             </li>
 
@@ -45,17 +45,17 @@
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">Laporan Perkembangan <br> Siswa (LPS)</a>
                         <ul aria-expanded="false">
-                            <li><a href="{{ route('wali_kelas.student_progress_reports.index') }}">Rapor Siswa</a>
+                            <li><a href="{{ route('wali_kelas.student_progress_reports.index') }}">Cetak LPS</a>
                             </li>
-                            <li><a href="{{ route('wali_kelas.class_progress_reports.index') }}">Legger Kelas</a></li>
+                            <li><a href="{{ route('wali_kelas.class_progress_reports.index') }}">Legger LPS</a></li>
                         </ul>
                     </li>
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">Laporan Hasil Belajar <br>
                             (Rapor) Peserta Didik</a>
                         <ul aria-expanded="false">
-                            <li><a href="{{ route('wali_kelas.student_reports.index') }}">Rapor Siswa</a></li>
-                            <li><a href="{{ route('wali_kelas.class_reports.index') }}">Legger Kelas</a></li>
+                            <li><a href="{{ route('wali_kelas.student_reports.index') }}">Cetak Rapor</a></li>
+                            <li><a href="{{ route('wali_kelas.class_reports.index') }}">Legger Rapor</a></li>
                         </ul>
                     </li>
                 </ul>

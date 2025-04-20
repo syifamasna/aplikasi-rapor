@@ -171,6 +171,9 @@
         gradient.addColorStop(0, 'rgba(89, 59, 219, 0.8)'); // #593bdb solid-ish
         gradient.addColorStop(1, 'rgba(89, 59, 219, 0.1)'); // faded
 
+        const minValue = Math.min(...siswaPerKelasData.map(item => item.total));
+        const adjustedMin = Math.max(minValue - 3, 0);
+
         const chart = new Chart(ctx, {
             type: 'bar',
             data: {
@@ -186,12 +189,12 @@
             options: {
                 responsive: true,
                 scales: {
-                    y: {
-                        beginAtZero: true,
+                    yAxes: [{
                         ticks: {
+                            min: adjustedMin,
                             precision: 0
                         }
-                    }
+                    }]
                 }
             }
         });

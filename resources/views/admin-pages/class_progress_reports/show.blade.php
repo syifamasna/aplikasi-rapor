@@ -50,6 +50,11 @@
             color: #707070;
         }
 
+        .td-merah {
+            background-color: #ff7e7e !important;
+            color: white;
+        }
+
         .info-row {
             display: grid;
             grid-template-columns: 170px 10px auto;
@@ -131,19 +136,19 @@
             <div class="container-fluid">
                 <div class="row page-titles mx-0">
                     <div class="col-md-6 p-md-0">
-                        <h4 class="mb-0">LPS Kelas {{ $class->nama ?? '-' }}</h4>
+                        <h4 class="mb-0">Legger LPS Kelas {{ $class->nama ?? '-' }}</h4>
                     </div>
                     <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
                             <li class="breadcrumb-item"><a href="javascript:void(0)">Cetak Rapor & Legger</a></li>
                             <li class="breadcrumb-item"><a href="{{ route('admin.class_progress_reports.index') }}"
-                                    title="Laporan Perkembangan Siswa">LPS</a></li>
+                                    title="Legger Laporan Perkembangan Siswa (LPS)">Legger LPS</a></li>
                             <li class="breadcrumb-item">
                                 <a href="{{ route('admin.class_progress_reports.show', ['class_id' => $class->id]) }}"
-                                    title="Rapor Kelas {{ $class->nama ?? '-' }}"
+                                    title="Legger LPS Kelas {{ $class->nama ?? '-' }}"
                                     class="{{ request()->is('admin/class_progress_reports/*') ? 'text-dark' : '' }}">
-                                    Rapor Kelas
+                                    Legger LPS Kelas
                                 </a>
                             </li>
                         </ol>
@@ -242,7 +247,15 @@
                                             @php
                                                 $grade = $student->grades->firstWhere('subject_id', $subject->id);
                                             @endphp
-                                            <td>{{ $grade->nilai ?? '-' }}</td>
+                                            @php
+                                                $nilai = $grade->nilai ?? null;
+                                                $style =
+                                                    is_numeric($nilai) && $nilai <= 70
+                                                        ? 'background-color: #ff7e7e !important;'
+                                                        : '';
+                                            @endphp
+                                            <td style="text-align: center; {{ $style }}">{{ $nilai ?? '-' }}
+                                            </td>
                                         @endforeach
 
                                         {{-- Absensi --}}
@@ -296,7 +309,7 @@
                                     </a>
                                     <a class="dropdown-item"
                                         href="{{ route('admin.class_progress_reports.export-all-pdf', ['class_id' => $class->id, 'school_year_id' => request('school_year_id', $schoolYear->id ?? '')]) }}">
-                                        <i class="fa fa-file-pdf-o"></i> PDF (Semua Rapor)
+                                        <i class="fa fa-file-pdf-o"></i> PDF (Cetak Semua LPS)
                                     </a>
                                     <a class="dropdown-item"
                                         href="{{ route('admin.class_progress_reports.export-pdf', ['class_id' => $class->id]) }}?school_year_id={{ request('school_year_id', $schoolYear->id) }}&mode=print"

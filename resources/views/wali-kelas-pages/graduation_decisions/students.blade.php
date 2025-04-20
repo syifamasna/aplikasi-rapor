@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Keputusan Kelulusan {{ $class->nama ?? 'Tidak Ada Kelas' }} - E-Rapor SIT Aliya</title>
+    <title>Keputusan Naik/Lulus Kelas {{ $class->nama ?? 'Tidak Ada Kelas' }} - E-Rapor SIT Aliya</title>
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('vendor/sweetalert2/dist/sweetalert2.min.css') }}">
@@ -81,7 +81,7 @@
             <div class="container-fluid">
                 <div class="row page-titles mx-0">
                     <div class="col-md-6 p-md-0">
-                        <h4 class="mb-0">Keputusan Kelulusan {{ $class->nama ?? 'Tidak Ada Kelas' }}</h4>
+                        <h4 class="mb-0">Keputusan Naik/Lulus Kelas {{ $class->nama ?? 'Tidak Ada Kelas' }}</h4>
                     </div>
                     <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                         <ol class="breadcrumb">
@@ -90,7 +90,7 @@
                             <li class="breadcrumb-item"><a
                                     href="{{ route('wali_kelas.graduation_decisions.index') }}">Kelas</a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">Keputusan Kelulusan</li>
+                            <li class="breadcrumb-item active" aria-current="page">Keputusan Naik/Lulus</li>
                         </ol>
                     </div>
                 </div>
@@ -169,13 +169,13 @@
                                                     <select name="graduation_decisions[{{ $student->id }}][status]"
                                                         class="form-control" required>
                                                         <option value="">-- Pilih Status --</option>
-                                                        <option value="lulus"
-                                                            {{ old("graduation_decisions.{$student->id}.status", $graduation_decisions[$student->id]->status ?? 'lulus') == 'lulus' ? 'selected' : '' }}>
-                                                            Lulus
+                                                        <option value="naik/lulus"
+                                                            {{ old("graduation_decisions.{$student->id}.status", $graduation_decisions[$student->id]->status ?? 'naik/lulus') == 'naik/lulus' ? 'selected' : '' }}>
+                                                            Naik/Lulus
                                                         </option>
-                                                        <option value="tidak lulus"
-                                                            {{ old("graduation_decisions.{$student->id}.status", $graduation_decisions[$student->id]->status ?? 'lulus') == 'tidak lulus' ? 'selected' : '' }}>
-                                                            Tidak Lulus
+                                                        <option value="tidak naik/lulus"
+                                                            {{ old("graduation_decisions.{$student->id}.status", $graduation_decisions[$student->id]->status ?? 'naik/lulus') == 'tidak naik/lulus' ? 'selected' : '' }}>
+                                                            Tidak Naik/Lulus
                                                         </option>
                                                     </select>
                                                 </td>

@@ -133,19 +133,19 @@
             <div class="container-fluid">
                 <div class="row page-titles mx-0">
                     <div class="col-md-6 p-md-0">
-                        <h4 class="mb-0">Rapor Kelas {{ $class->nama ?? '-' }}</h4>
+                        <h4 class="mb-0">Legger Rapor Kelas {{ $class->nama ?? '-' }}</h4>
                     </div>
                     <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('wali_kelas.dashboard') }}">Dashboard</a></li>
                             <li class="breadcrumb-item"><a href="javascript:void(0)">Cetak Rapor & Legger</a></li>
                             <li class="breadcrumb-item"><a href="{{ route('wali_kelas.class_reports.index') }}"
-                                    title="Laporan Hasil Belajar (Rapor) Peserta Didik">Rapor</a></li>
+                                    title="Legger Laporan Hasil Belajar (Rapor) Peserta Didik">Legger Rapor</a></li>
                             <li class="breadcrumb-item">
                                 <a href="{{ route('wali_kelas.class_reports.show', ['class_id' => $class->id]) }}"
-                                    title="Rapor Kelas {{ $class->nama ?? '-' }}"
+                                    title="Legger Rapor Kelas {{ $class->nama ?? '-' }}"
                                     class="{{ request()->is('wali/class_reports/*') ? 'text-dark' : '' }}">
-                                    Rapor Kelas
+                                    Legger Rapor Kelas
                                 </a>
                             </li>
                         </ol>
@@ -244,7 +244,15 @@
                                             @php
                                                 $grade = $student->grades->firstWhere('subject_id', $subject->id);
                                             @endphp
-                                            <td>{{ $grade->nilai ?? '-' }}</td>
+                                            @php
+                                                $nilai = $grade->nilai ?? null;
+                                                $style =
+                                                    is_numeric($nilai) && $nilai <= 70
+                                                        ? 'background-color: #ff7e7e !important;'
+                                                        : '';
+                                            @endphp
+                                            <td style="text-align: center; {{ $style }}">{{ $nilai ?? '-' }}
+                                            </td>
                                         @endforeach
 
                                         {{-- Absensi --}}
@@ -298,7 +306,7 @@
                                     </a>
                                     <a class="dropdown-item"
                                         href="{{ route('wali_kelas.class_reports.export-all-pdf', ['class_id' => $class->id, 'school_year_id' => request('school_year_id', $schoolYear->id ?? '')]) }}">
-                                        <i class="fa fa-file-pdf-o"></i> PDF (Semua Rapor)
+                                        <i class="fa fa-file-pdf-o"></i> PDF (Cetak Semua Rapor)
                                     </a>
                                     <a class="dropdown-item"
                                         href="{{ route('wali_kelas.class_reports.export-pdf', ['class_id' => $class->id]) }}?school_year_id={{ request('school_year_id', $schoolYear->id) }}&mode=print"

@@ -8,6 +8,7 @@ REVISI APLIKASI E-RAPOR SIT ALIYA
 PERTANYAAN 
 
 - Kenapa SIT Aliya bikin aplikasi e-rapor sendiri kalau udah ada yang dinas?
+  sebagai sekolah swasta memberikan penialian khusus, dinas cuma ngasih kurikulum standar, di aliya ada kurikulum yg tdk diampu dinas jd mengembangkan lebih lengkap dan informatif (pelengkap rapor dinas) bersifat deskriptif
 - Mengapa absensi bukan diinput oleh guru jam mata pelajaran tersebut melainkan wali kelas?
 - Kenapa penulisan kelas bukan pakai angka digital (1, 2, 3) dan malah pakai romawi?
 - Kenapa di template Import Nilai tidak perlu memasukkan kelas atau tahun ajar lagi?
@@ -31,6 +32,11 @@ tambahan (revisi) 10 April 2025:
 11. Menu Legger nilai diubah menjadi Cetak Rapor dan Legger ✅
 12. tombol export adanya di data perkelas bukan individu ✅
 13. rekap nilai perkelas (Legger Sekolah (gabungan dari legger kelas-kelas))
-14. grafik di dashboard =rata² nilai, gender(doughnut chart)
+14. grafik di dashboard =rata² nilai, gender(doughnut chart) ✅
 15. terapkan nilai dihilangkan
 16. Logo Sekolah dihilangkan
+17. Lulus/Naik ✅
+18. tabel leger merah dibawah  dibawah 70 ✅
+19. benerin grafik data siswa halaman admin ✅
+20. Mapel IPAS hanya kelas 3-6
+21. tambah import di halaman data siswa page wali kelas

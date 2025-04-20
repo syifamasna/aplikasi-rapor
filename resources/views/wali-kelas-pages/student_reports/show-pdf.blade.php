@@ -275,17 +275,17 @@
             $className = $class->nama ?? '';
             $naikKelas = '-';
 
-            if (Str::startsWith($className, 'I')) {
+            if (Str::startsWith($className, 'I (Satu)')) {
                 $naikKelas = 'II (Dua)';
-            } elseif (Str::startsWith($className, 'II')) {
+            } elseif (Str::startsWith($className, 'II (Dua)')) {
                 $naikKelas = 'III (Tiga)';
-            } elseif (Str::startsWith($className, 'III')) {
+            } elseif (Str::startsWith($className, 'III (Tiga)')) {
                 $naikKelas = 'IV (Empat)';
-            } elseif (Str::startsWith($className, 'IV')) {
+            } elseif (Str::startsWith($className, 'IV (Empat)')) {
                 $naikKelas = 'V (Lima)';
-            } elseif (Str::startsWith($className, 'V')) {
+            } elseif (Str::startsWith($className, 'V (Lima)')) {
                 $naikKelas = 'VI (Enam)';
-            } elseif (Str::startsWith($className, 'VI')) {
+            } elseif (Str::startsWith($className, 'VI (Enam)')) {
                 $naikKelas = 'LULUS';
             }
         @endphp
@@ -297,13 +297,13 @@
                     Berdasarkan hasil yang dicapai pada semester 1 dan 2 maka peserta didik ditetapkan:
                     <br>
                     <strong>
-                        @if ($graduationDecision->status === 'lulus')
+                        @if ($graduationDecision->status === 'naik/lulus')
                             @if ($naikKelas === 'LULUS')
                                 LULUS dari satuan pendidikan
                             @else
                                 Naik ke Kelas {{ $naikKelas }}
                             @endif
-                        @elseif ($graduationDecision->status === 'tidak lulus')
+                        @elseif ($graduationDecision->status === 'tidak naik/lulus')
                             @if ($naikKelas === 'LULUS')
                                 TIDAK LULUS dari satuan pendidikan
                             @else

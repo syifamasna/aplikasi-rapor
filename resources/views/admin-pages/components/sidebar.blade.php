@@ -48,16 +48,16 @@
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">Laporan Perkembangan <br> Siswa (LPS)</a>
                         <ul aria-expanded="false">
-                            <li><a href="{{ route('admin.student_progress_reports.index') }}">Rapor Siswa</a></li>
-                            <li><a href="{{ route('admin.class_progress_reports.index') }}">Legger Kelas</a></li>
+                            <li><a href="{{ route('admin.student_progress_reports.index') }}">Cetak LPS</a></li>
+                            <li><a href="{{ route('admin.class_progress_reports.index') }}">Legger LPS</a></li>
                         </ul>
                     </li>
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">Laporan Hasil Belajar <br>
                             (Rapor) Peserta Didik</a>
                         <ul aria-expanded="false">
-                            <li><a href="{{ route('admin.student_reports.index') }}">Rapor Siswa</a></li>
-                            <li><a href="{{ route('admin.class_reports.index') }}">Legger Kelas</a></li>
+                            <li><a href="{{ route('admin.student_reports.index') }}">Cetak Rapor</a></li>
+                            <li><a href="{{ route('admin.class_reports.index') }}">Legger Rapor</a></li>
                         </ul>
                     </li>
                 </ul>
