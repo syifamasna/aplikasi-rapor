@@ -127,7 +127,7 @@
                     <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('guru_mapel.dashboard') }}">Dashboard</a></li>
-                            <li class="breadcrumb-item"><a href="javascript:void(0)">Administrasi</a></li>
+                            <li class="breadcrumb-item"><a href="javascript:void(0)">Guru Mapel</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Data Pembelajaran</li>
                         </ol>
                     </div>

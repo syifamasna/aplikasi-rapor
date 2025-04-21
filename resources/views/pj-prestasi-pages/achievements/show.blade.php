@@ -129,14 +129,10 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('pj_prestasi.dashboard') }}">Dashboard</a>
                             </li>
-                            <li class="breadcrumb-item"><a href="javascript:void(0)">Administrasi</a></li>
+                            <li class="breadcrumb-item"><a href="javascript:void(0)">Pj Prestasi</a></li>
                             <li class="breadcrumb-item"><a
-                                    href="{{ route('pj_prestasi.achievements.index') }}">Kelas</a></li>
-                            <li class="breadcrumb-item">
-                                <a
-                                    href="{{ route('pj_prestasi.achievements.students', ['class_id' => $class->id ?? '']) }}">Siswa</a>
-                            </li>
-                            <li class="breadcrumb-item active" aria-current="page">Prestasi Siswa</li>
+                                    href="{{ route('pj_prestasi.achievements.index') }}">Prestasi Siswa</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Input Prestasi</li>
 
                         </ol>
                     </div>

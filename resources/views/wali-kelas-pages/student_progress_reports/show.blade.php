@@ -55,11 +55,17 @@
             color: #707070;
         }
 
+
         .info-row {
             display: grid;
-            grid-template-columns: 170px 10px auto;
+            grid-template-columns: 150px 30px auto;
             /* Kolom 1 untuk label, kolom 2 untuk ":", kolom 3 untuk nilai */
             padding: 8px 0;
+        }
+
+        .info-row span {
+            font-weight: bold;
+            color: #333;
         }
 
         .btn-back {
@@ -80,6 +86,19 @@
         @media (max-width: 991px) {
             .table-responsive {
                 overflow-x: auto;
+            }
+
+            .info-row {
+                grid-template-columns: 1fr;
+            }
+
+            .info-row>* {
+                margin-bottom: 4px;
+            }
+
+            .info-row span {
+                display: none;
+                /* atau bisa diganti tampil bawah kalau kamu mau */
             }
         }
     </style>
@@ -139,44 +158,53 @@
                                 <div class="row">
 
                                     <!-- Nama -->
-                                    <div class="col-md-12 mb-2 d-flex align-items-center">
-                                        <strong class="info-row h5 font-weight-bold me-3 w-25 text-nowrap">Nama Peserta
-                                            Didik
-                                            <span>:</span></strong>
-                                        <input type="text" class="form-control flex-grow-1"
-                                            value="{{ $student->nama ?? '-' }}" disabled>
+                                    <div class="col-md-12 mb-2">
+                                        <div class="info-row">
+                                            <strong class="h5 font-weight-bold">Nama Peserta
+                                                Didik</strong>
+                                            <span>:</span>
+                                            <input type="text" class="form-control"
+                                                value="{{ $student->nama ?? '-' }}" disabled>
+                                        </div>
                                     </div>
 
                                     <!-- NIS/NISN -->
-                                    <div class="col-md-12 mb-2 d-flex align-items-center">
-                                        <strong class="info-row h5 font-weight-bold me-3 w-25 text-nowrap">NIS / NISN
-                                            <span>:</span></strong>
-                                        <input type="text" class="form-control flex-grow-1"
-                                            value="{{ $student->nis ?? '-' }} / {{ $student->nisn ?? '-' }}" disabled>
+                                    <div class="col-md-12 mb-2">
+                                        <div class="info-row">
+                                            <strong class="h5 font-weight-bold">NIS / NISN</strong>
+                                            <span>:</span>
+                                            <input type="text" class="form-control"
+                                                value="{{ $student->nis ?? '-' }} / {{ $student->nisn ?? '-' }}"
+                                                disabled>
+                                        </div>
                                     </div>
 
                                     <!-- Kelas -->
-                                    <div class="col-md-12 mb-2 d-flex align-items-center">
-                                        <strong class="info-row h5 font-weight-bold me-3 w-25 text-nowrap">Kelas
-                                            <span>:</span></strong>
-                                        <input type="text" class="form-control flex-grow-1"
-                                            value="{{ $class->nama ?? '-' }}" disabled>
+                                    <div class="col-md-12 mb-2">
+                                        <div class="info-row">
+                                            <strong class="h5 font-weight-bold">Kelas</strong>
+                                            <span>:</span>
+                                            <input type="text" class="form-control"
+                                                value="{{ $class->nama ?? '-' }}" disabled>
+                                        </div>
                                     </div>
 
                                     <!-- Tahun Ajar -->
-                                    <div class="col-md-12 mb-2 d-flex align-items-center">
-                                        <strong class="info-row h5 font-weight-bold me-3 w-25 text-nowrap">Tahun
-                                            Pelajaran <span>:</span></strong>
-                                        <select name="school_year_id" class="form-control flex-grow-1"
-                                            onchange="this.form.submit()">
-                                            @foreach ($schoolYears as $year)
-                                                <option value="{{ $year->id }}"
-                                                    {{ request('school_year_id', $schoolYear->id ?? '') == $year->id ? 'selected' : '' }}>
-                                                    {{ $year->tahun_awal }} / {{ $year->tahun_akhir }} -
-                                                    {{ $year->semester }}
-                                                </option>
-                                            @endforeach
-                                        </select>
+                                    <div class="col-md-12 mb-2">
+                                        <div class="info-row">
+                                            <strong class="h5 font-weight-bold">Tahun Pelajaran</strong>
+                                            <span>:</span>
+                                            <select name="school_year_id" class="form-control"
+                                                onchange="this.form.submit()">
+                                                @foreach ($schoolYears as $year)
+                                                    <option value="{{ $year->id }}"
+                                                        {{ request('school_year_id', $schoolYear->id ?? '') == $year->id ? 'selected' : '' }}>
+                                                        {{ $year->tahun_awal }} / {{ $year->tahun_akhir }} -
+                                                        {{ $year->semester }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

@@ -109,7 +109,7 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('wali_kelas.dashboard') }}">Dashboard</a></li>
                             <li class="breadcrumb-item"><a href="javascript:void(0)">Administrasi</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Kelas</li>
+                            <li class="breadcrumb-item active" aria-current="page">Keputusan Naik/Lulus</li>
                         </ol>
                     </div>
                 </div>

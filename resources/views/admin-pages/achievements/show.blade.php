@@ -129,12 +129,8 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
                             <li class="breadcrumb-item"><a href="javascript:void(0)">Administrasi</a></li>
-                            <li class="breadcrumb-item"><a href="{{ route('admin.achievements.index') }}">Kelas</a></li>
-                            <li class="breadcrumb-item">
-                                <a
-                                    href="{{ route('admin.achievements.students', ['class_id' => $class->id ?? '']) }}">Siswa</a>
-                            </li>
-                            <li class="breadcrumb-item active" aria-current="page">Prestasi Siswa</li>
+                            <li class="breadcrumb-item"><a href="{{ route('admin.achievements.index') }}">Prestasi Siswa</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Input Prestasi</li>
 
                         </ol>
                     </div>

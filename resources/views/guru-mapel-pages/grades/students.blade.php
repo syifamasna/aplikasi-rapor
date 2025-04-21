@@ -59,9 +59,14 @@
 
         .info-row {
             display: grid;
-            grid-template-columns: 150px 10px auto;
+            grid-template-columns: 150px 30px auto;
             /* Kolom 1 untuk label, kolom 2 untuk ":", kolom 3 untuk nilai */
             padding: 8px 0;
+        }
+
+        .info-row span {
+            font-weight: bold;
+            color: #333;
         }
 
         .btn-back {
@@ -94,6 +99,19 @@
             .table-responsive {
                 overflow-x: auto;
             }
+
+            .info-row {
+                grid-template-columns: 1fr;
+            }
+
+            .info-row>* {
+                margin-bottom: 4px;
+            }
+
+            .info-row span {
+                display: none;
+                /* atau bisa diganti tampil bawah kalau kamu mau */
+            }
         }
     </style>
 </head>
@@ -114,10 +132,10 @@
                     <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('guru_mapel.dashboard') }}">Dashboard</a></li>
-                            <li class="breadcrumb-item"><a href="javascript:void(0)">Administrasi</a></li>
-                            <li class="breadcrumb-item"><a href="{{ route('guru_mapel.grades.index') }}">Kelas</a>
+                            <li class="breadcrumb-item"><a href="javascript:void(0)">Guru Mapel</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('guru_mapel.grades.index') }}">Data Pembelajaran</a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">Input Nilai Siswa</li>
+                            <li class="breadcrumb-item active" aria-current="page">Input Nilai</li>
                         </ol>
                     </div>
                 </div>
@@ -141,48 +159,56 @@
                             <div class="mb-4 border-bottom pb-3">
                                 <div class="row">
                                     <!-- Mata Pelajaran -->
-                                    <div class="col-md-12 mb-2 d-flex align-items-center">
-                                        <strong class="info-row h5 font-weight-bold me-3 w-25 text-nowrap">Mata
-                                            Pelajaran <span>:</span></strong>
-                                        @php
-                                            $selectedSubject = $subjects
-                                                ->where('id', request('subject_id', $subjectId))
-                                                ->first();
-                                        @endphp
-                                        <input type="text" class="form-control flex-grow-1"
-                                            value="{{ $selectedSubject->nama ?? '-' }}" disabled>
+                                    <div class="col-md-12 mb-2">
+                                        <div class="info-row">
+                                            <strong class="h5 font-weight-bold">Mata Pelajaran</strong>
+                                            <span>:</span>
+                                            @php
+                                                $selectedSubject = $subjects
+                                                    ->where('id', request('subject_id', $subjectId))
+                                                    ->first();
+                                            @endphp
+                                            <input type="text" class="form-control"
+                                                value="{{ $selectedSubject->nama ?? '-' }}" disabled>
+                                        </div>
                                     </div>
 
                                     <!-- Kelas -->
-                                    <div class="col-md-12 mb-2 d-flex align-items-center">
-                                        <strong class="info-row h5 font-weight-bold me-3 w-25 text-nowrap">Kelas
-                                            <span>:</span></strong>
-                                        <input type="text" class="form-control flex-grow-1"
-                                            value="{{ $class->nama ?? '-' }}" disabled>
+                                    <div class="col-md-12 mb-2">
+                                        <div class="info-row">
+                                            <strong class="h5 font-weight-bold">Kelas</strong>
+                                            <span>:</span>
+                                            <input type="text" class="form-control"
+                                                value="{{ $class->nama ?? '-' }}" disabled>
+                                        </div>
                                     </div>
 
                                     <!-- Guru Pengampu -->
-                                    <div class="col-md-12 mb-2 d-flex align-items-center">
-                                        <strong class="info-row h5 font-weight-bold me-3 w-25 text-nowrap">Guru
-                                            Pengampu <span>:</span></strong>
-                                        <input type="text" class="form-control flex-grow-1"
-                                            value="{{ $teacher->nama ?? '-' }}" disabled>
+                                    <div class="col-md-12 mb-2">
+                                        <div class="info-row">
+                                            <strong class="h5 font-weight-bold">Guru Pengampu</strong>
+                                            <span>:</span>
+                                            <input type="text" class="form-control"
+                                                value="{{ $teacher->nama ?? '-' }}" disabled>
+                                        </div>
                                     </div>
 
-                                    <!-- Tahun Ajar -->
-                                    <div class="col-md-12 mb-2 d-flex align-items-center">
-                                        <strong class="info-row h5 font-weight-bold me-3 w-25 text-nowrap">Tahun
-                                            Pelajaran <span>:</span></strong>
-                                        <select name="school_year_id" class="form-control flex-grow-1"
-                                            onchange="this.form.submit()">
-                                            @foreach ($schoolYears as $year)
-                                                <option value="{{ $year->id }}"
-                                                    {{ request('school_year_id', $schoolYear->id ?? '') == $year->id ? 'selected' : '' }}>
-                                                    {{ $year->tahun_awal }} / {{ $year->tahun_akhir }} -
-                                                    {{ $year->semester }}
-                                                </option>
-                                            @endforeach
-                                        </select>
+                                    <!-- Tahun Pelajaran -->
+                                    <div class="col-md-12 mb-2">
+                                        <div class="info-row">
+                                            <strong class="h5 font-weight-bold">Tahun Pelajaran</strong>
+                                            <span>:</span>
+                                            <select name="school_year_id" class="form-control"
+                                                onchange="this.form.submit()">
+                                                @foreach ($schoolYears as $year)
+                                                    <option value="{{ $year->id }}"
+                                                        {{ request('school_year_id', $schoolYear->id ?? '') == $year->id ? 'selected' : '' }}>
+                                                        {{ $year->tahun_awal }} / {{ $year->tahun_akhir }} -
+                                                        {{ $year->semester }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -191,17 +217,11 @@
                         <!-- TABEL NILAI -->
 
                         <!-- Tombol Terapkan Nilai Rata -->
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            <div>
-                                <button type="button" class="btn btn-primary" data-toggle="modal"
-                                    data-target="#applyAverageModal">
-                                    <i class="fa fa-clipboard"></i> Terapkan Nilai Rata
-                                </button>
-                                <button type="button" class="btn btn-success text-white" data-bs-toggle="modal"
-                                    data-bs-target="#importGradeModal">
-                                    <i class="fa fa-upload"></i> Impor Nilai
-                                </button>
-                            </div>
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <button type="button" class="btn btn-success text-white" data-bs-toggle="modal"
+                                data-bs-target="#importGradeModal">
+                                <i class="fa fa-upload"></i> Impor Nilai
+                            </button>
                             <div id="customDataTableFilter"></div>
                             <!-- Search bar DataTables will be placed here -->
                         </div>
@@ -352,23 +372,6 @@
     </div>
 
     <script>
-        // script Modal Input Nilai Rata
-        function applyAverage() {
-            var nilai = document.getElementById("averageScore").value;
-            if (nilai < 0 || nilai > 100) {
-                alert("Nilai harus antara 0 dan 100!");
-                return;
-            }
-
-            // Isi semua input nilai dengan nilai yang diinputkan
-            document.querySelectorAll("input[name^='grades'][name$='[nilai]']").forEach(input => {
-                input.value = nilai;
-            });
-
-            // Tutup modal setelah menerapkan nilai
-            $('#applyAverageModal').modal('hide');
-        }
-
         // script modal import
         document.getElementById('importForm').addEventListener('submit', function(e) {
             const fileInput = document.getElementById('importFile');
