@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Sekolah - E-Rapor SIT Aliya</title>
+    <title>Informasi Sekolah - E-Rapor SIT Aliya</title>
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('vendor/sweetalert2/dist/sweetalert2.min.css') }}">
@@ -24,13 +24,13 @@
             <div class="container-fluid">
                 <div class="row page-titles mx-0">
                     <div class="col-sm-6 p-md-0">
-                        <h4 class="mb-0">Data Sekolah</h4>
+                        <h4 class="mb-0">Informasi Sekolah</h4>
                     </div>
                     <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
                             <li class="breadcrumb-item"><a href="javascript:void(0)">Administrasi</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Data Sekolah</li>
+                            <li class="breadcrumb-item active" aria-current="page">Informasi Sekolah</li>
                         </ol>
                     </div>
                 </div>
@@ -39,7 +39,7 @@
                     <div class="col-md-7">
                         <div class="card">
                             <div class="card-header d-flex justify-content-between align-items-center">
-                                <h5 class="m-0 font-weight-bold text-primary">Informasi Sekolah</h5>
+                                <h5 class="m-0 font-weight-bold text-primary">Tabel Informasi Sekolah</h5>
                                 <a href="{{ route('admin.school_profiles.edit', $school_profiles->id) }}"
                                     class="btn btn-warning">
                                     <i class="fa fa-edit"></i> Edit

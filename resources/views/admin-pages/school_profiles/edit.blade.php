@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Data Sekolah - E-Rapor SIT Aliya</title>
+    <title>Edit Informasi Sekolah - E-Rapor SIT Aliya</title>
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('vendor/sweetalert2/dist/sweetalert2.min.css') }}">
@@ -30,15 +30,15 @@
             <div class="container-fluid">
                 <div class="row page-titles mx-0">
                     <div class="col-sm-6 p-md-0">
-                        <h4 class="mb-0">Edit Data Sekolah</h4>
+                        <h4 class="mb-0">Edit Informasi Sekolah</h4>
                     </div>
                     <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
                             <li class="breadcrumb-item"><a href="javascript:void(0)">Administrasi</a></li>
-                            <li class="breadcrumb-item"><a href="{{ route('admin.school_profiles.index') }}">Data
+                            <li class="breadcrumb-item"><a href="{{ route('admin.school_profiles.index') }}">Informasi
                                     Sekolah</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Edit Data Sekolah</li>
+                            <li class="breadcrumb-item active" aria-current="page">Edit Informasi Sekolah</li>
                         </ol>
                     </div>
                 </div>
@@ -46,9 +46,6 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card">
-                            <div class="card-header">
-                                <h5 class="m-0 font-weight-bold text-primary">Edit Informasi Sekolah</h5>
-                            </div>
                             <div class="card-body">
                                 <form action="{{ route('admin.school_profiles.update', $school_profiles->id) }}"
                                     method="POST">

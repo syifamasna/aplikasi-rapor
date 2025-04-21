@@ -122,13 +122,25 @@
 
                 </div>
                 <div class="row mt-2">
-                    <div class="col-12">
+                    <div class="col-sm-12">
                         <div class="card">
                             <div class="card-header">
                                 <h5 class="card-title">Jumlah Siswa per Kelas</h5>
                             </div>
                             <div class="card-body">
                                 <canvas id="siswaPerKelasChart" height="120"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-header bg-gradient-primary text-white">
+                                <h5 class="mb-0">Grafik Prestasi per Kelas</h5>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="prestasiChart" height="100"></canvas>
                             </div>
                         </div>
                     </div>
@@ -165,6 +177,7 @@
     <script src="{{ asset('vendor/sweetalert2/dist/sweetalert2.min.js') }}"></script>
 
     <script>
+        // script garfik jumlah siswa per kelas
         const siswaPerKelasData = @json($siswaPerKelas);
         const ctx = document.getElementById('siswaPerKelasChart').getContext('2d');
         const gradient = ctx.createLinearGradient(0, 0, 0, 400);
@@ -197,6 +210,63 @@
                     }]
                 }
             }
+        });
+
+        // script grafik prestasi per kelas
+        document.addEventListener("DOMContentLoaded", function() {
+            const ctx = document.getElementById('prestasiChart').getContext('2d');
+
+            const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+            gradient.addColorStop(0, '#f1c40f');
+            gradient.addColorStop(1, '#f39c12');
+
+            const labels = {!! json_encode($prestasiPerKelas->pluck('kelas')) !!};
+            const values = {!! json_encode($prestasiPerKelas->pluck('total')) !!};
+
+            // Hitung nilai minimum dan kasih jarak
+            const minValue = Math.min.apply(null, values);
+            const adjustedMin = Math.max(minValue - 3, 0); // supaya gak nempel ke garis X
+
+            const data = {
+                labels: labels,
+                datasets: [{
+                    label: 'Jumlah Prestasi',
+                    data: values,
+                    backgroundColor: gradient,
+                    borderColor: '#f1c40f',
+                    borderWidth: 1,
+                    hoverBackgroundColor: '#f39c12'
+                }]
+            };
+
+            const config = {
+                type: 'bar',
+                data: data,
+                options: {
+                    responsive: true,
+                    legend: {
+                        display: false
+                    },
+                    tooltips: {
+                        callbacks: {
+                            label: function(tooltipItem) {
+                                return ` ${tooltipItem.yLabel} prestasi`;
+                            }
+                        }
+                    },
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                min: adjustedMin,
+                                stepSize: 1, // supaya 1 langsung ke 2, bukan 1.5
+                                precision: 0
+                            },
+                        }],
+                    }
+                }
+            };
+
+            new Chart(ctx, config);
         });
     </script>
 

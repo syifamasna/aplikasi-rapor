@@ -19,6 +19,7 @@ class DashboardController extends Controller
         $totalMapel = Subject::count();
         $totalKelas = StudentClass::count();
         $totalPengguna = User::count();
+        $totalPrestasi = Achievement::count();
 
         $siswaPerKelas = Student::select('class_id', DB::raw('count(*) as total'))
             ->groupBy('class_id')
@@ -33,8 +34,16 @@ class DashboardController extends Controller
             ->sortBy('kelas') // urutkan berdasarkan nama kelas
             ->values(); // reset ulang index agar rapi saat dikirim ke view
 
+        $prestasiPerKelas = DB::table('achievements')
+            ->join('students', 'achievements.student_id', '=', 'students.id')
+            ->join('student_classes', 'students.class_id', '=', 'student_classes.id')
+            ->select('student_classes.nama as kelas', DB::raw('COUNT(*) as total'))
+            ->groupBy('student_classes.nama')
+            ->orderBy('student_classes.nama')
+            ->get();
+
         return view('admin-pages.dashboard.index', compact(
-            'totalSiswa', 'totalMapel', 'totalKelas', 'totalPengguna', 'siswaPerKelas'
+            'totalSiswa', 'totalMapel', 'totalKelas', 'totalPengguna', 'totalPrestasi', 'siswaPerKelas', 'prestasiPerKelas'
         ));
     }
 }

@@ -246,12 +246,11 @@
                                         @foreach ($subjects as $subject)
                                             @php
                                                 $grade = $student->grades->firstWhere('subject_id', $subject->id);
-                                            @endphp
-                                            @php
                                                 $nilai = $grade->nilai ?? null;
+
                                                 $style =
                                                     is_numeric($nilai) && $nilai <= 70
-                                                        ? 'background-color: #ff7e7e !important;'
+                                                        ? 'background-color: #ff7e7e !important; color: white;'
                                                         : '';
                                             @endphp
                                             <td style="text-align: center; {{ $style }}">{{ $nilai ?? '-' }}

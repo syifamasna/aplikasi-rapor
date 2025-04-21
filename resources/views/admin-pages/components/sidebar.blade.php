@@ -29,7 +29,7 @@
             <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="fa fa-folder"></i><span
                         class="nav-text">Administrasi</span></a>
                 <ul aria-expanded="false">
-                    <li><a href="{{ route('admin.school_profiles.index') }}">Data Sekolah</a></li>
+                    <li><a href="{{ route('admin.school_profiles.index') }}">Informasi Sekolah</a></li>
                     <li><a href="{{ route('admin.student_classes.index') }}">Data Kelas</a></li>
                     <li><a href="{{ route('admin.students.index') }}">Data Siswa</a></li>
                     <li><a href="{{ route('admin.subjects.index') }}">Data Mapel</a></li>

@@ -124,13 +124,20 @@
 
             const gradient = ctx.createLinearGradient(0, 0, 0, 400);
             gradient.addColorStop(0, '#f1c40f');
-            gradient.addColorStop(1, '#f39c12'); // lebih gelap untuk gradasi
+            gradient.addColorStop(1, '#f39c12');
+
+            const labels = {!! json_encode($prestasiPerKelas->pluck('kelas')) !!};
+            const values = {!! json_encode($prestasiPerKelas->pluck('total')) !!};
+
+            // Hitung nilai minimum dan kasih jarak
+            const minValue = Math.min.apply(null, values);
+            const adjustedMin = Math.max(minValue - 3, 0); // supaya gak nempel ke garis X
 
             const data = {
-                labels: {!! json_encode($prestasiPerKelas->pluck('kelas')) !!},
+                labels: labels,
                 datasets: [{
                     label: 'Jumlah Prestasi',
-                    data: {!! json_encode($prestasiPerKelas->pluck('total')) !!},
+                    data: values,
                     backgroundColor: gradient,
                     borderColor: '#f1c40f',
                     borderWidth: 1,
@@ -143,32 +150,34 @@
                 data: data,
                 options: {
                     responsive: true,
-                    plugins: {
-                        legend: {
-                            display: false
-                        },
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) {
-                                    return ` ${context.parsed.y} prestasi`;
-                                }
+                    legend: {
+                        display: false
+                    },
+                    tooltips: {
+                        callbacks: {
+                            label: function(tooltipItem) {
+                                return ` ${tooltipItem.yLabel} prestasi`;
                             }
                         }
                     },
                     scales: {
-                        y: {
-                            beginAtZero: true,
-                            title: {
+                        yAxes: [{
+                            ticks: {
+                                min: adjustedMin,
+                                stepSize: 1, // supaya 1 langsung ke 2, bukan 1.5
+                                precision: 0
+                            },
+                            scaleLabel: {
                                 display: true,
-                                text: 'Jumlah Prestasi'
+                                labelString: 'Jumlah Prestasi'
                             }
-                        },
-                        x: {
-                            title: {
+                        }],
+                        xAxes: [{
+                            scaleLabel: {
                                 display: true,
-                                text: 'Kelas'
+                                labelString: 'Kelas'
                             }
-                        }
+                        }]
                     }
                 }
             };
@@ -176,6 +185,7 @@
             new Chart(ctx, config);
         });
     </script>
+
 </body>
 
 </html>
