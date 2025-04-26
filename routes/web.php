@@ -81,9 +81,9 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
         
         Route::resource('school_years', AdminSchoolYearController::class)->names('admin.school_years');
         Route::resource('student_classes', AdminStudentClassController::class)->names('admin.student_classes');
-        Route::resource('students', AdminStudentController::class)->names('admin.students');
+        Route::resource('students', AdminStudentController::class)->names('admin.students')->except(['show']);
         Route::post('students/import', [AdminStudentController::class, 'import'])->name('admin.students.import');
-        Route::get('admin/students/template', [AdminStudentController::class, 'downloadTemplate'])->name('admin.students.template');
+        Route::get('students/template', [AdminStudentController::class, 'downloadTemplate'])->name('admin.students.template');
         Route::resource('subjects', AdminSubjectController::class)->names('admin.subjects');
         Route::resource('teachings', AdminTeachingController::class)->names('admin.teachings');
         Route::resource('users', AdminUserController::class)->names('admin.users');
@@ -158,7 +158,9 @@ Route::middleware(['auth'])->prefix('wali')->group(function () {
         // Rute untuk data kelas & siswa
         Route::resource('student_classes', WaliKelasStudentClassController::class)->names('wali_kelas.student_classes')->except(['show']);
         Route::get('student_classes/students', [WaliKelasStudentClassController::class, 'studentIndex'])->name('wali_kelas.student_classes.students');
-        Route::resource('students', WaliKelasStudentController::class)->names('wali_kelas.students');
+        Route::resource('students', WaliKelasStudentController::class)->names('wali_kelas.students')->except(['show']);
+        Route::post('students/import', [WaliKelasStudentController::class, 'import'])->name('wali_kelas.students.import');
+        Route::get('students/template', [WaliKelasStudentController::class, 'downloadTemplate'])->name('wali_kelas.students.template');
 
         // Rute untuk Laporan Perkembangan Peserta Didik (tampilan per siswa)
         Route::get('student_progress_reports', [WaliKelasStudentProgressReportController::class, 'index'])->name('wali_kelas.student_progress_reports.index');

@@ -102,6 +102,17 @@
             text-align: left;
         }
 
+        .custom-download-link {
+            color: #FFAA16;
+            font-weight: bold;
+            text-decoration: underline;
+            transition: color 0.3s ease;
+        }
+
+        .custom-download-link:hover {
+            color: #e0a800;
+        }
+
         /* Styling untuk tabel responsif hanya pada layar kecil */
         @media (max-width: 991px) {
             .table-responsive {
@@ -128,8 +139,8 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('wali_kelas.dashboard') }}">Dashboard</a></li>
                             <li class="breadcrumb-item"><a href="javascript:void(0)">Administrasi</a></li>
-                            <li class="breadcrumb-item"><a
-                                    href="{{ route('wali_kelas.student_classes.index') }}">Data Kelas</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('wali_kelas.student_classes.index') }}">Data
+                                    Kelas</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Data Siswa</li>
                         </ol>
                     </div>
@@ -138,10 +149,15 @@
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <h5 class="m-0">Tabel Siswa</h5>
-                        <button type="button" class="btn btn-primary" data-toggle="modal"
-                            data-target="#addStudentModal">
-                            Tambah Siswa
-                        </button>
+                        <div class="d-flex align-items-center gap-2">
+                            <button type="button" class="btn btn-success text-white" data-bs-toggle="modal"
+                                data-bs-target="#importStudentModal"><i class="fa fa-upload"></i> Impor Siswa
+                            </button>
+                            <button type="button" class="btn btn-primary ml-2" data-toggle="modal"
+                                data-target="#addStudentModal">
+                                Tambah Siswa
+                            </button>
+                        </div>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -193,10 +209,55 @@
         </div>
     </div>
 
+    <!-- Modal Impor Siswa -->
+    <div class="modal fade" id="importStudentModal" tabindex="-1" role="dialog"
+        aria-labelledby="importStudentModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="importStudentModalLabel">Impor Data Siswa</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{{ route('wali_kelas.students.import') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="alert alert-warning alert-dismissible fade show">
+                            <button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <i class="fa fa-exclamation-circle mr-2"></i>
+                            <b>Penting!</b> File yang diunggah harus berupa dokumen Microsoft Excel dengan ekstensi
+                            .xlsx
+                            <br><a href="{{ route('wali_kelas.students.template') }}" class="custom-download-link">
+                                Download Format Impor
+                            </a>
+                        </div>
+                        <div class="form-group">
+                            <label for="importFile">Pilih File (CSV/Excel)</label>
+                            <input type="file" class="form-control" id="importFile" name="importFile" required>
+                        </div>
+                        <div class="form-group form-check">
+                            <input class="form-check-input" type="checkbox" id="importConfirmCheckbox" required>
+                            <label class="form-check-label" for="importConfirmCheckbox">
+                                Saya yakin sudah mengisi data dengan benar
+                            </label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                        <button type="submit" class="btn btn-success" id="importSubmitButton"
+                            disabled>Impor</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
     <!-- Modal Tambah -->
-    <div class="modal fade" id="addStudentModal" tabindex="-1" role="dialog" aria-labelledby="addStudentModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="addStudentModal" tabindex="-1" role="dialog"
+        aria-labelledby="addStudentModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <form id="addStudentForm" action="{{ route('wali_kelas.students.store') }}" method="POST">
@@ -354,6 +415,11 @@
     </div>
 
     <script>
+        // script modal import
+        document.getElementById('importConfirmCheckbox').addEventListener('change', function() {
+            document.getElementById('importSubmitButton').disabled = !this.checked;
+        });
+
         // script modal tambah
         document.addEventListener('DOMContentLoaded', function() {
             const confirmCheckbox = document.getElementById('confirmCheckbox');

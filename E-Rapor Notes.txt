@@ -39,4 +39,6 @@ tambahan (revisi) 10 April 2025:
 18. tabel leger merah dibawah  dibawah 70 ✅
 19. benerin grafik data siswa halaman admin ✅
 20. Mapel IPAS hanya kelas 3-6
-21. tambah import di halaman data siswa page wali kelas
+21. tambah import di halaman data siswa page wali kelas ✅
+22. landing page dijadikan dinamis
+23. tambah ranking tertinggi di dashboard buat grafik 
