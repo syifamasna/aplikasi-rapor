@@ -57,7 +57,21 @@ class StudentProgressReportController extends Controller
         $schoolYear = SchoolYear::where('id', request('school_year_id', optional($schoolYears->first())->id))
             ->first();
 
-        $subjects = Subject::whereIn('kelompok_mapel', ['Mata Pelajaran Wajib', 'Muatan Lokal'])->get();
+        $kelas_3_6 = ['III', 'IV', 'V', 'VI'];
+        $isKelas3Sampai6 = Str::startsWith($class->nama, $kelas_3_6);
+            
+        if ($isKelas3Sampai6) {
+            $subjects = Subject::whereIn('kelompok_mapel', [
+                'Mata Pelajaran Wajib (Kelas 1-6)',
+                'Mata Pelajaran Wajib (Kelas 3-6)',
+                'Muatan Lokal'
+            ])->get();
+        } else {
+            $subjects = Subject::whereIn('kelompok_mapel', [
+                'Mata Pelajaran Wajib (Kelas 1-6)',
+                'Muatan Lokal'
+            ])->get();
+        }
 
         $grades = Grade::where('student_id', $student->id)
             ->where('school_year_id', $schoolYear->id ?? null)
@@ -94,7 +108,21 @@ class StudentProgressReportController extends Controller
                 ->first();
         }
 
-        $subjects = Subject::whereIn('kelompok_mapel', ['Mata Pelajaran Wajib', 'Muatan Lokal'])->get();
+        $kelas_3_6 = ['III', 'IV', 'V', 'VI'];
+        $isKelas3Sampai6 = Str::startsWith($class->nama, $kelas_3_6);
+            
+        if ($isKelas3Sampai6) {
+            $subjects = Subject::whereIn('kelompok_mapel', [
+                'Mata Pelajaran Wajib (Kelas 1-6)',
+                'Mata Pelajaran Wajib (Kelas 3-6)',
+                'Muatan Lokal'
+            ])->get();
+        } else {
+            $subjects = Subject::whereIn('kelompok_mapel', [
+                'Mata Pelajaran Wajib (Kelas 1-6)',
+                'Muatan Lokal'
+            ])->get();
+        }
 
         $grades = Grade::where('student_id', $student->id)
             ->where('school_year_id', $schoolYear->id)

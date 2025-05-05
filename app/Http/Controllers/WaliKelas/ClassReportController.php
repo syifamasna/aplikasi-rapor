@@ -47,7 +47,21 @@ class ClassReportController extends Controller
             ->first();
 
         // Ambil semua mata pelajaran
-        $subjects = Subject::whereIn('kelompok_mapel', ['Mata Pelajaran Wajib', 'Muatan Lokal'])->get();
+       $kelas_3_6 = ['III', 'IV', 'V', 'VI'];
+        $isKelas3Sampai6 = Str::startsWith($class->nama, $kelas_3_6);
+            
+        if ($isKelas3Sampai6) {
+            $subjects = Subject::whereIn('kelompok_mapel', [
+                'Mata Pelajaran Wajib (Kelas 1-6)',
+                'Mata Pelajaran Wajib (Kelas 3-6)',
+                'Muatan Lokal'
+            ])->get();
+        } else {
+            $subjects = Subject::whereIn('kelompok_mapel', [
+                'Mata Pelajaran Wajib (Kelas 1-6)',
+                'Muatan Lokal'
+            ])->get();
+        }
 
         // Ambil ID siswa dalam kelas
         $studentIds = Student::where('class_id', $class_id)->pluck('id');
@@ -94,7 +108,21 @@ class ClassReportController extends Controller
 
         $schoolYear = SchoolYear::findOrFail($request->school_year_id);
 
-        $subjects = Subject::whereIn('kelompok_mapel', ['Mata Pelajaran Wajib', 'Muatan Lokal'])->get();
+       $kelas_3_6 = ['III', 'IV', 'V', 'VI'];
+        $isKelas3Sampai6 = Str::startsWith($class->nama, $kelas_3_6);
+            
+        if ($isKelas3Sampai6) {
+            $subjects = Subject::whereIn('kelompok_mapel', [
+                'Mata Pelajaran Wajib (Kelas 1-6)',
+                'Mata Pelajaran Wajib (Kelas 3-6)',
+                'Muatan Lokal'
+            ])->get();
+        } else {
+            $subjects = Subject::whereIn('kelompok_mapel', [
+                'Mata Pelajaran Wajib (Kelas 1-6)',
+                'Muatan Lokal'
+            ])->get();
+        }
 
         $studentIds = Student::where('class_id', $class_id)->pluck('id');
 
@@ -234,7 +262,21 @@ class ClassReportController extends Controller
             ->first();
 
         // Ambil semua mata pelajaran
-        $subjects = Subject::whereIn('kelompok_mapel', ['Mata Pelajaran Wajib', 'Muatan Lokal'])->get();
+       $kelas_3_6 = ['III', 'IV', 'V', 'VI'];
+        $isKelas3Sampai6 = Str::startsWith($class->nama, $kelas_3_6);
+            
+        if ($isKelas3Sampai6) {
+            $subjects = Subject::whereIn('kelompok_mapel', [
+                'Mata Pelajaran Wajib (Kelas 1-6)',
+                'Mata Pelajaran Wajib (Kelas 3-6)',
+                'Muatan Lokal'
+            ])->get();
+        } else {
+            $subjects = Subject::whereIn('kelompok_mapel', [
+                'Mata Pelajaran Wajib (Kelas 1-6)',
+                'Muatan Lokal'
+            ])->get();
+        }
 
         // Ambil ID siswa dalam kelas
         $studentIds = Student::where('class_id', $class_id)->pluck('id');
@@ -311,7 +353,21 @@ class ClassReportController extends Controller
                 ->first();
         }
 
-        $subjects = Subject::whereIn('kelompok_mapel', ['Mata Pelajaran Wajib', 'Muatan Lokal'])->get();
+       $kelas_3_6 = ['III', 'IV', 'V', 'VI'];
+        $isKelas3Sampai6 = Str::startsWith($class->nama, $kelas_3_6);
+            
+        if ($isKelas3Sampai6) {
+            $subjects = Subject::whereIn('kelompok_mapel', [
+                'Mata Pelajaran Wajib (Kelas 1-6)',
+                'Mata Pelajaran Wajib (Kelas 3-6)',
+                'Muatan Lokal'
+            ])->get();
+        } else {
+            $subjects = Subject::whereIn('kelompok_mapel', [
+                'Mata Pelajaran Wajib (Kelas 1-6)',
+                'Muatan Lokal'
+            ])->get();
+        }
 
         $students = Student::where('class_id', $class_id)->orderBy('nama')->get();
 

@@ -199,9 +199,12 @@
                             <label for="filterKelompokMapel" class="form-label">Kelompok Mapel</label>
                             <select class="form-control" id="filterKelompokMapel" name="kelompok_mapel">
                                 <option value="">Semua</option>
-                                <option value="Mata Pelajaran Wajib"
-                                    {{ request('kelompok_mapel') == 'Mata Pelajaran Wajib' ? 'selected' : '' }}>Mata
-                                    Pelajaran Wajib</option>
+                                <option value="Mata Pelajaran Wajib (Kelas 1-6)"
+                                    {{ request('kelompok_mapel') == 'Mata Pelajaran Wajib (Kelas 1-6)' ? 'selected' : '' }}>
+                                    Mata Pelajaran Wajib (Kelas 1-6)</option>
+                                <option value="Mata Pelajaran Wajib (Kelas 3-6)"
+                                    {{ request('kelompok_mapel') == 'Mata Pelajaran Wajib (Kelas 3-6)' ? 'selected' : '' }}>
+                                    Mata Pelajaran Wajib (Kelas 3-6)</option>
                                 <option value="Muatan Lokal"
                                     {{ request('kelompok_mapel') == 'Muatan Lokal' ? 'selected' : '' }}>Muatan Lokal
                                 </option>
@@ -244,7 +247,8 @@
                             <label for="kelompok_mapel">Kelompok <span class="text-danger">*</span></label>
                             <select name="kelompok_mapel" id="kelompok_mapel" class="form-control" required>
                                 <option value="" selected disabled>Pilih Kelompok Mapel</option>
-                                <option value="Mata Pelajaran Wajib">Mata Pelajaran Wajib</option>
+                                <option value="Mata Pelajaran Wajib (Kelas 1-6)">Mata Pelajaran Wajib (Kelas 1-6)</option>
+                                <option value="Mata Pelajaran Wajib (Kelas 3-6)">Mata Pelajaran Wajib (Kelas 3-6)</option>
                                 <option value="Muatan Lokal">Muatan Lokal</option>
                             </select>
                         </div>
@@ -293,7 +297,9 @@
                         <div class="form-group">
                             <label for="edit_kelompok_mapel">Kelompok <span class="text-danger">*</span></label>
                             <select name="kelompok_mapel" id="edit_kelompok_mapel" class="form-control" required>
-                                <option value="Mata Pelajaran Wajib">Mata Pelajaran Wajib</option>
+                                <option value="" selected disabled>Pilih Kelompok Mapel</option>
+                                <option value="Mata Pelajaran Wajib (Kelas 1-6)">Mata Pelajaran Wajib (Kelas 1-6)</option>
+                                <option value="Mata Pelajaran Wajib (Kelas 3-6)">Mata Pelajaran Wajib (Kelas 3-6)</option>
                                 <option value="Muatan Lokal">Muatan Lokal</option>
                             </select>
                         </div>

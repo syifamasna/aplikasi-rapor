@@ -44,7 +44,7 @@ class SubjectController extends Controller
         $validated = $request->validate([
             'nama' => 'required|string|max:255',
             'singkatan' => 'nullable|string|max:255',
-            'kelompok_mapel' => 'required|in:Mata Pelajaran Wajib,Muatan Lokal'
+            'kelompok_mapel' => 'required|in:Mata Pelajaran Wajib (Kelas 1-6),Mata Pelajaran Wajib (Kelas 3-6),Muatan Lokal'
         ]);
 
         Subject::create($validated);
@@ -59,7 +59,7 @@ class SubjectController extends Controller
         $validated = $request->validate([
             'nama' => 'required|string|max:255',
             'singkatan' => 'nullable|string|max:255',
-            'kelompok_mapel' => 'required|in:Mata Pelajaran Wajib,Muatan Lokal'
+            'kelompok_mapel' => 'required|in:Mata Pelajaran Wajib (Kelas 1-6),Mata Pelajaran Wajib (Kelas 3-6),Muatan Lokal'
         ]);
     
         $subject = Subject::findOrFail($id);
