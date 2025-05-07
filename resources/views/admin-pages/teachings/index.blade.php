@@ -73,8 +73,9 @@
             background-color: #f0f0f0 !important;
         }
 
-        /* Membuat kolom Wali Kelas left-aligned */
-        table.dataTable tbody td:nth-child(2) {
+        /* Membuat kolom Mata Pelajaran dan Guru Pengampu left-aligned */
+        table.dataTable tbody td:nth-child(2),
+        table.dataTable tbody td:nth-child(4) {
             text-align: left;
         }
 
@@ -104,6 +105,14 @@
 
         /* Styling untuk tabel responsif hanya pada layar kecil */
         @media (max-width: 991px) {
+            .card-body .btn {
+                display: block;
+                width: 100%;
+                max-width: 300px;
+                margin: 5px auto;
+                text-align: center !important;
+            }
+
             .table-responsive {
                 overflow-x: auto;
             }
@@ -505,7 +514,7 @@
                 "autoWidth": false,
                 "responsive": true,
                 "pageLength": 5,
-                "lengthMenu": [2, 5, 10, 25, 50, 100]
+                "lengthMenu": [5, 10, 25, 50, 100]
             });
         });
     </script>

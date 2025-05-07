@@ -199,7 +199,7 @@
                 "autoWidth": false,
                 "responsive": true,
                 "pageLength": 5,
-                "lengthMenu": [2, 5, 10, 25, 50, 100]
+                "lengthMenu": [5, 10, 25, 50, 100]
             });
         });
     </script>

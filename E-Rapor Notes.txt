@@ -1,22 +1,7 @@
 REVISI APLIKASI E-RAPOR SIT ALIYA
 
-- Download format XSLX (Excel)
-- Data NULL yang sudah diisi di profil bisa dihapus/dikosongkan lagi 
 - Grafik Prestasi bisa di filter sesuai tahun ajar
 - Info dan paginate di buat ke center dalam mode responsive
-
-PERTANYAAN 
-
-- Kenapa SIT Aliya bikin aplikasi e-rapor sendiri kalau udah ada yang dinas?
-  sebagai sekolah swasta memberikan penialian khusus, dinas cuma ngasih kurikulum standar, di aliya ada kurikulum yg tdk diampu dinas jd mengembangkan lebih lengkap dan informatif (pelengkap rapor dinas) bersifat deskriptif
-- Mengapa absensi bukan diinput oleh guru jam mata pelajaran tersebut melainkan wali kelas?
-- Kenapa penulisan kelas bukan pakai angka digital (1, 2, 3) dan malah pakai romawi?
-- Kenapa di template Import Nilai tidak perlu memasukkan kelas atau tahun ajar lagi?
-- Logo Sekolah diperlukan tidak di data sekolah? kan tidak jadi dipakai di rapor?
-- LPS (tengah semester diambil dari nilai apa?)
-- Kenapa pakai Laravel 11?
-- Kenapa pakai XAMPP versi 3?
-- Kenapa pakai Bootstrap 3?
 
 tambahan (revisi) 10 April 2025: 
 1. bisa disort berdasarkan nama ✅

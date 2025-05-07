@@ -84,6 +84,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
         Route::resource('students', AdminStudentController::class)->names('admin.students')->except(['show']);
         Route::post('students/import', [AdminStudentController::class, 'import'])->name('admin.students.import');
         Route::get('students/template', [AdminStudentController::class, 'downloadTemplate'])->name('admin.students.template');
+        Route::post('students/bulk-delete', [AdminStudentController::class, 'bulkDelete'])->name('admin.students.bulk-delete');
         Route::resource('subjects', AdminSubjectController::class)->names('admin.subjects');
         Route::resource('teachings', AdminTeachingController::class)->names('admin.teachings');
         Route::resource('users', AdminUserController::class)->names('admin.users');
@@ -109,7 +110,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
         // Rute untuk Laporan Perkembangan Peserta Didik (tampilan per kelas)
         Route::get('class_progress_reports', [AdminClassProgressReportController::class, 'index'])->name('admin.class_progress_reports.index');
         Route::get('class_progress_reports/{class_id}', [AdminClassProgressReportController::class, 'show'])->name('admin.class_progress_reports.show');       
-        Route::get('class_progress_reports/{class_id}/export-csv', [AdminClassProgressReportController::class, 'exportCsv'])->name('admin.class_progress_reports.export-csv');
+        Route::get('class_progress_reports/{class_id}/export-excel', [AdminClassProgressReportController::class, 'exportExcel'])->name('admin.class_progress_reports.export-excel');
         Route::get('class_progress_reports/{class_id}/export-pdf', [AdminClassProgressReportController::class, 'exportPdf'])->name('admin.class_progress_reports.export-pdf'); 
         Route::get('class_progress_reports/{class_id}/export-all-pdf', [AdminClassProgressReportController::class, 'exportAllPdf'])->name('admin.class_progress_reports.export-all-pdf');
 
@@ -122,7 +123,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
         // Rute untuk Laporan Hasil Belajar (Rapor) Peserta Didik (tampilan per kelas)
         Route::get('class_reports', [AdminClassReportController::class, 'index'])->name('admin.class_reports.index');
         Route::get('class_reports/{class_id}', [AdminClassReportController::class, 'show'])->name('admin.class_reports.show');       
-        Route::get('class_reports/{class_id}/export-csv', [AdminClassReportController::class, 'exportCsv'])->name('admin.class_reports.export-csv');
+        Route::get('class_reports/{class_id}/export-excel', [AdminClassReportController::class, 'exportExcel'])->name('admin.class_reports.export-excel');
         Route::get('class_reports/{class_id}/export-pdf', [AdminClassReportController::class, 'exportPdf'])->name('admin.class_reports.export-pdf'); 
         Route::get('class_reports/{class_id}/export-all-pdf', [AdminClassReportController::class, 'exportAllPdf'])->name('admin.class_reports.export-all-pdf');
     });
@@ -161,6 +162,7 @@ Route::middleware(['auth'])->prefix('wali')->group(function () {
         Route::resource('students', WaliKelasStudentController::class)->names('wali_kelas.students')->except(['show']);
         Route::post('students/import', [WaliKelasStudentController::class, 'import'])->name('wali_kelas.students.import');
         Route::get('students/template', [WaliKelasStudentController::class, 'downloadTemplate'])->name('wali_kelas.students.template');
+        Route::post('students/bulk-delete', [WaliKelasStudentController::class, 'bulkDelete'])->name('wali_kelas.students.bulk-delete');
 
         // Rute untuk Laporan Perkembangan Peserta Didik (tampilan per siswa)
         Route::get('student_progress_reports', [WaliKelasStudentProgressReportController::class, 'index'])->name('wali_kelas.student_progress_reports.index');
@@ -171,7 +173,7 @@ Route::middleware(['auth'])->prefix('wali')->group(function () {
         // Rute untuk Laporan Perkembangan Peserta Didik (tampilan per kelas)
         Route::get('class_progress_reports', [WaliKelasClassProgressReportController::class, 'index'])->name('wali_kelas.class_progress_reports.index');
         Route::get('class_progress_reports/{class_id}', [WaliKelasClassProgressReportController::class, 'show'])->name('wali_kelas.class_progress_reports.show');       
-        Route::get('class_progress_reports/{class_id}/export-csv', [WaliKelasClassProgressReportController::class, 'exportCsv'])->name('wali_kelas.class_progress_reports.export-csv');
+        Route::get('class_progress_reports/{class_id}/export-excel', [WaliKelasClassProgressReportController::class, 'exportExcel'])->name('wali_kelas.class_progress_reports.export-excel');
         Route::get('class_progress_reports/{class_id}/export-pdf', [WaliKelasClassProgressReportController::class, 'exportPdf'])->name('wali_kelas.class_progress_reports.export-pdf'); 
         Route::get('class_progress_reports/{class_id}/export-all-pdf', [WaliKelasClassProgressReportController::class, 'exportAllPdf'])->name('wali_kelas.class_progress_reports.export-all-pdf');
 
@@ -184,7 +186,7 @@ Route::middleware(['auth'])->prefix('wali')->group(function () {
         // Rute untuk Laporan Hasil Belajar (Rapor) Peserta Didik (tampilan per kelas)
         Route::get('class_reports', [WaliKelasClassReportController::class, 'index'])->name('wali_kelas.class_reports.index');
         Route::get('class_reports/{class_id}', [WaliKelasClassReportController::class, 'show'])->name('wali_kelas.class_reports.show');       
-        Route::get('class_reports/{class_id}/export-csv', [WaliKelasClassReportController::class, 'exportCsv'])->name('wali_kelas.class_reports.export-csv');
+        Route::get('class_reports/{class_id}/export-excel', [WaliKelasClassReportController::class, 'exportExcel'])->name('wali_kelas.class_reports.export-excel');
         Route::get('class_reports/{class_id}/export-pdf', [WaliKelasClassReportController::class, 'exportPdf'])->name('wali_kelas.class_reports.export-pdf'); 
         Route::get('class_reports/{class_id}/export-all-pdf', [WaliKelasClassReportController::class, 'exportAllPdf'])->name('wali_kelas.class_reports.export-all-pdf');
 

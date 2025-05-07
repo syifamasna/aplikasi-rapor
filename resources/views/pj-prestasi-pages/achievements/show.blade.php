@@ -130,8 +130,8 @@
                             <li class="breadcrumb-item"><a href="{{ route('pj_prestasi.dashboard') }}">Dashboard</a>
                             </li>
                             <li class="breadcrumb-item"><a href="javascript:void(0)">Pj Prestasi</a></li>
-                            <li class="breadcrumb-item"><a
-                                    href="{{ route('pj_prestasi.achievements.index') }}">Prestasi Siswa</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('pj_prestasi.achievements.index') }}">Prestasi
+                                    Siswa</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Input Prestasi</li>
 
                         </ol>
@@ -417,7 +417,7 @@
                 "autoWidth": false,
                 "responsive": true,
                 "pageLength": 5,
-                "lengthMenu": [2, 5, 10, 25, 50, 100]
+                "lengthMenu": [5, 10, 25, 50, 100]
             });
         });
     </script>

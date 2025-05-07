@@ -89,9 +89,9 @@
             <h3>LAPORAN PERKEMBANGAN PESERTA DIDIK KELAS {{ $class->nama ?? '-' }}</h3>
             <h4>
                 @if ($schoolYear && $schoolYear->semester === 'Tengah Semester I (Satu)')
-                    SEMESTER I (SATU)
+                    TENGAH SEMESTER I (SATU)
                 @elseif ($schoolYear && $schoolYear->semester === 'Tengah Semester II (Dua)')
-                    SEMESTER II (DUA)
+                    TENGAH SEMESTER II (DUA)
                 @else
                     SEMESTER TIDAK DIKETAHUI
                 @endif

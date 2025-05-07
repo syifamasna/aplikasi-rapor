@@ -105,6 +105,14 @@
 
         /* Styling untuk tabel responsif hanya pada layar kecil */
         @media (max-width: 991px) {
+            .card-body .btn {
+                display: block;
+                width: 100%;
+                max-width: 300px;
+                margin: 5px auto;
+                text-align: center !important;
+            }
+
             .table-responsive {
                 overflow-x: auto;
             }
@@ -129,7 +137,8 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
                             <li class="breadcrumb-item"><a href="javascript:void(0)">Administrasi</a></li>
-                            <li class="breadcrumb-item"><a href="{{ route('admin.achievements.index') }}">Prestasi Siswa</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('admin.achievements.index') }}">Prestasi
+                                    Siswa</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Input Prestasi</li>
 
                         </ol>
@@ -415,7 +424,7 @@
                 "autoWidth": false,
                 "responsive": true,
                 "pageLength": 5,
-                "lengthMenu": [2, 5, 10, 25, 50, 100]
+                "lengthMenu": [5, 10, 25, 50, 100]
             });
         });
     </script>

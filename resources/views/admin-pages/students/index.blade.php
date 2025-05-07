@@ -113,10 +113,62 @@
             color: #e0a800;
         }
 
+        #bulkDeleteTable_wrapper .dataTables_filter input {
+            width: 180px !important;
+        }
+
+        #bulkDeleteTable_wrapper .dataTables_length select {
+            width: 70px !important;
+        }
+
+        #bulkDeleteTable_wrapper .dataTables_info,
+        #bulkDeleteTable_wrapper .dataTables_paginate {
+            width: 100%;
+            display: block;
+            text-align: center;
+        }
+
+        #bulkDeleteTable_wrapper .dataTables_paginate {
+            margin-top: 5px;
+        }
+
         /* Styling untuk tabel responsif hanya pada layar kecil */
         @media (max-width: 991px) {
+            .card-body .btn {
+                display: block;
+                width: 100%;
+                max-width: 300px;
+                margin: 5px auto;
+                text-align: center !important;
+            }
+
             .table-responsive {
                 overflow-x: auto;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .card-body .row {
+                text-align: center;
+            }
+
+            .card-body .row .col-md-6 {
+                width: 100%;
+            }
+
+            .card-body .row .btn {
+                display: inline-block;
+                width: 45%;
+                margin: 5px 2%;
+            }
+        }
+
+        @media (max-width: 425px) {
+            .card-body .row .btn {
+                display: block;
+                width: 100%;
+                max-width: 300px;
+                margin: 6px auto;
             }
         }
     </style>
@@ -145,19 +197,31 @@
                 </div>
 
                 <div class="card">
-                    <div class="card-header d-flex justify-content-between align-items-center">
-                        <h5 class="m-0">Tabel Siswa</h5>
-                        <div class="d-flex align-items-center gap-2">
-                            <button type="button" class="btn btn-success text-white" data-bs-toggle="modal"
-                                data-bs-target="#importStudentModal"><i class="fa fa-upload"></i> Impor Siswa
-                            </button>
-                            <button type="button" class="btn btn-primary ml-2" data-toggle="modal"
-                                data-target="#addStudentModal">
-                                Tambah Siswa
-                            </button>
-                            <button type="button" class="btn btn-secondary ml-2" data-bs-toggle="modal"
-                                data-bs-target="#filterModal"><i class="fa fa-filter"></i> Filter
-                            </button>
+                    <div class="card-header">
+                        <h5>Tabel Siswa</h5>
+                    </div>
+                    <div class="card-body mb-0">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <button type="button" class="btn btn-primary" data-toggle="modal"
+                                    data-target="#addStudentModal">
+                                    Tambah Siswa
+                                </button>
+                                <button type="button" class="btn btn-success text-white ml-2" data-bs-toggle="modal"
+                                    data-bs-target="#importStudentModal">
+                                    <i class="fa fa-upload"></i> Impor Siswa
+                                </button>
+                            </div>
+                            <div class="col-md-6 text-right">
+                                <button type="button" class="btn btn-secondary ml-2" data-bs-toggle="modal"
+                                    data-bs-target="#filterModal">
+                                    <i class="fa fa-filter"></i> Filter
+                                </button>
+                                <button type="button" class="btn btn-danger ml-2" data-bs-toggle="modal"
+                                    data-bs-target="#deleteMultipleModal">
+                                    <i class="fa fa-trash"></i> Hapus Beberapa
+                                </button>
+                            </div>
                         </div>
                     </div>
                     <div class="card-body">
@@ -166,7 +230,7 @@
                                 cellspacing="0">
                                 <thead>
                                     <tr>
-                                        <th>No.</th>
+                                        <th>No</th>
                                         <th>Nama</th>
                                         <th>Kelas</th>
                                         <th>Aksi</th>
@@ -221,7 +285,8 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="{{ route('admin.students.import') }}" method="POST" enctype="multipart/form-data">
+                <form id="importForm" action="{{ route('admin.students.import') }}" method="POST"
+                    enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
                         <div class="alert alert-warning alert-dismissible fade show">
@@ -236,7 +301,7 @@
                             </a>
                         </div>
                         <div class="form-group">
-                            <label for="importFile">Pilih File (CSV/Excel)</label>
+                            <label for="importFile">Pilih File Excel</label>
                             <input type="file" class="form-control" id="importFile" name="importFile" required>
                         </div>
                         <div class="form-group form-check">
@@ -247,7 +312,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                         <button type="submit" class="btn btn-success" id="importSubmitButton"
                             disabled>Impor</button>
                     </div>
@@ -453,8 +518,71 @@
         </div>
     </div>
 
+    <!-- Modal Hapus Beberapa -->
+    <div class="modal fade" id="deleteMultipleModal" tabindex="-1" role="dialog"
+        aria-labelledby="deleteMultipleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-md" role="document">
+            <form id="bulkDeleteForm" method="POST" action="{{ route('admin.students.bulk-delete') }}">
+                @csrf
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Pilih Siswa yang Akan Dihapus</h5>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table table-bordered table-striped" id="bulkDeleteTable" width="100%"
+                            cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th class="text-center"><input type="checkbox" id="selectAll"></th>
+                                    <th class="text-center">No</th>
+                                    <th class="text-center">Nama</th>
+                                    <th class="text-center">Kelas</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($students as $student)
+                                    <tr>
+                                        <td class="text-center"><input type="checkbox" name="student_ids[]"
+                                                value="{{ $student->id }}"></td>
+                                        <td class="text-center">{{ $loop->iteration }}</td>
+                                        <td class="text-left">{{ $student->nama }}</td> {{-- Nama tetap kiri --}}
+                                        <td class="text-center">{{ $student->class->nama ?? '-' }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-danger" id="btnDeleteSelected">Hapus Terpilih</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <script>
         // script modal import
+        document.getElementById('importForm').addEventListener('submit', function(e) {
+            const fileInput = document.getElementById('importFile');
+            const submitBtn = document.getElementById('importSubmitButton');
+
+            // Validasi file
+            if (!fileInput.files.length) {
+                e.preventDefault();
+                alert('Silakan pilih file terlebih dahulu!');
+                return;
+            }
+
+            // Tampilkan loading
+            submitBtn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Memproses...';
+            submitBtn.disabled = true;
+        });
+
+        // script modal import untuk mengaktifkan tombol simpan jika checkbox dicentang
         document.getElementById('importConfirmCheckbox').addEventListener('change', function() {
             document.getElementById('importSubmitButton').disabled = !this.checked;
         });
@@ -599,7 +727,72 @@
                 "autoWidth": false,
                 "responsive": true,
                 "pageLength": 5,
-                "lengthMenu": [2, 5, 10, 25, 50, 100]
+                "lengthMenu": [5, 10, 25, 50, 100]
+            });
+        });
+    </script>
+
+    <script>
+        let tableInitialized = false;
+
+        $('#deleteMultipleModal').on('shown.bs.modal', function() {
+            if (!tableInitialized) {
+                $('#bulkDeleteTable').DataTable({
+                    "paging": true,
+                    "lengthChange": true,
+                    "searching": true,
+                    "ordering": false,
+                    "info": true,
+                    "autoWidth": false,
+                    "responsive": true,
+                    "pageLength": 5,
+                    "lengthMenu": [5, 10, 25, 50, 100]
+                });
+                tableInitialized = true;
+            }
+        });
+
+        $('#selectAll').on('click', function() {
+            const isChecked = $(this).is(':checked');
+            $('#bulkDeleteTable input[type="checkbox"]').prop('checked', isChecked);
+        });
+
+        // Script untuk menghapus banyak siswa
+        $(document).ready(function() {
+            // Tombol hapus banyak
+            $('#btnDeleteSelected').on('click', function(e) {
+                e.preventDefault();
+
+                // Ambil semua ID yang tercentang
+                let selectedIds = [];
+                $('#bulkDeleteTable input[name="student_ids[]"]:checked').each(function() {
+                    selectedIds.push($(this).val());
+                });
+
+                if (selectedIds.length === 0) {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Tidak ada yang dipilih',
+                        text: 'Silakan pilih minimal satu siswa',
+                    });
+                    return;
+                }
+
+                Swal.fire({
+                    title: 'Apakah anda yakin?',
+                    text: `Anda akan menghapus ${selectedIds.length} siswa`,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#aaa',
+                    confirmButtonText: 'Ya, hapus!',
+                    cancelButtonText: 'Batal'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Kirim form jika dikonfirmasi
+                        $('#bulkDeleteForm').submit();
+                    }
+                });
             });
         });
     </script>

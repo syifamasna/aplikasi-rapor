@@ -84,6 +84,14 @@
 
         /* Styling untuk tabel responsif hanya pada layar kecil */
         @media (max-width: 991px) {
+            .card-body .btn {
+                display: block;
+                width: 100%;
+                max-width: 300px;
+                margin: 5px auto;
+                text-align: center !important;
+            }
+
             .table-responsive {
                 overflow-x: auto;
             }

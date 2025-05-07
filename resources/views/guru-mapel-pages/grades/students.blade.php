@@ -292,30 +292,6 @@
         </div>
     </div>
 
-    <!-- Modal Input Nilai Rata -->
-    <div class="modal fade" id="applyAverageModal" tabindex="-1" aria-labelledby="applyAverageModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="applyAverageModalLabel">Terapkan Nilai Rata</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <label for="averageScore">Nilai</label>
-                    <input type="number" id="averageScore" class="form-control" min="0" max="100"
-                        placeholder="Masukkan nilai...">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                    <button type="button" class="btn btn-success" onclick="applyAverage()">Terapkan</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- Modal Impor Nilai -->
     <div class="modal fade" id="importGradeModal" tabindex="-1" role="dialog"
         aria-labelledby="importGradeModalLabel" aria-hidden="true">

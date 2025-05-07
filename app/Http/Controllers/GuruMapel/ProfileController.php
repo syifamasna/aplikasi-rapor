@@ -38,12 +38,11 @@ class ProfileController extends Controller
             'image' => 'sometimes|nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
-        // Update hanya field yang dikirim
-        foreach ($request->only(['nama', 'email', 'nip', 'nuptk', 'telepon', 'alamat', 'jk']) as $key => $value) {
-            if ($request->filled($key)) {
-                $user->$key = $value;
+        foreach (['nama', 'email', 'nip', 'nuptk', 'telepon', 'alamat', 'jk'] as $key) {
+            if ($request->has($key)) {
+                $user->$key = $request->input($key) !== '' ? $request->input($key) : null;
             }
-        }
+        }        
 
         if ($request->filled('password')) {
             $user->password = bcrypt($request->password);
@@ -62,8 +61,9 @@ class ProfileController extends Controller
 
         $user->save();
 
-        return redirect()->route('guru_mapel.profile.index')->with('success', 'Profil berhasil diperbarui.');
+        return redirect()->route('admin.profile.index')->with('success', 'Profil berhasil diperbarui.');
     }
+
 
     public function destroyImage()
     {

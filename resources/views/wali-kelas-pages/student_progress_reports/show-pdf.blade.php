@@ -66,9 +66,9 @@
             <h3 style="margin: 2px 0;">LAPORAN PERKEMBANGAN PESERTA DIDIK</h3>
             <h3 style="margin: 2px 0;">
                 @if ($schoolYear && $schoolYear->semester === 'Tengah Semester I (Satu)')
-                    SEMESTER I (SATU)
+                    TENGAH SEMESTER I (SATU)
                 @elseif ($schoolYear && $schoolYear->semester === 'Tengah Semester II (Dua)')
-                    SEMESTER II (DUA)
+                    TENGAH SEMESTER II (DUA)
                 @else
                     SEMESTER TIDAK DIKETAHUI
                 @endif

@@ -323,8 +323,8 @@
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <a class="dropdown-item"
-                                        href="{{ route('wali_kelas.class_reports.export-csv', ['class_id' => $class->id]) }}?school_year_id={{ request('school_year_id', $schoolYear->id) }}">
-                                        <i class="fa fa-file-excel-o"></i> CSV (Legger)
+                                        href="{{ route('wali_kelas.class_reports.export-excel', ['class_id' => $class->id]) }}?school_year_id={{ request('school_year_id', $schoolYear->id) }}">
+                                        <i class="fa fa-file-excel-o"></i> Excel (Legger)
                                     </a>
                                     <a class="dropdown-item"
                                         href="{{ route('wali_kelas.class_reports.export-pdf', ['class_id' => $class->id]) }}?school_year_id={{ request('school_year_id', $schoolYear->id) }}">

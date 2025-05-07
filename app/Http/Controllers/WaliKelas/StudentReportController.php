@@ -180,7 +180,7 @@ class StudentReportController extends Controller
                 'graduationDecision'
             ) + ['isAll' => false]);            
 
-        $filename = 'Rapor_' . Str::slug($student->nama) . '_' . $schoolYear->tahun_awal . '_' . $schoolYear->tahun_akhir . '_' . $schoolYear->semester . '.pdf';
+        $filename = 'Rapor_' . Str::slug($student->nama) . '_' . $schoolYear->tahun_awal . '_' . $schoolYear->tahun_akhir . '_Semester ' . $schoolYear->semester . '.pdf';
 
         return $pdf->stream($filename);
     }

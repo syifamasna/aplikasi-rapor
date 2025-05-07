@@ -17,6 +17,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;
 use Barryvdh\DomPDF\Facade\Pdf;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use PhpOffice\PhpSpreadsheet\Style\Fill;
+use PhpOffice\PhpSpreadsheet\Style\Border;
+use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
 
 class ClassReportController extends Controller
 {
@@ -100,42 +106,32 @@ class ClassReportController extends Controller
         ));
     }
     
-    public function exportCsv(Request $request, $class_id)
+    public function exportExcel(Request $request, $class_id)
     {
-        $class = StudentClass::where('id', $class_id)
-            ->where('wali_kelas_id', auth()->id())
-            ->firstOrFail();
-
+        $class = StudentClass::findOrFail($class_id);
         $schoolYear = SchoolYear::findOrFail($request->school_year_id);
-
-       $kelas_3_6 = ['III', 'IV', 'V', 'VI'];
+        $schoolProfile = SchoolProfile::first();
+    
+        $kelas_3_6 = ['III', 'IV', 'V', 'VI'];
         $isKelas3Sampai6 = Str::startsWith($class->nama, $kelas_3_6);
-            
-        if ($isKelas3Sampai6) {
-            $subjects = Subject::whereIn('kelompok_mapel', [
-                'Mata Pelajaran Wajib (Kelas 1-6)',
-                'Mata Pelajaran Wajib (Kelas 3-6)',
-                'Muatan Lokal'
-            ])->get();
-        } else {
-            $subjects = Subject::whereIn('kelompok_mapel', [
-                'Mata Pelajaran Wajib (Kelas 1-6)',
-                'Muatan Lokal'
-            ])->get();
-        }
-
+    
+        $subjects = Subject::whereIn('kelompok_mapel', $isKelas3Sampai6
+            ? ['Mata Pelajaran Wajib (Kelas 1-6)', 'Mata Pelajaran Wajib (Kelas 3-6)', 'Muatan Lokal']
+            : ['Mata Pelajaran Wajib (Kelas 1-6)', 'Muatan Lokal']
+        )->get();
+    
         $studentIds = Student::where('class_id', $class_id)->pluck('id');
-
+    
         $grades = Grade::whereIn('student_id', $studentIds)
             ->where('school_year_id', $schoolYear->id)
             ->get()
             ->groupBy('student_id');
-
+    
         $attendances = Attendance::whereIn('student_id', $studentIds)
             ->where('school_year_id', $schoolYear->id)
             ->get()
             ->keyBy('student_id');
-
+    
         $students = Student::where('class_id', $class_id)
             ->orderBy('nama')
             ->get()
@@ -144,105 +140,138 @@ class ClassReportController extends Controller
                 $student->absensi = $attendances[$student->id] ?? ['sakit' => 0, 'izin' => 0, 'alfa' => 0];
                 return $student;
             });
-
-        $filename = 'Rapor ' . $class->nama . ' Semester ' 
-            . ($schoolYear->semester === 'I (Satu)' ? 'I (Satu)' : 'II (Dua)') 
-            . ' Tahun Ajar ' . $schoolYear->tahun_awal . '-' . $schoolYear->tahun_akhir . '.csv';
-
-        $headers = [
-            'Content-Type' => 'text/csv',
-            'Content-Disposition' => "attachment; filename=\"$filename\"",
-        ];
-
-        $callback = function () use ($students, $subjects, $class, $schoolYear) {
-            $handle = fopen('php://output', 'w');
-        
-            // Header Judul
-            fputcsv($handle, ['LEGGER NILAI RAPOR KELAS ' . strtoupper($class->nama)]);
-            $semesterRomawi = $schoolYear->semester === 'I (Satu)' ? 'I (Satu)' : 'II (Dua)';
-            $tahunPelajaran = $schoolYear->tahun_awal . ' / ' . $schoolYear->tahun_akhir;
-            fputcsv($handle, ["Semester $semesterRomawi Tahun Pelajaran $tahunPelajaran"]);
-            fputcsv($handle, []);
-        
-            // Header kolom
-            $columns = ['Nama Lengkap'];
-            foreach ($subjects as $subject) {
-                $columns[] = $subject->singkatan ?? $subject->nama;
-            }
-            $columns = array_merge($columns, ['Sakit', 'Izin', 'Alfa', 'Jumlah', 'Rata-Rata']);
-            fputcsv($handle, $columns);
-        
-            // Untuk menghitung rata-rata tiap kolom
-            $nilaiTotalPerMapel = array_fill_keys($subjects->pluck('id')->toArray(), 0);
-            $jumlahNilaiPerMapel = array_fill_keys($subjects->pluck('id')->toArray(), 0);
-            $totalSakit = $totalIzin = $totalAlfa = $totalJumlah = $totalRataRata = 0;
-            $totalSiswaDenganNilai = 0;
-        
-            foreach ($students as $student) {
-                $row = [$student->nama];
-                $nilaiArray = [];
-        
-                foreach ($subjects as $subject) {
-                    $nilai = optional($student->grades->firstWhere('subject_id', $subject->id))->nilai;
-                    $row[] = $nilai ?? '-';
-        
-                    if (is_numeric($nilai)) {
-                        $nilaiArray[] = floatval($nilai);
-                        $nilaiTotalPerMapel[$subject->id] += floatval($nilai);
-                        $jumlahNilaiPerMapel[$subject->id]++;
-                    }
+    
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+    
+        // Header
+        $sheet->mergeCells('A1:U1');
+        $sheet->setCellValue('A1', 'LAPORAN HASIL BELAJAR (RAPOR) KELAS ' . strtoupper($class->nama));
+        $sheet->getStyle('A1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER)->setVertical(Alignment::VERTICAL_CENTER);
+    
+        $sheet->mergeCells('A2:U2');
+        $semester = strtoupper($schoolYear->semester);
+        $sheet->setCellValue('A2', "SEMESTER $semester TAHUN PELAJARAN {$schoolYear->tahun_awal}/{$schoolYear->tahun_akhir}");
+        $sheet->getStyle('A2')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER)->setVertical(Alignment::VERTICAL_CENTER);
+    
+        // Header Kolom
+        $mapelCount = $subjects->count();
+        $startRow = 4;
+        $rowNilai = $startRow + 1;
+    
+        $sheet->setCellValue('A4', 'No')->mergeCells("A4:A5");
+        $sheet->setCellValue('B4', 'Nama Lengkap')->mergeCells("B4:B5");
+        $nilaiEndCol = Coordinate::stringFromColumnIndex(2 + $mapelCount);
+        $sheet->setCellValue("C4", 'Nilai')->mergeCells("C4:$nilaiEndCol" . '4');
+    
+        foreach ($subjects as $i => $subject) {
+            $col = Coordinate::stringFromColumnIndex(3 + $i); // Mulai dari C
+            $sheet->setCellValue($col . '5', $subject->singkatan ?? $subject->nama);
+        }
+    
+        // Absensi
+        $absensiStartCol = Coordinate::stringFromColumnIndex(3 + $mapelCount);
+        $absensiEndCol = Coordinate::stringFromColumnIndex(3 + $mapelCount + 2);
+        $sheet->setCellValue($absensiStartCol . '4', 'Absensi')->mergeCells("{$absensiStartCol}4:{$absensiEndCol}4");
+        $sheet->setCellValue($absensiStartCol . '5', 'S');
+        $sheet->setCellValue(Coordinate::stringFromColumnIndex(3 + $mapelCount + 1) . '5', 'I');
+        $sheet->setCellValue(Coordinate::stringFromColumnIndex(3 + $mapelCount + 2) . '5', 'A');
+    
+        // Jumlah & Rata-rata
+        $colJumlah = Coordinate::stringFromColumnIndex(3 + $mapelCount + 3);
+        $colRata2 = Coordinate::stringFromColumnIndex(3 + $mapelCount + 4);
+        $sheet->setCellValue($colJumlah . '4', 'Jumlah')->mergeCells("$colJumlah" . "4:$colJumlah" . "5");
+        $sheet->setCellValue($colRata2 . '4', 'Rata-rata')->mergeCells("$colRata2" . "4:$colRata2" . "5");
+    
+        // Isi Data Siswa
+        $row = 6;
+        foreach ($students as $index => $student) {
+            $sheet->setCellValue("A$row", $index + 1);
+            $sheet->setCellValue("B$row", $student->nama);
+    
+            $nilaiArray = [];
+            foreach ($subjects as $i => $subject) {
+                $col = Coordinate::stringFromColumnIndex(3 + $i);
+                $nilai = optional($student->grades->firstWhere('subject_id', $subject->id))->nilai;
+                $sheet->setCellValue("$col$row", $nilai ?? '-');
+                if (is_numeric($nilai) && $nilai <= 70) {
+                    $sheet->getStyle("$col$row")->getFill()->setFillType(Fill::FILL_SOLID)
+                        ->getStartColor()->setARGB('FF7E7E');
                 }
-        
-                $sakit = $student->absensi['sakit'] ?? 0;
-                $izin = $student->absensi['izin'] ?? 0;
-                $alfa = $student->absensi['alfa'] ?? 0;
-        
-                $row[] = $sakit;
-                $row[] = $izin;
-                $row[] = $alfa;
-        
-                $jumlah = array_sum($nilaiArray);
-                $rata = count($nilaiArray) > 0 ? round($jumlah / count($nilaiArray), 2) : '-';
-        
-                $row[] = $jumlah;
-                $row[] = $rata;
-        
-                // Akumulasi absensi & jumlah/rata-rata
-                $totalSakit += $sakit;
-                $totalIzin += $izin;
-                $totalAlfa += $alfa;
-        
-                if ($rata !== '-') {
-                    $totalJumlah += $jumlah;
-                    $totalRataRata += $rata;
-                    $totalSiswaDenganNilai++;
-                }
-        
-                fputcsv($handle, $row);
+                if (is_numeric($nilai)) $nilaiArray[] = $nilai;
             }
-        
-            // Baris Nilai Rata-rata
-            $averageRow = ['Nilai Rata-Rata'];
-            foreach ($subjects as $subject) {
-                $count = $jumlahNilaiPerMapel[$subject->id];
-                $total = $nilaiTotalPerMapel[$subject->id];
-                $averageRow[] = $count > 0 ? round($total / $count, 2) : '-';
-            }
-        
-            // Rata-rata absensi dan nilai total
-            $jumlahSiswa = count($students);
-            $averageRow[] = $jumlahSiswa > 0 ? round($totalSakit / $jumlahSiswa, 2) : '-';
-            $averageRow[] = $jumlahSiswa > 0 ? round($totalIzin / $jumlahSiswa, 2) : '-';
-            $averageRow[] = $jumlahSiswa > 0 ? round($totalAlfa / $jumlahSiswa, 2) : '-';
-            $averageRow[] = $totalSiswaDenganNilai > 0 ? round($totalJumlah / $totalSiswaDenganNilai, 2) : '-';
-            $averageRow[] = $totalSiswaDenganNilai > 0 ? round($totalRataRata / $totalSiswaDenganNilai, 2) : '-';
-        
-            fputcsv($handle, $averageRow);
-        
-            fclose($handle);
-        };        
+    
+            $absen = $student->absensi;
+            $sheet->setCellValue(Coordinate::stringFromColumnIndex(3 + $mapelCount) . $row, $absen['sakit']);
+            $sheet->setCellValue(Coordinate::stringFromColumnIndex(3 + $mapelCount + 1) . $row, $absen['izin']);
+            $sheet->setCellValue(Coordinate::stringFromColumnIndex(3 + $mapelCount + 2) . $row, $absen['alfa']);
+    
+            $jumlah = array_sum($nilaiArray);
+            $rata = count($nilaiArray) ? round($jumlah / count($nilaiArray), 2) : '-';
+            $sheet->setCellValue("$colJumlah$row", $jumlah);
+            $sheet->setCellValue("$colRata2$row", $rata);
+            $row++;
+        }
+    
+        // Footer: Rata-rata
+        $sheet->mergeCells("A$row:B$row");
+        $sheet->setCellValue("A$row", "Nilai rata-rata");
 
-        return response()->stream($callback, 200, $headers);
+        // 🌕 Terapkan warna kuning ke seluruh baris sampai kolom terakhir
+        $lastCol = $colRata2; // Ini kolom paling akhir dari data
+        $sheet->getStyle("A$row:$lastCol$row")->getFill()
+            ->setFillType(Fill::FILL_SOLID)
+            ->getStartColor()->setRGB('FFF27E');
+    
+        foreach ($subjects as $i => $subject) {
+            $col = Coordinate::stringFromColumnIndex(3 + $i);
+            $nilaiPerMapel = $students->map(fn($s) => optional($s->grades->firstWhere('subject_id', $subject->id))->nilai)
+                ->filter(fn($n) => is_numeric($n));
+            $sheet->setCellValue("$col$row", $nilaiPerMapel->count() ? round($nilaiPerMapel->avg(), 2) : '-');
+        }
+    
+        $sheet->setCellValue(Coordinate::stringFromColumnIndex(3 + $mapelCount) . $row, round($students->avg('absensi.sakit'), 2));
+        $sheet->setCellValue(Coordinate::stringFromColumnIndex(3 + $mapelCount + 1) . $row, round($students->avg('absensi.izin'), 2));
+        $sheet->setCellValue(Coordinate::stringFromColumnIndex(3 + $mapelCount + 2) . $row, round($students->avg('absensi.alfa'), 2));
+    
+        $jumlahSemua = $students->map(fn($s) =>
+            $subjects->map(fn($sub) =>
+                optional($s->grades->firstWhere('subject_id', $sub->id))->nilai
+            )->filter(fn($n) => is_numeric($n))->sum()
+        )->filter();
+    
+        $rataRataSemua = $students->map(fn($s) =>
+            $subjects->map(fn($sub) =>
+                optional($s->grades->firstWhere('subject_id', $sub->id))->nilai
+            )->filter(fn($n) => is_numeric($n))->avg()
+        )->filter();
+    
+        $sheet->setCellValue("$colJumlah$row", round($jumlahSemua->avg(), 2));
+        $sheet->setCellValue("$colRata2$row", round($rataRataSemua->avg(), 2));
+    
+        // Style semua border + center
+        $lastCol = $colRata2;
+        $sheet->getStyle("A4:$lastCol$row")->getBorders()->getAllBorders()->setBorderStyle(Border::BORDER_THIN);
+        $sheet->getStyle("A4:$lastCol$row")->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER)->setVertical(Alignment::VERTICAL_CENTER);
+        $sheet->getStyle("B6:B" . ($row - 1))->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
+    
+        // Tanda Tangan
+        $ttdRow = $row + 3;
+        $sheet->setCellValue("A$ttdRow", 'Kepala Sekolah');
+        $sheet->setCellValue("R$ttdRow", 'Wali Kelas');
+        $sheet->setCellValue("A" . ($ttdRow + 4), $schoolProfile->kepsek ?? '..........................');
+        $sheet->setCellValue("R" . ($ttdRow + 4), $class->waliKelas->nama ?? '..........................');
+    
+        // Output
+        $writer = new Xlsx($spreadsheet);
+        $filename = 'Legger Rapor Kelas ' . $class->nama . ' Semester ' 
+        . ($schoolYear->semester === 'I (Satu)' ? 'I (Satu)' : 'II (Dua)') 
+        . ' Tahun Ajar ' . $schoolYear->tahun_awal . '-' . $schoolYear->tahun_akhir . '.xlsx';
+
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header("Content-Disposition: attachment; filename=\"$filename\"");
+        $writer->save('php://output');
+        exit;
     }
 
     public function exportPdf($class_id)
@@ -332,7 +361,7 @@ class ClassReportController extends Controller
             'schoolProfile'
         ))->setPaper('A4', 'landscape');
 
-        $filename = Str::slug('Rekap Nilai' . '_' . $class->nama . '_' . $schoolYear->label) . '.pdf';
+        $filename = 'Legger_Rapor_' . Str::slug($class->nama) . '_' . $schoolYear->tahun_awal . '_' . $schoolYear->tahun_akhir . '_Semester ' . $schoolYear->semester . '.pdf';
 
         return $pdf->stream($filename);
     }
@@ -416,7 +445,7 @@ class ClassReportController extends Controller
         }
 
         $finalPdf = Pdf::loadHTML($mergedHtml);
-        $filename = 'Rapor_Kelas_' . Str::slug($class->nama) . '_' . $schoolYear->tahun_awal . '_' . $schoolYear->tahun_akhir . '_' . $schoolYear->semester . '.pdf';
+        $filename = 'Rapor_Kelas_' . Str::slug($class->nama) . '_' . $schoolYear->tahun_awal . '_' . $schoolYear->tahun_akhir . '_Semester ' . $schoolYear->semester . '.pdf';
 
         return $finalPdf->stream($filename);
     }

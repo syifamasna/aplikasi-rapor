@@ -65,6 +65,19 @@ class StudentController extends Controller
         ])->with('success', 'Data siswa berhasil dihapus');
     }
 
+    public function bulkDelete(Request $request)
+    {
+        $ids = $request->input('student_ids');
+    
+        if (is_array($ids) && count($ids) > 0) {
+            Student::whereIn('id', $ids)->delete();
+    
+            return redirect()->back()->with('success', count($ids) . ' Siswa berhasil dihapus');
+        }
+    
+        return redirect()->back()->with('error', 'Tidak ada siswa yang dipilih untuk dihapus');
+    }
+
     public function import(Request $request)
     {
         try {

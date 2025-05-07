@@ -80,7 +80,6 @@ class StudentController extends Controller
         return redirect()->route('admin.students.index')->with('success', 'Data siswa berhasil diperbarui');
     }
 
-
     public function destroy($id)
     {
         $student = Student::findOrFail($id);
@@ -91,6 +90,19 @@ class StudentController extends Controller
             'class_id' => request('class_id'),
             'keyword' => request('keyword')
         ])->with('success', 'Data siswa berhasil dihapus');
+    }
+
+    public function bulkDelete(Request $request)
+    {
+        $ids = $request->input('student_ids');
+    
+        if (is_array($ids) && count($ids) > 0) {
+            Student::whereIn('id', $ids)->delete();
+    
+            return redirect()->back()->with('success', count($ids) . ' Siswa berhasil dihapus');
+        }
+    
+        return redirect()->back()->with('error', 'Tidak ada siswa yang dipilih untuk dihapus');
     }
 
     public function import(Request $request)

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 24, 2025 at 03:19 AM
+-- Generation Time: May 07, 2025 at 05:02 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -187,33 +187,33 @@ INSERT INTO `attendances` (`id`, `student_id`, `school_year_id`, `sakit`, `izin`
 (52, 864, 7, 0, 0, 0, '2025-03-21 03:14:40', '2025-03-21 03:14:40'),
 (53, 865, 7, 0, 0, 0, '2025-03-21 03:14:40', '2025-03-21 03:14:40'),
 (54, 866, 7, 0, 0, 0, '2025-03-21 03:14:40', '2025-03-21 03:14:40'),
-(55, 894, 3, 0, 0, 0, '2025-04-09 22:06:51', '2025-04-09 22:06:51'),
-(56, 895, 3, 0, 0, 0, '2025-04-09 22:06:51', '2025-04-09 22:06:51'),
+(55, 894, 3, 4, 1, 0, '2025-04-09 22:06:51', '2025-05-06 02:44:33'),
+(56, 895, 3, 7, 2, 0, '2025-04-09 22:06:51', '2025-05-06 02:44:33'),
 (57, 896, 3, 0, 0, 0, '2025-04-09 22:06:51', '2025-04-09 22:06:51'),
 (58, 897, 3, 0, 0, 0, '2025-04-09 22:06:51', '2025-04-09 22:06:51'),
-(59, 898, 3, 0, 0, 0, '2025-04-09 22:06:51', '2025-04-09 22:06:51'),
+(59, 898, 3, 1, 0, 0, '2025-04-09 22:06:51', '2025-05-06 02:44:34'),
 (60, 899, 3, 0, 0, 0, '2025-04-09 22:06:51', '2025-04-09 22:06:51'),
 (61, 900, 3, 0, 0, 0, '2025-04-09 22:06:51', '2025-04-09 22:06:51'),
-(62, 901, 3, 0, 0, 0, '2025-04-09 22:06:51', '2025-04-09 22:06:51'),
+(62, 901, 3, 6, 0, 0, '2025-04-09 22:06:51', '2025-05-06 02:44:34'),
 (63, 902, 3, 0, 0, 0, '2025-04-09 22:06:51', '2025-04-09 22:06:51'),
 (64, 903, 3, 0, 0, 0, '2025-04-09 22:06:51', '2025-04-09 22:06:51'),
-(65, 904, 3, 0, 0, 0, '2025-04-09 22:06:51', '2025-04-09 22:06:51'),
-(66, 905, 3, 0, 0, 0, '2025-04-09 22:06:51', '2025-04-09 22:06:51'),
+(65, 904, 3, 1, 0, 0, '2025-04-09 22:06:51', '2025-05-06 02:44:34'),
+(66, 905, 3, 4, 1, 0, '2025-04-09 22:06:51', '2025-05-06 02:44:34'),
 (67, 906, 3, 0, 0, 0, '2025-04-09 22:06:51', '2025-04-09 22:06:51'),
-(68, 907, 3, 0, 0, 0, '2025-04-09 22:06:51', '2025-04-09 22:06:51'),
+(68, 907, 3, 4, 0, 0, '2025-04-09 22:06:51', '2025-05-06 02:44:34'),
 (69, 908, 3, 0, 0, 0, '2025-04-09 22:06:51', '2025-04-09 22:06:51'),
 (70, 909, 3, 0, 0, 0, '2025-04-09 22:06:51', '2025-04-09 22:06:51'),
-(71, 910, 3, 0, 0, 0, '2025-04-09 22:06:51', '2025-04-09 22:06:51'),
-(72, 911, 3, 0, 0, 0, '2025-04-09 22:06:51', '2025-04-09 22:06:51'),
-(73, 912, 3, 0, 0, 0, '2025-04-09 22:06:51', '2025-04-09 22:06:51'),
+(71, 910, 3, 4, 0, 0, '2025-04-09 22:06:51', '2025-05-06 02:44:34'),
+(72, 911, 3, 1, 1, 0, '2025-04-09 22:06:51', '2025-05-06 02:44:34'),
+(73, 912, 3, 1, 0, 0, '2025-04-09 22:06:51', '2025-05-06 02:44:34'),
 (74, 913, 3, 0, 0, 0, '2025-04-09 22:06:52', '2025-04-09 22:06:52'),
 (75, 914, 3, 0, 0, 0, '2025-04-09 22:06:52', '2025-04-09 22:06:52'),
-(76, 915, 3, 0, 0, 0, '2025-04-09 22:06:52', '2025-04-09 22:06:52'),
+(76, 915, 3, 2, 4, 0, '2025-04-09 22:06:52', '2025-05-06 02:44:34'),
 (77, 916, 3, 0, 0, 0, '2025-04-09 22:06:52', '2025-04-09 22:06:52'),
-(78, 917, 3, 0, 0, 0, '2025-04-09 22:06:52', '2025-04-09 22:06:52'),
-(79, 918, 3, 0, 0, 0, '2025-04-09 22:06:52', '2025-04-09 22:06:52'),
+(78, 917, 3, 0, 12, 0, '2025-04-09 22:06:52', '2025-05-06 02:44:34'),
+(79, 918, 3, 0, 4, 0, '2025-04-09 22:06:52', '2025-05-06 02:44:34'),
 (80, 919, 3, 0, 0, 0, '2025-04-09 22:06:52', '2025-04-09 22:06:52'),
-(81, 920, 3, 0, 0, 0, '2025-04-09 22:06:52', '2025-04-09 22:06:52');
+(81, 920, 3, 2, 0, 0, '2025-04-09 22:06:52', '2025-05-06 02:44:34');
 
 -- --------------------------------------------------------
 
@@ -438,33 +438,33 @@ INSERT INTO `grades` (`id`, `student_id`, `school_year_id`, `subject_id`, `nilai
 (188, 918, 3, 24, 95, '2025-04-03 08:09:11', '2025-04-18 05:37:31'),
 (189, 919, 3, 24, 97, '2025-04-03 08:09:11', '2025-04-18 05:37:31'),
 (190, 920, 3, 24, 90, '2025-04-03 08:09:11', '2025-04-18 05:37:31'),
-(191, 894, 3, 27, NULL, '2025-04-11 11:22:32', '2025-04-18 06:14:35'),
-(192, 895, 3, 27, NULL, '2025-04-11 11:22:32', '2025-04-18 06:14:35'),
-(193, 896, 3, 27, NULL, '2025-04-11 11:22:32', '2025-04-18 06:14:35'),
-(194, 897, 3, 27, NULL, '2025-04-11 11:22:32', '2025-04-18 06:14:35'),
-(195, 898, 3, 27, NULL, '2025-04-11 11:22:32', '2025-04-18 06:14:35'),
-(196, 899, 3, 27, NULL, '2025-04-11 11:22:32', '2025-04-18 06:14:35'),
-(197, 900, 3, 27, NULL, '2025-04-11 11:22:32', '2025-04-18 06:14:35'),
-(198, 901, 3, 27, NULL, '2025-04-11 11:22:32', '2025-04-18 06:14:35'),
-(199, 902, 3, 27, NULL, '2025-04-11 11:22:33', '2025-04-18 06:14:35'),
-(200, 903, 3, 27, NULL, '2025-04-11 11:22:33', '2025-04-18 06:14:35'),
-(201, 904, 3, 27, NULL, '2025-04-11 11:22:33', '2025-04-18 06:14:35'),
-(202, 905, 3, 27, NULL, '2025-04-11 11:22:33', '2025-04-18 06:14:35'),
-(203, 906, 3, 27, NULL, '2025-04-11 11:22:33', '2025-04-18 06:14:35'),
-(204, 907, 3, 27, NULL, '2025-04-11 11:22:33', '2025-04-18 06:14:35'),
-(205, 908, 3, 27, NULL, '2025-04-11 11:22:33', '2025-04-18 06:14:35'),
-(206, 909, 3, 27, NULL, '2025-04-11 11:22:33', '2025-04-18 06:14:35'),
-(207, 910, 3, 27, NULL, '2025-04-11 11:22:33', '2025-04-18 06:14:35'),
-(208, 911, 3, 27, NULL, '2025-04-11 11:22:33', '2025-04-18 06:14:35'),
-(209, 912, 3, 27, NULL, '2025-04-11 11:22:33', '2025-04-18 06:14:35'),
-(210, 913, 3, 27, NULL, '2025-04-11 11:22:33', '2025-04-18 06:14:35'),
-(211, 914, 3, 27, NULL, '2025-04-11 11:22:33', '2025-04-18 06:14:35'),
-(212, 915, 3, 27, NULL, '2025-04-11 11:22:33', '2025-04-18 06:14:35'),
-(213, 916, 3, 27, NULL, '2025-04-11 11:22:33', '2025-04-18 06:14:35'),
-(214, 917, 3, 27, NULL, '2025-04-11 11:22:33', '2025-04-18 06:14:35'),
-(215, 918, 3, 27, NULL, '2025-04-11 11:22:33', '2025-04-18 06:14:35'),
-(216, 919, 3, 27, NULL, '2025-04-11 11:22:33', '2025-04-18 06:14:35'),
-(217, 920, 3, 27, NULL, '2025-04-11 11:22:34', '2025-04-18 06:14:35'),
+(191, 894, 3, 27, 93, '2025-04-11 11:22:32', '2025-05-06 02:39:59'),
+(192, 895, 3, 27, 82, '2025-04-11 11:22:32', '2025-05-06 02:40:00'),
+(193, 896, 3, 27, 91, '2025-04-11 11:22:32', '2025-05-06 02:40:00'),
+(194, 897, 3, 27, 83, '2025-04-11 11:22:32', '2025-05-06 02:40:00'),
+(195, 898, 3, 27, 93, '2025-04-11 11:22:32', '2025-05-06 02:40:00'),
+(196, 899, 3, 27, 94, '2025-04-11 11:22:32', '2025-05-06 02:40:00'),
+(197, 900, 3, 27, 90, '2025-04-11 11:22:32', '2025-05-06 02:40:00'),
+(198, 901, 3, 27, 89, '2025-04-11 11:22:32', '2025-05-06 02:40:00'),
+(199, 902, 3, 27, 94, '2025-04-11 11:22:33', '2025-05-06 02:40:00'),
+(200, 903, 3, 27, 88, '2025-04-11 11:22:33', '2025-05-06 02:40:00'),
+(201, 904, 3, 27, 94, '2025-04-11 11:22:33', '2025-05-06 02:40:00'),
+(202, 905, 3, 27, 85, '2025-04-11 11:22:33', '2025-05-06 02:40:00'),
+(203, 906, 3, 27, 93, '2025-04-11 11:22:33', '2025-05-06 02:40:00'),
+(204, 907, 3, 27, 85, '2025-04-11 11:22:33', '2025-05-06 02:40:00'),
+(205, 908, 3, 27, 88, '2025-04-11 11:22:33', '2025-05-06 02:40:00'),
+(206, 909, 3, 27, 91, '2025-04-11 11:22:33', '2025-05-06 02:40:00'),
+(207, 910, 3, 27, 88, '2025-04-11 11:22:33', '2025-05-06 02:40:00'),
+(208, 911, 3, 27, 88, '2025-04-11 11:22:33', '2025-05-06 02:40:00'),
+(209, 912, 3, 27, 88, '2025-04-11 11:22:33', '2025-05-06 02:40:00'),
+(210, 913, 3, 27, 85, '2025-04-11 11:22:33', '2025-05-06 02:40:00'),
+(211, 914, 3, 27, 91, '2025-04-11 11:22:33', '2025-05-06 02:40:00'),
+(212, 915, 3, 27, 89, '2025-04-11 11:22:33', '2025-05-06 02:40:00'),
+(213, 916, 3, 27, 88, '2025-04-11 11:22:33', '2025-05-06 02:40:00'),
+(214, 917, 3, 27, 90, '2025-04-11 11:22:33', '2025-05-06 02:40:00'),
+(215, 918, 3, 27, 92, '2025-04-11 11:22:33', '2025-05-06 02:40:00'),
+(216, 919, 3, 27, 80, '2025-04-11 11:22:33', '2025-05-06 02:40:00'),
+(217, 920, 3, 27, 90, '2025-04-11 11:22:34', '2025-05-06 02:40:00'),
 (218, 894, 9, 3, 69, '2025-04-11 12:31:08', '2025-04-11 12:31:08'),
 (219, 895, 9, 3, 69, '2025-04-11 12:31:08', '2025-04-11 12:31:08'),
 (220, 896, 9, 3, 69, '2025-04-11 12:31:08', '2025-04-11 12:31:08'),
@@ -1429,7 +1429,8 @@ INSERT INTO `school_years` (`id`, `tahun_awal`, `tahun_akhir`, `semester`, `temp
 (3, 2024, 2025, 'II (Dua)', 'Bogor', '2025-06-20', '2025-03-06 00:21:23', '2025-04-10 20:07:17'),
 (5, 2024, 2025, 'I (Satu)', 'Bogor', '2024-12-26', '2025-03-06 20:04:02', '2025-04-10 20:07:37'),
 (7, 2023, 2024, 'II (Dua)', 'Bogor', '2024-06-21', '2025-03-06 20:31:49', '2025-04-10 20:06:39'),
-(9, 2024, 2025, 'Tengah Semester II (Dua)', 'Bogor', NULL, '2025-04-02 23:50:16', '2025-04-10 20:07:24');
+(9, 2024, 2025, 'Tengah Semester II (Dua)', 'Bogor', NULL, '2025-04-02 23:50:16', '2025-04-10 20:07:24'),
+(10, 2023, 2024, 'I (Satu)', 'Bogor', '2023-12-22', '2025-05-04 20:32:30', '2025-05-04 20:32:30');
 
 -- --------------------------------------------------------
 
@@ -1451,7 +1452,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('a10Xeparn1LfMDjqT608uBGMKed6jhXSVv2baP8i', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiVVg2UERDNXVnUDRVY0JJNDUwZjBGb3gwNHpFRElWV2g2UlVsYmhMeiI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9sb2dpbiI7fX0=', 1745258728);
+('C29LqSyAaKVnr7hmik2tXMdJwZZ0PH5ws8WXz18F', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoidFN1bW56MUVaTktRY1Q4V3V4TmdkMGRiZURjNFhWc1doeVhRS1BMaCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9sb2dpbiI7fX0=', 1746614832);
 
 -- --------------------------------------------------------
 
@@ -2195,7 +2196,7 @@ CREATE TABLE `subjects` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `nama` varchar(255) NOT NULL,
   `singkatan` varchar(255) DEFAULT NULL,
-  `kelompok_mapel` enum('Mata Pelajaran Wajib','Muatan Lokal') NOT NULL,
+  `kelompok_mapel` enum('Mata Pelajaran Wajib (Kelas 1-6)','Mata Pelajaran Wajib (Kelas 3-6)','Muatan Lokal') NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -2205,14 +2206,14 @@ CREATE TABLE `subjects` (
 --
 
 INSERT INTO `subjects` (`id`, `nama`, `singkatan`, `kelompok_mapel`, `created_at`, `updated_at`) VALUES
-(1, 'Pendidikan Agama Islam dan Budi Pekerti', 'PAIBP', 'Mata Pelajaran Wajib', '2024-11-13 20:09:32', '2025-03-10 21:05:03'),
-(2, 'Pendidikan Pancasila', 'PP', 'Mata Pelajaran Wajib', '2024-11-13 23:26:30', '2025-04-08 20:14:37'),
-(3, 'Bahasa Indonesia', 'B.Indo', 'Mata Pelajaran Wajib', '2024-11-13 23:26:45', '2025-04-08 20:22:28'),
-(4, 'Matematika', 'MTK', 'Mata Pelajaran Wajib', '2024-11-13 23:26:54', '2025-03-10 21:10:32'),
-(5, 'Ilmu Pengetahuan Alam dan Sosial', 'IPAS', 'Mata Pelajaran Wajib', '2024-11-13 23:27:22', '2025-03-10 21:10:42'),
-(6, 'Pendidikan Jasmani, Olahraga dan Kesehatan', 'PJOK', 'Mata Pelajaran Wajib', '2024-11-13 23:27:52', '2025-03-10 21:11:00'),
-(7, 'Seni Budaya dan Prakarya', 'SBDP', 'Mata Pelajaran Wajib', '2024-11-13 23:28:20', '2025-04-08 20:24:35'),
-(8, 'Bahasa Inggris', 'B.Inggris', 'Mata Pelajaran Wajib', '2024-11-13 23:28:35', '2025-04-08 20:22:20'),
+(1, 'Pendidikan Agama Islam dan Budi Pekerti', 'PAIBP', 'Mata Pelajaran Wajib (Kelas 1-6)', '2024-11-13 20:09:32', '2025-05-04 20:33:44'),
+(2, 'Pendidikan Pancasila', 'PP', 'Mata Pelajaran Wajib (Kelas 1-6)', '2024-11-13 23:26:30', '2025-05-04 20:34:22'),
+(3, 'Bahasa Indonesia', 'B.Indo', 'Mata Pelajaran Wajib (Kelas 1-6)', '2024-11-13 23:26:45', '2025-05-04 20:35:14'),
+(4, 'Matematika', 'MTK', 'Mata Pelajaran Wajib (Kelas 1-6)', '2024-11-13 23:26:54', '2025-05-04 20:35:21'),
+(5, 'Ilmu Pengetahuan Alam dan Sosial', 'IPAS', 'Mata Pelajaran Wajib (Kelas 3-6)', '2024-11-13 23:27:22', '2025-05-04 20:35:04'),
+(6, 'Pendidikan Jasmani, Olahraga dan Kesehatan', 'PJOK', 'Mata Pelajaran Wajib (Kelas 1-6)', '2024-11-13 23:27:52', '2025-05-04 20:35:28'),
+(7, 'Seni Budaya dan Prakarya', 'SBDP', 'Mata Pelajaran Wajib (Kelas 1-6)', '2024-11-13 23:28:20', '2025-05-04 20:35:36'),
+(8, 'Bahasa Inggris', 'B.Inggris', 'Mata Pelajaran Wajib (Kelas 1-6)', '2024-11-13 23:28:35', '2025-05-04 20:35:45'),
 (9, 'Bahasa dan Sastra Sunda', 'B.Sunda', 'Muatan Lokal', '2024-11-13 23:29:26', '2025-04-08 20:22:00'),
 (10, 'Bahasa Arab', 'B.Arab', 'Muatan Lokal', '2024-11-13 23:29:48', '2025-04-08 20:22:09'),
 (23, 'Al-Qur\'an Metode Ummi', 'Ummi', 'Muatan Lokal', '2025-03-10 20:48:32', '2025-04-08 20:23:56'),
@@ -2793,8 +2794,8 @@ INSERT INTO `users` (`id`, `nama`, `email`, `password`, `nip`, `nuptk`, `jk`, `t
 (8, 'Siska Maryana Dewi S.Si.,S.Pd.', 'siskamaryana@eraporsitaliya.web.id', '$2y$12$r8apidMQXoomURxhQEzvd.vm3oMmXMqeepzAk1lBCTiFrX2607W1e', NULL, NULL, 'Perempuan', NULL, NULL, NULL, '2025-03-10 21:30:38', '2025-04-19 22:01:45'),
 (17, 'Gunawan, S.Kom', 'gunawan@eraporsitaliya.web.id', '$2y$12$LduneUInh2Apy2frEYGRW.4UNF/b/KDRXFR2NgjXD2n41JGIfx0Ji', NULL, NULL, 'Laki-Laki', NULL, NULL, NULL, '2025-03-10 22:10:43', '2025-04-18 08:00:50'),
 (18, 'Irma Oktaviana Majid, S.Pt', 'irmaoktaviana@eraporsitaliya.web.id', '$2y$12$UVVoTKVucOu2sw.zzo6GquJhSc0hlBxtHTTbGf98WzMTLSUtycGj.', NULL, NULL, 'Perempuan', NULL, NULL, NULL, '2025-03-10 23:13:20', '2025-04-19 21:54:27'),
-(19, 'Asep Rudini Setiawan, S.Pi.,M.Pd', 'aseprudini@eraporsitaliya.web.id', '$2y$12$.CRIIv5YwKQGWfobA3iYGepDzxSCfl8JkBs8EdCoU.rCS0fGNv1d2', NULL, NULL, 'Laki-Laki', NULL, NULL, NULL, '2025-03-10 23:14:05', '2025-04-19 21:40:27'),
-(20, 'Admin', 'admin@eraporsitaliya.web.id', '$2y$12$f7nC.SMPy1dONw0zMw5R..SlKS2PC5pA4bWfjhorpkIdaf/7Gwvl.', NULL, NULL, 'Perempuan', NULL, NULL, NULL, '2025-03-10 23:35:30', '2025-03-20 21:56:47'),
+(19, 'Asep Rudini Setiawan, S.Pi.,M.Pd', 'aseprudini@eraporsitaliya.web.id', '$2y$12$.CRIIv5YwKQGWfobA3iYGepDzxSCfl8JkBs8EdCoU.rCS0fGNv1d2', NULL, NULL, 'Laki-Laki', NULL, NULL, NULL, '2025-03-10 23:14:05', '2025-05-07 03:25:53'),
+(20, 'Admin', 'admin@eraporsitaliya.web.id', '$2y$12$f7nC.SMPy1dONw0zMw5R..SlKS2PC5pA4bWfjhorpkIdaf/7Gwvl.', NULL, NULL, 'Perempuan', NULL, NULL, NULL, '2025-03-10 23:35:30', '2025-05-07 02:40:27'),
 (21, 'Ahmad Suhaedi, S.Pd.I, M.Pd', 'ahmadsuhaedi@eraporsitaliya.web.id', '$2y$12$JZpmIVmT5BWDuzfRTsMMduxN1F612RLWONS0ZXjxexOE51YcM90vW', NULL, NULL, 'Laki-Laki', NULL, NULL, NULL, '2025-03-12 20:20:41', '2025-04-18 07:46:58'),
 (22, 'Baban Sobana, S.Ag', 'babansobana@eraporsitaliya.web.id', '$2y$12$Y/AkI2.PCrKmqj/WdMvFz.0gldM0orIZY8pvWkoA7HQ3gtNNGb.YC', NULL, NULL, 'Laki-Laki', NULL, NULL, NULL, '2025-03-12 20:22:06', '2025-04-18 07:47:33'),
 (23, 'Saiful Rahman, S.Pd.I', 'saifulrahman@eraporsitaliya.web.id', '$2y$12$SkDXWy/BiQm58MwzJ1nz3eOe69o1hAc53CIi5ta/ZtQ4i2luL18LO', NULL, NULL, 'Laki-Laki', NULL, NULL, NULL, '2025-03-12 20:22:43', '2025-04-18 07:48:11'),
@@ -3110,25 +3111,25 @@ ALTER TABLE `school_profiles`
 -- AUTO_INCREMENT for table `school_years`
 --
 ALTER TABLE `school_years`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1085;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1193;
 
 --
 -- AUTO_INCREMENT for table `student_classes`
 --
 ALTER TABLE `student_classes`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `subjects`
 --
 ALTER TABLE `subjects`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `teachings`
