@@ -30,6 +30,10 @@
         .card-widget:hover .stat-icon i {
             color: inherit !important;
         }
+
+        .col-md-6 label {
+            color: #a3a3a3;
+        }
     </style>
 </head>
 
@@ -124,10 +128,8 @@
                 <div class="row mt-2">
                     <div class="col-sm-12">
                         <div class="card">
-                            <div class="card-header">
-                                <h5 class="card-title">Jumlah Siswa per Kelas</h5>
-                            </div>
                             <div class="card-body">
+                                <h5 class="text-center mb-4">Jumlah Siswa per Kelas</h5>
                                 <canvas id="siswaPerKelasChart" height="120"></canvas>
                             </div>
                         </div>
@@ -136,11 +138,46 @@
                 <div class="row mt-2">
                     <div class="col-sm-12">
                         <div class="card">
-                            <div class="card-header bg-gradient-primary text-white">
-                                <h5 class="mb-0">Grafik Prestasi per Kelas</h5>
-                            </div>
                             <div class="card-body">
-                                <canvas id="prestasiChart" height="100"></canvas>
+                                <h5 class="text-center mb-4">Grafik Peringkat Nilai Tertinggi</h5>
+
+                                {{-- Dropdown filter --}}
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label for="classSelect">Kelas</label>
+                                        <select id="classSelect" class="form-control">
+                                            <option value="">Pilih Kelas</option>
+                                            @foreach ($classes as $c)
+                                                <option value="{{ $c->id }}"
+                                                    {{ $c->id == $selectedClassId ? 'selected' : '' }}>
+                                                    {{ $c->nama }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="schoolYearSelect">Tahun Ajaran</label>
+                                        <select id="schoolYearSelect" class="form-control">
+                                            @foreach ($schoolYears as $year)
+                                                <option value="{{ $year->id }}"
+                                                    {{ $year->id == $selectedSchoolYearId ? 'selected' : '' }}>
+                                                    {{ $year->tahun_awal }}/{{ $year->tahun_akhir }} -
+                                                    {{ $year->semester }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+
+                                {{-- Grafik --}}
+                                @if (count($rankingTertinggi))
+                                    <div class="mt-4">
+                                        <canvas id="rankingChart" height="150"></canvas>
+                                    </div>
+                                @else
+                                    <p class="text-muted text-center mt-4">Silakan pilih kelas untuk melihat grafik
+                                        ranking.</p>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -212,62 +249,73 @@
             }
         });
 
-        // script grafik prestasi per kelas
+        // RANKING CHART
         document.addEventListener("DOMContentLoaded", function() {
-            const ctx = document.getElementById('prestasiChart').getContext('2d');
+            const rankingData = @json($rankingTertinggi);
 
-            const gradient = ctx.createLinearGradient(0, 0, 0, 400);
-            gradient.addColorStop(0, '#f1c40f');
-            gradient.addColorStop(1, '#f39c12');
+            const ctxRanking = document.getElementById('rankingChart').getContext('2d');
 
-            const labels = {!! json_encode($prestasiPerKelas->pluck('kelas')) !!};
-            const values = {!! json_encode($prestasiPerKelas->pluck('total')) !!};
+            // Membuat gradient warna untuk grafik
+            const gradient = ctxRanking.createLinearGradient(0, 0, 0, 400);
+            gradient.addColorStop(0, 'rgba(46, 204, 113, 0.8)'); // Hijau cerah
+            gradient.addColorStop(1, 'rgba(39, 174, 96, 0.1)'); // Hijau gelap
 
-            // Hitung nilai minimum dan kasih jarak
-            const minValue = Math.min.apply(null, values);
-            const adjustedMin = Math.max(minValue - 3, 0); // supaya gak nempel ke garis X
+            // Menghitung nilai terendah
+            const minValue = Math.min(...rankingData.map(d => d.average_nilai));
 
-            const data = {
-                labels: labels,
-                datasets: [{
-                    label: 'Jumlah Prestasi',
-                    data: values,
-                    backgroundColor: gradient,
-                    borderColor: '#f1c40f',
-                    borderWidth: 1,
-                    hoverBackgroundColor: '#f39c12'
-                }]
-            };
+            // Menambahkan jarak agar grafik tidak nempel pada garis X
+            const adjustedMin = Math.max(minValue - 3, 0); // Pastikan nilai minimum diatur dengan jarak
 
-            const config = {
+            // Membuat chart dengan data
+            const rankingChart = new Chart(ctxRanking, {
                 type: 'bar',
-                data: data,
+                data: {
+                    labels: rankingData.map(d => d.nama),
+                    datasets: [{
+                        label: 'Rata-rata Nilai',
+                        data: rankingData.map(d => d.average_nilai),
+                        backgroundColor: gradient,
+                        borderColor: 'rgba(39, 174, 96, 1)',
+                        borderWidth: 1
+                    }]
+                },
                 options: {
                     responsive: true,
-                    legend: {
-                        display: false
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                min: adjustedMin, // Pastikan nilai minimum sudah diubah
+                                precision: 0,
+                                stepSize: 1 // Langkah interval di sumbu Y
+                            }
+                        }]
                     },
                     tooltips: {
                         callbacks: {
                             label: function(tooltipItem) {
-                                return ` ${tooltipItem.yLabel} prestasi`;
+                                const nilai = tooltipItem.yLabel.toFixed(1).replace('.', ',');
+                                return `Rata-rata Nilai: ${nilai}`;
                             }
                         }
-                    },
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                min: adjustedMin,
-                                stepSize: 1, // supaya 1 langsung ke 2, bukan 1.5
-                                precision: 0
-                            },
-                        }],
                     }
                 }
-            };
-
-            new Chart(ctx, config);
+            });
         });
+
+        // Event handler untuk filter tahun ajaran & kelas
+        document.getElementById('schoolYearSelect').addEventListener('change', updateUrl);
+        document.getElementById('classSelect').addEventListener('change', updateUrl);
+
+        function updateUrl() {
+            const schoolYearId = document.getElementById('schoolYearSelect').value;
+            const classId = document.getElementById('classSelect').value;
+
+            const url = new URL(window.location.href);
+            url.searchParams.set('school_year_id', schoolYearId);
+            url.searchParams.set('class_id', classId);
+
+            window.location.href = url.toString();
+        }
     </script>
 
 </body>

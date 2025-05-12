@@ -31,6 +31,10 @@
             color: inherit !important;
         }
 
+        .col-md-6 label {
+            color: #a3a3a3;
+        }
+
         #genderChart {
             max-height: 200px;
             margin: 0 auto;
@@ -64,7 +68,7 @@
                 </div>
 
                 <div class="row mt-4">
-                    <div class="col-lg-4 col-sm-12">
+                    <div class="col-lg-6 col-sm-12">
                         <a href="{{ route('wali_kelas.student_classes.students') }}" class="text-decoration-none">
                             <div class="card card-widget">
                                 <div class="stat-widget-one card-body text-primary">
@@ -78,11 +82,30 @@
                                 </div>
                             </div>
                         </a>
-                    </div>
-                    <div class="col-lg-8 col-sm-12">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="text-center">Grafik Jenis Kelamin {{ $class->nama ?? '-' }}</h5>
+                                <h5 class="text-center mb-4">Grafik Peringkat Nilai Tertinggi {{ $class->nama ?? '-' }}
+                                </h5>
+                                <div class="form-group mb-3">
+                                    <label for="schoolYearSelect">Tahun Pelajaran</label>
+                                    <select id="schoolYearSelect" class="form-control">
+                                        @foreach ($schoolYears as $year)
+                                            <option value="{{ $year->id }}"
+                                                {{ $year->id == $selectedSchoolYearId ? 'selected' : '' }}>
+                                                {{ $year->tahun_awal }}/{{ $year->tahun_akhir }} -
+                                                {{ $year->semester }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <canvas id="rankingChart" width="200" height="200"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="text-center mb-4">Grafik Jenis Kelamin {{ $class->nama ?? '-' }}</h5>
                                 <canvas id="genderChart" width="200" height="200"></canvas>
                             </div>
                         </div>
@@ -149,6 +172,67 @@
                     }
                 }
             }
+        });
+
+        // RANKING CHART
+        document.addEventListener("DOMContentLoaded", function() {
+            const rankingData = @json($rankingTertinggi);
+
+            const ctxRanking = document.getElementById('rankingChart').getContext('2d');
+
+            // Membuat gradient warna untuk grafik
+            const gradient = ctxRanking.createLinearGradient(0, 0, 0, 400);
+            gradient.addColorStop(0, 'rgba(46, 204, 113, 0.8)'); // Hijau cerah
+            gradient.addColorStop(1, 'rgba(39, 174, 96, 0.1)'); // Hijau gelap
+
+            // Menghitung nilai terendah
+            const minValue = Math.min(...rankingData.map(d => d.average_nilai));
+
+            // Menambahkan jarak agar grafik tidak nempel pada garis X
+            const adjustedMin = Math.max(minValue - 3, 0); // Pastikan nilai minimum diatur dengan jarak
+
+            // Membuat chart dengan data
+            const rankingChart = new Chart(ctxRanking, {
+                type: 'bar',
+                data: {
+                    labels: rankingData.map(d => d.nama),
+                    datasets: [{
+                        label: 'Rata-rata Nilai',
+                        data: rankingData.map(d => d.average_nilai),
+                        backgroundColor: gradient,
+                        borderColor: 'rgba(39, 174, 96, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                min: adjustedMin, // Pastikan nilai minimum sudah diubah
+                                precision: 0,
+                                stepSize: 1 // Langkah interval di sumbu Y
+                            }
+                        }]
+                    },
+                    tooltips: {
+                        callbacks: {
+                            label: function(tooltipItem) {
+                                const nilai = tooltipItem.yLabel.toFixed(1).replace('.', ',');
+                                return `Rata-rata Nilai: ${nilai}`;
+                            }
+                        }
+                    }
+                }
+            });
+        });
+
+        // Ketika dropdown tahun ajaran diubah, reload dengan query
+        document.getElementById('schoolYearSelect').addEventListener('change', function() {
+            const schoolYearId = this.value;
+            const url = new URL(window.location.href);
+            url.searchParams.set('school_year_id', schoolYearId);
+            window.location.href = url.toString();
         });
     </script>
 

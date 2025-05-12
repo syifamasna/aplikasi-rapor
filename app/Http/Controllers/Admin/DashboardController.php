@@ -5,15 +5,17 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Achievement;
+use App\Models\Grade;
 use App\Models\User;
 use App\Models\Student;
 use App\Models\Subject;
+use App\Models\SchoolYear;
 use App\Models\StudentClass;
 use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $totalSiswa = Student::count();
         $totalMapel = Subject::count();
@@ -34,16 +36,41 @@ class DashboardController extends Controller
             ->sortBy('kelas') // urutkan berdasarkan nama kelas
             ->values(); // reset ulang index agar rapi saat dikirim ke view
 
-        $prestasiPerKelas = DB::table('achievements')
-            ->join('students', 'achievements.student_id', '=', 'students.id')
-            ->join('student_classes', 'students.class_id', '=', 'student_classes.id')
-            ->select('student_classes.nama as kelas', DB::raw('COUNT(*) as total'))
-            ->groupBy('student_classes.nama')
-            ->orderBy('student_classes.nama')
-            ->get();
+               // Ambil semua tahun ajaran
+        $schoolYears = SchoolYear::orderByDesc('tahun_awal')->get();
 
-        return view('admin-pages.dashboard.index', compact(
-            'totalSiswa', 'totalMapel', 'totalKelas', 'totalPengguna', 'totalPrestasi', 'siswaPerKelas', 'prestasiPerKelas'
-        ));
+        // Ambil ID tahun ajaran dari URL (GET), atau pakai yang pertama kalau belum dipilih
+        $selectedSchoolYearId = $request->get('school_year_id') ?? optional($schoolYears->first())->id;
+
+        $selectedClassId = $request->get('class_id');
+
+        // Ambil daftar semua kelas
+        $classes = StudentClass::orderBy('nama')->get();
+
+        // Ambil ranking siswa hanya jika ada class_id yang dipilih
+        $rankingTertinggi = [];
+
+        if ($selectedClassId) {
+            $rankingTertinggi = Student::with(['grades' => function ($query) use ($selectedSchoolYearId) {
+                $query->where('school_year_id', $selectedSchoolYearId);
+            }])
+            ->where('class_id', $selectedClassId)
+            ->get()
+            ->map(function ($student) {
+                $avg = $student->grades->avg('nilai');
+                return [
+                    'nama' => $student->nama,
+                    'average_nilai' => round($avg, 1),
+                ];
+            })
+            ->sortByDesc('average_nilai')
+            ->take(10)
+            ->values();
+        }
+
+    return view('admin-pages.dashboard.index', compact(
+        'totalSiswa', 'totalMapel', 'totalKelas', 'totalPengguna', 'totalPrestasi', 'siswaPerKelas', 'schoolYears', 'selectedSchoolYearId',
+        'rankingTertinggi', 'classes', 'selectedClassId'
+    ));
     }
 }

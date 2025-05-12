@@ -30,6 +30,10 @@
         .card-widget:hover .stat-icon i {
             color: inherit !important;
         }
+
+        .col-md-6 label {
+            color: #a3a3a3;
+        }
     </style>
 </head>
 
@@ -78,10 +82,20 @@
                 <div class="row mt-2">
                     <div class="col-sm-12">
                         <div class="card">
-                            <div class="card-header bg-gradient-primary text-white">
-                                <h5 class="mb-0">Grafik Prestasi per Kelas</h5>
-                            </div>
                             <div class="card-body">
+                                <h5 class="text-center">Grafik Prestasi per Kelas</h5>
+                                <div class="form-group mb-3">
+                                    <label for="schoolYearSelect">Tahun Pelajaran</label>
+                                    <select id="schoolYearSelect" class="form-control">
+                                        @foreach ($schoolYears as $year)
+                                            <option value="{{ $year->id }}"
+                                                {{ $year->id == $selectedSchoolYearId ? 'selected' : '' }}>
+                                                {{ $year->tahun_awal }}/{{ $year->tahun_akhir }} -
+                                                {{ $year->semester }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
                                 <canvas id="prestasiChart" height="100"></canvas>
                             </div>
                         </div>
@@ -123,8 +137,8 @@
             const ctx = document.getElementById('prestasiChart').getContext('2d');
 
             const gradient = ctx.createLinearGradient(0, 0, 0, 400);
-            gradient.addColorStop(0, '#f1c40f');
-            gradient.addColorStop(1, '#f39c12');
+            gradient.addColorStop(0, 'rgba(241, 196, 15, 0.8)');
+            gradient.addColorStop(1, 'rgba(243, 156, 18, 0.2)');
 
             const labels = {!! json_encode($prestasiPerKelas->pluck('kelas')) !!};
             const values = {!! json_encode($prestasiPerKelas->pluck('total')) !!};
@@ -139,9 +153,8 @@
                     label: 'Jumlah Prestasi',
                     data: values,
                     backgroundColor: gradient,
-                    borderColor: '#f1c40f',
+                    borderColor: 'rgba(243, 156, 18, 1)',
                     borderWidth: 1,
-                    hoverBackgroundColor: '#f39c12'
                 }]
             };
 
@@ -150,13 +163,10 @@
                 data: data,
                 options: {
                     responsive: true,
-                    legend: {
-                        display: false
-                    },
                     tooltips: {
                         callbacks: {
                             label: function(tooltipItem) {
-                                return ` ${tooltipItem.yLabel} prestasi`;
+                                return ` ${tooltipItem.yLabel} Prestasi`;
                             }
                         }
                     },
@@ -166,16 +176,6 @@
                                 min: adjustedMin,
                                 stepSize: 1, // supaya 1 langsung ke 2, bukan 1.5
                                 precision: 0
-                            },
-                            scaleLabel: {
-                                display: true,
-                                labelString: 'Jumlah Prestasi'
-                            }
-                        }],
-                        xAxes: [{
-                            scaleLabel: {
-                                display: true,
-                                labelString: 'Kelas'
                             }
                         }]
                     }
@@ -183,6 +183,14 @@
             };
 
             new Chart(ctx, config);
+        });
+
+        // Ketika dropdown tahun ajaran diubah, reload dengan query
+        document.getElementById('schoolYearSelect').addEventListener('change', function() {
+            const schoolYearId = this.value;
+            const url = new URL(window.location.href);
+            url.searchParams.set('school_year_id', schoolYearId);
+            window.location.href = url.toString();
         });
     </script>
 

@@ -46,10 +46,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 //rute landing page
-Route::get('/', [LandingPageController::class, 'index']);
+// Route::get('/', [LandingPageController::class, 'index']);
 
 //rute kontak landing page
-Route::post('/contact', [ContactController::class, 'sendContact'])->name('contact.send');
+// Route::post('/contact', [ContactController::class, 'sendContact'])->name('contact.send');
 
 
 // ===========================================
